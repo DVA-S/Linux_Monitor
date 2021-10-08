@@ -1,0 +1,9 @@
+.login{
+    width: 400px;
+    height: 500px;
+    background: #555;
+    border-radius: 5px;
+    position: relative;
+    top: 5%;
+    left: 35%;
+}
