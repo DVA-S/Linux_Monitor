@@ -123,7 +123,6 @@ createTB(){
 	id int(10) primary key auto_increment not null,
 	host_ip varchar(50) not null,
 	cpu_used float not null,
-	cpu_free float not null,
 	data_time datetime not null 
 	);"
 	
