@@ -39,8 +39,7 @@ cpu(){
 	mysql -uroot -phtzy0000 -e "insert into php.cpu(host_ip,cpu_used,cpu_free,data_time) 
 	values(
 	`echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}')\'`,
-	`echo 100 $(top -bn 1 -i -c | grep "%Cpu(s):" | awk -F " " '{print $8}')| awk '{print $1-$2}'`,
-	`top -bn 1 -i -c | grep "%Cpu(s):" | awk -F " " '{print $8}'`,
+	`echo $(vmstat -w 2 2 | sed -n '4p' | awk -F ' ' '{print $13,$14}') | awk '{print $1+$2}'`,
 	`date +"%Y%m%d%T" | sed 's/://g'`
 	);"
 }
