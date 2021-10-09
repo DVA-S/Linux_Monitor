@@ -7,3 +7,26 @@
     top: 5%;
     left: 35%;
 }
+
+/* 背景渐变色 */
+/*利用CSS动画实现 - https://www.w3school.com.cn/css/css3_animations.asp */
+.gradientColor{
+   height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-image: linear-gradient(125deg,#9C27B0,#3F51B5,#2196F3);
+    background-size: 400%;
+    font-family: "montserrat";
+    animation: bganimation 12s infinite;
+}
+@keyframes bganimation{
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
+    }
+}
