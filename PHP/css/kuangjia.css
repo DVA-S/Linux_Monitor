@@ -1,0 +1,399 @@
+/* 全局样式 */
+*{
+    margin: 0;
+    padding: 0;
+}
+/* 为了调节背景和内容的位置 */
+body{
+	height: 100vh;
+	width: 100%;
+	background-size: 500%;
+	overflow: hidden;
+
+}
+/* 定位方式  */
+*{
+	position: relative;
+}
+/* 背景渐变色 */
+.background_color{
+	/* 1vh等于视口高度的1% */
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(180deg,#F90,#9C27B0,#1196F3);
+    background-size: 100%;
+	/* 毛玻璃 */
+	-webkit-filter: blur(4px);
+	-moz-filter: blur(4px);
+	-ms-filter: blur(4px);
+	-o-filter: blur(4px);
+	filter: blur(0px);
+}
+
+/* 动画效果 */
+/* 登录效果-登录页*/
+@keyframes login_loginOk {
+	from{left: 32.5%;}
+	to{left: -35%;}
+}
+/* 登录效果-主页 */
+@keyframes index_head_loginOk{
+	from{left: 100%;}
+	to{left: 0%;}
+}
+@keyframes index_panel_loginOk{
+	from{left: 100%;}
+	to{left: 2.5%;}
+}
+/* 主页面板切换效果 */
+/* 尽量是一个函数来实现 */
+/* 
+	隐藏时的位置（在左边）	显示时的位置		隐藏时的位置（在右边）
+    top: -278%;				top: -278%;		top: -278%;
+    left: -100%;			left: 2.5%;     left: 100%;
+ */
+/* 从中间到左边 */
+@keyframes btn_switch_CenterGoLeftHide{
+	from{left: 2.5%}
+	to{left: -100%;}
+}
+
+/* 从右边到中间 */
+@keyframes btn_switch_RightGoCenterShow{
+	from{left: 100%}
+	to{left: 2.5%;}
+}
+/* 向左切换 从中间到右边 */
+@keyframes btn_switch_CenterGoRightHide{
+	from{left: 2.5%}
+	to{left: 100%;}
+}
+/* 从左边到中间 */
+@keyframes btn_switch_LeftGoCenterShow{
+	from{left: -100%}
+	to{left: 2.5%;}
+}
+/* 原地刷新 */
+@keyframes flush{
+	from{opacity: 0;}
+	to{left:2.5%;opacity: 1;}
+}
+
+
+/* DIV 登录页 登录框 */
+.login_div{
+	width: 35%;
+	height: 80%;
+	background-color: rgb(24 27 31);
+	top: -95%;
+	left: 32.5%;
+	border-radius: 8px;
+}
+.logo{
+	width: 50%;
+	height: 25%;
+	left: 25%;
+	top: 5%;
+	border-radius: 100%;
+}
+.login_form{
+	width: 80%;
+	height: 60%;
+	left: 10%;
+	top: 8%;
+}
+.login_form form{
+	width: 80%;
+	height: 85%;
+	left: 10%;
+	top: 12.5%;
+}
+/* active选择器无法更改行内式元素样式 */
+.submit{
+	background-color: #1196F3;
+	width: 100%;
+	height: 15%;
+	border: none;
+	color: #FFF;
+	font-size: 15px;
+	font-weight: bold;
+	border-radius: 5px;	
+}
+.submit:active{
+	background-color: #000;
+	border-radius: 5px;
+}
+
+/* DIV 主页 导航栏 */
+.head_div{
+	width: 100%;
+	height: 6%;
+	background-color: rgb(24 27 31);
+	border-radius: 0 0 4px 4px;
+	top: -280%;
+	left: 100%;
+	opacity: 0.85;
+	/* 成功登陆后才会显示 */
+	/* display: none; */
+}
+
+/* 导航栏 - 按钮 */
+.host_btn, .user_btn, .panel_btn, .setup_btn, .checking_btn{
+	width: 10%;
+	height: 100%;
+	float: left;
+	/* 五个按钮占50%，每个按钮有左右两个边距，25%/5=5% = 居中 */
+	margin: 0 5% 0 5%;
+	background-color: #FFF;
+	border-radius: 3px;
+}
+/* 按钮效果 */
+.host_btn:active, .user_btn:active, .panel_btn:active, .setup_btn:active, .checking_btn:active, .submit:active{
+	background-color: #000;
+}
+/* 先并集再交集 */
+.host_btn,.user_btn,.panel_btn,.setup_btn,.checking_btn p{
+	text-align: center;
+	line-height: 200%;
+}
+
+/* DIV 主页 面板 */
+.panel{
+	width: 95%;
+	height: 91%;
+	top:  8%;
+	left: 2.5%;
+	border-radius: 4px;
+	opacity: 0.8;
+	background-color: #000;
+}
+.panel object{
+	border-radius: 10px;
+}
+
+/* DIV 主页 主机 */
+.host{
+	width: 95%;
+	height: 91%;
+	background-color: #FFF;
+	top:  8%;
+	left: 2.5%;
+	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
+	display: none;
+}
+.host_left{
+	width: 20%;
+	height: 100%;
+	background-color: #123;
+	
+}
+.host_left_all{
+	height: 10%;
+	background-color: #AAA;	
+}
+.host_left_list{
+	height: 10%;
+	top:1%;
+	
+	background-color: #AAA;	
+}
+.host_left_addhost{
+	height: 10%;
+	top:2%;
+	
+	background-color: #AAA;
+}
+.host_right{
+	width: 80%;
+	height: 100%;
+	background-color: #FFF;
+	
+	top: -100%;
+	left: 20%;
+}
+.host_right_all{
+	width: 100%;
+	height: 100%;
+	background-color: #0F0;
+	
+	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
+	display: none;
+}
+.host_right_list{
+	width: 100%;
+	height: 100%;
+	background-color: #00F;
+	
+	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
+	display: none;
+}
+.host_right_addhost{
+	width: 100%;
+	height: 100%;
+	background-color: #F00;
+	
+	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
+	display: none;
+}
+
+/* DIV 主页 巡检 */
+.checking{
+	width: 95%;
+	height: 91%;
+	background-color: #9D5;
+	top:  8%;
+	left: 2.5%;
+	display: none;
+}
+.checking_left{
+	width: 20%;
+	height: 100%;
+	background-color: #123;
+	
+}
+.checking_left_link{
+	height: 10%;
+	background-color: #AAA;	
+}
+.checking_left_test{
+	height: 10%;
+	top:1%;
+	
+	background-color: #AAA;	
+}
+.checking_left_port{
+	height: 10%;
+	top:2%;
+	
+	background-color: #AAA;
+}
+.checking_left_device{
+	height: 10%;
+	top:3%;
+	
+	background-color: #AAA;
+}
+.checking_right{
+	width: 80%;
+	height: 100%;
+	background-color: #FFF;
+	
+	top: -100%;
+	left: 20%;
+}
+.checking_right_link{
+	width: 100%;
+	height: 100%;
+	background-color: #0F0;
+	
+	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
+	display: none;
+}
+.checking_right_test{
+	width: 100%;
+	height: 100%;
+	background-color: #00F;
+	
+	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
+	display: none;
+}
+.checking_right_port{
+	width: 100%;
+	height: 100%;
+	background-color: #200;
+	
+	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
+	display: none;
+}
+.checking_right_device{
+	width: 100%;
+	height: 100%;
+	background-color: #F00;
+	
+	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
+	display: none;
+}
+
+/* DIV 主页 用户 */
+.user{
+	width: 95%;
+	height: 91%;
+	background-color: #FF9900;
+	top:  8%;
+	left: 2.5%;
+	display: none;
+}
+.user_left{
+	width: 20%;
+	height: 100%;
+	background-color: #123;
+	
+}
+.user_left_list{
+	height: 10%;
+	background-color: #AAA;	
+}
+.user_left_webUser{
+	height: 10%;
+	top:1%;
+	
+	background-color: #AAA;	
+}
+.user_left_deviceUser{
+	height: 10%;
+	top:2%;
+	
+	background-color: #AAA;
+}
+.user_left_addUser{
+	height: 10%;
+	top:3%;
+	
+	background-color: #AAA;
+}
+.user_right{
+	width: 80%;
+	height: 100%;
+	background-color: #FFF;
+	
+	top: -100%;
+	left: 20%;
+}
+.user_right_list{
+	width: 100%;
+	height: 100%;
+	background-color: #0F0;
+	
+	display: none;
+}
+.user_right_webUser{
+	width: 100%;
+	height: 100%;
+	background-color: #00F;
+	
+	display: none;
+}
+.user_right_deviceUser{
+	width: 100%;
+	height: 100%;
+	background-color: #200;
+	
+	display: none;
+}
+.user_right_addUser{
+	width: 100%;
+	height: 100%;
+	background-color: #F00;
+	
+	display: none;
+}
+
+/* DIV 主页 设置 */
+.setup{
+	width: 95%;
+	height: 91%;
+	background-color: #4400FF;
+	top:  8%;
+	left: 2.5%;
+	display: none;
+}
