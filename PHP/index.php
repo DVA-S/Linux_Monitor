@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/kuangjia.css"/>
+		<script type="text/javascript" src="js/kuangjia.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<meta charset="utf-8">
+		
+		<title>主面板</title>
+	</head>
+	<body>
+		<!-- 登录页 -->
+		<div class="background_color">
+		</div>
+		<div class="login_div" id="login_div">
+			<div class="logo">
+				<h1 style="text-align: center;line-height: 480%;color: #CCCCDC;">登录✌</h1>
+			</div>
+			<div class="login_form">
+				<form>
+					<p style="font-size: 14px;color: #CCCCDC;">用户名：</p>
+					<!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+					<input style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="text" name="username" maxlength="20">
+					<br />
+					<br />
+					<p style="font-size: 14px;color: #CCCCDC;">密码：</p>
+					<input style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="password" name="passwd">
+					<br />
+					<br />
+					<input class="submit" type="button" value="登  录" onclick="loginOkAnimation()">
+				</form> 
+			</div>
+		</div>
+		
+		<!-- 主页 -->
+		 <div class="background_color">
+			 
+		 </div>
+		 <!-- 导航栏 -->
+		 <div class="head_div" id="head_div">
+			 <div class="panel_btn" onclick="btnOnClick(this)">
+				 <p>监控面板</p>
+			 </div>
+			 <div class="host_btn" onclick="btnOnClick(this)">
+				 <p>设备管理</p>
+			 </div>
+			 <div class="checking_btn" onclick="btnOnClick(this)">
+				 <p>自动巡检</p>
+			 </div>
+			 <div class="user_btn" onclick="btnOnClick(this)">
+				 <p>用户管理</p>
+			 </div>
+			 <div class="setup_btn" onclick="btnOnClick(this)">系统设置</div>
+		 </div>
+		 <!-- 监控面板 -->
+		 <div class="panel" id="panel">
+			 <!-- test -->
+			 <h1>①</h1>
+			 <!-- 消耗资源过大 -->
+<!-- 			 <iframe src="http://192.168.157.128:3000/d/kkmdQnFnz/bysjtu-biao-copy?orgId=1&refresh=5s&from=now-5m&to=now&kiosk" width="100%" height="100%"></iframe> -->
+			<!-- 资源得到优化  -->
+			 <object class="current_pdf" data="http://192.168.157.128:3000/d/kkmdQnFnz/bysjtu-biao-copy?orgId=1&refresh=5s&from=now-5m&to=now&kiosk" height="100%" width="100%"> 
+			 </object>
+		 </div>
+		 
+		 <!-- 主机管理 -->
+		 <div class="host" id="host">
+			 <!-- 左侧边栏 -->
+			 <div class="host_left">
+				 <!-- 设备总览 -- Linux/MySQL/Other -->
+				 <div class="host_left_all" onclick="btnOnClick(this)">设备总览</div>
+				 <!-- 设备列表 -- 修改/删除 -->
+				 <div class="host_left_list" onclick="btnOnClick(this)">设备列表</div>
+				 <!-- 添加设备 -- 表单 -->
+				 <div class="host_left_addhost" onclick="btnOnClick(this)">添加设备</div>
+			 </div>
+			 <!-- 右侧面板 -->
+			 <div class="host_right">
+				 <!-- test -->
+				 <h1>②</h1>
+				 <div class="host_right_all" id="host_right_all">设备总览</div>
+				 <div class="host_right_list" id="host_right_list">设备列表</div>
+				 <div class="host_right_addhost" id="host_right_addhost">添加设备</div>
+			 </div>
+		 </div>
+		 
+		 <!-- 自动巡检 -->
+		 <div class="checking" id="checking">
+			 <!-- 左侧边栏 -->
+			 <div class="checking_left">
+			 	 <!-- 连通性检测 -- Ping/可登录 -->
+			 	 <div class="checking_left_link" onclick="btnOnClick(this)">连通性检测</div>
+			 	 <!-- 性能检测 -- disk读写/网速/CPU/内存 -->
+			 	 <div class="checking_left_test" onclick="btnOnClick(this)">性能检测</div>
+			 	 <!-- 端口检测 -- 主机暴露端口 -->
+			 	 <div class="checking_left_port" onclick="btnOnClick(this)">端口检测</div>
+				 <!-- 硬件检测 -- cpu/内存条/网卡/硬盘(数量、规格) -->
+			 	<div class="checking_left_device" onclick="btnOnClick(this)">硬件检测</div>			 
+			 </div>
+			 <!-- 右侧面板 -->
+			 <div class="checking_right">
+				 <!-- test -->
+				 <h1>③</h1>
+			 	 <div class="checking_right_link" id="checking_right_link">连通性检测</div>
+			 	 <div class="checking_right_test" id="checking_right_test">性能检测</div>
+			 	 <div class="checking_right_port" id="checking_right_port">端口检测</div>
+				 <div class="checking_right_device" id="checking_right_device">硬件检测</div>
+			 </div>
+		 </div>
+		 
+		 <!-- 用户管理 -->
+		 <div class="user" id="user">
+			 <!-- 左侧边栏 -->
+			  <div class="user_left">
+			  	 <!-- 用户列表 -- 登录 -->
+			  	 <div class="user_left_list" onclick="btnOnClick(this)">用户列表</div>
+			  	 <!-- 系统用户 -- web用户 -->
+			  	 <div class="user_left_webUser" onclick="btnOnClick(this)">系统用户</div>
+			  	 <!-- 设备用户 -- 主机用户 -->
+			  	 <div class="user_left_deviceUser" onclick="btnOnClick(this)">设备用户</div>
+			 	 <!-- 添加用户 -- 系统用户/设备用户 -->
+			  	<div class="user_left_addUser" onclick="btnOnClick(this)">添加用户</div>			 
+			  </div>
+			  <!-- 右侧面板 -->
+			  <div class="user_right">
+				  <!-- test -->
+				  <h1>④</h1>
+			  	 <div class="user_right_list" id="user_right_List">用户列表</div>
+			  	 <div class="user_right_webUser" id="user_right_WebUser">系统用户</div>
+			  	 <div class="user_right_deviceUser" id="user_right_DeviceUser">设备用户</div>
+			 	 <div class="user_right_addUser" id="user_right_AddUser">添加用户</div>
+			  </div>
+		 </div>
+		 
+		 <!-- 系统设置 -->
+		 <div class="setup" id="setup">
+			 <!-- test -->
+			 <h1>⑤</h1>
+		 </div> 
+	</body>
+</html>
