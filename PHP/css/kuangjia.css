@@ -15,6 +15,12 @@ body{
 *{
 	position: relative;
 }
+/* 面板样式 */
+#panel,#checking,#user,#host,#setup,.host_left,.host_right,.checking_left,.checking_right,.user_left,.user_right,.host_left_all,.host_right_all,.checking_left_link,.host_left_list,.host_left_addhost,.host_right_list,.host_right_addhost,.checking_left_test,.checking_left_port,.checking_left_device,.user_left_list,.user_left_webUser,.user_left_deviceUser,.user_left_addUser{
+	border-radius: 6px;
+}
+
+
 /* 背景渐变色 */
 .background_color{
 	/* 1vh等于视口高度的1% */
@@ -30,13 +36,13 @@ body{
 	filter: blur(0px);
 }
 
-/* 动画效果 */
-/* 登录效果-登录页*/
+/* 动画效果 根据元素的定位属性*/
+/* 登录效果-登录页 从右向左滑走*/
 @keyframes login_loginOk {
 	from{left: 32.5%;}
 	to{left: -35%;}
 }
-/* 登录效果-主页 */
+/* 登录效果-主页 从右向左滑入*/
 @keyframes index_head_loginOk{
 	from{left: 100%;}
 	to{left: 0%;}
@@ -45,19 +51,25 @@ body{
 	from{left: 100%;}
 	to{left: 2.5%;}
 }
+@keyframes login_loginNo{
+	0% {left: 32.5%;}
+	10% {left: 33%;}
+	20% {left: 32.5%;}
+	30% {left: 33%;}
+	40% {left: 32.5%;}
+	50% {left: 33%;}
+	60% {left: 32.5%;}
+	70% {left: 33%;}
+	80% {left: 32.5%;}
+	90%  {left: 33%;}
+	100% {left: 32.5%;}
+}
 /* 主页面板切换效果 */
-/* 尽量是一个函数来实现 */
-/* 
-	隐藏时的位置（在左边）	显示时的位置		隐藏时的位置（在右边）
-    top: -278%;				top: -278%;		top: -278%;
-    left: -100%;			left: 2.5%;     left: 100%;
- */
 /* 从中间到左边 */
 @keyframes btn_switch_CenterGoLeftHide{
 	from{left: 2.5%}
 	to{left: -100%;}
 }
-
 /* 从右边到中间 */
 @keyframes btn_switch_RightGoCenterShow{
 	from{left: 100%}
@@ -130,11 +142,11 @@ body{
 	height: 6%;
 	background-color: rgb(24 27 31);
 	border-radius: 0 0 4px 4px;
-	top: -280%;
-	left: 100%;
+	top: 0%;
+	left: 0%;
+	position: absolute;
 	opacity: 0.85;
-	/* 成功登陆后才会显示 */
-	/* display: none; */
+	display: none;
 }
 
 /* 导航栏 - 按钮 */
@@ -166,6 +178,8 @@ body{
 	border-radius: 4px;
 	opacity: 0.8;
 	background-color: #000;
+	display: none;
+	position: absolute;
 }
 .panel object{
 	border-radius: 10px;
@@ -185,7 +199,6 @@ body{
 	width: 20%;
 	height: 100%;
 	background-color: #123;
-	
 }
 .host_left_all{
 	height: 10%;
@@ -194,20 +207,17 @@ body{
 .host_left_list{
 	height: 10%;
 	top:1%;
-	
 	background-color: #AAA;	
 }
 .host_left_addhost{
 	height: 10%;
 	top:2%;
-	
 	background-color: #AAA;
 }
 .host_right{
 	width: 80%;
 	height: 100%;
 	background-color: #FFF;
-	
 	top: -100%;
 	left: 20%;
 }
@@ -215,24 +225,18 @@ body{
 	width: 100%;
 	height: 100%;
 	background-color: #0F0;
-	
-	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
 	display: none;
 }
 .host_right_list{
 	width: 100%;
 	height: 100%;
 	background-color: #00F;
-	
-	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
 	display: none;
 }
 .host_right_addhost{
 	width: 100%;
 	height: 100%;
 	background-color: #F00;
-	
-	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
 	display: none;
 }
 
@@ -249,7 +253,6 @@ body{
 	width: 20%;
 	height: 100%;
 	background-color: #123;
-	
 }
 .checking_left_link{
 	height: 10%;
@@ -258,26 +261,22 @@ body{
 .checking_left_test{
 	height: 10%;
 	top:1%;
-	
 	background-color: #AAA;	
 }
 .checking_left_port{
 	height: 10%;
 	top:2%;
-	
 	background-color: #AAA;
 }
 .checking_left_device{
 	height: 10%;
 	top:3%;
-	
 	background-color: #AAA;
 }
 .checking_right{
 	width: 80%;
 	height: 100%;
 	background-color: #FFF;
-	
 	top: -100%;
 	left: 20%;
 }
@@ -285,32 +284,24 @@ body{
 	width: 100%;
 	height: 100%;
 	background-color: #0F0;
-	
-	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
 	display: none;
 }
 .checking_right_test{
 	width: 100%;
 	height: 100%;
 	background-color: #00F;
-	
-	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
 	display: none;
 }
 .checking_right_port{
 	width: 100%;
 	height: 100%;
 	background-color: #200;
-	
-	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
 	display: none;
 }
 .checking_right_device{
 	width: 100%;
 	height: 100%;
 	background-color: #F00;
-	
-	/* BUG::主界面默认显示多个面板::所以给每一个面板设置默认不显示 */
 	display: none;
 }
 
@@ -327,7 +318,6 @@ body{
 	width: 20%;
 	height: 100%;
 	background-color: #123;
-	
 }
 .user_left_list{
 	height: 10%;
@@ -336,26 +326,22 @@ body{
 .user_left_webUser{
 	height: 10%;
 	top:1%;
-	
 	background-color: #AAA;	
 }
 .user_left_deviceUser{
 	height: 10%;
 	top:2%;
-	
 	background-color: #AAA;
 }
 .user_left_addUser{
 	height: 10%;
 	top:3%;
-	
 	background-color: #AAA;
 }
 .user_right{
 	width: 80%;
 	height: 100%;
 	background-color: #FFF;
-	
 	top: -100%;
 	left: 20%;
 }
@@ -363,28 +349,24 @@ body{
 	width: 100%;
 	height: 100%;
 	background-color: #0F0;
-	
 	display: none;
 }
 .user_right_webUser{
 	width: 100%;
 	height: 100%;
 	background-color: #00F;
-	
 	display: none;
 }
 .user_right_deviceUser{
 	width: 100%;
 	height: 100%;
 	background-color: #200;
-	
 	display: none;
 }
 .user_right_addUser{
 	width: 100%;
 	height: 100%;
 	background-color: #F00;
-	
 	display: none;
 }
 
