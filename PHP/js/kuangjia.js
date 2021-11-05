@@ -15,65 +15,60 @@ function viewPanel(view_btn){
 		// 显示位置:top:100vh*0.08 or 100%*0.08 && *0.025
 		// 隐藏位置:top:50px left:-100vh
 		
-		// 哪个面板正在显示
+		// 判断哪个面板正在显示
 		var windowsSizeNoView = -document.body.clientWidth+'px'
-		if(getComputedStyle(document.getElementById(panel_list[0]),null).getPropertyValue('left')!='2.5%' && getComputedStyle(document.getElementById(panel_list[0]),null).getPropertyValue('left')!=windowsSizeNoView){
+		if( getComputedStyle(document.getElementById(panel_list[0]),null).getPropertyValue('left') != '2.5%' &&
+		    getComputedStyle(document.getElementById(panel_list[0]),null).getPropertyValue('left') != windowsSizeNoView ) {
 			var view=0; 
-		}else if(getComputedStyle(document.getElementById(panel_list[1]),null).getPropertyValue('left')!='2.5%' && getComputedStyle(document.getElementById(panel_list[1]),null).getPropertyValue('left')!=windowsSizeNoView){
+		}else if( getComputedStyle(document.getElementById(panel_list[1]),null).getPropertyValue('left') != '2.5%' &&
+		          getComputedStyle(document.getElementById(panel_list[1]),null).getPropertyValue('left') != windowsSizeNoView ) {
 			var view=1;
-		}else if(getComputedStyle(document.getElementById(panel_list[2]),null).getPropertyValue('left')!='2.5%' && getComputedStyle(document.getElementById(panel_list[2]),null).getPropertyValue('left')!=windowsSizeNoView){
+		}else if( getComputedStyle(document.getElementById(panel_list[2]),null).getPropertyValue('left') != '2.5%' &&
+		          getComputedStyle(document.getElementById(panel_list[2]),null).getPropertyValue('left') != windowsSizeNoView ) {
 			var view=2;
-		}else if(getComputedStyle(document.getElementById(panel_list[3]),null).getPropertyValue('left')!='2.5%' && getComputedStyle(document.getElementById(panel_list[3]),null).getPropertyValue('left')!=windowsSizeNoView){
+		}else if( getComputedStyle(document.getElementById(panel_list[3]),null).getPropertyValue('left') != '2.5%' &&
+		          getComputedStyle(document.getElementById(panel_list[3]),null).getPropertyValue('left') != windowsSizeNoView ) {
 			var view=3;
-		}else if(getComputedStyle(document.getElementById(panel_list[4]),null).getPropertyValue('left')!='2.5%' && getComputedStyle(document.getElementById(panel_list[4]),null).getPropertyValue('left')!=windowsSizeNoView){
-			var view=4;
-		}
+		}else if( getComputedStyle(document.getElementById(panel_list[4]),null).getPropertyValue('left') != '2.5%' &&
+		          getComputedStyle(document.getElementById(panel_list[4]),null).getPropertyValue('left') != windowsSizeNoView ) {
+			var view=4; }
 		// 问题出在判断语句扰乱了显示状态（可能优化所有面板处的移动==面板离开时的动画）--2021年11月3日
-		
 		 if(view<panel_list.indexOf(view_btn)){
-			 // BUG:所有面板都显示过后，无法跳转切换
-			 // 例如：从2到4后，虽然实际显示的是4，但view的值是3
-			 // 所以解决方法之一为：做动作前先清场，大概属于一刀切方法，很简单。
+			 // ##BUG:所有面板都显示过后，无法跳转切换
+			 // ##例如：从2到4后，虽然实际显示的是4，但view的值是3
+			 // ##所以解决方法之一为：做动作前先清场，大概属于一刀切方法，很简单。
 			 $('#panel,#checking,#user,#host,#setup').css('display', 'none');
-			 
 			//点击当前面板右边的按钮
-				// 当前面板左移
+				// 离开动画--当前面板左移
+				document.getElementById(panel_list[view]).style.display="block";
 				document.getElementById(panel_list[view]).style.animation="0.5s ease forwards running btn_switch_CenterGoLeftHide";
-				
-				// 当前元素从右边到中间显示
+				// 进入动画--当前元素从右边到中间显示
 				document.getElementById(view_btn).style.display="block";
 				// 不加绝对定位动画会上天
 				document.getElementById(view_btn).style.position="absolute";
 				document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_RightGoCenterShow";
-				
 				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"<<向左");
-				
 				break;
 		}else if(view>panel_list.indexOf(view_btn)){
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
-			
 			// 点击当前面板左边的按钮
-				//当前面板右移
+				// 离开动画--当前面板右移
+				document.getElementById(panel_list[view]).style.display="block";
 				document.getElementById(panel_list[view]).style.animation="0.5s ease forwards running btn_switch_CenterGoRightHide";
-				
-				// 当前元素从左边到中间显示
+				// 进入动画--当前元素从左边到中间显示
 				document.getElementById(view_btn).style.display="block";
 				document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_LeftGoCenterShow";
 				document.getElementById(view_btn).style.position="absolute";
-				
 				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+">>向右");
-				
 				break;
 		}else if(view===panel_list.indexOf(view_btn)){		
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
-			
-				// 当前元素显示
+			// 点击当前面板按钮
+				// 刷新动画--当前元素显示
 				document.getElementById(view_btn).style.display="block";
 				document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
 				document.getElementById(view_btn).style.position="absolute";
-				
-				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"刷新显示");
-				
+				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"刷新显示");		
 				break;
 		}
 		case 5:case 6:case 7: 
@@ -89,6 +84,7 @@ function viewPanel(view_btn){
 			break;
 	}
 }
+// 登录事件
 // btnOnClick(this)根据按钮类名-设置并传出右侧面板ID到view_panel()
 function btnOnClick(element){
 	var go=element.className;
@@ -101,28 +97,41 @@ function btnOnClick(element){
 		case 'setup_btn': 				viewPanel('setup');  				break;
 	    case 'host_left_all': 			viewPanel('host_right_all');  		break;
 	    case 'host_left_list': 			viewPanel('host_right_list'); 		break;
-	    case 'host_left_addhost': 		viewPanel('host_right_addhost');   break;
-	    case 'checking_left_link': 		viewPanel('checking_right_link');  break;
-	    case 'checking_left_test': 		viewPanel('checking_right_test');  break;
-	    case 'checking_left_port': 		viewPanel('checking_right_port');  break;
-	    case 'checking_left_device': 	viewPanel('checking_right_device');break;
-		case 'user_left_list': 			viewPanel('user_right_List');  	break;
-		case 'user_left_webUser': 		viewPanel('user_right_WebUser');   break;
-		case 'user_left_deviceUser': 	viewPanel('user_right_DeviceUser');break;
-		case 'user_left_addUser': 		viewPanel('user_right_AddUser');   break;
+	    case 'host_left_addhost': 		viewPanel('host_right_addhost');    break;
+	    case 'checking_left_link': 		viewPanel('checking_right_link');   break;
+	    case 'checking_left_test': 		viewPanel('checking_right_test');   break;
+	    case 'checking_left_port': 		viewPanel('checking_right_port');   break;
+	    case 'checking_left_device': 	viewPanel('checking_right_device'); break;
+		case 'user_left_list': 			viewPanel('user_right_List');  	    break;
+		case 'user_left_webUser': 		viewPanel('user_right_WebUser');    break;
+		case 'user_left_deviceUser': 	viewPanel('user_right_DeviceUser'); break;
+		case 'user_left_addUser': 		viewPanel('user_right_AddUser');    break;
 		default:
 	}
 }
 // 登录成功动画
 function loginOkAnimation(){
-	// forwards属性会让对象停留在终点
-	// 登录框
-	document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginOk";
-	//主页
-	// setInterval(function test(){
-		document.getElementById("head_div").style.animation="0.5s ease 0s 1 normal forwards running index_head_loginOk";
-		document.getElementById("panel").style.animation="0.5s ease 0s 1 normal forwards running index_panel_loginOk";
-	// },501);
+	var username =$("#username").val();
+	var passwd = $("#passwd").val();
+	$.post(
+		"php/login.php",{"user":username,"passwd":passwd},
+	    function(data,status){
+	        console.log("数据: \n" + data + "\n状态: " + status);
+			if(data==1){
+				// 登录框  forwards属性会让对象停留在终点
+				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginOk";
+				// 主页
+				document.getElementById("head_div").style.display="block";
+				document.getElementById("head_div").style.animation="0.5s ease 0s 1 normal forwards running index_head_loginOk";
+				document.getElementById("panel").style.display="block";
+				document.getElementById("panel").style.animation="0.5s ease 0s 1 normal forwards running index_panel_loginOk";
+				console.log("logOK!");
+			}else{
+				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginNo";
+				// 延迟一秒刷新
+				setTimeout(function(){ location.reload(); },500);
+				console.log("logNO!");
+				}
+			}
+		);
 }
-// 导航栏按钮切换面板动画
-// 点击按钮👉获取当前窗口的id、位置👉当前窗口左移&&按钮下的窗口右移
