@@ -5,7 +5,6 @@
 		<script type="text/javascript" src="js/kuangjia.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<meta charset="utf-8">
-		
 		<title>主面板</title>
 	</head>
 	<body>
@@ -16,26 +15,25 @@
 			<div class="logo">
 				<h1 style="text-align: center;line-height: 480%;color: #CCCCDC;">登录✌</h1>
 			</div>
-			<div class="login_form">
-				<form>
+			<div class="login_form" id="login_form">
+				<form action="index.php" method="post">
 					<p style="font-size: 14px;color: #CCCCDC;">用户名：</p>
 					<!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-					<input style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="text" name="username" maxlength="20">
+					<input id="username" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="text" name="username" maxlength="20">
 					<br />
 					<br />
 					<p style="font-size: 14px;color: #CCCCDC;">密码：</p>
-					<input style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="password" name="passwd">
+					<input id="passwd" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="password" name="passwd">
 					<br />
 					<br />
-					<input class="submit" type="button" value="登  录" onclick="loginOkAnimation()">
+					<input class="submit" type="button" value="登  录"  onclick="loginOkAnimation();">
+					<!-- onclick="loginOkAnimation()" -->
 				</form> 
+
 			</div>
 		</div>
-		
 		<!-- 主页 -->
-		 <div class="background_color">
-			 
-		 </div>
+		 <div class="background_color"></div>
 		 <!-- 导航栏 -->
 		 <div class="head_div" id="head_div">
 			 <div class="panel_btn" onclick="btnOnClick(this)">
@@ -56,11 +54,9 @@
 		 <div class="panel" id="panel">
 			 <!-- test -->
 			 <h1>①</h1>
-			 <!-- 消耗资源过大 -->
-<!-- 			 <iframe src="http://192.168.157.128:3000/d/kkmdQnFnz/bysjtu-biao-copy?orgId=1&refresh=5s&from=now-5m&to=now&kiosk" width="100%" height="100%"></iframe> -->
-			<!-- 资源得到优化  -->
-			 <object class="current_pdf" data="http://192.168.157.128:3000/d/kkmdQnFnz/bysjtu-biao-copy?orgId=1&refresh=5s&from=now-5m&to=now&kiosk" height="100%" width="100%"> 
-			 </object>
+			 <!-- 消耗资源过大 <iframe src="http://192.168.157.128:3000/d/kkmdQnFnz/bysjtu-biao-copy?orgId=1&refresh=5s&from=now-5m&to=now&kiosk"></iframe> -->
+			 <!-- 资源优化 -->
+			 <object class="current_pdf" data="http://192.168.157.128:3000/d/kkmdQnFnz/bysjtu-biao-copy?orgId=1&refresh=5s&from=now-5m&to=now&kiosk" height="100%" width="100%">			 </object>
 		 </div>
 		 
 		 <!-- 主机管理 -->
