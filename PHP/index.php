@@ -7,6 +7,13 @@
 		<meta charset="utf-8">
 		<title>主面板</title>
 	</head>
+    <!-- 根据session判断是否登录 -->
+    <!-- session_start()函数前不能有任何代码输出到浏览器，最好加在页面头部，或者先用ob_start()函数打开输出缓冲区。-->
+    <?php
+        session_start();
+        $status = $_SESSION["loginStatus"];
+        echo "<script>console.log('loginStatus:',{$_SESSION['loginStatus']});</script>";
+    ?>
 	<body>
 		<!-- 登录页 -->
 		<div class="background_color">
@@ -16,18 +23,17 @@
 				<h1 style="text-align: center;line-height: 480%;color: #CCCCDC;">登录✌</h1>
 			</div>
 			<div class="login_form" id="login_form">
-				<form action="index.php" method="post">
-                    <label style="font-size: 14px;color: #CCCCDC;">用户名：</label>
-<!--					<p style="font-size: 14px;color: #CCCCDC;">用户名：</p>-->
+				<form action="#" method="post">
+                    <label for="username" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
 					<!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
 					<input id="username" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="text" name="username" maxlength="20">
 					<br />
 					<br />
-					<label style="font-size: 14px;color: #CCCCDC;">密码：</label>
+					<label for="passwd" style="font-size: 14px;color: #CCCCDC;">密码：</label>
 					<input id="passwd" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="password" name="passwd">
 					<br />
 					<br />
-					<input class="submit" type="button" value="登  录" onclick="loginOkAnimation()" ">
+					<input class="submit" type="button" value="登  录" onclick="loginOkAnimation()">
 					<!-- onclick="loginOkAnimation()" -->
 				</form>
 			</div>
@@ -130,13 +136,21 @@
 		 
 		 <!-- 系统设置 -->
 		 <div class="setup" id="setup">
-			 <!-- test -->
-			 <h1>⑤</h1>
 		 </div>
-<!--        根据session判断是否登录-->
+        <!-- 放在页面底部可以读到上面元素的ID值 -->
+        <!-- 保持登录一段时间 判定phpSession的值，为1表示已经登录 -->
+<!--        问题：无法重置登录cookie的时间-->
         <?php
-            if($_SESSION['login']===1){
-                echo "<script> alert('ok'); </script>";
+            if($status==1){
+                echo "<script>
+		 		//登录框  forwards属性会让对象停留在终点
+		        document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';
+		        //主页
+		        document.getElementById('head_div').style.display='block';
+		        document.getElementById('head_div').style.animation='0.5s ease 0s 1 normal forwards running index_head_loginOk';
+		        document.getElementById('panel').style.display='block';
+		        document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
+		 		</script>";
             }
         ?>
 	</body>
