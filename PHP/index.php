@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/kuangjia.css"/>
 		<script type="text/javascript" src="js/kuangjia.js"></script>
@@ -17,19 +17,19 @@
 			</div>
 			<div class="login_form" id="login_form">
 				<form action="index.php" method="post">
-					<p style="font-size: 14px;color: #CCCCDC;">用户名：</p>
+                    <label style="font-size: 14px;color: #CCCCDC;">用户名：</label>
+<!--					<p style="font-size: 14px;color: #CCCCDC;">用户名：</p>-->
 					<!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
 					<input id="username" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="text" name="username" maxlength="20">
 					<br />
 					<br />
-					<p style="font-size: 14px;color: #CCCCDC;">密码：</p>
+					<label style="font-size: 14px;color: #CCCCDC;">密码：</label>
 					<input id="passwd" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="password" name="passwd">
 					<br />
 					<br />
-					<input class="submit" type="button" value="登  录"  onclick="loginOkAnimation();">
+					<input class="submit" type="button" value="登  录" onclick="loginOkAnimation()" ">
 					<!-- onclick="loginOkAnimation()" -->
-				</form> 
-
+				</form>
 			</div>
 		</div>
 		<!-- 主页 -->
@@ -91,7 +91,7 @@
 			 	 <!-- 端口检测 -- 主机暴露端口 -->
 			 	 <div class="checking_left_port" onclick="btnOnClick(this)">端口检测</div>
 				 <!-- 硬件检测 -- cpu/内存条/网卡/硬盘(数量、规格) -->
-			 	<div class="checking_left_device" onclick="btnOnClick(this)">硬件检测</div>			 
+			 	<div class="checking_left_device" onclick="btnOnClick(this)">硬件检测</div>
 			 </div>
 			 <!-- 右侧面板 -->
 			 <div class="checking_right">
@@ -115,7 +115,7 @@
 			  	 <!-- 设备用户 -- 主机用户 -->
 			  	 <div class="user_left_deviceUser" onclick="btnOnClick(this)">设备用户</div>
 			 	 <!-- 添加用户 -- 系统用户/设备用户 -->
-			  	<div class="user_left_addUser" onclick="btnOnClick(this)">添加用户</div>			 
+			  	<div class="user_left_addUser" onclick="btnOnClick(this)">添加用户</div>
 			  </div>
 			  <!-- 右侧面板 -->
 			  <div class="user_right">
@@ -132,6 +132,12 @@
 		 <div class="setup" id="setup">
 			 <!-- test -->
 			 <h1>⑤</h1>
-		 </div> 
+		 </div>
+<!--        根据session判断是否登录-->
+        <?php
+            if($_SESSION['login']===1){
+                echo "<script> alert('ok'); </script>";
+            }
+        ?>
 	</body>
 </html>

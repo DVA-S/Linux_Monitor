@@ -18,6 +18,7 @@ $stmt->bind_param("ss",$user,$passwd);
 $stmt->bind_result($login_status);
 $stmt->execute();
 
+//输出查询数据的行数
 while($stmt->fetch()){
  echo $login_status;
 }

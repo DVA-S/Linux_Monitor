@@ -60,7 +60,7 @@ function viewPanel(view_btn){
 				document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_LeftGoCenterShow";
 				document.getElementById(view_btn).style.position="absolute";
 				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+">>向右");
-				break;
+				// break;
 		}else if(view===panel_list.indexOf(view_btn)){		
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			// 点击当前面板按钮
@@ -69,8 +69,9 @@ function viewPanel(view_btn){
 				document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
 				document.getElementById(view_btn).style.position="absolute";
 				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"刷新显示");		
-				break;
+				// break;
 		}
+		break;
 		case 5:case 6:case 7: 
 			$('#host_right_list,#host_right_addhost,#host_right_all').css('display', 'none');
 			document.getElementById(view_btn).style.display="block";		break;
@@ -84,7 +85,6 @@ function viewPanel(view_btn){
 			break;
 	}
 }
-// 登录事件
 // btnOnClick(this)根据按钮类名-设置并传出右侧面板ID到view_panel()
 function btnOnClick(element){
 	var go=element.className;
@@ -109,7 +109,29 @@ function btnOnClick(element){
 		default:
 	}
 }
-// 登录成功动画
+//cookie：get and set
+//设置cookie存活时间：2021-11-08T03:23:55.000Z（这种时间格式表示格林尼治的时间，加上八个小时就是北京时间了）
+function setCookie(cname,cvalue,minute)
+{
+	var d = new Date();
+	d.setTime(d.getTime()+(minute*60*1000));
+	var expires = "expires="+d.toGMTString();
+	document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+function getCookie(cname)
+{
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++)
+	{
+		var c = ca[i].trim();
+		if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+	}
+	return "";
+}
+
+
+// 登录判断显示动画、设置Cookie
 function loginOkAnimation(){
 	var username =$("#username").val();
 	var passwd = $("#passwd").val();
@@ -125,13 +147,44 @@ function loginOkAnimation(){
 				document.getElementById("head_div").style.animation="0.5s ease 0s 1 normal forwards running index_head_loginOk";
 				document.getElementById("panel").style.display="block";
 				document.getElementById("panel").style.animation="0.5s ease 0s 1 normal forwards running index_panel_loginOk";
+				// var loginSession;
+				// sessionStorage.setItem(loginSession,data);
+
+				setCookie("loginCookie",data,5);
 				console.log("logOK!");
+				console.log("CookieYESLogin:",getCookie("loginCookie"));
+
 			}else{
 				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginNo";
 				// 延迟一秒刷新
 				setTimeout(function(){ location.reload(); },500);
+				// var loginSession;
+				// sessionStorage.setItem(loginSession,data);
+
+				setCookie("loginCookie",data,5);
 				console.log("logNO!");
+				console.log("CookieNOLogin:",getCookie("loginCookie"));
 				}
 			}
 		);
+}
+//根据session判断登录状态
+
+//根据cookie获取登录状态
+window.onload = function(){
+	if (getCookie("loginCookie")==1){
+		//登录框  forwards属性会让对象停留在终点
+		document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginOk";
+		// 主页
+		document.getElementById("head_div").style.display="block";
+		document.getElementById("head_div").style.animation="0.5s ease 0s 1 normal forwards running index_head_loginOk";
+		document.getElementById("panel").style.display="block";
+		document.getElementById("panel").style.animation="0.5s ease 0s 1 normal forwards running index_panel_loginOk";
+		console.log("CookieLoginOK!");
+		console.log("CookieNOLogin:",getCookie("loginCookie"));
+	}else{
+		document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginNo";
+		console.log("CookieLoginNO!");
+		console.log("CookieNOLogin:",getCookie("loginCookie"));
+	}
 }
