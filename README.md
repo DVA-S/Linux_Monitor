@@ -18,3 +18,46 @@
  **用户管理**  用户管理也包括权限管理。可以为不同的部门设置相应的用户，不同权限的用户会在监控面板上看到不同的内容。例如，某主机上存有机密信息，便可以设置该主机对管理员之外的用户不可见。
 
  **邮件通知**  利用邮件通知功能用户可以自行设置触发发送邮件的条件。例如，当CPU使用率超过95%时邮件通知系统管理员。
+
+**环境配置：**
+
+PHP:
+
+```
+版本：
+PHP 7.4.3 (cli) (built: Oct 25 2021 18:20:54) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v3.4.0, Copyright (c) Zend Technologies
+    with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies
+
+安装：
+apt install php-common libapache2-mod-php php-cli
+apt install php-mysql php-curl
+```
+
+MySQL：
+
+```
+版本：
+mysql  Ver 8.0.27-0ubuntu0.20.04.1 for Linux on x86_64 ((Ubuntu))
+
+安装：
+见仓库中MySQL/MySQL_install.sh
+
+远程登录：
+在数据库配置文件中/etc/mysql/mysql.conf.d/mysql.cnf（可能路径会不同），注释掉“bind-address = 127.0.0.1”
+mysql> create user 'root'@'%' identified by 'passwd';
+mysql> grant all privileges on *.* to 'root'@'%';
+mysql> flush privileges;
+```
+
+
+
+apache2：
+
+```
+版本：
+Server version: Apache/2.4.41 (Ubuntu)
+Server built:   2021-10-14T16:24:43
+```
+

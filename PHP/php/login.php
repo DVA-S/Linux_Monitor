@@ -1,4 +1,5 @@
 <?php
+    //问题1：数据库不能远程连接 :: /etc/mysql/mysql.conf.d/mysql.cnf >> #bind-address = 127.0.0.1
     $user = isset($_POST['user']) ? htmlspecialchars($_POST['user']) : '';
     $passwd = isset($_POST['passwd']) ? htmlspecialchars($_POST['passwd']) : '';
 
