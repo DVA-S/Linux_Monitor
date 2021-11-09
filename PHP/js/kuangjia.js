@@ -14,6 +14,7 @@ function viewPanel(view_btn){
 			return true;
 		}
 	}
+	var view=null;
 	switch(panel_list.indexOf(view_btn))
 	{
 		case 0:case 1:case 2:case 3:case 4:	
@@ -21,7 +22,7 @@ function viewPanel(view_btn){
 		// 判断哪个面板正在显示，然后设置变量值作为状态
 		var windowsSizeNoView = -document.body.clientWidth+'px'
 		if( getPanelView(0) ) {
-			var view=0;
+			view=0;
 		}else if( getPanelView(1) ) {
 			view=1;
 		}else if( getPanelView(2) ) {

@@ -1,14 +1,10 @@
 <?php
-    //问题1：数据库不能远程连接 :: /etc/mysql/mysql.conf.d/mysql.cnf >> #bind-address = 127.0.0.1
     $user = isset($_POST['user']) ? htmlspecialchars($_POST['user']) : '';
     $passwd = isset($_POST['passwd']) ? htmlspecialchars($_POST['passwd']) : '';
+    $con = null;
+    $login_status = null;
 
-    $servername = "192.168.157.128";
-    $username = "root";
-    $password = "htzy0000";
-    // 创建连接
-    $con = new mysqli($servername, $username, $password);
-
+    require_once "linkDB.php";
     // 选择数据库
     mysqli_select_db($con,"bysj");
     // 设置编码，防止中文乱码
@@ -29,6 +25,7 @@
             session_start();
             $_SESSION['loginStatus']=1;
             $_SESSION['loginUser']=$user;
+//            这儿将来会产生一个随机的用户标志，标志将会在别处使用前被还原
         }else{
             session_start();
             $_SESSION['loginStatus']=0;

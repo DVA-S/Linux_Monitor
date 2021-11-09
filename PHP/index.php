@@ -4,7 +4,7 @@
 		<link rel="stylesheet" type="text/css" href="css/kuangjia.css"/>
 		<script type="text/javascript" src="js/kuangjia.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
-		<meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>主面板</title>
 	</head>
     <!-- 根据session判断是否登录 -->
@@ -79,12 +79,24 @@
 			 <!-- 右侧面板 -->
 			 <div class="host_right">
 				 <div class="host_right_all" id="host_right_all">
-                     <div class="Ubuntu"></div>
-                     <div class="CentOS"></div>
-                     <div class="MySQL"></div>
+                     <div class='Ubuntu'>
+                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://192.168.157.128/php/host/Count.php?type=Ubuntu'); ?><br>Ubuntu</h1>
+                     </div>
+                     <div class='CentOS'>
+                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://192.168.157.128/php/host/Count.php?type=CentOS'); ?><br>CentOS</h1>
+                     </div>
+                     <div class='MySQL'>
+                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://192.168.157.128/php/host/Count.php?type=MySQL'); ?><br>MySQL</h1>
+                     </div>
                  </div>
-				 <div class="host_right_list" id="host_right_list">设备列表</div>
-				 <div class="host_right_addhost" id="host_right_addhost">添加设备</div>
+				 <div class="host_right_list" id="host_right_list">
+                         <?php echo file_get_contents('http://192.168.157.128/php/host/List.php'); ?>
+                 </div>
+				 <div class="host_right_addhost" id="host_right_addhost">
+                     <form>
+<!--                         向接口提交数据，返回插入结果-->
+                     </form>
+                 </div>
 			 </div>
 		 </div>
 		 
