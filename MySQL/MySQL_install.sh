@@ -2,7 +2,7 @@
 #2021年9月18日
 #检查系统数据库
 #数据库root密码为htzy0000
-#创建php数据库、内存表、
+#创建bysj数据库、内存表、
 #最后修改：2021年9月24日09点26分 获取系统类型
 
 
@@ -67,7 +67,7 @@ installDB(){
 		systemctl enable mysql
 		initialization_ubuntu
 		#echo "安装数据库"
-		
+
 		#采集网卡和硬盘信息使用的软件包
 		apt -y install ethtool sysstat
 	else
@@ -86,10 +86,11 @@ installDB(){
 createTB(){
 	#主机表
 	mysql -uroot -phtzy0000 -e "
-	use php;
+	use bysj;
 	create table if not exists host (
 	id int(255) not null primary key auto_increment,
 	host_name char(20) not null,
+	host_type char(20) not null,
 	host_ip varchar(50) not null,
 	cpu_model varchar(50) not null,
 	cpu_core int not null,
@@ -97,50 +98,51 @@ createTB(){
 	swap_total float null,
 	network_model varchar(100) not null,
 	network_speed varchar(50) not null,
-	network_num int not null,							
-	disk_num int not null 								
+	network_num int not null,
+	disk_num int not null
 	);
 	"
 
-	
+
 	#内存表
 	mysql -uroot -phtzy0000 -e "
-	use php;
-	create table if not exists memory ( 
+	use bysj;
+	create table if not exists memory (
 	id int(10) primary key auto_increment not null,
 	host_ip varchar(50) not null,
 	mem_used float not null,
 	mem_free float not null,
+	mem_cache float,
 	swap_used float,
 	swap_free float,
-	data_time datetime not null  
+	data_time datetime not null
 	);
 	"
 	#CPU表
 	mysql -uroot -phtzy0000 -e "
-	use php;
-	create table if not exists cpu( 
+	use bysj;
+	create table if not exists cpu(
 	id int(10) primary key auto_increment not null,
 	host_ip varchar(50) not null,
 	cpu_used float not null,
-	data_time datetime not null 
+	data_time datetime not null
 	);"
-	
+
 	#网卡表
 	mysql -uroot -phtzy0000 -e "
-	use php;
-	create table if not exists network( 
+	use bysj;
+	create table if not exists network(
 	id int(10) primary key auto_increment not null,
 	host_ip varchar(50) not null,
-	network_name varchar(20) not null,
+	network_name varchar(50) not null,
 	network_up  float not null,
 	network_down  float not null,
-	data_time datetime not null 
+	data_time datetime not null
 	);"
-	
+
 	#磁盘表
 	mysql -uroot -phtzy0000 -e "
-	use php;
+	use bysj;
 	create table if not exists disk (
 	id int(255) not null primary key auto_increment,
 	host_ip varchar(50) not null,
@@ -151,19 +153,29 @@ createTB(){
 	data_time datetime  not null
 	);
 	"
+	#日志表
+	mysql -uroot -phtzy0000 -e "
+	use bysj;
+	create table if not exists logs (
+	id int(255) not null primary key auto_increment,
+	num int(255) not null,
+	logs varchar(255) null,
+	data_time datetime  not null
+	);
+	"
 }
 
 db=`mysql --version 2> /dev/null | awk -F ' ' '{print $1}'`
 if [ $db ]
 then
 	#建库、建表
-	mysql -uroot -phtzy0000 -e "create database if not exists php character set utf8 collate utf8_bin;"
+	mysql -uroot -phtzy0000 -e "create database if not exists bysj character set utf8 collate utf8_bin;"
 	createTB
-	#echo "有数据库"
+	#echo "已安装数据库"
 else
 	installDB
 	#建库、建表
-	mysql -uroot -phtzy0000 -e "create database if not exists php character set utf8 collate utf8_bin;"
+	mysql -uroot -phtzy0000 -e "create database if not exists bysj character set utf8 collate utf8_bin;"
 	createTB
-	#echo "没有数据库"
+	#echo "未安装数据库"
 fi

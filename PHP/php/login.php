@@ -2,7 +2,7 @@
     $user = isset($_POST['user']) ? htmlspecialchars($_POST['user']) : '';
     $passwd = isset($_POST['passwd']) ? htmlspecialchars($_POST['passwd']) : '';
 
-    $servername = "127.0.0.1";
+    $servername = "192.168.157.128";
     $username = "root";
     $password = "htzy0000";
     // 创建连接
@@ -23,20 +23,18 @@
      echo $login_status;
     }
     //如果登录成功，在关闭窗口前都不需要重新登录
-    function keepLogin($login_status){
+    function keepLogin($login_status,$user){
         if ($login_status==1){
             session_start();
             $_SESSION['loginStatus']=1;
-            $lifeTime = 300;//300秒
-            setcookie(session_name(), session_id(), time() + $lifeTime, "/");
+            $_SESSION['loginUser']=$user;
         }else{
             session_start();
             $_SESSION['loginStatus']=0;
-            $lifeTime = 300;
-            setcookie(session_name(), session_id(), time() + $lifeTime, "/");
+            $_SESSION['loginUser']=null;
         }
     }
-    keepLogin($login_status);
+    keepLogin($login_status,$user);
 
     $stmt->free_result();
     $stmt->close();

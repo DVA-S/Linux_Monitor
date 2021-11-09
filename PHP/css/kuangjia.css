@@ -223,8 +223,13 @@ body{
 .host_right_all{
 	width: 100%;
 	height: 100%;
-	background-color: #0F0;
+	/*background-color: #0F0;*/
 	display: none;
+}
+.Ubuntu,.CentOS,.MySQL{
+	width: 25%;
+	height: 25%;
+	background-color: #1196F3;
 }
 .host_right_list{
 	width: 100%;

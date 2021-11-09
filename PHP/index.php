@@ -78,9 +78,11 @@
 			 </div>
 			 <!-- 右侧面板 -->
 			 <div class="host_right">
-				 <!-- test -->
-				 <h1>②</h1>
-				 <div class="host_right_all" id="host_right_all">设备总览</div>
+				 <div class="host_right_all" id="host_right_all">
+                     <div class="Ubuntu"></div>
+                     <div class="CentOS"></div>
+                     <div class="MySQL"></div>
+                 </div>
 				 <div class="host_right_list" id="host_right_list">设备列表</div>
 				 <div class="host_right_addhost" id="host_right_addhost">添加设备</div>
 			 </div>
