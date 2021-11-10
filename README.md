@@ -45,7 +45,7 @@ mysql  Ver 8.0.27-0ubuntu0.20.04.1 for Linux on x86_64 ((Ubuntu))
 见仓库中MySQL/MySQL_install.sh
 
 远程登录：
-在数据库配置文件中/etc/mysql/mysql.conf.d/mysql.cnf（可能路径会不同），注释掉“bind-address = 127.0.0.1”
+在数据库配置文件中/etc/mysql/mysql.conf.d/mysqld.cnf（可能路径会不同），注释掉“bind-address = 127.0.0.1”
 mysql> create user 'root'@'%' identified by 'passwd';
 mysql> grant all privileges on *.* to 'root'@'%';
 mysql> flush privileges;
