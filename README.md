@@ -31,6 +31,8 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
     with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies
 
 安装：
+配置数据库驱动：
+在/etc/php/7.4/apache2/php.ini中取消掉extension=mysqli的注释
 apt install php-common libapache2-mod-php php-cli
 apt install php-mysql php-curl
 ```
@@ -45,8 +47,8 @@ mysql  Ver 8.0.27-0ubuntu0.20.04.1 for Linux on x86_64 ((Ubuntu))
 见仓库中MySQL/MySQL_install.sh
 
 远程登录：
-在数据库配置文件中/etc/mysql/mysql.conf.d/mysql.cnf（可能路径会不同），注释掉“bind-address = 127.0.0.1”
-mysql> create user 'root'@'%' identified by 'passwd';
+在数据库配置文件中/etc/mysql/mysql.conf.d/mysqld.cnf（可能路径会不同），注释掉“bind-address = 127.0.0.1”
+mysql> create user 'root'@'%' identified by '8080';
 mysql> grant all privileges on *.* to 'root'@'%';
 mysql> flush privileges;
 ```
