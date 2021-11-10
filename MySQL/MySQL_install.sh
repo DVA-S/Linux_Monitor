@@ -105,6 +105,8 @@ createTB(){
 
 
 	#内存表
+  #修改 -- 2021年11月10日
+  #移除mem_cache字段
 	mysql -uroot -phtzy0000 -e "
 	use bysj;
 	create table if not exists memory (
@@ -112,7 +114,6 @@ createTB(){
 	host_ip varchar(50) not null,
 	mem_used float not null,
 	mem_free float not null,
-	mem_cache float,
 	swap_used float,
 	swap_free float,
 	data_time datetime not null

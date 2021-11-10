@@ -8,15 +8,18 @@
 #	`top -bn 1 -i -c | grep "%Cpu(s):" | awk -F " " '{print $8}'`,
 # >> vmstat
 
-##Memory
+##Memory -- 单位：MB
+##优化 -- 2021年11月10日
+# 1，使用/proc/meminfo中的MemAvailable代替free命令表示可用内存
+# 2，移出mem_cache字段
+# 3，使用/proc/swaps中的Used替代free命令表示已用交换分区
 memory(){
-	mysql -uroot -phtzy0000 -e "insert into bysj.memory (host_ip,mem_used,mem_free,mem_cache,swap_used,swap_free,data_time) values
+	mysql -uroot -phtzy0000 -e "insert into bysj.memory (host_ip,mem_used,mem_free,swap_used,swap_free,data_time) values
 	(
 	`echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}')\'`,
 	`free -m | grep Mem | awk '{print $3}'`,
-	`free -m | grep Mem | awk '{print $4}'`,
-	`free -m | grep Mem | awk '{print $6}'`,
-	`free -m | grep Swap | awk '{print $3}'`,
+	`echo $(cat /proc/meminfo | grep MemAvailable: | awk '{print $2}') 1024 | awk '{print $1/$2}'`,
+	`echo $(cat /proc/swaps | sed -n '2p' | awk '{print $4}') 1024 | awk '{print $1/$2}'`,
 	`free -m | grep Swap | awk '{print $4}'`,
 	`date +"%Y%m%d%T" | sed 's/://g'`
 	);"
