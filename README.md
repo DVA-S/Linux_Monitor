@@ -31,6 +31,8 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
     with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies
 
 安装：
+配置数据库驱动：
+在/etc/php/7.4/apache2/php.ini中取消掉extension=mysqli的注释
 apt install php-common libapache2-mod-php php-cli
 apt install php-mysql php-curl
 ```
