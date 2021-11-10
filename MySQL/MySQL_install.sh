@@ -5,11 +5,12 @@
 #创建bysj数据库、内存表、
 #最后修改：2021年9月24日09点26分 获取系统类型
 
-
-
 #初始化
 initialization_ubuntu(){
+  #安装额外包
+  apt -y install sysstat
 	apt -y install expect
+
 	expect -c "
 	spawn /usr/bin/mysql_secure_installation
 	expect \"Press y|Y for Yes, any other key for No:\"
@@ -34,7 +35,10 @@ initialization_ubuntu(){
 	"
 }
 initialization_centos(){
+  #安装额外包
+  yum -y install redhat-lsb-core
 	yum -y install expect
+
 	expect -c "
 	spawn /usr/bin/mysql_secure_installation
 	expect \"Enter current password for root (enter for none):\"
