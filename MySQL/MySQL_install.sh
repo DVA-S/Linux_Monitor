@@ -10,6 +10,7 @@ initialization_ubuntu(){
   #安装额外包
   apt -y install sysstat
 	apt -y install expect
+  apt -y install ethtool
 
 	expect -c "
 	spawn /usr/bin/mysql_secure_installation
