@@ -93,9 +93,25 @@
                          <?php echo file_get_contents('http://192.168.157.128/php/host/List.php'); ?>
                  </div>
 				 <div class="host_right_addhost" id="host_right_addhost">
-                     <form>
-<!--                         向接口提交数据，返回插入结果-->
-                     </form>
+                     <div class="addhost_form">
+                         <form action="#" method="get">
+                             <label for="ipaddress" style="font-size: 14px;color: #CCCCDC;">IP地址：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="ipaddress" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="ipaddress" maxlength="20">
+                             <br />
+                             <br />
+                             <label for="hostuser" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="hostuser" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="hostuser" maxlength="20">
+                             <br />
+                             <br />
+                             <label for="hostpasswd" style="font-size: 14px;color: #CCCCDC;">密&nbsp;&nbsp;&nbsp;码：</label>
+                             <input id="hostpasswd" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="password" name="hostpasswd">
+                             <br />
+                             <br />
+                             <input style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="添加" onclick="addHost()">
+                         </form>
+                     </div>
                  </div>
 			 </div>
 		 </div>
@@ -115,9 +131,10 @@
 			 </div>
 			 <!-- 右侧面板 -->
 			 <div class="checking_right">
-				 <!-- test -->
-				 <h1>③</h1>
-			 	 <div class="checking_right_link" id="checking_right_link">连通性检测</div>
+			 	 <div class="checking_right_link" id="checking_right_link">
+                     <button onclick="hostLink()">开始检测</button>
+                     <p id="hostLinkList">test</p>
+                 </div>
 			 	 <div class="checking_right_test" id="checking_right_test">性能检测</div>
 			 	 <div class="checking_right_port" id="checking_right_port">端口检测</div>
 				 <div class="checking_right_device" id="checking_right_device">硬件检测</div>

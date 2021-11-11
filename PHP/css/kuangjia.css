@@ -255,8 +255,14 @@ body{
 .host_right_addhost{
 	width: 100%;
 	height: 100%;
-	background-color: #F00;
+	background-color: #000;
+	opacity: 0.8;
 	display: none;
+}
+.addhost_form{
+	padding: 5%;
+	width: 80%;
+	height: 100%;
 }
 
 /* DIV 主页 巡检 */
@@ -302,7 +308,8 @@ body{
 .checking_right_link{
 	width: 100%;
 	height: 100%;
-	background-color: #0F0;
+	background-color: #000;
+	opacity: 0.8;
 	display: none;
 }
 .checking_right_test{

@@ -25,7 +25,7 @@ mysqli_set_charset($con, "utf8");
 $stmt = $con->prepare("select host_name,host_type,host_ip,cpu_model,mem_total,network_speed from bysj.host");
 $stmt->bind_result($host_name,$host_type,$host_ip,$cpu_model,$mem_total,$network_speed);
 $stmt->execute();
-echo "<table border='1' class='hostList' style=''>
+echo "<table border='0' class='hostList' style=''>
     <tr>
         <th>主机名</th><th>类型</th><th>地址</th><th>CPU型号</th><th>内存</th><th>网卡速率</th>
     </tr>";

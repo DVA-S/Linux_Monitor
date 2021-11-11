@@ -9,7 +9,7 @@ host(){
 	    (
 	    `echo \'$(hostname)\'`,
 	    `echo \'$(lsb_release -a 2> /dev/null | grep "Distributor ID:" | awk -F ' ' '{print $3}')\'`,
-	    `echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}')\'`,
+	    `echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}')\'`,
 	    `echo \'$(lscpu | grep "型号名称："|awk -F "：" '{print $2}')\' | sed 's/ /-/g' | sed "s/'-/'/g"`,
 	    `echo $(lscpu | grep "每个座的核数" | awk -F '：' '{print $2}')`,
 	    `echo $(free -m | grep "内存：" | awk '{print $2}')`,
@@ -25,7 +25,7 @@ host(){
       	    (
       	    `echo \'$(hostname)\'`,
       	    `echo \'$(lsb_release -a 2> /dev/null | grep "Distributor ID:" | awk -F ' ' '{print $3}')\'`,
-      	    `echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}')\'`,
+      	    `echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}')\'`,
       	    `echo \'$(lscpu | grep "Model name:"|awk -F ":" '{print $2}')\' | sed 's/ /-/g' | sed "s/'-/'/g"`,
       	    `echo $(lscpu | grep -n "^CPU(s):"|awk -F ":" '{print $3}')`,
       	    `echo $(free -m | grep Mem | awk '{print $2}')`,

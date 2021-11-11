@@ -130,3 +130,26 @@ function loginOkAnimation(){
 			}
 		);
 }
+
+//添加主机
+function addHost(){
+	var ipaddress =$("#ipaddress").val();
+	var username =$("#hostuser").val();
+	var passwd = $("#hostpasswd").val();
+	$.get(
+		"php/host/addHost.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd},
+		function(data,status){
+			console.log("数据: \n" + data + "\n状态: " + status);
+		}
+	);
+}
+
+//连通性检测ping
+function hostLink(){
+	$.get(
+		"php/checking/hostLink.php",{},
+		function(data){
+			document.getElementById("hostLinkList").innerHTML=data;
+		}
+	);
+}
