@@ -41,12 +41,13 @@ network(){
   #系统语言
   if [ $lang = "zh_CN.UTF-8" ]
   then
+      #rxkB/s下载
     	mysql -uroot -phtzy0000 -e "insert into bysj.network(host_ip,network_name,network_up,network_down,data_time)
     	values(
     	`echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}')\'`,
     	`echo \'$(ip a | grep "<" | awk -F ":" '{print $2}'| sed 's/^ //g' | sed -n '1,4p')\' | sed 's/ /\//g'`,
-    	`echo $(sar -n DEV 1 1 | grep "平均时间:" | awk -F ' ' '{print $6}' | sed -n '2p') $(sar -n DEV 1 1 | grep "平均时间:" | awk -F ' ' '{print $6}' | sed -n '3p') $(sar -n DEV 1 1 | grep "平均时间:" | awk -F ' ' '{print $6}' | sed -n '4p') | awk '{print $1+$2+$3}'`,
-    	`echo $(sar -n DEV 1 1 | grep "平均时间:" | awk -F ' ' '{print $5}' | sed -n '2p') $(sar -n DEV 1 1 | grep "平均时间:" | awk -F ' ' '{print $5}' | sed -n '3p') $(sar -n DEV 1 1 | grep "平均时间:" | awk -F ' ' '{print $5}' | sed -n '4p') | awk '{print $1+$2+$3}'`,
+    	`echo $(sar -n DEV 1 1 | grep "平均时间:" | awk -F ' ' '{print $6}' | sed -n '2,4p') | awk '{print $1+$2+$3}'`,
+    	`echo $(sar -n DEV 1 1 | grep "平均时间:" | awk -F ' ' '{print $5}' | sed -n '2,4p') | awk '{print $1+$2+$3}'`,
     	`date +"%Y%m%d%T" | sed 's/://g'`
     	);"
   else
@@ -54,8 +55,8 @@ network(){
     	values(
     	`echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}')\'`,
     	`echo \'$(ip a | grep "<" | awk -F ":" '{print $2}'| sed 's/^ //g' | sed -n '1,4p')\' | sed 's/ /\//g'`,
-    	`echo $(sar -n DEV 1 1 | grep Average: | awk -F ' ' '{print $6}' | sed -n '2p') $(sar -n DEV 1 1 | grep Average: | awk -F ' ' '{print $6}' | sed -n '3p') $(sar -n DEV 1 1 | grep Average: | awk -F ' ' '{print $6}' | sed -n '4p') | awk '{print $1+$2+$3}'`,
-    	`echo $(sar -n DEV 1 1 | grep Average: | awk -F ' ' '{print $5}' | sed -n '2p') $(sar -n DEV 1 1 | grep Average: | awk -F ' ' '{print $5}' | sed -n '3p') $(sar -n DEV 1 1 | grep Average: | awk -F ' ' '{print $5}' | sed -n '4p') | awk '{print $1+$2+$3}'`,
+    	`echo $(sar -n DEV 1 1 | grep Average: | awk -F ' ' '{print $6}' | sed -n '2,4p') | awk '{print $1+$2+$3}'`,
+    	`echo $(sar -n DEV 1 1 | grep Average: | awk -F ' ' '{print $5}' | sed -n '2,4p') | awk '{print $1+$2+$3}'`,
     	`date +"%Y%m%d%T" | sed 's/://g'`
     	);"
   fi
@@ -74,7 +75,12 @@ disk(){
 	`date +"%Y%m%d%T" | sed 's/://g'`
 	);"
 }
+while(true)
+do
+{
 memory
 cpu
 network
 disk
+}
+done
