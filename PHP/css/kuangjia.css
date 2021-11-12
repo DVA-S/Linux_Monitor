@@ -181,12 +181,6 @@ body{
 	position: absolute;
 }
 
-.panel object{
-	height: 100%;
-	width: 100%;
-	border-radius: 10px;
-}
-
 /* DIV 主页 主机 */
 .host{
 	width: 95%;

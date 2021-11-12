@@ -64,12 +64,11 @@
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
 <!--			 <object data="http://192.168.157.128:3000/d/ULfAeD5nk/jian-kong-mian-ban?orgId=1&from=now-5m&to=now&viewPanel=2&refresh=5s"></object>-->
-             <div id="memory" style="width: 600px;height: 250px;background-color: #fff;left: 1%;">
+             <div class="view" id="memory" style="width: 50%;height: 50%;position: relative;top: 1%;background-color: #AAA;">
                  <script>
                      var chartDom = document.getElementById('memory');
                      var myChart = echarts.init(chartDom);
                      var option;
-
                      option = {
                          //关闭图表加载动画
                          animation: false,
@@ -164,7 +163,7 @@
                      },5000);
                  </script>
              </div>
-             <div id="network" style="width: 600px;height: 250px;background-color: #fff;left: 53%;top: -44%;">
+             <div class="view" id="network" style="width: 50%;height: 50%;position: relative;top: 1%;background-color: #DDD;">
                 <script>
 
                     var chartDom = document.getElementById('network');
@@ -243,11 +242,162 @@
                     },5000);
                 </script>
              </div>
-             <div id="cpu" style="width: 600px;height: 250px;background-color: #fff;left: 1%;top: -40%;">
+             <div class="view" id="cpu" style="width: 50%;height: 50%;position: relative;top: -49%;left: 50%;background-color: #1196F3;">
+                 <script>
 
+                     var chartDom = document.getElementById('cpu');
+                     var myChart = echarts.init(chartDom);
+                     var option;
+
+                     option = {
+                         animation: false,
+                         title: {
+                             text: 'cpu'
+                         },
+                         tooltip: {
+                             trigger: 'axis',
+                             axisPointer: {
+                                 type: 'cross',
+                                 label: {
+                                     backgroundColor: '#6a7985'
+                                 }
+                             }
+                         },
+                         legend: {
+                             data: ['占用', '空闲']
+                         },
+                         toolbox: {
+                             feature: {
+                                 saveAsImage: {}
+                             }
+                         },
+                         grid: {
+                             left: '3%',
+                             right: '4%',
+                             bottom: '3%',
+                             containLabel: true
+                         },
+                         xAxis: [
+                             {
+                                 type: 'category',
+                                 boundaryGap: false,
+                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/cpu.php?type=datatime'); ?>
+                             }
+                         ],
+                         yAxis: [
+                             {
+                                 type: 'value',
+                                 axisLabel: {
+                                     formatter: '{value} %'
+                                 }
+                             }
+                         ],
+                         series: [
+                             {
+                                 name: '占用',
+                                 type: 'line',
+                                 stack: 'Total',
+                                 areaStyle: {},
+                                 emphasis: {
+                                     focus: 'series'
+                                 },
+                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/cpu.php?type=cpuused'); ?>
+                             },
+                             {
+                                 name: '空闲',
+                                 type: 'line',
+                                 stack: 'Total',
+                                 areaStyle: {},
+                                 emphasis: {
+                                     focus: 'series'
+                                 },
+                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/cpu.php?type=cpufree'); ?>
+                             }
+                         ]
+                     };
+                     option && myChart.setOption(option);
+                     setTimeout(function (){
+                         $("#cpu").load("#cpu");
+                     },5000);
+                 </script>
              </div>
-             <div id="disk" style="width: 600px;height: 250px;background-color: #fff;left: 53%;top: -84%;">
+             <div class="view" id="disk" style="width: 50%;height: 50%;position: relative;top: -149%;left: 50%;background-color: #99DD55;">
+                 <script>
+                     var chartDom = document.getElementById('disk');
+                     var myChart = echarts.init(chartDom);
+                     var option;
 
+                     option = {
+                         animation: false,
+                         title: {
+                             text: 'disk'
+                         },
+                         tooltip: {
+                             trigger: 'axis',
+                             axisPointer: {
+                                 type: 'cross',
+                                 label: {
+                                     backgroundColor: '#6a7985'
+                                 }
+                             }
+                         },
+                         legend: {
+                             data: ['r', 'w']
+                         },
+                         toolbox: {
+                             feature: {
+                                 saveAsImage: {}
+                             }
+                         },
+                         grid: {
+                             left: '3%',
+                             right: '4%',
+                             bottom: '3%',
+                             containLabel: true
+                         },
+                         xAxis: [
+                             {
+                                 type: 'category',
+                                 boundaryGap: false,
+                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/disk.php?type=datatime'); ?>
+                             }
+                         ],
+                         yAxis: [
+                             {
+                                 type: 'value',
+                                 axisLabel: {
+                                     formatter: '{value} KB/S'
+                                 }
+                             }
+                         ],
+                         series: [
+                             {
+                                 name: 'r',
+                                 type: 'line',
+                                 stack: 'Total',
+                                 areaStyle: {},
+                                 emphasis: {
+                                     focus: 'series'
+                                 },
+                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/disk.php?type=diskread'); ?>
+                             },
+                             {
+                                 name: 'w',
+                                 type: 'line',
+                                 stack: 'Total',
+                                 areaStyle: {},
+                                 emphasis: {
+                                     focus: 'series'
+                                 },
+                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/disk.php?type=diskwrite'); ?>
+                             }
+                         ]
+                     };
+                     option && myChart.setOption(option);
+                     setTimeout(function (){
+                         $("#disk").load("#disk");
+                     },5000);
+                 </script>
              </div>
 		 </div>
 		 
