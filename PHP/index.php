@@ -4,6 +4,7 @@
 		<link rel="stylesheet" type="text/css" href="css/kuangjia.css"/>
 		<script type="text/javascript" src="js/kuangjia.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/echars.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>主面板</title>
 	</head>
@@ -15,6 +16,10 @@
         echo "<script>console.log('loginStatus:',{$_SESSION['loginStatus']});</script>";
     ?>
 	<body>
+
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+
+
 		<!-- 登录页 -->
 		<div class="background_color">
 		</div>
@@ -39,7 +44,7 @@
 			</div>
 		</div>
 		<!-- 主页 -->
-		 <div class="background_color"></div>
+<!--		 <div class="background_color"></div>-->
 		 <!-- 导航栏 -->
 		 <div class="head_div" id="head_div">
 			 <div class="panel_btn" onclick="btnOnClick(this)">
@@ -58,11 +63,99 @@
 		 </div>
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
-			 <!-- test -->
-			 <h1>①</h1>
-			 <!-- 消耗资源过大 <iframe src="http://192.168.157.128:3000/d/kkmdQnFnz/bysjtu-biao-copy?orgId=1&refresh=5s&from=now-5m&to=now&kiosk"></iframe> -->
-			 <!-- 资源优化 -->
-			 <object class="current_pdf" data="http://192.168.157.128:3000/d/kkmdQnFnz/bysjtu-biao-copy?orgId=1&refresh=5s&from=now-5m&to=now&kiosk" height="100%" width="100%">			 </object>
+<!--			 <object data="http://192.168.157.128:3000/d/ULfAeD5nk/jian-kong-mian-ban?orgId=1&from=now-5m&to=now&viewPanel=2&refresh=5s"></object>-->
+             <div id="memory" style="width: 600px;height: 300px;background-color: #fff;">
+                 <script>
+                     var chartDom = document.getElementById('memory');
+                     var myChart = echarts.init(chartDom);
+                     var option;
+
+                     option = {
+                         title: {
+                             text: 'Memory'
+                         },
+                         tooltip: {
+                             trigger: 'axis'
+                         },
+                         legend: {},
+                         toolbox: {
+                             show: true,
+                             feature: {
+                                 dataZoom: {
+                                     yAxisIndex: 'none'
+                                 },
+                                 dataView: { readOnly: false },
+                                 magicType: { type: ['line', 'bar'] },
+                                 restore: {},
+                                 saveAsImage: {}
+                             }
+                         },
+                         xAxis: {
+                             type: 'category',
+                             boundaryGap: false,
+                             data: <?php echo file_get_contents('http://192.168.157.128/php/panel/memory.php?type=datatime'); ?>
+                                 // ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                         },
+                         yAxis: {
+                             type: 'value',
+                             axisLabel: {
+                                 formatter: '{value} MB'
+                             }
+                         },
+                         series: [
+                             {
+                                 name: 'Highest',
+                                 type: 'line',
+                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/memory.php?type=memused'); ?>,
+                                     // [10, 11, 13, 11, 12, 12, 9],
+                                 markPoint: {
+                                     data: [
+                                         { type: 'max', name: 'Max' },
+                                         { type: 'min', name: 'Min' }
+                                     ]
+                                 },
+                                 markLine: {
+                                     data: [{ type: 'average', name: 'Avg' }]
+                                 }
+                             },
+                             {
+                                 name: 'Lowest',
+                                 type: 'line',
+                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/memory.php?type=memfree'); ?>,
+                                     // [1, -2, 2, 5, 3, 2, 0],
+                                 markPoint: {
+                                     data: [{ name: '最低点', value: -2, xAxis: 1, yAxis: -1.5 }]
+                                 },
+                                 markLine: {
+                                     data: [
+                                         { type: 'average', name: 'Avg' },
+                                         [
+                                             {
+                                                 symbol: 'none',
+                                                 x: '90%',
+                                                 yAxis: 'max'
+                                             },
+                                             {
+                                                 symbol: 'circle',
+                                                 label: {
+                                                     position: 'start',
+                                                     formatter: 'Max'
+                                                 },
+                                                 type: 'max',
+                                                 name: '最高点'
+                                             }
+                                         ]
+                                     ]
+                                 }
+                             }
+                         ]
+                     };
+                     option && myChart.setOption(option);
+                     // $("#memory").load(location.href + " #memory");
+                     // setTimeout("location=location; ", 5000);
+                 </script>
+             </div>
+
 		 </div>
 		 
 		 <!-- 主机管理 -->
