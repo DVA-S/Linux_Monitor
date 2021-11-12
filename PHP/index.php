@@ -151,8 +151,11 @@
                          ]
                      };
                      option && myChart.setOption(option);
-                     // $("#memory").load(location.href + " #memory");
-                     // setTimeout("location=location; ", 5000);
+                     setTimeout(function (){
+                         $("#memory").load("#memory");
+                     },5000);
+
+                     // setTimeout("parent.location.reload();", 5000);
                  </script>
              </div>
 
