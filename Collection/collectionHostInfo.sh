@@ -33,7 +33,7 @@ host(){
       	    `echo \'$(lspci | grep Ethernet | head -n 1 | awk -F ' ' '{print $4,$5,$6,$7,$8,$9,$10}')\'`,
       	    `echo \'$(ethtool $(ip a | grep "<" | awk -F ":" '{print $2}'| sed 's/^ //g' | sed -n '2p') |  grep -i speed | awk -F ":" '{print $2}' | sed 's/^ //g')\'`,
       	    `lspci | grep Ethernet | wc -l`,
-      	    `lsblk -S | grep disk |wc -l`
+      	    `lsblk -S | grep disk | wc -l`
       	    );"
 	    fi
 }

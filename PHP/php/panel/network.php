@@ -2,10 +2,9 @@
 $type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 
 $con =null;
-$id = null;
 $data_time=null;
-$mem_used=null;
-$mem_free=null;
+$network_up=null;
+$network_down=null;
 $datalist=array();
 
 require_once "../linkDB.php";
@@ -13,8 +12,8 @@ mysqli_select_db($con,"bysj");
 // 设置编码，防止中文乱码
 mysqli_set_charset($con, "utf8");
 //利用数据行数判定登录
-$stmt = $con->prepare("select id,data_time,mem_used,mem_free from (select id,data_time,mem_used,mem_free from bysj.memory order by data_time desc limit 0,20) AS BtoS order by data_time;");
-$stmt->bind_result($id,$data_time,$mem_used,$mem_free);
+$stmt = $con->prepare("select data_time,network_up,network_down from (select data_time,network_up,network_down from bysj.network order by data_time desc limit 0,30) AS network order by data_time;");
+$stmt->bind_result($data_time,$network_up,$network_down);
 $stmt->execute();
 if ($type == "datatime"){
     $num=0;
@@ -25,22 +24,22 @@ if ($type == "datatime"){
         echo "'$datalist[$num]'",",";
     }
     echo "'$datalist[0]']";
-}else if ($type == "memused"){
+}else if ($type == "networkup"){
     $num=0;
     echo "[";
     while($stmt->fetch()){
-        $datalist[$num]=$mem_used;
+        $datalist[$num]=$network_up;
         $num=$num--;
-        echo "'$mem_used'",",";
+        echo "'$network_up'",",";
     }
     echo "'$datalist[0]']";
-}else if($type == "memfree"){
+}else if($type == "networkdown"){
     $num=0;
     echo "[";
     while($stmt->fetch()){
-        $datalist[$num]=$mem_free;
+        $datalist[$num]=$network_down;
         $num=$num++;
-        echo "'$mem_free'",",";
+        echo "'$network_down'",",";
     }
     echo "'$datalist[0]']";
 }

@@ -64,13 +64,15 @@
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
 <!--			 <object data="http://192.168.157.128:3000/d/ULfAeD5nk/jian-kong-mian-ban?orgId=1&from=now-5m&to=now&viewPanel=2&refresh=5s"></object>-->
-             <div id="memory" style="width: 600px;height: 300px;background-color: #fff;">
+             <div id="memory" style="width: 600px;height: 250px;background-color: #fff;left: 1%;">
                  <script>
                      var chartDom = document.getElementById('memory');
                      var myChart = echarts.init(chartDom);
                      var option;
 
                      option = {
+                         //关闭图表加载动画
+                         animation: false,
                          title: {
                              text: 'Memory'
                          },
@@ -90,6 +92,12 @@
                                  saveAsImage: {}
                              }
                          },
+                         grid: {
+                             left: '1%',
+                             right: '5%',
+                             bottom: '3%',
+                             containLabel: true
+                         },
                          xAxis: {
                              type: 'category',
                              boundaryGap: false,
@@ -104,7 +112,7 @@
                          },
                          series: [
                              {
-                                 name: 'Highest',
+                                 name: '已用内存',
                                  type: 'line',
                                  data: <?php echo file_get_contents('http://192.168.157.128/php/panel/memory.php?type=memused'); ?>,
                                      // [10, 11, 13, 11, 12, 12, 9],
@@ -119,13 +127,13 @@
                                  }
                              },
                              {
-                                 name: 'Lowest',
+                                 name: '空闲内存',
                                  type: 'line',
                                  data: <?php echo file_get_contents('http://192.168.157.128/php/panel/memory.php?type=memfree'); ?>,
                                      // [1, -2, 2, 5, 3, 2, 0],
-                                 markPoint: {
-                                     data: [{ name: '最低点', value: -2, xAxis: 1, yAxis: -1.5 }]
-                                 },
+                                 // markPoint: {
+                                 //     data: [{ name: '最低点', value: -2, xAxis: 1, yAxis: -1.5 }]
+                                 // },
                                  markLine: {
                                      data: [
                                          { type: 'average', name: 'Avg' },
@@ -133,7 +141,7 @@
                                              {
                                                  symbol: 'none',
                                                  x: '90%',
-                                                 yAxis: 'max'
+                                                 yAxis: ''
                                              },
                                              {
                                                  symbol: 'circle',
@@ -154,11 +162,93 @@
                      setTimeout(function (){
                          $("#memory").load("#memory");
                      },5000);
-
-                     // setTimeout("parent.location.reload();", 5000);
                  </script>
              </div>
+             <div id="network" style="width: 600px;height: 250px;background-color: #fff;left: 53%;top: -44%;">
+                <script>
 
+                    var chartDom = document.getElementById('network');
+                    var myChart = echarts.init(chartDom);
+                    var option;
+
+                    option = {
+                        animation: false,
+                        title: {
+                            text: 'network'
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'cross',
+                                label: {
+                                    backgroundColor: '#6a7985'
+                                }
+                            }
+                        },
+                        legend: {
+                            data: ['up', 'down']
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: [
+                            {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: <?php echo file_get_contents('http://192.168.157.128/php/panel/network.php?type=datatime'); ?>
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'value',
+                                axisLabel: {
+                                    formatter: '{value} KB/S'
+                                }
+                            }
+                        ],
+                        series: [
+                            {
+                                name: 'up',
+                                type: 'line',
+                                stack: 'Total',
+                                areaStyle: {},
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: <?php echo file_get_contents('http://192.168.157.128/php/panel/network.php?type=networkup'); ?>
+                            },
+                            {
+                                name: 'down',
+                                type: 'line',
+                                stack: 'Total',
+                                areaStyle: {},
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: <?php echo file_get_contents('http://192.168.157.128/php/panel/network.php?type=networkdown'); ?>
+                            }
+                        ]
+                    };
+                    option && myChart.setOption(option);
+                    setTimeout(function (){
+                        $("#network").load("#network");
+                    },5000);
+                </script>
+             </div>
+             <div id="cpu" style="width: 600px;height: 250px;background-color: #fff;left: 1%;top: -40%;">
+
+             </div>
+             <div id="disk" style="width: 600px;height: 250px;background-color: #fff;left: 53%;top: -84%;">
+
+             </div>
 		 </div>
 		 
 		 <!-- 主机管理 -->
