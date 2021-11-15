@@ -128,6 +128,7 @@ function loginOkAnimation(){
 				document.getElementById("panel").style.animation="0.5s ease 0s 1 normal forwards running index_panel_loginOk";
 				console.log("logOK!");
 			}else{
+				//拒绝动画
 				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginNo";
 				// 延迟0.5秒刷新-重置登录失败动画
 				setTimeout(function(){ location.reload(); },500);

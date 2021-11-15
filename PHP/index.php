@@ -6,7 +6,7 @@
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/echars.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<title>主面板</title>
+		<title>Inspection and Monitoring</title>
 	</head>
     <!-- 根据session判断是否登录 -->
     <!-- session_start()函数前不能有任何代码输出到浏览器，最好加在页面头部，或者先用ob_start()函数打开输出缓冲区。-->
@@ -25,23 +25,23 @@
 		</div>
 		<div class="login_div" id="login_div">
 			<div class="logo">
-				<h1 style="text-align: center;line-height: 480%;color: #CCCCDC;">登录✌</h1>
+				<h1 style="text-align: center;line-height: 480%;color: #FFF;"><i>运维系统</i></h1>
 			</div>
 			<div class="login_form" id="login_form">
 				<form action="#" method="post"">
                     <label for="username" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
 					<!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-					<input id="username" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="text" name="username" maxlength="20" onkeydown="keyLogin()">
+					<input id="username" placeholder="admin" autofocus="autofocus" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="text" name="username" maxlength="20" onkeydown="keyLogin()">
 					<br />
 					<br />
 					<label for="passwd" style="font-size: 14px;color: #CCCCDC;">密码：</label>
-					<input id="passwd" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="password" name="passwd"  onkeydown="keyLogin()">
+					<input id="passwd" placeholder="回车可登录" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="password" name="passwd"  onkeydown="keyLogin()">
 					<br />
 					<br />
 					<input id="loginbtn" class="submit" type="button" value="登  录" onclick="loginOkAnimation()">
-					<!-- onclick="loginOkAnimation()" -->
 				</form>
 			</div>
+            <p style="color: #CCC;position: relative;top: 25%;left: 22.5%;font-size: 14px;">自动化运维与监控系统@2021 by wxk</p>
 		</div>
 		<!-- 主页 -->
 <!--		 <div class="background_color"></div>-->
@@ -63,8 +63,7 @@
 		 </div>
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
-<!--			 <object data="http://localhost:3000/d/ULfAeD5nk/jian-kong-mian-ban?orgId=1&from=now-5m&to=now&viewPanel=2&refresh=5s"></object>-->
-             <div class="view" id="memory" style="width: 50%;height: 50%;position: relative;top: 1%;background-color: #AAA;">
+             <div class="view" id="memory" style="width: 50%;height: 50%;position: relative;top: -0.5%;left: -0.5%;background-color: #FFF;">
                  <script>
                      var chartDom = document.getElementById('memory');
                      var myChart = echarts.init(chartDom);
@@ -163,7 +162,7 @@
                      // },5000);
                  </script>
              </div>
-             <div class="view" id="network" style="width: 50%;height: 50%;position: relative;top: 1%;background-color: #DDD;">
+             <div class="view" id="network" style="width: 50%;height: 50%;position: relative;top: 0.5%;left: -0.5%;background-color: #FFF;">
                 <script>
 
                     var chartDom = document.getElementById('network');
@@ -242,7 +241,7 @@
                     // },5000);
                 </script>
              </div>
-             <div class="view" id="cpu" style="width: 50%;height: 50%;position: relative;top: -49%;left: 50%;background-color: #1196F3;">
+             <div class="view" id="cpu" style="width: 50%;height: 50%;position: relative;top: -49.5%;left: 50.5%;background-color: #FFF;">
                  <script>
 
                      var chartDom = document.getElementById('cpu');
@@ -321,7 +320,7 @@
                      // },5000);
                  </script>
              </div>
-             <div class="view" id="disk" style="width: 50%;height: 50%;position: relative;top: -149%;left: 50%;background-color: #99DD55;">
+             <div class="view" id="disk" style="width: 50%;height: 50%;position: relative;top: -150.5%;left: 50.5%;background-color: #FFF;">
                  <script>
                      var chartDom = document.getElementById('disk');
                      var myChart = echarts.init(chartDom);

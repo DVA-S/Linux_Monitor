@@ -129,10 +129,6 @@ body{
 	font-weight: bold;
 	border-radius: 5px;	
 }
-.submit:active{
-	background-color: #000;
-	border-radius: 5px;
-}
 
 /* DIV 主页 导航栏 */
 .head_div{
@@ -159,7 +155,8 @@ body{
 }
 /* 按钮效果 */
 .host_btn:active, .user_btn:active, .panel_btn:active, .setup_btn:active, .checking_btn:active, .submit:active{
-	background-color: #000;
+	background-color: #0B3861;
+	color: #AAA;
 }
 /* 先并集再交集 */
 .host_btn,.user_btn,.panel_btn,.setup_btn,.checking_btn p{
