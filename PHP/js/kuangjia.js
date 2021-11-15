@@ -153,3 +153,61 @@ function hostLink(){
 		}
 	);
 }
+
+function hostPerf(element){
+	var go=element.className;
+	var ipaddress =$("#ipaddressC").val();
+	var username =$("#hostuserC").val();
+	var passwd = $("#hostpasswdC").val();
+	switch (go){
+		case 'hostDisk':
+			$.get(
+				"php/checking/hostPerformance.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,"type":"disk"},
+				function(data){
+					document.getElementById("checking_disk").innerHTML=data;
+				}
+			);
+			break;
+		case 'hostNetwork':
+			$.get(
+				"php/checking/hostPerformance.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,"type":"network"},
+				function(data){
+					document.getElementById("checking_network").innerHTML=data;
+				}
+			);
+			break;
+		case 'hostCpu':
+			$.get(
+				"php/checking/hostPerformance.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,"type":"cpu"},
+				function(data){
+					document.getElementById("checking_cpu").innerHTML=data;
+				}
+			);
+			break;
+		default:
+	}
+}
+
+function hostPort(){
+	var ipaddress =$("#ipaddressC").val();
+	var username =$("#hostuserC").val();
+	var passwd = $("#hostpasswdC").val();
+	$.get(
+		"php/checking/hostPort.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd},
+		function(data){
+			document.getElementById("checking_port").innerHTML=data;
+		}
+	);
+}
+
+function hostDevice(){
+	var ipaddress =$("#ipaddressC").val();
+	var username =$("#hostuserC").val();
+	var passwd = $("#hostpasswdC").val();
+	$.get(
+		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd},
+		function(data){
+			document.getElementById("checking_device").innerHTML=data;
+		}
+	);
+}

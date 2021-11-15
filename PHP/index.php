@@ -63,7 +63,7 @@
 		 </div>
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
-<!--			 <object data="http://192.168.157.128:3000/d/ULfAeD5nk/jian-kong-mian-ban?orgId=1&from=now-5m&to=now&viewPanel=2&refresh=5s"></object>-->
+<!--			 <object data="http://localhost:3000/d/ULfAeD5nk/jian-kong-mian-ban?orgId=1&from=now-5m&to=now&viewPanel=2&refresh=5s"></object>-->
              <div class="view" id="memory" style="width: 50%;height: 50%;position: relative;top: 1%;background-color: #AAA;">
                  <script>
                      var chartDom = document.getElementById('memory');
@@ -100,7 +100,7 @@
                          xAxis: {
                              type: 'category',
                              boundaryGap: false,
-                             data: <?php echo file_get_contents('http://192.168.157.128/php/panel/memory.php?type=datatime'); ?>
+                             data: <?php echo file_get_contents('http://localhost/php/panel/memory.php?type=datatime'); ?>
                                  // ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                          },
                          yAxis: {
@@ -113,7 +113,7 @@
                              {
                                  name: '已用内存',
                                  type: 'line',
-                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/memory.php?type=memused'); ?>,
+                                 data: <?php echo file_get_contents('http://localhost/php/panel/memory.php?type=memused'); ?>,
                                      // [10, 11, 13, 11, 12, 12, 9],
                                  markPoint: {
                                      data: [
@@ -128,7 +128,7 @@
                              {
                                  name: '空闲内存',
                                  type: 'line',
-                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/memory.php?type=memfree'); ?>,
+                                 data: <?php echo file_get_contents('http://localhost/php/panel/memory.php?type=memfree'); ?>,
                                      // [1, -2, 2, 5, 3, 2, 0],
                                  // markPoint: {
                                  //     data: [{ name: '最低点', value: -2, xAxis: 1, yAxis: -1.5 }]
@@ -158,9 +158,9 @@
                          ]
                      };
                      option && myChart.setOption(option);
-                     setTimeout(function (){
-                         $("#memory").load("#memory");
-                     },5000);
+                     // setTimeout(function (){
+                     //     $("#memory").load("#memory");
+                     // },5000);
                  </script>
              </div>
              <div class="view" id="network" style="width: 50%;height: 50%;position: relative;top: 1%;background-color: #DDD;">
@@ -202,7 +202,7 @@
                             {
                                 type: 'category',
                                 boundaryGap: false,
-                                data: <?php echo file_get_contents('http://192.168.157.128/php/panel/network.php?type=datatime'); ?>
+                                data: <?php echo file_get_contents('http://localhost/php/panel/network.php?type=datatime'); ?>
                             }
                         ],
                         yAxis: [
@@ -222,7 +222,7 @@
                                 emphasis: {
                                     focus: 'series'
                                 },
-                                data: <?php echo file_get_contents('http://192.168.157.128/php/panel/network.php?type=networkup'); ?>
+                                data: <?php echo file_get_contents('http://localhost/php/panel/network.php?type=networkup'); ?>
                             },
                             {
                                 name: 'down',
@@ -232,14 +232,14 @@
                                 emphasis: {
                                     focus: 'series'
                                 },
-                                data: <?php echo file_get_contents('http://192.168.157.128/php/panel/network.php?type=networkdown'); ?>
+                                data: <?php echo file_get_contents('http://localhost/php/panel/network.php?type=networkdown'); ?>
                             }
                         ]
                     };
                     option && myChart.setOption(option);
-                    setTimeout(function (){
-                        $("#network").load("#network");
-                    },5000);
+                    // setTimeout(function (){
+                    //     $("#network").load("#network");
+                    // },5000);
                 </script>
              </div>
              <div class="view" id="cpu" style="width: 50%;height: 50%;position: relative;top: -49%;left: 50%;background-color: #1196F3;">
@@ -281,7 +281,7 @@
                              {
                                  type: 'category',
                                  boundaryGap: false,
-                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/cpu.php?type=datatime'); ?>
+                                 data: <?php echo file_get_contents('http://localhost/php/panel/cpu.php?type=datatime'); ?>
                              }
                          ],
                          yAxis: [
@@ -301,7 +301,7 @@
                                  emphasis: {
                                      focus: 'series'
                                  },
-                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/cpu.php?type=cpuused'); ?>
+                                 data: <?php echo file_get_contents('http://localhost/php/panel/cpu.php?type=cpuused'); ?>
                              },
                              {
                                  name: '空闲',
@@ -311,14 +311,14 @@
                                  emphasis: {
                                      focus: 'series'
                                  },
-                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/cpu.php?type=cpufree'); ?>
+                                 data: <?php echo file_get_contents('http://localhost/php/panel/cpu.php?type=cpufree'); ?>
                              }
                          ]
                      };
                      option && myChart.setOption(option);
-                     setTimeout(function (){
-                         $("#cpu").load("#cpu");
-                     },5000);
+                     // setTimeout(function (){
+                     //     $("#cpu").load("#cpu");
+                     // },5000);
                  </script>
              </div>
              <div class="view" id="disk" style="width: 50%;height: 50%;position: relative;top: -149%;left: 50%;background-color: #99DD55;">
@@ -359,7 +359,7 @@
                              {
                                  type: 'category',
                                  boundaryGap: false,
-                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/disk.php?type=datatime'); ?>
+                                 data: <?php echo file_get_contents('http://localhost/php/panel/disk.php?type=datatime'); ?>
                              }
                          ],
                          yAxis: [
@@ -379,7 +379,7 @@
                                  emphasis: {
                                      focus: 'series'
                                  },
-                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/disk.php?type=diskread'); ?>
+                                 data: <?php echo file_get_contents('http://localhost/php/panel/disk.php?type=diskread'); ?>
                              },
                              {
                                  name: 'w',
@@ -389,13 +389,13 @@
                                  emphasis: {
                                      focus: 'series'
                                  },
-                                 data: <?php echo file_get_contents('http://192.168.157.128/php/panel/disk.php?type=diskwrite'); ?>
+                                 data: <?php echo file_get_contents('http://localhost/php/panel/disk.php?type=diskwrite'); ?>
                              }
                          ]
                      };
                      option && myChart.setOption(option);
                      setTimeout(function (){
-                         $("#disk").load("#disk");
+                         $("#disk").load("#disk");$("#memory").load("#memory");$("#cpu").load("#cpu");$("#network").load("#network");
                      },5000);
                  </script>
              </div>
@@ -416,17 +416,17 @@
 			 <div class="host_right">
 				 <div class="host_right_all" id="host_right_all">
                      <div class='Ubuntu'>
-                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://192.168.157.128/php/host/Count.php?type=Ubuntu'); ?><br>Ubuntu</h1>
+                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://localhost/php/host/Count.php?type=Ubuntu'); ?><br>Ubuntu</h1>
                      </div>
                      <div class='CentOS'>
-                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://192.168.157.128/php/host/Count.php?type=CentOS'); ?><br>CentOS</h1>
+                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://localhost/php/host/Count.php?type=CentOS'); ?><br>CentOS</h1>
                      </div>
                      <div class='MySQL'>
-                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://192.168.157.128/php/host/Count.php?type=MySQL'); ?><br>MySQL</h1>
+                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://localhost/php/host/Count.php?type=MySQL'); ?><br>MySQL</h1>
                      </div>
                  </div>
 				 <div class="host_right_list" id="host_right_list">
-                         <?php echo file_get_contents('http://192.168.157.128/php/host/List.php'); ?>
+                         <?php echo file_get_contents('http://localhost/php/host/List.php'); ?>
                  </div>
 				 <div class="host_right_addhost" id="host_right_addhost">
                      <div class="addhost_form">
@@ -471,9 +471,71 @@
                      <button onclick="hostLink()">开始检测</button>
                      <p id="hostLinkList">test</p>
                  </div>
-			 	 <div class="checking_right_test" id="checking_right_test">性能检测</div>
-			 	 <div class="checking_right_port" id="checking_right_port">端口检测</div>
-				 <div class="checking_right_device" id="checking_right_device">硬件检测</div>
+			 	 <div class="checking_right_test" id="checking_right_test">
+                     <form action="#" method="get">
+                         <label for="ipaddressC" style="font-size: 14px;color: #CCCCDC;">IP地址：</label>
+                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                         <input id="ipaddressC" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="ipaddressC" maxlength="20">
+                         <br />
+                         <br />
+                         <label for="hostuserC" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
+                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                         <input id="hostuserC" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="hostuserC" maxlength="20">
+                         <br />
+                         <br />
+                         <label for="hostpasswdC" style="font-size: 14px;color: #CCCCDC;">密&nbsp;&nbsp;&nbsp;码：</label>
+                         <input id="hostpasswdC" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="password" name="hostpasswdC">
+                         <br />
+                         <br />
+                         <input class="hostDisk" style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="磁盘速度" onclick="hostPerf(this)">
+                         <input class="hostNetwork" style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="网络速度" onclick="hostPerf(this)">
+                         <input class="hostCpu" style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="CPU性能" onclick="hostPerf(this)">
+                     </form>
+                     <p id="checking_disk"></p>
+                     <p id="checking_network"></p>
+                     <p id="checking_cpu"></p>
+
+                 </div>
+			 	 <div class="checking_right_port" id="checking_right_port">
+                     <form action="#" method="get">
+                         <label for="ipaddressP" style="font-size: 14px;color: #CCCCDC;">IP地址：</label>
+                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                         <input id="ipaddressP" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="ipaddressP" maxlength="20">
+                         <br />
+                         <br />
+                         <label for="hostuserP" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
+                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                         <input id="hostuserP" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="hostuserP" maxlength="20">
+                         <br />
+                         <br />
+                         <label for="hostpasswdP" style="font-size: 14px;color: #CCCCDC;">密&nbsp;&nbsp;&nbsp;码：</label>
+                         <input id="hostpasswdP" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="password" name="hostpasswdP">
+                         <br />
+                         <br />
+                         <input class="hostPort" style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="开放端口" onclick="hostPort()">
+                     </form>
+                     <p id="checking_port"></p>
+                 </div>
+				 <div class="checking_right_device" id="checking_right_device" style="overflow:auto;">
+                     <form action="#" method="get">
+                         <label for="ipaddressD" style="font-size: 14px;color: #CCCCDC;">IP地址：</label>
+                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                         <input id="ipaddressD" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="ipaddressD" maxlength="20">
+                         <br />
+                         <br />
+                         <label for="hostuserD" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
+                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                         <input id="hostuserD" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="hostuserD" maxlength="20">
+                         <br />
+                         <br />
+                         <label for="hostpasswdD" style="font-size: 14px;color: #CCCCDC;">密&nbsp;&nbsp;&nbsp;码：</label>
+                         <input id="hostpasswdD" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="password" name="hostpasswdD">
+                         <br />
+                         <br />
+                         <input class="hostDevice" style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="硬件信息" onclick="hostDevice()">
+                     </form>
+                     <p id="checking_device"></p>
+                 </div>
 			 </div>
 		 </div>
 		 
@@ -482,7 +544,7 @@
 			 <!-- 左侧边栏 -->
 			  <div class="user_left">
 			  	 <!-- 用户列表 -- 登录 -->
-			  	 <div class="user_left_list" onclick="btnOnClick(this)">用户列表</div>
+<!--			  	 <div class="user_left_list" onclick="btnOnClick(this)">用户列表</div>-->
 			  	 <!-- 系统用户 -- web用户 -->
 			  	 <div class="user_left_webUser" onclick="btnOnClick(this)">系统用户</div>
 			  	 <!-- 设备用户 -- 主机用户 -->
@@ -492,9 +554,8 @@
 			  </div>
 			  <!-- 右侧面板 -->
 			  <div class="user_right">
-				  <!-- test -->
-				  <h1>④</h1>
-			  	 <div class="user_right_list" id="user_right_List">用户列表</div>
+
+<!--			  	 <div class="user_right_list" id="user_right_List">用户列表</div>-->
 			  	 <div class="user_right_webUser" id="user_right_WebUser">系统用户</div>
 			  	 <div class="user_right_deviceUser" id="user_right_DeviceUser">设备用户</div>
 			 	 <div class="user_right_addUser" id="user_right_AddUser">添加用户</div>
