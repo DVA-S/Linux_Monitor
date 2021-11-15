@@ -1,9 +1,9 @@
 #建表
 createTB(){
   #建库
-  mysql -uroot -p8080 -e "create database if not exists bysj character set utf8 collate utf8_bin;"
+  mysql -uroot -pEsxi0000. -e "create database if not exists bysj character set utf8 collate utf8_bin;"
 	#主机表
-	mysql -uroot -p8080 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists host (
 	id int(255) not null primary key auto_increment,
@@ -16,12 +16,14 @@ createTB(){
 	network_model varchar(100) not null,
 	network_speed varchar(50) not null,
 	network_num int not null,
-	disk_num int not null
+	disk_num int not null,
+	username varchar(20) not null,
+	passwd varchar(20) not null
 	);
 	"
 
 	#内存表
-	mysql -uroot -p8080 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists memory (
 	id int(10) primary key auto_increment not null,
@@ -35,7 +37,7 @@ createTB(){
 	);
 	"
 	#CPU表
-	mysql -uroot -p8080 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists cpu(
 	id int(10) primary key auto_increment not null,
@@ -45,7 +47,7 @@ createTB(){
 	);"
 
 	#网卡表
-	mysql -uroot -p8080 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists network(
 	id int(10) primary key auto_increment not null,
@@ -57,7 +59,7 @@ createTB(){
 	);"
 
 	#磁盘表
-	mysql -uroot -p8080 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists disk (
 	id int(255) not null primary key auto_increment,
@@ -70,7 +72,7 @@ createTB(){
 	);
 	"
 	#日志表
-	mysql -uroot -p8080 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists logs (
 	id int(255) not null primary key auto_increment,
@@ -80,18 +82,13 @@ createTB(){
 	);
 	"
 	#用户表
-	mysql -uroot -p8080 -e "
+	mysql -uroot -pEsxi0000. -e "
   	use bysj;
   	create table if not exists user (
   	id int(255) not null primary key auto_increment,
   	username varchar(20) not null,
   	passwd varchar(20) not null
   	);
-  	"
-  #m默认账号
-  mysql -uroot -p8080 -e "
-  	use bysj;
-  	insert into user(username,passwd) values("admin","admin");
   	"
 }
 createTB

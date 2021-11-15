@@ -28,17 +28,17 @@
 				<h1 style="text-align: center;line-height: 480%;color: #CCCCDC;">登录✌</h1>
 			</div>
 			<div class="login_form" id="login_form">
-				<form action="#" method="post">
+				<form action="#" method="post"">
                     <label for="username" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
 					<!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-					<input id="username" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="text" name="username" maxlength="20">
+					<input id="username" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="text" name="username" maxlength="20" onkeydown="keyLogin()">
 					<br />
 					<br />
 					<label for="passwd" style="font-size: 14px;color: #CCCCDC;">密码：</label>
-					<input id="passwd" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="password" name="passwd">
+					<input id="passwd" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 5px;" type="password" name="passwd"  onkeydown="keyLogin()">
 					<br />
 					<br />
-					<input class="submit" type="button" value="登  录" onclick="loginOkAnimation()">
+					<input id="loginbtn" class="submit" type="button" value="登  录" onclick="loginOkAnimation()">
 					<!-- onclick="loginOkAnimation()" -->
 				</form>
 			</div>
@@ -564,6 +564,7 @@
 		 
 		 <!-- 系统设置 -->
 		 <div class="setup" id="setup">
+             <button onclick="loginout()">退出登录</button>
 		 </div>
         <!-- 放在页面底部可以读到上面元素的ID值 -->
         <!-- 保持登录一段时间 判定phpSession的值，为1表示已经登录 -->

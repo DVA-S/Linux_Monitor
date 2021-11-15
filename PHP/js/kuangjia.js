@@ -1,3 +1,9 @@
+//回车登录(在输入框调用)
+function keyLogin(){
+	if (event.keyCode==13)  //回车键的键值为13
+		document.getElementById("loginbtn").click(); //调用登录按钮的登录事件
+}
+
 // 根据btnOnClick传入的ID显示面板
 function viewPanel(view_btn){
 	// 0-4:主页上方五个按钮 5-7:设备管理左侧三个按钮 8-11:自动巡检左侧四个按钮 12-15:用户管理左侧四个按钮
@@ -154,6 +160,7 @@ function hostLink(){
 	);
 }
 
+//自动巡检 -- 性能检测
 function hostPerf(element){
 	var go=element.className;
 	var ipaddress =$("#ipaddressC").val();
@@ -210,4 +217,19 @@ function hostDevice(){
 			document.getElementById("checking_device").innerHTML=data;
 		}
 	);
+}
+
+//cookie：get and set
+//设置cookie存活时间：2021-11-08T03:23:55.000Z（这种时间格式表示格林尼治的时间，加上八个小时就是北京时间了）
+function setCookie(cname,cvalue,minute)
+{
+	var d = new Date();
+	d.setTime(d.getTime()+(minute*60*1000));
+	var expires = "expires="+d.toGMTString();
+	document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+//退出登录
+function loginout(){
+	setCookie("PHPSESSID", "", -1);
+	location.reload();
 }

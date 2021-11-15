@@ -5,7 +5,7 @@ host(){
   if [ $lang = "zh_CN.UTF-8" ]
       then
 	    mysql -uroot -phtzy0000 -e "
-	    insert into bysj.host (host_name,host_type,host_ip,cpu_model,cpu_core,mem_total,swap_total,network_model,network_speed,network_num,disk_num) values
+	    insert into bysj.host (host_name,host_type,host_ip,cpu_model,cpu_core,mem_total,swap_total,network_model,network_speed,network_num,disk_num,username,passwd) values
 	    (
 	    `echo \'$(hostname)\'`,
 	    `echo \'$(lsb_release -a 2> /dev/null | grep "Distributor ID:" | awk -F ' ' '{print $3}')\'`,
@@ -21,7 +21,7 @@ host(){
 	    );"
 	    else
 	    mysql -uroot -phtzy0000 -e "
-      	    insert into bysj.host (host_name,host_type,host_ip,cpu_model,cpu_core,mem_total,swap_total,network_model,network_speed,network_num,disk_num) values
+      	    insert into bysj.host (host_name,host_type,host_ip,cpu_model,cpu_core,mem_total,swap_total,network_model,network_speed,network_num,disk_num,username,passwd) values
       	    (
       	    `echo \'$(hostname)\'`,
       	    `echo \'$(lsb_release -a 2> /dev/null | grep "Distributor ID:" | awk -F ' ' '{print $3}')\'`,

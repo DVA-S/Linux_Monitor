@@ -23,9 +23,11 @@
     function keepLogin($login_status,$user){
         if ($login_status==1){
             session_start();
+            //在index.php中的php代码处 -- 用来保持登录
             $_SESSION['loginStatus']=1;
+            //这句干嘛来着？忘了…… 也许没用到
             $_SESSION['loginUser']=$user;
-//            这儿将来会产生一个随机的用户标志，标志将会在别处使用前被还原
+            //这儿将来会产生一个随机的用户标志，标志将会在别处使用前被还原
         }else{
             session_start();
             $_SESSION['loginStatus']=0;
@@ -37,4 +39,5 @@
     $stmt->free_result();
     $stmt->close();
     mysqli_close($con);
+
 ?>
