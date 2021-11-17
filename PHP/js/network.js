@@ -19,22 +19,9 @@ function Network(){
     xmlHttpdNetworkTime.send(null);
     xmlHttpNetworkUp.send(null);
     xmlHttpNetworkDown.send(null);
-    setTimeout(function (){
-        console.log("动画开始");
-        setTimeout("Network(); console.log(\"动画结束\");",2000);
-        setTimeout("Memory(); console.log(\"动画结束\");",2000);
-        setTimeout("Disk(); console.log(\"动画结束\");",2000);
-        setTimeout("Cpu(); console.log(\"动画结束\");",2000);
+    loading();
 
-        //
-        // setTimeout("Memory()",10000);
-        // setTimeout("Disk()",10000);
-        // setTimeout("Cpu()",10000);
-    },10000);
 }
-
-
-
 function networkback(){
     if(chartDom != null && chartDom != "" && chartDom != undefined){
         echarts.dispose(document.getElementById("network"))

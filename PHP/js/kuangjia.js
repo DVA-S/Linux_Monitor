@@ -51,6 +51,9 @@ function viewPanel(view_btn){
 				document.getElementById(view_btn).style.position="absolute";
 				document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_RightGoCenterShow";
 				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"<<向左");
+			 console.log(
+				 getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left')
+			 );
 				break;
 		}else if(view>panel_list.indexOf(view_btn)){
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
@@ -63,6 +66,9 @@ function viewPanel(view_btn){
 				document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_LeftGoCenterShow";
 				document.getElementById(view_btn).style.position="absolute";
 				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+">>向右");
+			 console.log(
+				 getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left')
+			 );
 		}else if(view===panel_list.indexOf(view_btn)){		
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			// 点击当前面板按钮
@@ -72,6 +78,10 @@ function viewPanel(view_btn){
 				document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
 				document.getElementById(view_btn).style.position="absolute";
 				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"刷新显示");
+				console.log(
+					getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left')
+				);
+
 		}
 		break;
 		case 5:case 6:case 7: 
@@ -235,4 +245,16 @@ function setCookie(cname,cvalue,minute)
 function loginout(){
 	setCookie("PHPSESSID", "", -1);
 	location.reload();
+}
+
+//刷新事件
+function loading(){
+	var windowsSizeNoView = -document.body.clientWidth+'px';
+	setTimeout(function (){
+		if(getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != '2.5%' &&
+			getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != windowsSizeNoView){
+			console.log("动画开始");
+			setTimeout("Network();Memory();Disk();Cpu();console.log(\"动画结束\");",2000);
+		}
+	},5000);
 }

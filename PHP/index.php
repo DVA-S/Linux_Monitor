@@ -44,7 +44,8 @@
 <!--		 <div class="background_color"></div>-->
 		 <!-- 导航栏 -->
 		 <div class="head_div" id="head_div">
-			 <div class="panel_btn" onclick="btnOnClick(this);">
+            <!--loading（）：点击监控面板按钮 重新触发刷新事件-->
+			 <div class="panel_btn" onclick="btnOnClick(this);loading();">
 				 <p>监控面板</p>
 			 </div>
 			 <div class="host_btn" onclick="btnOnClick(this)">
