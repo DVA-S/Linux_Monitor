@@ -176,6 +176,108 @@
     // },5000);
 </script>
 
+
+
+//disk透明刷新
+<script>
+    var windowsSizeNoView = -document.body.clientWidth+'px';
+    function loading(){
+        setTimeout(function (){
+            if(getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != '2.5%' &&
+                getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != windowsSizeNoView){
+                if (getComputedStyle(document.getElementById("memory"),null).getPropertyValue("opacity") == "0.5"){
+                    console.log("加载动画");
+                    document.getElementById("memory").style.opacity="1";
+                    document.getElementById("network").style.opacity="1";
+                    document.getElementById("cpu").style.opacity="1";
+                    document.getElementById("disk").style.opacity="1";
+                }else {
+                    console.log("显示");
+                    document.getElementById("memory").style.opacity="0.5";
+                    document.getElementById("network").style.opacity="0.5";
+                    document.getElementById("cpu").style.opacity="0.5";
+                    document.getElementById("disk").style.opacity="0.5";
+                    document.getElementById("memory").innerHTML = "";
+                }
+            }
+        },2000);
+    }
+    loading();
+</script>
+
+//图表php接口版本
+var chartDom = document.getElementById('disk');
+var myChart = echarts.init(chartDom);
+var option;
+
+option = {
+animation: false,
+title: {
+text: 'disk'
+},
+tooltip: {
+trigger: 'axis',
+axisPointer: {
+type: 'cross',
+label: {
+backgroundColor: '#6a7985'
+}
+}
+},
+legend: {
+data: ['r', 'w']
+},
+toolbox: {
+feature: {
+saveAsImage: {}
+}
+},
+grid: {
+left: '3%',
+right: '4%',
+bottom: '3%',
+containLabel: true
+},
+xAxis: [
+{
+type: 'category',
+boundaryGap: false,
+data: <?php //echo file_get_contents('http://localhost/php/panel/disk.php?type=datatime'); ?>
+}
+],
+yAxis: [
+{
+type: 'value',
+axisLabel: {
+formatter: '{value} KB/S'
+}
+}
+],
+series: [
+{
+name: 'r',
+type: 'line',
+stack: 'Total',
+areaStyle: {},
+emphasis: {
+focus: 'series'
+},
+data: <?php //echo file_get_contents('http://localhost/php/panel/disk.php?type=diskread'); ?>
+},
+{
+name: 'w',
+type: 'line',
+stack: 'Total',
+areaStyle: {},
+emphasis: {
+focus: 'series'
+},
+data: <?php //echo file_get_contents('http://localhost/php/panel/disk.php?type=diskwrite'); ?>
+}
+]
+};
+option && myChart.setOption(option);
+
 <!--cpu表格-->
 <script>
     var chartDom = document.getElementById('cpu');

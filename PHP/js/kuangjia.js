@@ -51,9 +51,6 @@ function viewPanel(view_btn){
 				document.getElementById(view_btn).style.position="absolute";
 				document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_RightGoCenterShow";
 				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"<<向左");
-			 console.log(
-				 getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left')
-			 );
 				break;
 		}else if(view>panel_list.indexOf(view_btn)){
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
@@ -66,9 +63,6 @@ function viewPanel(view_btn){
 				document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_LeftGoCenterShow";
 				document.getElementById(view_btn).style.position="absolute";
 				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+">>向右");
-			 console.log(
-				 getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left')
-			 );
 		}else if(view===panel_list.indexOf(view_btn)){		
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			// 点击当前面板按钮
@@ -78,10 +72,6 @@ function viewPanel(view_btn){
 				document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
 				document.getElementById(view_btn).style.position="absolute";
 				console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"刷新显示");
-				console.log(
-					getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left')
-				);
-
 		}
 		break;
 		case 5:case 6:case 7: 
@@ -247,24 +237,20 @@ function loginout(){
 	location.reload();
 }
 
-//刷新事件
+//刷新事件&加载动画（实时刷新）
 function loading(){
 	var windowsSizeNoView = -document.body.clientWidth+'px';
 	setTimeout(function (){
 		//如果监控面板正在显示
 		if(getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != '2.5%' &&
 			getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != windowsSizeNoView){
-			console.log("动画开始");
+			// console.log("动画开始");
 			document.getElementById("memory").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
 			document.getElementById("disk").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
 			document.getElementById("network").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
 			document.getElementById("cpu").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
-			// if(图表异常){
-			// 	显示动画
-			// }else{
-			// 	清空动画
-			// }
-			setTimeout("Network();Memory();Disk();Cpu();console.log(\"动画结束\");",1000);
+			setTimeout("Network();Memory();Disk();Cpu();",1000);
+			// console.log("动画结束");
 		}
 	},5000);
 }

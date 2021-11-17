@@ -21,7 +21,7 @@ function Cpu(){
     xmlHttpCpuFree.send(null);
 }
 function cpuback(){
-    //There is a chart instance already initialized on the dom.解决方法0.1
+    //报错：There is a chart instance already initialized on the dom.解决方法0.1
     if(chartDom != null && chartDom != "" && chartDom != undefined){
         echarts.dispose(document.getElementById("cpu"))
     }
@@ -64,7 +64,7 @@ function cpuback(){
                 grid: {
                     left: '3%',
                     right: '4%',
-                    bottom: '3%',
+                    bottom: '1%',
                     containLabel: true
                 },
                 xAxis: [
