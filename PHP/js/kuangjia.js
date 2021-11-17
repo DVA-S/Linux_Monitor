@@ -1,3 +1,5 @@
+var chartDom;var myChart;
+
 //回车登录(在输入框调用)
 function keyLogin(){
 	if (event.keyCode==13)  //回车键的键值为13

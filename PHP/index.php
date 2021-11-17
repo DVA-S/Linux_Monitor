@@ -17,10 +17,6 @@
 //        echo "<script>console.log('loginStatus:',{$_SESSION['loginStatus']});</script>";
     ?>
 	<body>
-
-    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
-
-
 		<!-- 登录页 -->
 		<div class="background_color">
 		</div>
@@ -48,7 +44,7 @@
 <!--		 <div class="background_color"></div>-->
 		 <!-- 导航栏 -->
 		 <div class="head_div" id="head_div">
-			 <div class="panel_btn" onclick="btnOnClick(this);loading();">
+			 <div class="panel_btn" onclick="btnOnClick(this);">
 				 <p>监控面板</p>
 			 </div>
 			 <div class="host_btn" onclick="btnOnClick(this)">
@@ -65,260 +61,13 @@
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
              <div class="view" id="memory" style="width: 50%;height: 50%;position: relative;top: -0.5%;left: -0.5%;background-color: #FFF;">
-                 <script>
-                         var chartDom = document.getElementById('memory');
-                         var myChart = echarts.init(chartDom);
-                         var option;
-                         option = {
-                             //关闭图表加载动画
-                             animation: false,
-                             title: {
-                                 text: 'Memory'
-                             },
-                             tooltip: {
-                                 trigger: 'axis'
-                             },
-                             legend: {},
-                             toolbox: {
-                                 show: true,
-                                 feature: {
-                                     dataZoom: {
-                                         yAxisIndex: 'none'
-                                     },
-                                     dataView: { readOnly: false },
-                                     magicType: { type: ['line', 'bar'] },
-                                     restore: {},
-                                     saveAsImage: {}
-                                 }
-                             },
-                             grid: {
-                                 left: '1%',
-                                 right: '5%',
-                                 bottom: '3%',
-                                 containLabel: true
-                             },
-                             xAxis: {
-                                 type: 'category',
-                                 boundaryGap: false,
-                                 data: <?php echo file_get_contents('http://localhost/php/panel/memory.php?type=datatime'); ?>
-                                 // ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                             },
-                             yAxis: {
-                                 type: 'value',
-                                 axisLabel: {
-                                     formatter: '{value} MB'
-                                 }
-                             },
-                             series: [
-                                 {
-                                     name: '已用内存',
-                                     type: 'line',
-                                     data: <?php echo file_get_contents('http://localhost/php/panel/memory.php?type=memused'); ?>,
-                                     // [10, 11, 13, 11, 12, 12, 9],
-                                     markPoint: {
-                                         data: [
-                                             { type: 'max', name: 'Max' },
-                                             { type: 'min', name: 'Min' }
-                                         ]
-                                     },
-                                     markLine: {
-                                         data: [{ type: 'average', name: 'Avg' }]
-                                     }
-                                 },
-                                 {
-                                     name: '空闲内存',
-                                     type: 'line',
-                                     data: <?php echo file_get_contents('http://localhost/php/panel/memory.php?type=memfree'); ?>,
-                                     // [1, -2, 2, 5, 3, 2, 0],
-                                     // markPoint: {
-                                     //     data: [{ name: '最低点', value: -2, xAxis: 1, yAxis: -1.5 }]
-                                     // },
-                                     markLine: {
-                                         data: [
-                                             { type: 'average', name: 'Avg' },
-                                             [
-                                                 {
-                                                     symbol: 'none',
-                                                     x: '90%',
-                                                     yAxis: ''
-                                                 },
-                                                 {
-                                                     symbol: 'circle',
-                                                     label: {
-                                                         position: 'start',
-                                                         formatter: 'Max'
-                                                     },
-                                                     type: 'max',
-                                                     name: '最高点'
-                                                 }
-                                             ]
-                                         ]
-                                     }
-                                 }
-                             ]
-                         };
-                         option && myChart.setOption(option);
-                         // setTimeout(function (){
-                         //     $("#memory").load("#memory");
-                         // },5000);
-                     </script>
+                 <script src="js/memory.js"></script>
              </div>
              <div class="view" id="network" style="width: 50%;height: 50%;position: relative;top: 0.5%;left: -0.5%;background-color: #FFF;">
-                <script>
-
-                    var chartDom = document.getElementById('network');
-                    var myChart = echarts.init(chartDom);
-                    var option;
-
-                    option = {
-                        animation: false,
-                        title: {
-                            text: 'network'
-                        },
-                        tooltip: {
-                            trigger: 'axis',
-                            axisPointer: {
-                                type: 'cross',
-                                label: {
-                                    backgroundColor: '#6a7985'
-                                }
-                            }
-                        },
-                        legend: {
-                            data: ['up', 'down']
-                        },
-                        toolbox: {
-                            feature: {
-                                saveAsImage: {}
-                            }
-                        },
-                        grid: {
-                            left: '3%',
-                            right: '4%',
-                            bottom: '3%',
-                            containLabel: true
-                        },
-                        xAxis: [
-                            {
-                                type: 'category',
-                                boundaryGap: false,
-                                data: <?php echo file_get_contents('http://localhost/php/panel/network.php?type=datatime'); ?>
-                            }
-                        ],
-                        yAxis: [
-                            {
-                                type: 'value',
-                                axisLabel: {
-                                    formatter: '{value} KB/S'
-                                }
-                            }
-                        ],
-                        series: [
-                            {
-                                name: 'up',
-                                type: 'line',
-                                stack: 'Total',
-                                areaStyle: {},
-                                emphasis: {
-                                    focus: 'series'
-                                },
-                                data: <?php echo file_get_contents('http://localhost/php/panel/network.php?type=networkup'); ?>
-                            },
-                            {
-                                name: 'down',
-                                type: 'line',
-                                stack: 'Total',
-                                areaStyle: {},
-                                emphasis: {
-                                    focus: 'series'
-                                },
-                                data: <?php echo file_get_contents('http://localhost/php/panel/network.php?type=networkdown'); ?>
-                            }
-                        ]
-                    };
-                    option && myChart.setOption(option);
-                    // setTimeout(function (){
-                    //     $("#network").load("#network");
-                    // },5000);
-                </script>
+                 <script src="js/network.js"></script>
              </div>
              <div class="view" id="cpu" style="width: 50%;height: 50%;position: relative;top: -49.5%;left: 50.5%;background-color: #FFF;">
-                 <script>
-                     var chartDom = document.getElementById('cpu');
-                     var myChart = echarts.init(chartDom);
-                     var option;
-
-                     option = {
-                         animation: false,
-                         title: {
-                             text: 'cpu'
-                         },
-                         tooltip: {
-                             trigger: 'axis',
-                             axisPointer: {
-                                 type: 'cross',
-                                 label: {
-                                     backgroundColor: '#6a7985'
-                                 }
-                             }
-                         },
-                         legend: {
-                             data: ['占用', '空闲']
-                         },
-                         toolbox: {
-                             feature: {
-                                 saveAsImage: {}
-                             }
-                         },
-                         grid: {
-                             left: '3%',
-                             right: '4%',
-                             bottom: '3%',
-                             containLabel: true
-                         },
-                         xAxis: [
-                             {
-                                 type: 'category',
-                                 boundaryGap: false,
-                                 data: <?php echo file_get_contents('http://localhost/php/panel/cpu.php?type=datatime'); ?>
-                             }
-                         ],
-                         yAxis: [
-                             {
-                                 type: 'value',
-                                 axisLabel: {
-                                     formatter: '{value} %'
-                                 }
-                             }
-                         ],
-                         series: [
-                             {
-                                 name: '占用',
-                                 type: 'line',
-                                 stack: 'Total',
-                                 areaStyle: {},
-                                 emphasis: {
-                                     focus: 'series'
-                                 },
-                                 data: <?php echo file_get_contents('http://localhost/php/panel/cpu.php?type=cpuused'); ?>
-                             },
-                             {
-                                 name: '空闲',
-                                 type: 'line',
-                                 stack: 'Total',
-                                 areaStyle: {},
-                                 emphasis: {
-                                     focus: 'series'
-                                 },
-                                 data: <?php echo file_get_contents('http://localhost/php/panel/cpu.php?type=cpufree'); ?>
-                             }
-                         ]
-                     };
-                     option && myChart.setOption(option);
-                     // setTimeout(function (){
-                     //     $("#cpu").load("#cpu");
-                     // },5000);
-                 </script>
+                 <script src="js/cpu.js"></script>
              </div>
              <div class="view" id="disk" style="width: 50%;height: 50%;position: relative;top: -150.5%;left: 50.5%;background-color: #FFF;">
                 <script src="js/disk.js"></script>

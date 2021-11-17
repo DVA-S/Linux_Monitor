@@ -18,30 +18,30 @@ $stmt->bind_result($id,$data_time,$mem_used,$mem_free);
 $stmt->execute();
 if ($type == "datatime"){
     $num=0;
-    echo "[";
+//    echo "[";
     while($stmt->fetch()){
         $datalist[$num]=$data_time;
         $num=$num++;
-        echo "'$datalist[$num]'",",";
+        echo "$datalist[$num]",",";
     }
-    echo "'$datalist[0]']";
+//    echo "'$datalist[0]']";
 }else if ($type == "memused"){
     $num=0;
-    echo "[";
+//    echo "[";
     while($stmt->fetch()){
         $datalist[$num]=$mem_used;
         $num=$num--;
-        echo "'$mem_used'",",";
+        echo "$mem_used",",";
     }
-    echo "'$datalist[0]']";
+//    echo "'$datalist[0]']";
 }else if($type == "memfree"){
     $num=0;
-    echo "[";
+//    echo "[";
     while($stmt->fetch()){
         $datalist[$num]=$mem_free;
         $num=$num++;
-        echo "'$mem_free'",",";
+        echo "$mem_free",",";
     }
-    echo "'$datalist[0]']";
+//    echo "'$datalist[0]']";
 }
 ?>

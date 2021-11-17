@@ -17,30 +17,30 @@ $stmt->bind_result($data_time,$network_up,$network_down);
 $stmt->execute();
 if ($type == "datatime"){
     $num=0;
-    echo "[";
+//    echo "[";
     while($stmt->fetch()){
         $datalist[$num]=$data_time;
         $num=$num++;
-        echo "'$datalist[$num]'",",";
+        echo "$datalist[$num]",",";
     }
-    echo "'$datalist[0]']";
+//    echo "'$datalist[0]']";
 }else if ($type == "networkup"){
     $num=0;
-    echo "[";
+//    echo "[";
     while($stmt->fetch()){
         $datalist[$num]=$network_up;
         $num=$num--;
-        echo "'$network_up'",",";
+        echo "$network_up",",";
     }
-    echo "'$datalist[0]']";
+//    echo "'$datalist[0]']";
 }else if($type == "networkdown"){
     $num=0;
-    echo "[";
+//    echo "[";
     while($stmt->fetch()){
         $datalist[$num]=$network_down;
         $num=$num++;
-        echo "'$network_down'",",";
+        echo "$network_down",",";
     }
-    echo "'$datalist[0]']";
+//    echo "'$datalist[0]']";
 }
 ?>

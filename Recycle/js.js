@@ -4,38 +4,27 @@
 <script>
     var windowsSizeNoView = -document.body.clientWidth+'px';
     function loading(){
-    //这下面一片会影响整体动画与布局--2021年11月16日
-    // setTimeout(function (){
-    //     if(getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != '2.5%' &&
-    //         getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != windowsSizeNoView){
-    //         if (getComputedStyle(document.getElementById("memory"),null).getPropertyValue("opacity") == "0.5"){
-    //             console.log("加载动画");
-    //             document.getElementById("memory").style.opacity="1";
-    //             document.getElementById("network").style.opacity="1";
-    //             document.getElementById("cpu").style.opacity="1";
-    //             document.getElementById("disk").style.opacity="1";
-    //             $("#disk").load("#disk");
-    //             // $("#memory").load("#memory");
-    //             // $("#cpu").load("#cpu");
-    //             // $("#network").load("#network");
-    //         }else {
-    //             console.log("显示");
-    //             document.getElementById("memory").style.opacity="0.5";
-    //             document.getElementById("network").style.opacity="0.5";
-    //             document.getElementById("cpu").style.opacity="0.5";
-    //             document.getElementById("disk").style.opacity="0.5";
-    //             document.getElementById("memory").innerHTML = "";
-    //             $("#disk").load("#disk");
-    //             // $("#memory").load("#memory");
-    //             // $("#cpu").load("#cpu");
-    //             // $("#network").load("#network");
-    //         }
-    //     }
-    // },2000);
+    setTimeout(function (){
+        if(getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != '2.5%' &&
+            getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != windowsSizeNoView){
+            if (getComputedStyle(document.getElementById("memory"),null).getPropertyValue("opacity") == "0.5"){
+                console.log("加载动画");
+                document.getElementById("memory").style.opacity="1";
+                document.getElementById("network").style.opacity="1";
+                document.getElementById("cpu").style.opacity="1";
+                document.getElementById("disk").style.opacity="1";
+            }else {
+                console.log("显示");
+                document.getElementById("memory").style.opacity="0.5";
+                document.getElementById("network").style.opacity="0.5";
+                document.getElementById("cpu").style.opacity="0.5";
+                document.getElementById("disk").style.opacity="0.5";
+                document.getElementById("memory").innerHTML = "";
+            }
+        }
+    },2000);
 }
     loading();
-    //这下面一片会影响整体动画与布局--2021年11月16日
-    // setTimeout(function (){$("#panel1").load("#panel1")},2000);
 </script>
 
 //图表php接口版本

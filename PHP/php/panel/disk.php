@@ -1,5 +1,4 @@
 <?php
-
 //第一种方案
 $type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 

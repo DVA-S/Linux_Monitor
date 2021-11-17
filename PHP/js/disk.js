@@ -1,40 +1,44 @@
-var xmlHttpd;
-var xmlHttpw;
-var xmlHttpr;
-xmlHttpd = new XMLHttpRequest();
-xmlHttpw = new XMLHttpRequest();
-xmlHttpr = new XMLHttpRequest();
+var xmlHttpDiskTime;
+var xmlHttpDiskWrite;
+var xmlHttpDiskRead;
+xmlHttpDiskTime = new XMLHttpRequest();
+xmlHttpDiskWrite = new XMLHttpRequest();
+xmlHttpDiskRead = new XMLHttpRequest();
 
-function start(){
+function Disk(){
     var urltime="../php/panel/disk.php?type=datatime";
     var urlwrite="../php/panel/disk.php?type=diskwrite";
     var urlread="../php/panel/disk.php?type=diskread";
 
-    xmlHttpd.open("GET",urltime,true);
-    xmlHttpw.open("GET",urlwrite,true);
-    xmlHttpr.open("GET",urlread,true);
-    xmlHttpd.onreadystatechange = callback;
-    xmlHttpw.onreadystatechange = callback;
-    xmlHttpr.onreadystatechange = callback;
-    xmlHttpd.send(null);
-    xmlHttpw.send(null);
-    xmlHttpr.send(null);
+    xmlHttpDiskTime.open("GET",urltime,true);
+    xmlHttpDiskWrite.open("GET",urlwrite,true);
+    xmlHttpDiskRead.open("GET",urlread,true);
+    xmlHttpDiskTime.onreadystatechange = diskback;
+    xmlHttpDiskWrite.onreadystatechange = diskback;
+    xmlHttpDiskRead.onreadystatechange = diskback;
+    xmlHttpDiskTime.send(null);
+    xmlHttpDiskWrite.send(null);
+    xmlHttpDiskRead.send(null);
 }
-function callback(){
-    if(xmlHttpd.readyState == 4){
-        if(xmlHttpd.status == 200){
-            var datatime = xmlHttpd.responseText;
-            var diskwrite = xmlHttpw.responseText;
-            var diskread = xmlHttpr.responseText;
+
+function diskback(){
+    if(chartDom != null && chartDom != "" && chartDom != undefined){
+        echarts.dispose(document.getElementById("disk"))
+    }
+    if(xmlHttpDiskTime.readyState == 4){
+        if(xmlHttpDiskTime.status == 200){
+            var datatime = xmlHttpDiskTime.responseText;
+            var diskwrite = xmlHttpDiskWrite.responseText;
+            var diskread = xmlHttpDiskRead.responseText;
             datatime=datatime.split(",");
             diskwrite=diskwrite.split(",");
             diskread=diskread.split(",");
 
-            setTimeout("start()",5100);
+
 
             //图表
-            var chartDom = document.getElementById("disk");
-            var myChart = echarts.init(chartDom);
+            chartDom = document.getElementById("disk");
+            myChart = echarts.init(chartDom);
             var option;
 
             option = {
@@ -109,7 +113,7 @@ function callback(){
         }
     }
 }
-start();
+Disk();
 
 
 

@@ -16,33 +16,33 @@ $stmt->bind_result($data_time,$cpu_used);
 $stmt->execute();
 if ($type == "datatime"){
     $num=0;
-    echo "[";
+//    echo "[";
     while($stmt->fetch()){
         $datalist[$num]=$data_time;
         $num=$num++;
-        echo "'$datalist[$num]'",",";
+        echo "$datalist[$num]",",";
     }
-    echo "'$datalist[0]']";
+//    echo "'$datalist[0]']";
 }else if ($type == "cpuused"){
     $num=0;
-    echo "[";
+//    echo "[";
     while($stmt->fetch()){
         $datalist[$num]=$cpu_used;
         $num=$num--;
-        echo "'$cpu_used'",",";
+        echo "$cpu_used",",";
     }
-    echo "'$datalist[0]']";
+//    echo "'$datalist[0]']";
 }else if ($type == "cpufree"){
     $num=0;
     $all=100;
     $cpufree=0;
-    echo "[";
+//    echo "[";
     while($stmt->fetch()){
         $cpufree=$all-$cpu_used;
         $datalist[$num]=$cpu_used;
         $num=$num--;
-        echo "'$cpufree'",",";
+        echo "$cpufree",",";
     }
-    echo "'$datalist[0]']";
+//    echo "'$datalist[0]']";
 }
 ?>
