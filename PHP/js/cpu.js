@@ -34,8 +34,6 @@ function cpuback(){
             cpuused=cpuused.split(",");
             cpufree=cpufree.split(",");
 
-
-
             //There is a chart instance already initialized on the dom.解决方法0.1
             chartDom = document.getElementById("cpu");
             myChart = echarts.init(chartDom);

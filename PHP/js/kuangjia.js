@@ -251,10 +251,20 @@ function loginout(){
 function loading(){
 	var windowsSizeNoView = -document.body.clientWidth+'px';
 	setTimeout(function (){
+		//如果监控面板正在显示
 		if(getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != '2.5%' &&
 			getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != windowsSizeNoView){
 			console.log("动画开始");
-			setTimeout("Network();Memory();Disk();Cpu();console.log(\"动画结束\");",2000);
+			document.getElementById("memory").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
+			document.getElementById("disk").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
+			document.getElementById("network").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
+			document.getElementById("cpu").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
+			// if(图表异常){
+			// 	显示动画
+			// }else{
+			// 	清空动画
+			// }
+			setTimeout("Network();Memory();Disk();Cpu();console.log(\"动画结束\");",1000);
 		}
 	},5000);
 }
