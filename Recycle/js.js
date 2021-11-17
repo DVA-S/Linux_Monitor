@@ -1,5 +1,118 @@
 //此处为弃用的代码
 
+//disk透明刷新
+<script>
+    var windowsSizeNoView = -document.body.clientWidth+'px';
+    function loading(){
+    //这下面一片会影响整体动画与布局--2021年11月16日
+    // setTimeout(function (){
+    //     if(getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != '2.5%' &&
+    //         getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != windowsSizeNoView){
+    //         if (getComputedStyle(document.getElementById("memory"),null).getPropertyValue("opacity") == "0.5"){
+    //             console.log("加载动画");
+    //             document.getElementById("memory").style.opacity="1";
+    //             document.getElementById("network").style.opacity="1";
+    //             document.getElementById("cpu").style.opacity="1";
+    //             document.getElementById("disk").style.opacity="1";
+    //             $("#disk").load("#disk");
+    //             // $("#memory").load("#memory");
+    //             // $("#cpu").load("#cpu");
+    //             // $("#network").load("#network");
+    //         }else {
+    //             console.log("显示");
+    //             document.getElementById("memory").style.opacity="0.5";
+    //             document.getElementById("network").style.opacity="0.5";
+    //             document.getElementById("cpu").style.opacity="0.5";
+    //             document.getElementById("disk").style.opacity="0.5";
+    //             document.getElementById("memory").innerHTML = "";
+    //             $("#disk").load("#disk");
+    //             // $("#memory").load("#memory");
+    //             // $("#cpu").load("#cpu");
+    //             // $("#network").load("#network");
+    //         }
+    //     }
+    // },2000);
+}
+    loading();
+    //这下面一片会影响整体动画与布局--2021年11月16日
+    // setTimeout(function (){$("#panel1").load("#panel1")},2000);
+</script>
+
+//图表php接口版本
+var chartDom = document.getElementById('disk');
+var myChart = echarts.init(chartDom);
+var option;
+
+option = {
+   animation: false,
+   title: {
+       text: 'disk'
+   },
+   tooltip: {
+       trigger: 'axis',
+       axisPointer: {
+           type: 'cross',
+           label: {
+               backgroundColor: '#6a7985'
+           }
+       }
+   },
+   legend: {
+       data: ['r', 'w']
+   },
+   toolbox: {
+       feature: {
+           saveAsImage: {}
+       }
+   },
+   grid: {
+       left: '3%',
+       right: '4%',
+       bottom: '3%',
+       containLabel: true
+   },
+   xAxis: [
+       {
+           type: 'category',
+           boundaryGap: false,
+           data: <?php //echo file_get_contents('http://localhost/php/panel/disk.php?type=datatime'); ?>
+       }
+   ],
+   yAxis: [
+       {
+           type: 'value',
+           axisLabel: {
+               formatter: '{value} KB/S'
+           }
+       }
+   ],
+   series: [
+       {
+           name: 'r',
+           type: 'line',
+           stack: 'Total',
+           areaStyle: {},
+           emphasis: {
+               focus: 'series'
+           },
+           data: <?php //echo file_get_contents('http://localhost/php/panel/disk.php?type=diskread'); ?>
+       },
+       {
+           name: 'w',
+           type: 'line',
+           stack: 'Total',
+           areaStyle: {},
+           emphasis: {
+               focus: 'series'
+           },
+           data: <?php //echo file_get_contents('http://localhost/php/panel/disk.php?type=diskwrite'); ?>
+       }
+   ]
+};
+option && myChart.setOption(option);
+
+
+
 //cookie：get and set
 //设置cookie存活时间：2021-11-08T03:23:55.000Z（这种时间格式表示格林尼治的时间，加上八个小时就是北京时间了）
 function setCookie(cname,cvalue,minute)
