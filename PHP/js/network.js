@@ -1,39 +1,37 @@
 var xmlHttpdNetworkTime;
 var xmlHttpNetworkUp;
 var xmlHttpNetworkDown;
-xmlHttpdNetworkTime = new XMLHttpRequest();
-xmlHttpNetworkUp = new XMLHttpRequest();
-xmlHttpNetworkDown = new XMLHttpRequest();
 
-function Network(){
-    var urltime="../php/panel/network.php?type=datatime";
-    var networkup="../php/panel/network.php?type=networkup";
-    var networkdown="../php/panel/network.php?type=networkdown";
+// function Network(){
+//     xmlHttpdNetworkTime.open("GET","../php/panel/network.php?type=datatime",true);
+//     xmlHttpNetworkUp.open("GET","../php/panel/network.php?type=networkup",true);
+//     xmlHttpNetworkDown.open("GET","../php/panel/network.php?type=networkdown",true);
+//     xmlHttpdNetworkTime.onreadystatechange = networkback;
+//     xmlHttpNetworkUp.onreadystatechange = networkback;
+//     xmlHttpNetworkDown.onreadystatechange = networkback;
+//     xmlHttpdNetworkTime.send(null);
+//     xmlHttpNetworkUp.send(null);
+//     xmlHttpNetworkDown.send(null);
+//     loading();
+// }
 
-    xmlHttpdNetworkTime.open("GET",urltime,true);
-    xmlHttpNetworkUp.open("GET",networkup,true);
-    xmlHttpNetworkDown.open("GET",networkdown,true);
-    xmlHttpdNetworkTime.onreadystatechange = networkback;
-    xmlHttpNetworkUp.onreadystatechange = networkback;
-    xmlHttpNetworkDown.onreadystatechange = networkback;
-    xmlHttpdNetworkTime.send(null);
-    xmlHttpNetworkUp.send(null);
-    xmlHttpNetworkDown.send(null);
+function runNetwork(){
+    xmlHttpdNetworkTime = pgGet("http://192.168.157.128/php/panel/network.php?type=datatime",networkback);
+    xmlHttpNetworkUp = pgGet("http://192.168.157.128/php/panel/network.php?type=networkup",networkback);
+    xmlHttpNetworkDown = pgGet("http://192.168.157.128/php/panel/network.php?type=networkdown",networkback);
+//    特别重要 这是刷新驱动函数
     loading();
-
 }
+
 function networkback(){
     if(chartDom != null && chartDom != "" && chartDom != undefined){
         echarts.dispose(document.getElementById("network"))
     }
     if(xmlHttpdNetworkTime.readyState == 4){
         if(xmlHttpdNetworkTime.status == 200){
-            var datatime = xmlHttpdNetworkTime.responseText;
-            var networkup = xmlHttpNetworkUp.responseText;
-            var networkdown = xmlHttpNetworkDown.responseText;
-            datatime=datatime.split(",");
-            networkup=networkup.split(",");
-            networkdown=networkdown.split(",");
+            var datatime = xmlHttpdNetworkTime.responseText.split(",");
+            var networkup = xmlHttpNetworkUp.responseText.split(",");
+            var networkdown = xmlHttpNetworkDown.responseText.split(",");
 
             //图表
             chartDom = document.getElementById("network");
@@ -110,4 +108,4 @@ function networkback(){
         }
     }
 }
-Network();
+runNetwork();

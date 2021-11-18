@@ -1,45 +1,45 @@
+// var xmlHttpdCpuTime = new XMLHttpRequest();
+// var xmlHttpCpuUsed  = new XMLHttpRequest();
+// var xmlHttpCpuFree  = new XMLHttpRequest();
+//
+// //获取数据
+// function Cpu(){
+//     xmlHttpdCpuTime.open("GET","../php/panel/cpu.php?type=datatime",true);
+//     xmlHttpCpuUsed.open("GET","../php/panel/cpu.php?type=cpuused",true);
+//     xmlHttpCpuFree.open("GET","../php/panel/cpu.php?type=cpufree",true);
+//     xmlHttpdCpuTime.onreadystatechange = cpuback;
+//     xmlHttpCpuUsed.onreadystatechange = cpuback;
+//     xmlHttpCpuFree.onreadystatechange = cpuback;
+//     xmlHttpdCpuTime.send(null);
+//     xmlHttpCpuUsed.send(null);
+//     xmlHttpCpuFree.send(null);
+// }
+
 var xmlHttpdCpuTime;
 var xmlHttpCpuUsed;
 var xmlHttpCpuFree;
-xmlHttpdCpuTime = new XMLHttpRequest();
-xmlHttpCpuUsed = new XMLHttpRequest();
-xmlHttpCpuFree = new XMLHttpRequest();
 
-function Cpu(){
-    var urltime="../php/panel/cpu.php?type=datatime";
-    var cpuused="../php/panel/cpu.php?type=cpuused";
-    var cpufree="../php/panel/cpu.php?type=cpufree";
-
-    xmlHttpdCpuTime.open("GET",urltime,true);
-    xmlHttpCpuUsed.open("GET",cpuused,true);
-    xmlHttpCpuFree.open("GET",cpufree,true);
-    xmlHttpdCpuTime.onreadystatechange = cpuback;
-    xmlHttpCpuUsed.onreadystatechange = cpuback;
-    xmlHttpCpuFree.onreadystatechange = cpuback;
-    xmlHttpdCpuTime.send(null);
-    xmlHttpCpuUsed.send(null);
-    xmlHttpCpuFree.send(null);
+function runCpu(){
+    xmlHttpdCpuTime = pgGet("http://192.168.157.128/php/panel/cpu.php?type=datatime",cpuback);
+    xmlHttpCpuUsed = pgGet("http://192.168.157.128/php/panel/cpu.php?type=cpuused",cpuback);
+    xmlHttpCpuFree = pgGet("http://192.168.157.128/php/panel/cpu.php?type=cpufree",cpuback);
 }
+
 function cpuback(){
     //报错：There is a chart instance already initialized on the dom.解决方法0.1
     if(chartDom != null && chartDom != "" && chartDom != undefined){
         echarts.dispose(document.getElementById("cpu"))
     }
-    if(xmlHttpdCpuTime.readyState == 4){
-        if(xmlHttpdCpuTime.status == 200){
-            var datatime = xmlHttpdCpuTime.responseText;
-            var cpuused = xmlHttpCpuUsed.responseText;
-            var cpufree = xmlHttpCpuFree.responseText;
-            datatime=datatime.split(",");
-            cpuused=cpuused.split(",");
-            cpufree=cpufree.split(",");
+    // if(xmlHttpdCpuTime.readyState == 4){
+    //     if(xmlHttpdCpuTime.status == 200){
+            var datatime = xmlHttpdCpuTime.responseText.split(",");
+            var cpuused = xmlHttpCpuUsed.responseText.split(",");
+            var cpufree = xmlHttpCpuFree.responseText.split(",");
 
             //There is a chart instance already initialized on the dom.解决方法0.1
             chartDom = document.getElementById("cpu");
             myChart = echarts.init(chartDom);
-            var option;
-
-            option = {
+            var option = {
                 animation: false,
                 title: {
                     text: 'cpu'
@@ -106,7 +106,7 @@ function cpuback(){
         ]
         };
             option && myChart.setOption(option);
-        }
-    }
+    //     }
+    // }
 }
-Cpu();
+runCpu();

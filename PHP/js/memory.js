@@ -1,39 +1,38 @@
+// var xmlHttpMemoryTime = new XMLHttpRequest();
+// var xmlHttpMemoryUsed = new XMLHttpRequest();
+// var xmlHttpMemoryFree = new XMLHttpRequest();
+//
+// function Memory(){
+//     xmlHttpMemoryTime.open("GET","../php/panel/memory.php?type=datatime",true);
+//     xmlHttpMemoryUsed.open("GET","../php/panel/memory.php?type=memused",true);
+//     xmlHttpMemoryFree.open("GET","../php/panel/memory.php?type=memfree",true);
+//     xmlHttpMemoryTime.onreadystatechange = memoryback;
+//     xmlHttpMemoryUsed.onreadystatechange = memoryback;
+//     xmlHttpMemoryFree.onreadystatechange = memoryback;
+//     xmlHttpMemoryTime.send(null);
+//     xmlHttpMemoryUsed.send(null);
+//     xmlHttpMemoryFree.send(null);
+// }
+
 var xmlHttpMemoryTime;
 var xmlHttpMemoryUsed;
 var xmlHttpMemoryFree;
-xmlHttpMemoryTime = new XMLHttpRequest();
-xmlHttpMemoryUsed = new XMLHttpRequest();
-xmlHttpMemoryFree = new XMLHttpRequest();
 
-function Memory(){
-    var urltime="../php/panel/memory.php?type=datatime";
-    var memused="../php/panel/memory.php?type=memused";
-    var memfree="../php/panel/memory.php?type=memfree";
-
-    xmlHttpMemoryTime.open("GET",urltime,true);
-    xmlHttpMemoryUsed.open("GET",memused,true);
-    xmlHttpMemoryFree.open("GET",memfree,true);
-    xmlHttpMemoryTime.onreadystatechange = memoryback;
-    xmlHttpMemoryUsed.onreadystatechange = memoryback;
-    xmlHttpMemoryFree.onreadystatechange = memoryback;
-    xmlHttpMemoryTime.send(null);
-    xmlHttpMemoryUsed.send(null);
-    xmlHttpMemoryFree.send(null);
+function runMemory(){
+    xmlHttpMemoryTime= pgGet("http://192.168.157.128/php/panel/memory.php?type=datatime",memoryback);
+    xmlHttpMemoryUsed = pgGet("http://192.168.157.128/php/panel/memory.php?type=memused",memoryback);
+    xmlHttpMemoryFree= pgGet("http://192.168.157.128/php/panel/memory.php?type=memfree",memoryback);
 }
+
 function memoryback(){
     if(chartDom != null && chartDom != "" && chartDom != undefined){
         echarts.dispose(document.getElementById("memory"))
     }
     if(xmlHttpMemoryTime.readyState == 4){
         if(xmlHttpMemoryTime.status == 200){
-            var datatime = xmlHttpMemoryTime.responseText;
-            var memused = xmlHttpMemoryUsed.responseText;
-            var memfree = xmlHttpMemoryFree.responseText;
-            datatime=datatime.split(",");
-            memused=memused.split(",");
-            memfree=memfree.split(",");
-            // console.log(datatime);
-
+            var datatime = xmlHttpMemoryTime.responseText.split(",");
+            var memused = xmlHttpMemoryUsed.responseText.split(",");
+            var memfree = xmlHttpMemoryFree.responseText.split(",");
 
             //图表
             chartDom = document.getElementById("memory");
@@ -132,4 +131,4 @@ function memoryback(){
         }
     }
 }
-Memory();
+runMemory();

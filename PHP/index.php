@@ -88,15 +88,19 @@
 			 <!-- 右侧面板 -->
 			 <div class="host_right">
 				 <div class="host_right_all" id="host_right_all">
-                     <div class='Ubuntu'>
-                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://localhost/php/host/Count.php?type=Ubuntu'); ?><br>Ubuntu</h1>
+                     <div id="hostall" style="width: 500%;height: 500%;top: -14%;left: 10%;">
+                         <script src="js/host/hostall.js"></script>
                      </div>
-                     <div class='CentOS'>
-                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://localhost/php/host/Count.php?type=CentOS'); ?><br>CentOS</h1>
-                     </div>
-                     <div class='MySQL'>
-                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo file_get_contents('http://localhost/php/host/Count.php?type=MySQL'); ?><br>MySQL</h1>
-                     </div>
+
+<!--                     <div class='Ubuntu'>-->
+<!--                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><?php //echo file_get_contents('http://localhost/php/host/Count.php?type=Ubuntu'); ?><!--<br>Ubuntu</h1>-->
+<!--                     </div>-->
+<!--                     <div class='CentOS'>-->
+<!--                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><?php //echo file_get_contents('http://localhost/php/host/Count.php?type=CentOS'); ?><!--<br>CentOS</h1>-->
+<!--                     </div>-->
+<!--                     <div class='MySQL'>-->
+<!--                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><?php //echo file_get_contents('http://localhost/php/host/Count.php?type=MySQL'); ?><!--<br>MySQL</h1>-->
+<!--                     </div>-->
                  </div>
 				 <div class="host_right_list" id="host_right_list">
                          <?php echo file_get_contents('http://localhost/php/host/List.php'); ?>
@@ -227,11 +231,26 @@
 			  </div>
 			  <!-- 右侧面板 -->
 			  <div class="user_right">
-
-<!--			  	 <div class="user_right_list" id="user_right_List">用户列表</div>-->
-			  	 <div class="user_right_webUser" id="user_right_WebUser">系统用户</div>
-			  	 <div class="user_right_deviceUser" id="user_right_DeviceUser">设备用户</div>
-			 	 <div class="user_right_addUser" id="user_right_AddUser">添加用户</div>
+			  	 <div class="user_right_webUser" id="user_right_WebUser">
+                     <?php echo file_get_contents('http://localhost/php/user/userList.php'); ?>
+                 </div>
+			  	 <div class="user_right_deviceUser" id="user_right_DeviceUser">
+                     <?php echo file_get_contents('http://localhost/php/user/userList.php'); ?>
+                 </div>
+			 	 <div class="user_right_addUser" id="user_right_AddUser">
+                     <form action="#" method="get">
+                         <label for="adduser" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
+                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                         <input id="adduser" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="adduser" maxlength="20">
+                         <br />
+                         <br />
+                         <label for="addpasswd" style="font-size: 14px;color: #CCCCDC;">密&nbsp;&nbsp;&nbsp;码：</label>
+                         <input id="addpasswd" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="password" name="addpasswd">
+                         <br />
+                         <br />
+                         <input style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="添加" onclick="addUser()">
+                     </form>
+                 </div>
 			  </div>
 		 </div>
 		 

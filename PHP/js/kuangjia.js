@@ -6,16 +6,16 @@ function keyLogin(){
 		document.getElementById("loginbtn").click(); //调用登录按钮的登录事件
 }
 
-// 根据btnOnClick传入的ID显示面板
+// 根据btnOnClick传入的ID显示面板（主界面导航栏按钮和面板左侧按钮）
 function viewPanel(view_btn){
-	// 0-4:主页上方五个按钮 5-7:设备管理左侧三个按钮 8-11:自动巡检左侧四个按钮 12-15:用户管理左侧四个按钮
+	// 0-4:导航栏五个按钮 5-7:设备管理左侧三个按钮 8-11:自动巡检左侧四个按钮 12-15:用户管理左侧四个按钮
 	var panel_list = [
 		'panel','host','checking','user','setup',
 		'host_right_all','host_right_list','host_right_addhost',
 		'checking_right_link','checking_right_test','checking_right_port','checking_right_device',
 		'user_right_WebUser','user_right_DeviceUser','user_right_AddUser','user_right_List'
 	];
-	//判断哪个面板正在显示
+	//判断正在显示的面板：：list参数表示导航栏按钮
 	function getPanelView(list){
 		if(getComputedStyle(document.getElementById(panel_list[list]),null).getPropertyValue('left') != '2.5%' &&
 			getComputedStyle(document.getElementById(panel_list[list]),null).getPropertyValue('left') != windowsSizeNoView){
@@ -23,11 +23,13 @@ function viewPanel(view_btn){
 		}
 	}
 	var view=null;
+
+	//函数主体
 	switch(panel_list.indexOf(view_btn))
 	{
 		case 0:case 1:case 2:case 3:case 4:	
 		// 点击按钮在当前窗口的左边或者右边 初始位置:top:8%;left:2.5%; 显示位置:top:100vh*0.08 or 100%*0.08 && *0.025 隐藏位置:top:50px left:-100vh
-		// 判断哪个面板正在显示，然后设置变量值作为状态
+		//确定正在显示面板在数组中的位置（得到数组下标）
 		var windowsSizeNoView = -document.body.clientWidth+'px'
 		if( getPanelView(0) ) {
 			view=0;
@@ -39,6 +41,8 @@ function viewPanel(view_btn){
 			view=3;
 		}else if( getPanelView(4) ) {
 			view=4; }
+
+		 //switch主体 - 获取按钮点击传来的ID，判断该ID在数组中的位置（返回数字）;正在显示面板下标和点击按钮将要显示的面板的下标作比较
 		 if(view<panel_list.indexOf(view_btn)){
 			 // ##BUG:所有面板都显示过后，无法跳转切换 ##例如：从2到4后，虽然实际显示的是4，但view的值是3 ##所以解决方法之一为：做动作前先清场，大概属于一刀切方法，很简单。
 			 $('#panel,#checking,#user,#host,#setup').css('display', 'none');
@@ -87,7 +91,8 @@ function viewPanel(view_btn){
 			break;
 	}
 }
-// btnOnClick(this)根据按钮类名-设置并传出右侧面板ID到view_panel()
+
+// btnOnClick(this)根据按钮的类名，传出右侧面板ID到view_panel()
 function btnOnClick(element){
 	var go=element.className;
 	switch(go)
@@ -112,7 +117,7 @@ function btnOnClick(element){
 	}
 }
 
-// 登录判断显示动画、设置Cookie
+//登录 -- 判断显示动画、设置Cookie
 function loginOkAnimation(){
 	var username =$("#username").val();
 	var passwd = $("#passwd").val();
@@ -140,20 +145,31 @@ function loginOkAnimation(){
 		);
 }
 
-//添加主机
+//自动巡检 -- 添加主机
 function addHost(){
 	var ipaddress =$("#ipaddress").val();
 	var username =$("#hostuser").val();
 	var passwd = $("#hostpasswd").val();
 	$.get(
-		"php/host/addHost.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd},
+		"php/host/AddHost.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd},
+		function(data,status){
+			console.log("数据: \n" + data + "\n状态: " + status);
+		}
+	);
+}
+//用户管理 -- 添加用户
+function addUser(){
+	var username =$("#adduser").val();
+	var passwd = $("#addpasswd").val();
+	$.get(
+		"php/user/AddUser.php",{"username":username,"passwd":passwd},
 		function(data,status){
 			console.log("数据: \n" + data + "\n状态: " + status);
 		}
 	);
 }
 
-//连通性检测ping
+//自动巡检 -- 连通性检测ping
 function hostLink(){
 	$.get(
 		"php/checking/hostLink.php",{},
@@ -198,6 +214,7 @@ function hostPerf(element){
 	}
 }
 
+//自动巡检 -- 获取端口信息
 function hostPort(){
 	var ipaddress =$("#ipaddressC").val();
 	var username =$("#hostuserC").val();
@@ -210,6 +227,7 @@ function hostPort(){
 	);
 }
 
+//自动巡检 -- 获取硬件信息
 function hostDevice(){
 	var ipaddress =$("#ipaddressC").val();
 	var username =$("#hostuserC").val();
@@ -224,13 +242,13 @@ function hostDevice(){
 
 //cookie：get and set
 //设置cookie存活时间：2021-11-08T03:23:55.000Z（这种时间格式表示格林尼治的时间，加上八个小时就是北京时间了）
-function setCookie(cname,cvalue,minute)
-{
+function setCookie(cname,cvalue,minute){
 	var d = new Date();
 	d.setTime(d.getTime()+(minute*60*1000));
 	var expires = "expires="+d.toGMTString();
 	document.cookie = cname + "=" + cvalue + "; " + expires;
 }
+
 //退出登录
 function loginout(){
 	setCookie("PHPSESSID", "", -1);
@@ -245,12 +263,22 @@ function loading(){
 		if(getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != '2.5%' &&
 			getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != windowsSizeNoView){
 			// console.log("动画开始");
-			document.getElementById("memory").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
+			// //此动画主要用来清空图表刷新数据时的异常闪动
+			document.getElementById("memory").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;opacity: 0.5;\" />";
 			document.getElementById("disk").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
 			document.getElementById("network").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
 			document.getElementById("cpu").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
-			setTimeout("Network();Memory();Disk();Cpu();",1000);
+			setTimeout("runNetwork();runMemory();runDisk();runCpu();",800);
 			// console.log("动画结束");
 		}
-	},5000);
+	},2000);
+}
+
+//请求数据
+function pgGet(url,back){
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("GET",url,true);
+	xmlHttp.onreadystatechange = back;
+	xmlHttp.send(null);
+	return xmlHttp;
 }

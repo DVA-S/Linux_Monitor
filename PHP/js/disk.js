@@ -1,24 +1,27 @@
+// var xmlHttpDiskTime = new XMLHttpRequest();
+// var xmlHttpDiskWrite = new XMLHttpRequest();
+// var xmlHttpDiskRead = new XMLHttpRequest();
+//
+// function Disk(){
+//     xmlHttpDiskTime.open("GET","../php/panel/disk.php?type=datatime",true);
+//     xmlHttpDiskWrite.open("GET","../php/panel/disk.php?type=diskwrite",true);
+//     xmlHttpDiskRead.open("GET","../php/panel/disk.php?type=diskread",true);
+//     xmlHttpDiskTime.onreadystatechange = diskback;
+//     xmlHttpDiskWrite.onreadystatechange = diskback;
+//     xmlHttpDiskRead.onreadystatechange = diskback;
+//     xmlHttpDiskTime.send(null);
+//     xmlHttpDiskWrite.send(null);
+//     xmlHttpDiskRead.send(null);
+// }
+
 var xmlHttpDiskTime;
 var xmlHttpDiskWrite;
 var xmlHttpDiskRead;
-xmlHttpDiskTime = new XMLHttpRequest();
-xmlHttpDiskWrite = new XMLHttpRequest();
-xmlHttpDiskRead = new XMLHttpRequest();
 
-function Disk(){
-    var urltime="../php/panel/disk.php?type=datatime";
-    var urlwrite="../php/panel/disk.php?type=diskwrite";
-    var urlread="../php/panel/disk.php?type=diskread";
-
-    xmlHttpDiskTime.open("GET",urltime,true);
-    xmlHttpDiskWrite.open("GET",urlwrite,true);
-    xmlHttpDiskRead.open("GET",urlread,true);
-    xmlHttpDiskTime.onreadystatechange = diskback;
-    xmlHttpDiskWrite.onreadystatechange = diskback;
-    xmlHttpDiskRead.onreadystatechange = diskback;
-    xmlHttpDiskTime.send(null);
-    xmlHttpDiskWrite.send(null);
-    xmlHttpDiskRead.send(null);
+function runDisk(){
+    xmlHttpDiskTime = pgGet("http://192.168.157.128/php/panel/disk.php?type=datatime",diskback);
+    xmlHttpDiskWrite = pgGet("http://192.168.157.128/php/panel/disk.php?type=diskwrite",diskback);
+    xmlHttpDiskRead = pgGet("http://192.168.157.128/php/panel/disk.php?type=diskread",diskback);
 }
 
 function diskback(){
@@ -27,14 +30,9 @@ function diskback(){
     }
     if(xmlHttpDiskTime.readyState == 4){
         if(xmlHttpDiskTime.status == 200){
-            var datatime = xmlHttpDiskTime.responseText;
-            var diskwrite = xmlHttpDiskWrite.responseText;
-            var diskread = xmlHttpDiskRead.responseText;
-            datatime=datatime.split(",");
-            diskwrite=diskwrite.split(",");
-            diskread=diskread.split(",");
-
-
+            var datatime = xmlHttpDiskTime.responseText.split(",");
+            var diskwrite = xmlHttpDiskWrite.responseText.split(",");
+            var diskread = xmlHttpDiskRead.responseText.split(",");
 
             //图表
             chartDom = document.getElementById("disk");
@@ -113,8 +111,7 @@ function diskback(){
         }
     }
 }
-Disk();
-
+runDisk();
 
 
 
