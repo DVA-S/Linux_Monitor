@@ -271,7 +271,7 @@ function loading(){
 			setTimeout("runNetwork();runMemory();runDisk();runCpu();",800);
 			// console.log("动画结束");
 		}
-	},2000);
+	},8000);
 }
 
 //请求数据

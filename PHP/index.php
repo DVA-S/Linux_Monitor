@@ -266,6 +266,11 @@
                 echo "<script>
 		 		//登录框  forwards属性会让对象停留在终点
 		        document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';
+		        
+                //BUG:登录成功后,刷新任何界面,登录表单会出现一秒钟然后消失. --  解决方法:设置登陆成功后&&播放完登录动画后,移除登录盒子.
+                //平移登录动画时,每次刷新都会重复登录动画.改进登陆动画后,出现了此BUG                		                
+		        document.getElementById('login_div').remove();      
+		        
 		        //主页
 		        document.getElementById('head_div').style.display='block';
 		        document.getElementById('head_div').style.animation='0.5s ease 0s 1 normal forwards running index_head_loginOk';
@@ -273,6 +278,11 @@
 		        document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
 		 		</script>";
             }
+//            else{
+//                echo "<script>
+//                document.getElementById('login_div').style.display='block';
+//                </script>";
+//            }
         ?>
 	</body>
 </html>
