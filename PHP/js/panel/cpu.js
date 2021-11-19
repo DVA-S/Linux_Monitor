@@ -1,20 +1,3 @@
-// var xmlHttpdCpuTime = new XMLHttpRequest();
-// var xmlHttpCpuUsed  = new XMLHttpRequest();
-// var xmlHttpCpuFree  = new XMLHttpRequest();
-//
-// //获取数据
-// function Cpu(){
-//     xmlHttpdCpuTime.open("GET","../php/panel/cpu.php?type=datatime",true);
-//     xmlHttpCpuUsed.open("GET","../php/panel/cpu.php?type=cpuused",true);
-//     xmlHttpCpuFree.open("GET","../php/panel/cpu.php?type=cpufree",true);
-//     xmlHttpdCpuTime.onreadystatechange = cpuback;
-//     xmlHttpCpuUsed.onreadystatechange = cpuback;
-//     xmlHttpCpuFree.onreadystatechange = cpuback;
-//     xmlHttpdCpuTime.send(null);
-//     xmlHttpCpuUsed.send(null);
-//     xmlHttpCpuFree.send(null);
-// }
-
 var xmlHttpdCpuTime;
 var xmlHttpCpuUsed;
 var xmlHttpCpuFree;
@@ -32,6 +15,7 @@ function cpuback(){
     }
     // if(xmlHttpdCpuTime.readyState == 4){
     //     if(xmlHttpdCpuTime.status == 200){
+    // responseText解析：https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/responseText
             var datatime = xmlHttpdCpuTime.responseText.split(",");
             var cpuused = xmlHttpCpuUsed.responseText.split(",");
             var cpufree = xmlHttpCpuFree.responseText.split(",");

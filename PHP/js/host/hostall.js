@@ -1,19 +1,3 @@
-// var xmlHttpHostCountUbuntu = new XMLHttpRequest();
-// var xmlHttpHostCountCentOS = new XMLHttpRequest();
-// var xmlHttpHostCountMySQL = new XMLHttpRequest();
-//
-// xmlHttpHostCountUbuntu.open("GET","../php/host/Count.php?type=Ubuntu",true);
-// xmlHttpHostCountCentOS.open("GET","../php/host/Count.php?type=CentOS",true);
-// xmlHttpHostCountMySQL.open("GET","../php/host/Count.php?type=MySQL",true);
-//
-// xmlHttpHostCountUbuntu.onreadystatechange = hostcount;
-// xmlHttpHostCountCentOS.onreadystatechange = hostcount;
-// xmlHttpHostCountMySQL.onreadystatechange = hostcount;
-//
-// xmlHttpHostCountUbuntu.send(null);
-// xmlHttpHostCountCentOS.send(null);
-// xmlHttpHostCountMySQL.send(null);
-
 var xmlHttpHostCountUbuntu;
 var xmlHttpHostCountCentOS;
 var xmlHttpHostCountMySQL;

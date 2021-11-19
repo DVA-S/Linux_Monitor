@@ -22,7 +22,7 @@
 		</div>
 		<div class="login_div" id="login_div">
 			<div class="logo">
-				<h1 style="text-align: center;line-height: 480%;color: #FFF;"><i>运维系统</i></h1>
+                <img src="logo1-1.png" alt="这是logo！" style="width: 50%;left: 22.5%;top: 20%;"/>
 			</div>
 			<div class="login_form" id="login_form">
 				<form action="#" method="post"">
@@ -45,33 +45,33 @@
 		 <!-- 导航栏 -->
 		 <div class="head_div" id="head_div">
             <!--loading（）：点击监控面板按钮 重新触发刷新事件-->
-			 <div class="panel_btn" onclick="btnOnClick(this);loading();">
+			 <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="btnOnClick(this);loading();">
 				 <p>监控面板</p>
 			 </div>
-			 <div class="host_btn" onclick="btnOnClick(this)">
+			 <div class="host_btn" title="设备的总览、列表、添加" onclick="btnOnClick(this)">
 				 <p>设备管理</p>
 			 </div>
-			 <div class="checking_btn" onclick="btnOnClick(this)">
+			 <div class="checking_btn" title="设备的连通、性能、端口、硬件" onclick="btnOnClick(this)">
 				 <p>自动巡检</p>
 			 </div>
-			 <div class="user_btn" onclick="btnOnClick(this)">
+			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">
 				 <p>用户管理</p>
 			 </div>
-			 <div class="setup_btn" onclick="btnOnClick(this)">系统设置</div>
+			 <div class="setup_btn" title="退出登录、修改密码……" onclick="btnOnClick(this)">系统设置</div>
 		 </div>
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
              <div class="view" id="memory" style="width: 50%;height: 50%;position: relative;top: -0.5%;left: -0.5%;background-color: #FFF;">
-                 <script src="js/memory.js"></script>
+                 <script src="js/panel/memory.js"></script>
              </div>
              <div class="view" id="network" style="width: 50%;height: 50%;position: relative;top: 0.5%;left: -0.5%;background-color: #FFF;">
-                 <script src="js/network.js"></script>
+                 <script src="js/panel/network.js"></script>
              </div>
              <div class="view" id="cpu" style="width: 50%;height: 50%;position: relative;top: -49.5%;left: 50.5%;background-color: #FFF;">
-                 <script src="js/cpu.js"></script>
+                 <script src="js/panel/cpu.js"></script>
              </div>
              <div class="view" id="disk" style="width: 50%;height: 50%;position: relative;top: -150.5%;left: 50.5%;background-color: #FFF;">
-                <script src="js/disk.js"></script>
+                <script src="js/panel/disk.js"></script>
              </div>
 		 </div>
 		 <!-- 主机管理 -->
@@ -79,11 +79,11 @@
 			 <!-- 左侧边栏 -->
 			 <div class="host_left">
 				 <!-- 设备总览 -- Linux/MySQL/Other -->
-				 <div class="host_left_all" onclick="btnOnClick(this)">设备总览</div>
+				 <div class="host_left_all" title="所有设备及分类" onclick="btnOnClick(this)">设备总览</div>
 				 <!-- 设备列表 -- 修改/删除 -->
-				 <div class="host_left_list" onclick="btnOnClick(this)">设备列表</div>
+				 <div class="host_left_list" title="所有设备及设备信息" onclick="btnOnClick(this)">设备列表</div>
 				 <!-- 添加设备 -- 表单 -->
-				 <div class="host_left_addhost" onclick="btnOnClick(this)">添加设备</div>
+				 <div class="host_left_addhost" title="添加某种设备" onclick="btnOnClick(this)">添加设备</div>
 			 </div>
 			 <!-- 右侧面板 -->
 			 <div class="host_right">
@@ -91,16 +91,6 @@
                      <div id="hostall" style="width: 500%;height: 500%;top: -14%;left: 10%;">
                          <script src="js/host/hostall.js"></script>
                      </div>
-
-<!--                     <div class='Ubuntu'>-->
-<!--                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><?php //echo file_get_contents('http://localhost/php/host/Count.php?type=Ubuntu'); ?><!--<br>Ubuntu</h1>-->
-<!--                     </div>-->
-<!--                     <div class='CentOS'>-->
-<!--                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><?php //echo file_get_contents('http://localhost/php/host/Count.php?type=CentOS'); ?><!--<br>CentOS</h1>-->
-<!--                     </div>-->
-<!--                     <div class='MySQL'>-->
-<!--                         <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><?php //echo file_get_contents('http://localhost/php/host/Count.php?type=MySQL'); ?><!--<br>MySQL</h1>-->
-<!--                     </div>-->
                  </div>
 				 <div class="host_right_list" id="host_right_list">
                          <?php echo file_get_contents('http://localhost/php/host/List.php'); ?>
@@ -134,13 +124,13 @@
 			 <!-- 左侧边栏 -->
 			 <div class="checking_left">
 			 	 <!-- 连通性检测 -- Ping/可登录 -->
-			 	 <div class="checking_left_link" onclick="btnOnClick(this)">连通性检测</div>
+			 	 <div class="checking_left_link" title="Ping命令检测" onclick="btnOnClick(this)">连通性检测</div>
 			 	 <!-- 性能检测 -- disk读写/网速/CPU/内存 -->
-			 	 <div class="checking_left_test" onclick="btnOnClick(this)">性能检测</div>
+			 	 <div class="checking_left_test" title="磁盘、网络、处理器性能" onclick="btnOnClick(this)">性能检测</div>
 			 	 <!-- 端口检测 -- 主机暴露端口 -->
-			 	 <div class="checking_left_port" onclick="btnOnClick(this)">端口检测</div>
+			 	 <div class="checking_left_port" title="设备端口开放情况" onclick="btnOnClick(this)">端口检测</div>
 				 <!-- 硬件检测 -- cpu/内存条/网卡/硬盘(数量、规格) -->
-			 	<div class="checking_left_device" onclick="btnOnClick(this)">硬件检测</div>
+			 	<div class="checking_left_device" title="硬件信息" onclick="btnOnClick(this)">硬件检测</div>
 			 </div>
 			 <!-- 右侧面板 -->
 			 <div class="checking_right">
@@ -223,11 +213,11 @@
 			  	 <!-- 用户列表 -- 登录 -->
 <!--			  	 <div class="user_left_list" onclick="btnOnClick(this)">用户列表</div>-->
 			  	 <!-- 系统用户 -- web用户 -->
-			  	 <div class="user_left_webUser" onclick="btnOnClick(this)">系统用户</div>
+			  	 <div class="user_left_webUser" title="可登录本界面" onclick="btnOnClick(this)">系统用户</div>
 			  	 <!-- 设备用户 -- 主机用户 -->
-			  	 <div class="user_left_deviceUser" onclick="btnOnClick(this)">设备用户</div>
+			  	 <div class="user_left_deviceUser" title="可登录设备" onclick="btnOnClick(this)">设备用户</div>
 			 	 <!-- 添加用户 -- 系统用户/设备用户 -->
-			  	<div class="user_left_addUser" onclick="btnOnClick(this)">添加用户</div>
+			  	<div class="user_left_addUser" title="添加某种用户" onclick="btnOnClick(this)">添加用户</div>
 			  </div>
 			  <!-- 右侧面板 -->
 			  <div class="user_right">
@@ -278,11 +268,6 @@
 		        document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
 		 		</script>";
             }
-//            else{
-//                echo "<script>
-//                document.getElementById('login_div').style.display='block';
-//                </script>";
-//            }
         ?>
 	</body>
 </html>

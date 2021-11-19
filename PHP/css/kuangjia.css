@@ -200,16 +200,23 @@ body{
 }
 .host_left_all{
 	height: 10%;
+	top: 2%;
+	margin-left: 2%;
+	margin-right: 2%;
 	background-color: #AAA;	
 }
 .host_left_list{
 	height: 10%;
-	top:1%;
-	background-color: #AAA;	
+	top:4%;
+	margin-left: 2%;
+	margin-right: 2%;
+	background-color: #AAA;
 }
 .host_left_addhost{
 	height: 10%;
-	top:2%;
+	top:6%;
+	margin-left: 2%;
+	margin-right: 2%;
 	background-color: #AAA;
 }
 .host_right{
@@ -224,7 +231,7 @@ body{
 	height: 100%;
 	padding-top: 14%;
 	padding-left: 14%;
-	display: none;
+	display: block;
 }
 .Ubuntu,.CentOS,.MySQL{
 	width: 22.5%;
@@ -281,21 +288,30 @@ body{
 }
 .checking_left_link{
 	height: 10%;
+	top: 2%;
+	margin-left: 2%;
+	margin-right: 2%;
 	background-color: #AAA;	
 }
 .checking_left_test{
 	height: 10%;
-	top:1%;
+	top: 4%;
+	margin-left: 2%;
+	margin-right: 2%;
 	background-color: #AAA;	
 }
 .checking_left_port{
 	height: 10%;
-	top:2%;
+	top: 6%;
+	margin-left: 2%;
+	margin-right: 2%;
 	background-color: #AAA;
 }
 .checking_left_device{
 	height: 10%;
-	top:3%;
+	top: 8%;
+	margin-left: 2%;
+	margin-right: 2%;
 	background-color: #AAA;
 }
 .checking_right{
@@ -310,7 +326,7 @@ body{
 	height: 100%;
 	background-color: #000;
 	opacity: 0.8;
-	display: none;
+	display: block;
 }
 .checking_right_test{
 	width: 100%;
@@ -345,23 +361,29 @@ body{
 	height: 100%;
 	background-color: #123;
 }
-.user_left_list{
-	height: 10%;
-	background-color: #AAA;	
-}
+/*.user_left_list{*/
+/*	height: 10%;*/
+/*	background-color: #AAA;	*/
+/*}*/
 .user_left_webUser{
 	height: 10%;
-	top:1%;
+	top: 2%;
+	margin-left: 2%;
+	margin-right: 2%;
 	background-color: #AAA;	
 }
 .user_left_deviceUser{
 	height: 10%;
-	top:2%;
+	top: 4%;
+	margin-left: 2%;
+	margin-right: 2%;
 	background-color: #AAA;
 }
 .user_left_addUser{
 	height: 10%;
-	top:3%;
+	top: 6%;
+	margin-left: 2%;
+	margin-right: 2%;
 	background-color: #AAA;
 }
 .user_right{
@@ -371,17 +393,11 @@ body{
 	top: -100%;
 	left: 20%;
 }
-/*.user_right_list{*/
-/*	width: 100%;*/
-/*	height: 100%;*/
-/*	background-color: #0F0;*/
-/*	display: none;*/
-/*}*/
 .user_right_webUser{
 	width: 100%;
 	height: 100%;
 	/*background-color: #00F;*/
-	display: none;
+	display: block;
 }
 .user_right_deviceUser{
 	width: 100%;

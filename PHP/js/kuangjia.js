@@ -1,3 +1,4 @@
+//echars图表变量
 var chartDom;var myChart;
 
 //回车登录(在输入框调用)
@@ -278,6 +279,7 @@ function loading(){
 function pgGet(url,back){
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("GET",url,true);
+	//当 readyState 的值改变的时候，callback 函数会被调用。
 	xmlHttp.onreadystatechange = back;
 	xmlHttp.send(null);
 	return xmlHttp;

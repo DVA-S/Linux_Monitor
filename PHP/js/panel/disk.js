@@ -1,19 +1,3 @@
-// var xmlHttpDiskTime = new XMLHttpRequest();
-// var xmlHttpDiskWrite = new XMLHttpRequest();
-// var xmlHttpDiskRead = new XMLHttpRequest();
-//
-// function Disk(){
-//     xmlHttpDiskTime.open("GET","../php/panel/disk.php?type=datatime",true);
-//     xmlHttpDiskWrite.open("GET","../php/panel/disk.php?type=diskwrite",true);
-//     xmlHttpDiskRead.open("GET","../php/panel/disk.php?type=diskread",true);
-//     xmlHttpDiskTime.onreadystatechange = diskback;
-//     xmlHttpDiskWrite.onreadystatechange = diskback;
-//     xmlHttpDiskRead.onreadystatechange = diskback;
-//     xmlHttpDiskTime.send(null);
-//     xmlHttpDiskWrite.send(null);
-//     xmlHttpDiskRead.send(null);
-// }
-
 var xmlHttpDiskTime;
 var xmlHttpDiskWrite;
 var xmlHttpDiskRead;

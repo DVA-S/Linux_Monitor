@@ -1,19 +1,3 @@
-// var xmlHttpMemoryTime = new XMLHttpRequest();
-// var xmlHttpMemoryUsed = new XMLHttpRequest();
-// var xmlHttpMemoryFree = new XMLHttpRequest();
-//
-// function Memory(){
-//     xmlHttpMemoryTime.open("GET","../php/panel/memory.php?type=datatime",true);
-//     xmlHttpMemoryUsed.open("GET","../php/panel/memory.php?type=memused",true);
-//     xmlHttpMemoryFree.open("GET","../php/panel/memory.php?type=memfree",true);
-//     xmlHttpMemoryTime.onreadystatechange = memoryback;
-//     xmlHttpMemoryUsed.onreadystatechange = memoryback;
-//     xmlHttpMemoryFree.onreadystatechange = memoryback;
-//     xmlHttpMemoryTime.send(null);
-//     xmlHttpMemoryUsed.send(null);
-//     xmlHttpMemoryFree.send(null);
-// }
-
 var xmlHttpMemoryTime;
 var xmlHttpMemoryUsed;
 var xmlHttpMemoryFree;

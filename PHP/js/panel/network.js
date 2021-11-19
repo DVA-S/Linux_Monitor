@@ -2,19 +2,6 @@ var xmlHttpdNetworkTime;
 var xmlHttpNetworkUp;
 var xmlHttpNetworkDown;
 
-// function Network(){
-//     xmlHttpdNetworkTime.open("GET","../php/panel/network.php?type=datatime",true);
-//     xmlHttpNetworkUp.open("GET","../php/panel/network.php?type=networkup",true);
-//     xmlHttpNetworkDown.open("GET","../php/panel/network.php?type=networkdown",true);
-//     xmlHttpdNetworkTime.onreadystatechange = networkback;
-//     xmlHttpNetworkUp.onreadystatechange = networkback;
-//     xmlHttpNetworkDown.onreadystatechange = networkback;
-//     xmlHttpdNetworkTime.send(null);
-//     xmlHttpNetworkUp.send(null);
-//     xmlHttpNetworkDown.send(null);
-//     loading();
-// }
-
 function runNetwork(){
     xmlHttpdNetworkTime = pgGet("http://192.168.157.128/php/panel/network.php?type=datatime",networkback);
     xmlHttpNetworkUp = pgGet("http://192.168.157.128/php/panel/network.php?type=networkup",networkback);
