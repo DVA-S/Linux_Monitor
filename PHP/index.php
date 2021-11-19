@@ -22,7 +22,7 @@
 		</div>
 		<div class="login_div" id="login_div">
 			<div class="logo">
-                <img src="logo1-1.png" alt="这是logo！" style="width: 50%;left: 22.5%;top: 20%;"/>
+                <img src="img/logo1-1.png" alt="这是logo！" style="width: 50%;left: 22.5%;top: 20%;"/>
 			</div>
 			<div class="login_form" id="login_form">
 				<form action="#" method="post"">
@@ -57,20 +57,20 @@
 			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">
 				 <p>用户管理</p>
 			 </div>
-			 <div class="setup_btn" title="退出登录、修改密码……" onclick="btnOnClick(this)">系统设置</div>
+			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this)">系统设置</div>
 		 </div>
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
-             <div class="view" id="memory" style="width: 50%;height: 50%;position: relative;top: -0.5%;left: -0.5%;background-color: #FFF;">
+             <div class="view" id="memory" style="top: 2%;left: 3%;">
                  <script src="js/panel/memory.js"></script>
              </div>
-             <div class="view" id="network" style="width: 50%;height: 50%;position: relative;top: 0.5%;left: -0.5%;background-color: #FFF;">
+             <div class="view" id="network" style="top: 4%;left: 3%;">
                  <script src="js/panel/network.js"></script>
              </div>
-             <div class="view" id="cpu" style="width: 50%;height: 50%;position: relative;top: -49.5%;left: 50.5%;background-color: #FFF;">
+             <div class="view" id="cpu" style="top: -41%;left: 52%;">
                  <script src="js/panel/cpu.js"></script>
              </div>
-             <div class="view" id="disk" style="width: 50%;height: 50%;position: relative;top: -150.5%;left: 50.5%;background-color: #FFF;">
+             <div class="view" id="disk" style="top: -133%;left: 52%;">
                 <script src="js/panel/disk.js"></script>
              </div>
 		 </div>
@@ -88,12 +88,12 @@
 			 <!-- 右侧面板 -->
 			 <div class="host_right">
 				 <div class="host_right_all" id="host_right_all">
-                     <div id="hostall" style="width: 500%;height: 500%;top: -14%;left: 10%;">
+                     <div id="hostall" style="width: 500%;height: 500%;padding-left: 23%;padding-top: 3%;">
                          <script src="js/host/hostall.js"></script>
                      </div>
                  </div>
 				 <div class="host_right_list" id="host_right_list">
-                         <?php echo file_get_contents('http://localhost/php/host/List.php'); ?>
+                     <?php echo file_get_contents('http://localhost/php/host/List.php'); ?>
                  </div>
 				 <div class="host_right_addhost" id="host_right_addhost">
                      <div class="addhost_form">

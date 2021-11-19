@@ -11,7 +11,7 @@
 <!--<input type="button" value="开始显示时间" id="go" onclick="start()" />-->
 <p>当前时间：<font color="red"><span id="showtime"></span></font></p>
 <div id="cpu" style="width: 1000px;height: 400px;"></div>
-<img src="../loading.gif" style="position: relative;left: 49%;background-color: #000;" />
+<img src="../img/loading.gif" style="position: relative;left: 49%;background-color: #000;" />
 </body>
 <script type="text/javascript">
     var xmlHttpd;

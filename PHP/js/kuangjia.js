@@ -265,14 +265,14 @@ function loading(){
 			getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != windowsSizeNoView){
 			// console.log("动画开始");
 			// //此动画主要用来清空图表刷新数据时的异常闪动
-			document.getElementById("memory").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;opacity: 0.5;\" />";
-			document.getElementById("disk").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
-			document.getElementById("network").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
-			document.getElementById("cpu").innerHTML="<img src=\"loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
-			setTimeout("runNetwork();runMemory();runDisk();runCpu();",800);
+			document.getElementById("memory").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 20%;top: 13%;opacity: 0.5;\" />";
+			document.getElementById("disk").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
+			document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
+			document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 20%;top: 13%;\" />";
+			setTimeout("runNetwork();runMemory();runDisk();runCpu();",200);
 			// console.log("动画结束");
 		}
-	},8000);
+	},15000);
 }
 
 //请求数据
