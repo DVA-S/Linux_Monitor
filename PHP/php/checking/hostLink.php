@@ -16,10 +16,10 @@ $stmt->execute();
 
 //判定登录--输出查询数据的行数
 //可以改为并行
-echo "<table border='0' class='hostList' style=''>
-    <tr>
-        <th>主机名</th><th>地址</th><th>延时</th>
-    </tr>";
+echo "
+<tr>
+    <th>主机名</th><th>地址</th><th>延时</th>
+</tr>";
 while($stmt->fetch()){
     $ms = `ping -c 3 $host_ip | awk -F 'time=' '{print $2,$3}' | sed -n '3p'`;
     echo "
@@ -27,8 +27,9 @@ while($stmt->fetch()){
         <td>$host_name</td>
         <td>$host_ip</td>
         <td>$ms</td>
-    </tr>";
+    </tr>
+    ";
 }
-echo "</table>";
+//echo "</table>";
 
 ?>

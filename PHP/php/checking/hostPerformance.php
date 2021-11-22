@@ -15,7 +15,7 @@ if ($type == "disk"){
         expect \"password:\"
         send \"$passwd\r\"
         expect \"#\"
-        send \"dd if=/dev/zero of=/opt/test.dd bs=1M count=20 > /opt/w 2>&1 && dd if=/opt/test.dd of=/dev/null bs=1M > /opt/r 2>&1\r\"
+        send \"dd if=/dev/zero of=/opt/test.dd bs=1M count=200 > /opt/w 2>&1 && dd if=/opt/test.dd of=/dev/null bs=1M > /opt/r 2>&1\r\"
         expect eof
         "
         `;

@@ -175,23 +175,24 @@ function hostLink(){
 	$.get(
 		"php/checking/hostLink.php",{},
 		function(data){
-			document.getElementById("hostLinkList").innerHTML=data;
+			document.getElementById("alltable").innerHTML=data;
 		}
 	);
 }
 
 //自动巡检 -- 性能检测
 function hostPerf(element){
-	var go=element.className;
-	var ipaddress =$("#ipaddressC").val();
-	var username =$("#hostuserC").val();
-	var passwd = $("#hostpasswdC").val();
+	var go=element.id;
+	console.log(go);
+	var ipaddress =$("#ipaddressChecking").val();
+	var username =$("#hostuserChecking").val();
+	var passwd = $("#hostpasswdChecking").val();
 	switch (go){
 		case 'hostDisk':
 			$.get(
 				"php/checking/hostPerformance.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,"type":"disk"},
 				function(data){
-					document.getElementById("checking_disk").innerHTML=data;
+					document.getElementById("checkingPerf").innerHTML=data;
 				}
 			);
 			break;
@@ -199,7 +200,7 @@ function hostPerf(element){
 			$.get(
 				"php/checking/hostPerformance.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,"type":"network"},
 				function(data){
-					document.getElementById("checking_network").innerHTML=data;
+					document.getElementById("checkingPerf").innerHTML=data;
 				}
 			);
 			break;
@@ -207,7 +208,7 @@ function hostPerf(element){
 			$.get(
 				"php/checking/hostPerformance.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,"type":"cpu"},
 				function(data){
-					document.getElementById("checking_cpu").innerHTML=data;
+					document.getElementById("checkingPerf").innerHTML=data;
 				}
 			);
 			break;
@@ -217,13 +218,13 @@ function hostPerf(element){
 
 //自动巡检 -- 获取端口信息
 function hostPort(){
-	var ipaddress =$("#ipaddressC").val();
-	var username =$("#hostuserC").val();
-	var passwd = $("#hostpasswdC").val();
+	var ipaddress =$("#ipaddressPort").val();
+	var username =$("#hostuserPort").val();
+	var passwd = $("#hostpasswdPort").val();
 	$.get(
 		"php/checking/hostPort.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd},
 		function(data){
-			document.getElementById("checking_port").innerHTML=data;
+			document.getElementById("checkingPerfPort").innerHTML=data;
 		}
 	);
 }

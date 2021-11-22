@@ -116,7 +116,7 @@
                              <input id="hostpasswd" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
                              <br />
                              <br />
-                             <input class="ok" type="button" value="添加" onclick="addHost()">
+                             <div class="ok" onclick="addHost()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
                          </form>
                      </div>
                  </div>
@@ -139,54 +139,78 @@
 			 <!-- 右侧面板 -->
 			 <div class="checking_right">
 			 	 <div class="checking_right_link" id="checking_right_link">
-                     <button onclick="hostLink()">开始检测</button>
-                     <p id="hostLinkList">test</p>
+                     <table class='alltable' id="alltable">
+                         <div class="alltable_head">
+                             <p>设备列表</p>
+                         </div>
+                         <tr>
+                             <th>主机名</th><th>地址</th><th>延时</th>
+                         </tr>
+                     </table>
+                     <button class="ok" style="position: absolute;top: 4%;height: 6%;left: 84%;" onclick="hostLink()">开始检测</button>
                  </div>
 			 	 <div class="checking_right_test" id="checking_right_test">
-                     <form action="#" method="get">
-                         <label for="ipaddressC" style="font-size: 14px;color: #CCCCDC;">IP地址：</label>
-                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                         <input id="ipaddressC" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="ipaddressC" maxlength="20">
-                         <br />
-                         <br />
-                         <label for="hostuserC" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
-                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                         <input id="hostuserC" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="hostuserC" maxlength="20">
-                         <br />
-                         <br />
-                         <label for="hostpasswdC" style="font-size: 14px;color: #CCCCDC;">密&nbsp;&nbsp;&nbsp;码：</label>
-                         <input id="hostpasswdC" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="password" name="hostpasswdC">
-                         <br />
-                         <br />
-                         <input class="hostDisk" style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="磁盘速度" onclick="hostPerf(this)">
-                         <input class="hostNetwork" style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="网络速度" onclick="hostPerf(this)">
-                         <input class="hostCpu" style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="CPU性能" onclick="hostPerf(this)">
-                     </form>
-                     <p id="checking_disk"></p>
-                     <p id="checking_network"></p>
-                     <p id="checking_cpu"></p>
-
+                     <div class="addhost_form">
+                         <form action="#" method="get">
+                             <label for="ipaddressChecking" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="ipaddressChecking" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddressChecking" maxlength="20">
+                             <br />
+                             <br />
+                             <label for="hostuserChecking" style="position: absolute;top: 8%;left: 30%;">用户名：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="hostuserChecking" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuserChecking" maxlength="20">
+                             <br />
+                             <br />
+                             <label for="hostpasswdChecking" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
+                             <input id="hostpasswdChecking" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="hostpasswdChecking" name="hostpasswd">
+                             <br />
+                             <br />
+                             <div class="ok" id="hostDisk" style="position: absolute;top: 51%;left: 20%;background-color: #DDD;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;硬盘</div>
+                             <div class="ok" id="hostNetwork" style="position: absolute;top: 51%;left: 40%;background-color: #DDD;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网络</div>
+                             <div class="ok" id="hostCpu" style="position: absolute;top: 51%;left: 60%;background-color: #DDD;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;处理器</div>
+                         </form>
+                     </div>
+                     <br />
+                     <br />
+                     <table class='alltable' id="checkingPerf">
+                         <div class="alltable_head">
+                             <p>测试结果</p>
+                         </div>
+                     </table>
                  </div>
 			 	 <div class="checking_right_port" id="checking_right_port">
-                     <form action="#" method="get">
-                         <label for="ipaddressP" style="font-size: 14px;color: #CCCCDC;">IP地址：</label>
-                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                         <input id="ipaddressP" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="ipaddressP" maxlength="20">
-                         <br />
-                         <br />
-                         <label for="hostuserP" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
-                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                         <input id="hostuserP" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="hostuserP" maxlength="20">
-                         <br />
-                         <br />
-                         <label for="hostpasswdP" style="font-size: 14px;color: #CCCCDC;">密&nbsp;&nbsp;&nbsp;码：</label>
-                         <input id="hostpasswdP" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="password" name="hostpasswdP">
-                         <br />
-                         <br />
-                         <input class="hostPort" style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="开放端口" onclick="hostPort()">
-                     </form>
-                     <p id="checking_port"></p>
+                     <div class="addhost_form">
+                         <form action="#" method="get">
+                             <label for="ipaddressCheckingPort" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="ipaddressCheckingPort" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddressCheckingPort" maxlength="20">
+                             <br />
+                             <br />
+                             <label for="hostuserCheckingPort" style="position: absolute;top: 8%;left: 30%;">用户名：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="hostuserCheckingPort" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuserCheckingPort" maxlength="20">
+                             <br />
+                             <br />
+                             <label for="hostpasswdCheckingPort" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
+                             <input id="hostpasswdCheckingPort" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="hostpasswdCheckingPort" name="hostpasswd">
+                             <br />
+                             <br />
+                             <div class="ok" id="hostDisk"  onclick="hostPort()">&nbsp;&nbsp;&nbsp;&nbsp;端口检测</div>
+                         </form>
+                     </div>
+                     <br />
+                     <br />
+                     <table class='alltable' id="checkingPerfPort">
+                         <div class="alltable_head">
+                             <p>测试结果</p>
+                         </div>
+                         <tr>
+                             <th>主机名</th><th>地址</th><th>端口类型</th><th>端口</th><th>进程</th>
+                         </tr>
+                     </table>
                  </div>
+
 				 <div class="checking_right_device" id="checking_right_device" style="overflow:auto;">
                      <form action="#" method="get">
                          <label for="ipaddressD" style="font-size: 14px;color: #CCCCDC;">IP地址：</label>
