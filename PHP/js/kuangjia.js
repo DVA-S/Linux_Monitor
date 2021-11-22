@@ -256,7 +256,7 @@ function loginout(){
 	location.reload();
 }
 
-//刷新事件&加载动画（实时刷新）
+//刷新事件&加载动画（实时刷新可以传入一个时间间隔参数）
 function loading(){
 	var windowsSizeNoView = -document.body.clientWidth+'px';
 	setTimeout(function (){

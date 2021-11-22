@@ -10,6 +10,8 @@ body{
 	width: 100%;
 	background-size: 500%;
 	overflow: hidden;
+	/* 禁止文字选中 */
+	-webkit-user-select:none;
 }
 /* 定位方式 */
 *{
@@ -52,6 +54,12 @@ body{
 	margin: 0 5% 0 5%;
 	background-color: #FFF;
 	border-radius: 3px;
+	text-align: center;
+	line-height: 200%;
+}
+/* 所有按钮 > 导航栏按钮 ：按钮下效果 */
+.host_btn:active, .user_btn:active, .panel_btn:active, .setup_btn:active, .checking_btn:active, .submit:active{
+	opacity: 0.8;
 }
 /* 所有按钮 > 面板按钮 */
 .host_left_all,.host_left_list,.host_left_addhost,.checking_left_link,.checking_left_test,.checking_left_port,.checking_left_device,.user_left_webUser,.user_left_deviceUser,.user_left_addUser{
@@ -60,15 +68,11 @@ body{
 	margin-left: 2%;
 	margin-right: 2%;
 	border-radius: 2px;
-}
-/* 所有按钮 > 导航栏按钮 ： 按钮字体位置  先并集再交集 */
-.host_btn,.user_btn,.panel_btn,.setup_btn,.checking_btn p{
 	text-align: center;
-	line-height: 200%;
+	line-height: 300%;
 }
-/* 所有按钮 > 导航栏按钮 ：按钮下效果 */
-.host_btn:active, .user_btn:active, .panel_btn:active, .setup_btn:active, .checking_btn:active, .submit:active{
-	opacity: 0.8;
+.host_left_all:active,.host_left_list:active,.host_left_addhost:active,.checking_left_link:active,.checking_left_test:active,.checking_left_port:active,.checking_left_device:active,.user_left_webUser:active,.user_left_deviceUser:active,.user_left_addUser:active{
+	background-color: #FFF;
 }
 /**********************************************所有按钮*********************************************/
 
@@ -229,7 +233,42 @@ body{
 }
 /**********************************************内容面板*********************************************/
 
-/* 监控面板 > 图表 */
+/**********************************************所有表格*********************************************/
+/*#F90,#9C27B0,#1196F3*/
+.alltable_head
+{
+	background-color:#1196F3;
+	width:18%;
+	height:6%;
+	border-radius: 0 50px 0 0;
+	top: 5%;
+	left: 5%;
+	box-shadow:5px 5px 5px 5px #BBB;
+	text-align: center;
+	line-height: 200%;
+}
+.alltable{
+	top: 5%;
+	left: 5%;
+	width: 90%;
+	text-align: center;
+	background-color: #DDD;
+	box-shadow:5px 5px 5px 5px #BBB;
+	border-radius: 3px;
+}
+.alltable th{
+	background-color: #9C27B0;
+	height: 35px;
+	width: 100px;
+}
+.alltable tr{
+	background-color: #F90;
+	height: 25px;
+}
+/**********************************************所有表格*********************************************/
+
+/**********************************************监控图表*********************************************/
+/* 监控面板 > 图表 CPU，内存，硬盘，网络 */
 .view{
 	width: 45%;
 	height: 45%;
@@ -238,14 +277,32 @@ body{
 	box-shadow:5px 5px 5px 5px #BBB;
 	border-radius: 4px;
 }
-/* 具体内容 */
-.hostList{
-	width: 100%;
-	text-align: center;
-	background-color: #1196F3;
-}
+/**********************************************监控图表*********************************************/
+
+/**********************************************面板表格*********************************************/
+/*#F90,#9C27B0,#1196F3*/
 .addhost_form{
-	padding: 5%;
-	width: 80%;
-	height: 100%;
+	font-size: 14px;
+	top: 5%;
+	left: 5%;
+	width: 90%;
+	height: 8%;
+	border-radius: 4px;
+	background-color: #EEE;
+	box-shadow:5px 5px 5px 5px #BBB;
 }
+.form_input{
+	height: 8%;
+	width: 20%;
+	padding: 0.5%;
+	border-radius: 3px;
+}
+.ok{
+	height: 20%;
+	width: 10%;
+	border-radius: 5px;
+	left: 88%;
+	top: 8%;
+	position: absolute;
+}
+/**********************************************面板表格*********************************************/

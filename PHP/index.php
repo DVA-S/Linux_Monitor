@@ -45,18 +45,10 @@
 		 <!-- 导航栏 -->
 		 <div class="head_div" id="head_div">
             <!--loading（）：点击监控面板按钮 重新触发刷新事件-->
-			 <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="btnOnClick(this);loading();">
-				 <p>监控面板</p>
-			 </div>
-			 <div class="host_btn" title="设备的总览、列表、添加" onclick="btnOnClick(this)">
-				 <p>设备管理</p>
-			 </div>
-			 <div class="checking_btn" title="设备的连通、性能、端口、硬件" onclick="btnOnClick(this)">
-				 <p>自动巡检</p>
-			 </div>
-			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">
-				 <p>用户管理</p>
-			 </div>
+			 <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="btnOnClick(this);loading();">监控面板</div>
+			 <div class="host_btn" title="设备的总览、列表、添加" onclick="btnOnClick(this)">设备管理</div>
+			 <div class="checking_btn" title="设备的连通、性能、端口、硬件" onclick="btnOnClick(this)">自动巡检</div>
+			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">用户管理</div>
 			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this)">系统设置</div>
 		 </div>
 		 <!-- 监控面板 -->
@@ -93,26 +85,38 @@
                      </div>
                  </div>
 				 <div class="host_right_list" id="host_right_list">
-                     <?php echo file_get_contents('http://localhost/php/host/List.php'); ?>
+                     <table class='alltable'>
+                         <div class="alltable_head">
+                             <p>设备列表</p>
+                         </div>
+                         <tr>
+                             <th>主机名</th><th>类型</th><th>地址</th><th>内存</th><th>网卡速率</th><th>硬盘</th>
+                         </tr>
+                         <?php echo file_get_contents('http://localhost/php/host/List.php'); ?>
+                     </table>
+
                  </div>
 				 <div class="host_right_addhost" id="host_right_addhost">
+                     <div class="alltable_head">
+                         <p>添加设备</p>
+                     </div>
                      <div class="addhost_form">
                          <form action="#" method="get">
-                             <label for="ipaddress" style="font-size: 14px;color: #CCCCDC;">IP地址：</label>
+                             <label for="ipaddress" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="ipaddress" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="ipaddress" maxlength="20">
+                             <input id="ipaddress" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddress" maxlength="20">
                              <br />
                              <br />
-                             <label for="hostuser" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
+                             <label for="hostuser" style="position: absolute;top: 8%;left: 30%;">用户名：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="hostuser" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="hostuser" maxlength="20">
+                             <input id="hostuser" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuser" maxlength="20">
                              <br />
                              <br />
-                             <label for="hostpasswd" style="font-size: 14px;color: #CCCCDC;">密&nbsp;&nbsp;&nbsp;码：</label>
-                             <input id="hostpasswd" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="password" name="hostpasswd">
+                             <label for="hostpasswd" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
+                             <input id="hostpasswd" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
                              <br />
                              <br />
-                             <input style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="添加" onclick="addHost()">
+                             <input class="ok" type="button" value="添加" onclick="addHost()">
                          </form>
                      </div>
                  </div>

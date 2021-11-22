@@ -5,7 +5,7 @@ host(){
   if [ $lang = "zh_CN.UTF-8" ]
       then
 	    mysql -uroot -phtzy0000 -e "
-	    insert into bysj.host (host_name,host_type,host_ip,cpu_model,cpu_core,mem_total,swap_total,network_model,network_speed,network_num,disk_num,username,passwd) values
+	    insert into bysj.host (host_name,host_type,host_ip,cpu_model,cpu_core,mem_total,swap_total,network_model,network_speed,network_num,disk_num,disk_all) values
 	    (
 	    `echo \'$(hostname)\'`,
 	    `echo \'$(lsb_release -a 2> /dev/null | grep "Distributor ID:" | awk -F ' ' '{print $3}')\'`,
@@ -17,11 +17,12 @@ host(){
 	    `echo \'$(lspci | grep Ethernet | head -n 1 | awk -F ' ' '{print $4,$5,$6,$7,$8,$9,$10}')\'`,
 	    `echo \'$(ethtool $(ip a | grep "<" | awk -F ":" '{print $2}'| sed 's/^ //g' | sed -n '2p') |  grep -i speed | awk -F ":" '{print $2}' | sed 's/^ //g')\'`,
 	    `echo $(lspci | grep Ethernet | wc -l)`,
-	    `echo $(lsblk -S | grep disk |wc -l)`
+	    `echo $(lsblk -S | grep disk |wc -l)`,
+	    `echo \'$(lsblk | grep disk | awk '{print $4}')\'`
 	    );"
 	    else
 	    mysql -uroot -phtzy0000 -e "
-      	    insert into bysj.host (host_name,host_type,host_ip,cpu_model,cpu_core,mem_total,swap_total,network_model,network_speed,network_num,disk_num,username,passwd) values
+      	    insert into bysj.host (host_name,host_type,host_ip,cpu_model,cpu_core,mem_total,swap_total,network_model,network_speed,network_num,disk_num) values
       	    (
       	    `echo \'$(hostname)\'`,
       	    `echo \'$(lsb_release -a 2> /dev/null | grep "Distributor ID:" | awk -F ' ' '{print $3}')\'`,
@@ -33,7 +34,8 @@ host(){
       	    `echo \'$(lspci | grep Ethernet | head -n 1 | awk -F ' ' '{print $4,$5,$6,$7,$8,$9,$10}')\'`,
       	    `echo \'$(ethtool $(ip a | grep "<" | awk -F ":" '{print $2}'| sed 's/^ //g' | sed -n '2p') |  grep -i speed | awk -F ":" '{print $2}' | sed 's/^ //g')\'`,
       	    `lspci | grep Ethernet | wc -l`,
-      	    `lsblk -S | grep disk | wc -l`
+      	    `lsblk -S | grep disk | wc -l`,
+            `echo \'$(lsblk | grep disk | awk '{print $4}')\'`
       	    );"
 	    fi
 }

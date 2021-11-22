@@ -1,7 +1,7 @@
 #！/bin/bash
 #2021年9月18日
 #检查系统数据库
-#数据库root密码为htzy0000
+#数据库root密码为Esxi0000.
 #创建bysj数据库、内存表、
 #最后修改：2021年9月24日09点26分 获取系统类型
 
@@ -19,9 +19,9 @@ initialization_ubuntu(){
 	expect \"Please enter 0 = LOW, 1 = MEDIUM and 2 = STRONG:\"
 	send \"0\r\"
 	expect \"New password:\"
-	send \"htzy0000\r\"
+	send \"Esxi0000.\r\"
 	expect \"Re-enter new password:\"
-	send \"htzy0000\r\"
+	send \"Esxi0000.\r\"
 	expect \"Do you wish to continue with the password provided?(Press y|Y for Yes, any other key for No) :\"
 	send \"y\r\"
 	expect \"Remove anonymous users?\"
@@ -47,9 +47,9 @@ initialization_centos(){
 	expect \"Set root password? [Y/n]\"
 	send \"Y\r\"
 	expect \"New password:\"
-	send \"htzy0000\r\"
+	send \"Esxi0000.\r\"
 	expect \"Re-enter new password:\"
-	send \"htzy0000\r\"
+	send \"Esxi0000.\r\"
 	expect \"Remove anonymous users?\"
 	send \"y\r\"
 	expect \"Disallow root login remotely?\"
@@ -90,7 +90,7 @@ installDB(){
 #建表
 createTB(){
 	#主机表
-	mysql -uroot -phtzy0000 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists host (
 	id int(255) not null primary key auto_increment,
@@ -104,14 +104,15 @@ createTB(){
 	network_model varchar(100) not null,
 	network_speed varchar(50) not null,
 	network_num int not null,
-	disk_num int not null
+	disk_num int not null,
+	disk_all varchar(10) not null
 	);
 	"
 
 	#内存表
   #修改 -- 2021年11月10日
   #移除mem_cache字段
-	mysql -uroot -phtzy0000 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists memory (
 	id int(10) primary key auto_increment not null,
@@ -124,7 +125,7 @@ createTB(){
 	);
 	"
 	#CPU表
-	mysql -uroot -phtzy0000 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists cpu(
 	id int(10) primary key auto_increment not null,
@@ -134,7 +135,7 @@ createTB(){
 	);"
 
 	#网卡表
-	mysql -uroot -phtzy0000 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists network(
 	id int(10) primary key auto_increment not null,
@@ -146,7 +147,7 @@ createTB(){
 	);"
 
 	#磁盘表
-	mysql -uroot -phtzy0000 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists disk (
 	id int(255) not null primary key auto_increment,
@@ -159,7 +160,7 @@ createTB(){
 	);
 	"
 	#日志表
-	mysql -uroot -phtzy0000 -e "
+	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists logs (
 	id int(255) not null primary key auto_increment,
@@ -174,13 +175,13 @@ db=`mysql --version 2> /dev/null | awk -F ' ' '{print $1}'`
 if [ $db ]
 then
 	#建库、建表
-	mysql -uroot -phtzy0000 -e "create database if not exists bysj character set utf8 collate utf8_bin;"
+	mysql -uroot -pEsxi0000. -e "create database if not exists bysj character set utf8 collate utf8_bin;"
 	createTB
 	#echo "已安装数据库"
 else
 	installDB
 	#建库、建表
-	mysql -uroot -phtzy0000 -e "create database if not exists bysj character set utf8 collate utf8_bin;"
+	mysql -uroot -pEsxi0000. -e "create database if not exists bysj character set utf8 collate utf8_bin;"
 	createTB
 	#echo "未安装数据库"
 fi
