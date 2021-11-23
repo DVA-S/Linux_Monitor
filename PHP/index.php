@@ -80,7 +80,7 @@
 			 <!-- 右侧面板 -->
 			 <div class="host_right">
 				 <div class="host_right_all" id="host_right_all">
-                     <div id="hostall" style="width: 500%;height: 500%;padding-left: 28%;padding-top: 3%;">
+                     <div id="hostall" style="width: 90vh;height: 90vh;padding-left: 28%;padding-top: 3%;">
                          <script src="js/host/hostall.js"></script>
                      </div>
                  </div>
@@ -166,9 +166,9 @@
                              <input id="hostpasswdChecking" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="hostpasswdChecking" name="hostpasswd">
                              <br />
                              <br />
-                             <div class="ok" id="hostDisk" style="position: absolute;top: 51%;left: 20%;background-color: #DDD;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;硬盘</div>
-                             <div class="ok" id="hostNetwork" style="position: absolute;top: 51%;left: 40%;background-color: #DDD;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网络</div>
-                             <div class="ok" id="hostCpu" style="position: absolute;top: 51%;left: 60%;background-color: #DDD;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;处理器</div>
+                             <div class="ok" id="hostDisk" style="position: absolute;top: 51%;left: 20%;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;硬盘</div>
+                             <div class="ok" id="hostNetwork" style="position: absolute;top: 51%;left: 40%;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网络</div>
+                             <div class="ok" id="hostCpu" style="position: absolute;top: 51%;left: 60%;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;处理器</div>
                          </form>
                      </div>
                      <br />

@@ -56,7 +56,7 @@ body{
 	background-color: #FFF;
 	border-radius: 3px;
 	text-align: center;
-	line-height: 200%;
+	line-height: 5vh;
 	box-shadow:2px 2px 2px 2px #000;
 }
 /* 所有按钮 > 导航栏按钮 ：按钮下效果 */
@@ -74,12 +74,13 @@ body{
 	margin-right: 2%;
 	border-radius: 4px;
 	text-align: center;
-	line-height: 280%;
+	line-height: 7vh;
 	box-shadow:2px 2px 2px 2px #000;
 }
 .host_left_all:active,.host_left_list:active,.host_left_addhost:active,.checking_left_link:active,.checking_left_test:active,.checking_left_port:active,.checking_left_device:active,.user_left_webUser:active,.user_left_deviceUser:active,.user_left_addUser:active{
 	box-shadow:inset 2px 2px 2px 2px #000;
 	background-color: #FFF;
+	font-size: 15.5px;
 }
 /**********************************************所有按钮*********************************************/
 
@@ -254,7 +255,7 @@ body{
 	left: 2%;
 	box-shadow:5px 5px 5px 5px #BBB;
 	text-align: center;
-	line-height: 200%;
+	line-height: 5.5vh;
 }
 .alltable{
 	top: 2%;
@@ -320,8 +321,11 @@ input{
 	top: 8%;
 	position: absolute;
 	background-color: #FFF;
+	box-shadow: 2px 2px 2px 2px #bbb;
 }
 .ok:active{
+	box-shadow:inset 1px 1px 1px 1px #000;
 	background-color: #DDD;
+	font-size: 13.5px;
 }
 /**********************************************面板表格*********************************************/
