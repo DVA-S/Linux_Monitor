@@ -159,13 +159,37 @@ function addHost(){
 	);
 }
 //用户管理 -- 添加用户
-function addUser(){
-	var username =$("#adduser").val();
-	var passwd = $("#addpasswd").val();
+function addUserWindows(){
+	document.getElementById("addSysUser").style.display="block";
+}
+function addUserWindowsDev(){
+	document.getElementById("addSysUserDev").style.display="block";
+}
+
+function addUserSys(){
+	var username =$("#username").val();
+	var userAdd =$("#userAdd").val();
+	var userAddPasswd =$("#userAddPasswd").val();
+	var email =$("#email").val();
+	var sex =$("#sex").val();
+	var phone =$("#phone").val();
 	$.get(
-		"php/user/AddUser.php",{"username":username,"passwd":passwd},
-		function(data,status){
-			console.log("数据: \n" + data + "\n状态: " + status);
+		"php/user/AddUser.php",{"username":username,"user":userAdd,"passwd":userAddPasswd,"email":email,"sex":sex,"phone":phone},
+		function(){
+			alert("OK!");
+			document.getElementById('addSysUser').style.display='none';
+		}
+	);
+}
+function addUserDev(){
+	var ipaddr =$("#ipaddressDev").val();
+	var user =$("#userDev").val();
+	var passwd =$("#passwdDev").val();
+	$.get(
+		"php/user/AddDevUser.php",{"ipaddr":ipaddr,"user":user,"passwd":passwd},
+		function(){
+			alert("OK!");
+			document.getElementById('addSysUserDev').style.display='none';
 		}
 	);
 }

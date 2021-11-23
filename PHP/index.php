@@ -291,7 +291,7 @@
 			  	 <!-- 设备用户 -- 主机用户 -->
 			  	 <div class="user_left_deviceUser" title="可登录设备" onclick="btnOnClick(this)">设备用户</div>
 			 	 <!-- 添加用户 -- 系统用户/设备用户 -->
-			  	<div class="user_left_addUser" title="添加某种用户" onclick="btnOnClick(this)">添加用户</div>
+<!--			  	<div class="user_left_addUser" title="添加某种用户" onclick="btnOnClick(this)">添加用户</div>-->
 			  </div>
 			  <!-- 右侧面板 -->
 			  <div class="user_right">
@@ -305,6 +305,41 @@
                          </tr>
                          <?php echo file_get_contents('http://localhost/php/user/userList.php'); ?>
                      </table>
+                     <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;" onclick="addUserWindows()">添加用户</button>
+                     <div id="addSysUser" class="floatWindows">
+                         <form class="addWindows" style="height: 85%;">
+                             <h4 align="center">添加系统用户</h4>
+                             <label for="username" style="position: absolute;top: 7%;left: 22%;">姓&nbsp;&nbsp;&nbsp;名：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="username" style="position: absolute;top: 8%;left: 33%;" type="text" name="username" maxlength="20">
+                             <br>
+                             <br>
+                             <label for="userAdd" style="position: absolute;top: 22%;left: 22%;">用户名：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="userAdd" style="position: absolute;top: 23%;left: 33%;" type="text" name="userAdd" maxlength="20">
+                             <br>
+                             <br>
+                             <label for="userAddPasswd" style="position: absolute;top: 37%;left: 22%;">密&nbsp;&nbsp;&nbsp;码：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="userAddPasswd" style="position: absolute;top: 38%;left: 33%;" type="password" name="userAddPasswd" maxlength="20">
+                             <br>
+                             <br>
+                             <label for="email" style="position: absolute;top: 52%;left: 22%;">邮&nbsp;&nbsp;&nbsp;箱：</label>
+                             <input id="email" style="position: absolute;top: 53%;left: 33%;" type="email" name="email">
+                             <br>
+                             <br>
+                             <label for="sex" style="position: absolute;top: 67%;left: 22%;">性&nbsp;&nbsp;&nbsp;别：</label>
+                             <input id="sex" style="position: absolute;top: 68%;left: 33%;" type="text" name="sex">
+                             <br>
+                             <br>
+                             <label for="phone" style="position: absolute;top: 82%;left: 22%;">电&nbsp;&nbsp;&nbsp;话：</label>
+                             <input id="phone" style="position: absolute;top: 83%;left: 33%;" type="text" name="phone">
+                             <br>
+                             <br>
+                             <div class="floatWindowsBtn ok" onclick="addUserSys()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
+                             <div class="floatWindowsBtn ok" onclick="function guanbi(){document.getElementById('addSysUser').style.display='none'} guanbi();" style="left: 30%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭</div>
+                         </form>
+                     </div>
                  </div>
 			  	 <div class="user_right_deviceUser" id="user_right_DeviceUser">
                      <table class='alltable'>
@@ -316,21 +351,31 @@
                          </tr>
                          <?php echo file_get_contents('http://localhost/php/user/devList.php'); ?>
                      </table>
+                     <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;" onclick="addUserWindowsDev()">添加用户</button>
+                     <div id="addSysUserDev" class="floatWindows">
+                         <form class="addWindows" style="height: 85%;">
+                             <h4 align="center">添加设备用户</h4>
+                             <label for="ipaddressDev" style="position: absolute;top: 7%;left: 22%;">IP地址：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="ipaddressDev" style="position: absolute;top: 8%;left: 33%;" type="text" name="ipaddressDev" maxlength="20">
+                             <br>
+                             <br>
+                             <label for="userDev" style="position: absolute;top: 22%;left: 22%;">用户名：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="userDev" style="position: absolute;top: 23%;left: 33%;" type="text" name="userDev" maxlength="20">
+                             <br>
+                             <br>
+                             <label for="passwdDev" style="position: absolute;top: 37%;left: 22%;">密&nbsp;&nbsp;&nbsp;码：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="passwdDev" style="position: absolute;top: 38%;left: 33%;" type="password" name="passwdDev" maxlength="20">
+                             <br>
+                             <br>
+                             <div class="floatWindowsBtn ok" onclick="addUserDev()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
+                             <div class="floatWindowsBtn ok" onclick="function guanbi(){document.getElementById('addSysUserDev').style.display='none'} guanbi();" style="left: 30%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭</div>
+                         </form>
+                     </div>
                  </div>
-			 	 <div class="user_right_addUser" id="user_right_AddUser">
-                     <form action="#" method="get">
-                         <label for="adduser" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
-                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                         <input id="adduser" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="adduser" maxlength="20">
-                         <br />
-                         <br />
-                         <label for="addpasswd" style="font-size: 14px;color: #CCCCDC;">密&nbsp;&nbsp;&nbsp;码：</label>
-                         <input id="addpasswd" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="password" name="addpasswd">
-                         <br />
-                         <br />
-                         <input style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="添加" onclick="addUser()">
-                     </form>
-                 </div>
+
 			  </div>
 		 </div>
 		 

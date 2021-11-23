@@ -179,7 +179,7 @@ createTB(){
   	user varchar(20) not null,
   	passwd varchar(20) not null,
   	email varchar(30)  null,
-  	sex varchar(2) null,
+  	sex varchar(8) null,
   	phone int(255) null
   	);
   	"
