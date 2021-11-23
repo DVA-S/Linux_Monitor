@@ -169,6 +169,31 @@ createTB(){
 	data_time datetime  not null
 	);
 	"
+
+		#系统用户表
+  	mysql -uroot -pEsxi0000. -e "
+  	use bysj;
+  	create table if not exists sysUser (
+  	id int(255) not null primary key auto_increment,
+  	username varchar(20) null,
+  	user varchar(20) not null,
+  	passwd varchar(20) not null,
+  	email varchar(30)  null,
+  	sex varchar(2) null,
+  	phone int(255) null
+  	);
+  	"
+
+  	#设备用户表
+    mysql -uroot -pEsxi0000. -e "
+    use bysj;
+    create table if not exists devUser (
+    id int(255) not null primary key auto_increment,
+    ipaddr varchar(20) null,
+    user varchar(20) not null,
+    passwd varchar(20) not null
+    );
+    "
 }
 
 db=`mysql --version 2> /dev/null | awk -F ' ' '{print $1}'`

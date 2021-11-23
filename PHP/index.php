@@ -40,8 +40,7 @@
 			</div>
             <p style="color: #CCC;position: relative;top: 25%;left: 22.5%;font-size: 14px;">自动化运维与监控系统@2021 by wxk</p>
 		</div>
-		<!-- 主页 -->
-<!--		 <div class="background_color"></div>-->
+
 		 <!-- 导航栏 -->
 		 <div class="head_div" id="head_div">
             <!--loading（）：点击监控面板按钮 重新触发刷新事件-->
@@ -51,6 +50,7 @@
 			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">用户管理</div>
 			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this)">系统设置</div>
 		 </div>
+
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
              <div class="view" id="memory" style="top: 2%;left: 3%;">
@@ -66,6 +66,7 @@
                 <script src="js/panel/disk.js"></script>
              </div>
 		 </div>
+
 		 <!-- 主机管理 -->
 		 <div class="host" id="host">
 			 <!-- 左侧边栏 -->
@@ -94,7 +95,6 @@
                          </tr>
                          <?php echo file_get_contents('http://localhost/php/host/List.php'); ?>
                      </table>
-
                  </div>
 				 <div class="host_right_addhost" id="host_right_addhost">
                      <div class="alltable_head">
@@ -122,7 +122,7 @@
                  </div>
 			 </div>
 		 </div>
-		 
+
 		 <!-- 自动巡检 -->
 		 <div class="checking" id="checking">
 			 <!-- 左侧边栏 -->
@@ -210,8 +210,7 @@
                          </tr>
                      </table>
                  </div>
-
-				 <div class="checking_right_device" id="checking_right_device" style="overflow-y: scroll;width: 106%;">
+				 <div class="checking_right_device" id="checking_right_device" style="overflow-y: scroll;width: 81vw;">
                      <div class="addhost_form">
                          <form action="#" method="get">
                              <label for="ipaddressCheckingDevice" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
@@ -297,10 +296,26 @@
 			  <!-- 右侧面板 -->
 			  <div class="user_right">
 			  	 <div class="user_right_webUser" id="user_right_WebUser">
-                     <?php echo file_get_contents('http://localhost/php/user/userList.php'); ?>
+                     <table class='alltable'>
+                         <div class="alltable_head">
+                             <p>系统用户列表</p>
+                         </div>
+                         <tr>
+                             <th>ID</th><th>姓名</th><th>用户名</th><th>邮箱</th><th>性别</th><th>电话</th>
+                         </tr>
+                         <?php echo file_get_contents('http://localhost/php/user/userList.php'); ?>
+                     </table>
                  </div>
 			  	 <div class="user_right_deviceUser" id="user_right_DeviceUser">
-                     <?php echo file_get_contents('http://localhost/php/user/userList.php'); ?>
+                     <table class='alltable'>
+                         <div class="alltable_head">
+                             <p>设备用户列表</p>
+                         </div>
+                         <tr>
+                             <th>ID</th><th>IP地址</th><th>用户名</th><th>密码</th>
+                         </tr>
+                         <?php echo file_get_contents('http://localhost/php/user/devList.php'); ?>
+                     </table>
                  </div>
 			 	 <div class="user_right_addUser" id="user_right_AddUser">
                      <form action="#" method="get">
@@ -323,6 +338,7 @@
 		 <div class="setup" id="setup">
              <button onclick="loginout()">退出登录</button>
 		 </div>
+
         <!-- 放在页面底部可以读到上面元素的ID值 -->
         <!-- 保持登录一段时间 判定phpSession的值，为1表示已经登录 -->
 <!--        问题：无法重置登录cookie的时间-->

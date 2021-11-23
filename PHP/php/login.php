@@ -10,7 +10,7 @@
     // 设置编码，防止中文乱码
     mysqli_set_charset($con, "utf8");
     //利用数据行数判定登录
-    $stmt = $con->prepare("SELECT count(*) as login_status FROM bysj.user WHERE username = ? and passwd = ?");
+    $stmt = $con->prepare("select count(*) as login_status from bysj.sysUser where user = ? and passwd = ?");
     $stmt->bind_param("ss",$user,$passwd);
     $stmt->bind_result($login_status);
     $stmt->execute();

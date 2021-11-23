@@ -6,26 +6,26 @@
 //$type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 $con = null;
 $id  = null;
-$usernaem = null;
-$passwd = null;
+$username = null;
+$user = null;
+$email = null;
+$sex = null;
+$phone = null;
 
 require_once "../linkDB.php";
 mysqli_select_db($con,"bysj");
 // 设置编码，防止中文乱码
 mysqli_set_charset($con, "utf8");
 //利用数据行数判定登录
-$stmt = $con->prepare("select id,username,passwd from bysj.user;");
-$stmt->bind_result($id,$usernaem,$passwd);
+$stmt = $con->prepare("select id,username,user,email,sex,phone from bysj.sysUser;");
+$stmt->bind_result($id,$username,$user,$email,$sex,$phone);
 $stmt->execute();
-echo "<table border='0' class='hostList' style=''>
-    <tr>
-        <th>ID</th><th>用户名</th><th>密码</th>
-    </tr>";
+
 while($stmt->fetch()){
     echo "
     <tr>
-        <td>$id</td><td>$usernaem</td><td>$passwd</td>
+        <td>$id</td><td>$username</td><td>$user</td><td>$email</td><td>$sex</td><td>$phone</td>
     </tr>";
 }
-echo "</table>";
+
 ?>

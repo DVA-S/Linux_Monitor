@@ -6,30 +6,25 @@
 //$type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 $con = null;
 $id  = null;
-$host_name = null;
-$host_type = null;
-$host_ip = null;
-$cpu_model  = null;
-$cpu_core = null;
-$mem_total = null;
-$swap_total = null;
-$network_model = null;
-$network_speed = null;
-$network_num = null;
-$disk_num = null;
-$disk_all = null;
+$ipaddr = null;
+$username = null;
+$user = null;
+
+
 require_once "../linkDB.php";
 mysqli_select_db($con,"bysj");
 // 设置编码，防止中文乱码
 mysqli_set_charset($con, "utf8");
 //利用数据行数判定登录
-$stmt = $con->prepare("select host_name,host_type,host_ip,mem_total,network_speed,disk_all from bysj.host");
-$stmt->bind_result($host_name,$host_type,$host_ip,$mem_total,$network_speed,$disk_all);
+$stmt = $con->prepare("select id,ipaddr,user,passwd from bysj.devUser;");
+$stmt->bind_result($id,$ipaddr,$username,$user);
 $stmt->execute();
+
 while($stmt->fetch()){
     echo "
     <tr>
-        <td>$host_name</td><td>$host_type</td><td>$host_ip</td><td>$mem_total MB</td><td>$network_speed</td><td>$disk_all</td>
+        <td>$id</td><td>$ipaddr</td><td>$username</td><td>$user</td>
     </tr>";
 }
+
 ?>
