@@ -172,6 +172,12 @@ function addUser(){
 
 //自动巡检 -- 连通性检测ping
 function hostLink(){
+	document.getElementById("alltable").innerHTML="<table class='alltable' id=\"alltable\">\n" +
+		"                         <tr>\n" +
+		"                             <th>主机名</th><th>地址</th><th>延时</th>\n" +
+		"                         </tr>\n" +
+		"                     </table>" +
+		"<img src=\"img/loading.gif\" style=\"position: relative;left: 100%;top: 0;opacity: 0.5;width: 100%;\" />";
 	$.get(
 		"php/checking/hostLink.php",{},
 		function(data){
@@ -182,6 +188,7 @@ function hostLink(){
 
 //自动巡检 -- 性能检测
 function hostPerf(element){
+	document.getElementById("checkingPerf").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;opacity: 0.5;width: 30%;\" />";
 	var go=element.id;
 	console.log(go);
 	var ipaddress =$("#ipaddressChecking").val();
@@ -213,6 +220,7 @@ function hostPerf(element){
 			);
 			break;
 		default:
+			break;
 	}
 }
 

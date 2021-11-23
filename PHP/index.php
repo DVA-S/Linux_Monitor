@@ -147,7 +147,7 @@
                              <th>主机名</th><th>地址</th><th>延时</th>
                          </tr>
                      </table>
-                     <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 90%;box-shadow: 2px 2px 2px 2px #bbb;" onclick="hostLink()">开始检测</button>
+                     <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;" onclick="hostLink()">开始检测</button>
                  </div>
 			 	 <div class="checking_right_test" id="checking_right_test">
                      <div class="addhost_form" style="height: 18%;">
