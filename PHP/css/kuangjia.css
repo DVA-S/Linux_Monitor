@@ -69,16 +69,17 @@ body{
 /* 所有按钮 > 面板按钮 */
 .host_left_all,.host_left_list,.host_left_addhost,.checking_left_link,.checking_left_test,.checking_left_port,.checking_left_device,.user_left_webUser,.user_left_deviceUser,.user_left_addUser{
 	height: 8%;
-	background-color: #FFF;
+	background-color: #DDD;
 	margin-left: 2%;
 	margin-right: 2%;
-	border-radius: 2px;
+	border-radius: 4px;
 	text-align: center;
 	line-height: 280%;
 	box-shadow:2px 2px 2px 2px #000;
 }
 .host_left_all:active,.host_left_list:active,.host_left_addhost:active,.checking_left_link:active,.checking_left_test:active,.checking_left_port:active,.checking_left_device:active,.user_left_webUser:active,.user_left_deviceUser:active,.user_left_addUser:active{
-	box-shadow:inset 2px 2px 2px 2px #285d81;
+	box-shadow:inset 2px 2px 2px 2px #000;
+	background-color: #FFF;
 }
 /**********************************************所有按钮*********************************************/
 
@@ -206,9 +207,10 @@ body{
 }
 /* 内容面板 第二层 > 左侧边栏： 设备管理，自动巡检，用户管理 */
 .host_left,.checking_left,.user_left{
-	width: 20%;
+	width: 15%;
 	height: 100%;
 	background-color: #0d5d98;
+	border-radius: 4px;
 }
 /* 内容面板 第二层 > 左侧边栏 > 按钮： 设备总览/列表/添加、连通性/性能/端口/硬件检测、系统/设备/添加用户 */
 .host_left_all,.user_left_webUser,.checking_left_link{
@@ -229,7 +231,8 @@ body{
 	height: 100%;
 	background-color: #FFF;
 	top: -100%;
-	left: 20%;
+	left: 15%;
+	border-radius: 4px;
 }
 /* 内容面板 第三层 > 右侧面板 > 功能面板 ：设备总览，连通性检测，系统用户 */
 .host_right_all,.user_right_webUser,.checking_right_link,.host_right_list,.user_right_deviceUser,.checking_right_test,.host_right_addhost,.checking_right_port,.user_right_addUser,.checking_right_device{
@@ -247,16 +250,16 @@ body{
 	width:18%;
 	height:6%;
 	border-radius: 0 50px 0 0;
-	top: 5%;
-	left: 5%;
+	top: 2%;
+	left: 2%;
 	box-shadow:5px 5px 5px 5px #BBB;
 	text-align: center;
 	line-height: 200%;
 }
 .alltable{
-	top: 5%;
-	left: 5%;
-	width: 90%;
+	top: 2%;
+	left: 2%;
+	width: 95%;
 	text-align: center;
 	background-color: #DDD;
 	box-shadow:5px 5px 5px 5px #BBB;
@@ -294,9 +297,9 @@ input{
 /*#F90,#9C27B0,#1196F3*/
 .addhost_form{
 	font-size: 14px;
-	top: 5%;
-	left: 5%;
-	width: 90%;
+	top: 2%;
+	left: 2%;
+	width: 96%;
 	height: 8%;
 	border-radius: 4px;
 	background-color: #EEE;

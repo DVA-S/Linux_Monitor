@@ -231,13 +231,37 @@ function hostPort(){
 
 //自动巡检 -- 获取硬件信息
 function hostDevice(){
-	var ipaddress =$("#ipaddressC").val();
-	var username =$("#hostuserC").val();
-	var passwd = $("#hostpasswdC").val();
+	var ipaddress =$("#ipaddressCheckingDevice").val();
+	var username =$("#hostuserCheckingDevice").val();
+	var passwd = $("#hostpasswdCheckingDevice").val();
 	$.get(
-		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd},
+		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,type:"cpu"},
 		function(data){
-			document.getElementById("checking_device").innerHTML=data;
+			document.getElementById("checkingPerfDevice").innerHTML=data;
+		}
+	);
+	$.get(
+		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,type:"mother"},
+		function(data){
+			document.getElementById("checkingPerfDeviceMother").innerHTML=data;
+		}
+	);
+	$.get(
+		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,type:"memory"},
+		function(data){
+			document.getElementById("checkingPerfDeviceMemory").innerHTML=data;
+		}
+	);
+	$.get(
+		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,type:"network"},
+		function(data){
+			document.getElementById("checkingPerfDeviceNetwork").innerHTML=data;
+		}
+	);
+	$.get(
+		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,type:"disk"},
+		function(data){
+			document.getElementById("checkingPerfDeviceDisk").innerHTML=data;
 		}
 	);
 }

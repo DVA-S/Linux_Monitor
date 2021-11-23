@@ -80,7 +80,7 @@
 			 <!-- 右侧面板 -->
 			 <div class="host_right">
 				 <div class="host_right_all" id="host_right_all">
-                     <div id="hostall" style="width: 500%;height: 500%;padding-left: 23%;padding-top: 3%;">
+                     <div id="hostall" style="width: 500%;height: 500%;padding-left: 28%;padding-top: 3%;">
                          <script src="js/host/hostall.js"></script>
                      </div>
                  </div>
@@ -147,10 +147,10 @@
                              <th>主机名</th><th>地址</th><th>延时</th>
                          </tr>
                      </table>
-                     <button class="ok" style="position: absolute;top: 4%;height: 6%;left: 84%;" onclick="hostLink()">开始检测</button>
+                     <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 90%;box-shadow: 2px 2px 2px 2px #bbb;" onclick="hostLink()">开始检测</button>
                  </div>
 			 	 <div class="checking_right_test" id="checking_right_test">
-                     <div class="addhost_form">
+                     <div class="addhost_form" style="height: 18%;">
                          <form action="#" method="get">
                              <label for="ipaddressChecking" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
@@ -211,25 +211,72 @@
                      </table>
                  </div>
 
-				 <div class="checking_right_device" id="checking_right_device" style="overflow:auto;">
-                     <form action="#" method="get">
-                         <label for="ipaddressD" style="font-size: 14px;color: #CCCCDC;">IP地址：</label>
-                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                         <input id="ipaddressD" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="ipaddressD" maxlength="20">
-                         <br />
-                         <br />
-                         <label for="hostuserD" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
-                         <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                         <input id="hostuserD" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="text" name="hostuserD" maxlength="20">
-                         <br />
-                         <br />
-                         <label for="hostpasswdD" style="font-size: 14px;color: #CCCCDC;">密&nbsp;&nbsp;&nbsp;码：</label>
-                         <input id="hostpasswdD" style="height: 5%;width: 40%;padding: 1% 2%;border-radius: 5px;" type="password" name="hostpasswdD">
-                         <br />
-                         <br />
-                         <input class="hostDevice" style="height: 5%;width: 15%;padding: 1% 2%;border-radius: 5px;left: 36%;" type="button" value="硬件信息" onclick="hostDevice()">
-                     </form>
-                     <p id="checking_device"></p>
+				 <div class="checking_right_device" id="checking_right_device" style="overflow-y: scroll;width: 106%;">
+                     <div class="addhost_form">
+                         <form action="#" method="get">
+                             <label for="ipaddressCheckingDevice" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="ipaddressCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddressCheckingDevice" maxlength="20">
+                             <br />
+                             <br />
+                             <label for="hostuserCheckingDevice" style="position: absolute;top: 8%;left: 30%;">用户名：</label>
+                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
+                             <input id="hostuserCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuserCheckingDevice" maxlength="20">
+                             <br />
+                             <br />
+                             <label for="hostpasswdCheckingDevice" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
+                             <input id="hostpasswdCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="hostpasswdCheckingDevice" name="hostpasswd">
+                             <br />
+                             <br />
+                             <div class="ok" id="hostDisk"  onclick="hostDevice()">&nbsp;&nbsp;&nbsp;&nbsp;设备检测</div>
+                         </form>
+                     </div>
+                     <br />
+                     <br />
+                     <table class='alltable' id="checkingPerfDevice">
+                         <div class="alltable_head">
+                             <p>CPU</p>
+                         </div>
+                         <tr>
+                             <th>CPU核心</th><th>CPU型号</th><th>CPU频率</th>
+                         </tr>
+                     </table>
+                     <br />
+                     <table class='alltable' id="checkingPerfDeviceMother">
+                         <div class="alltable_head">
+                             <p>主板</p>
+                         </div>
+                         <tr>
+                             <th>主板型号</th>
+                         </tr>
+                     </table>
+                     <br />
+                     <table class='alltable' id="checkingPerfDeviceMemory">
+                         <div class="alltable_head">
+                             <p>内存</p>
+                         </div>
+                         <tr>
+                             <th>主板型号</th>
+                         </tr>
+                     </table>
+                     <br />
+                     <table class='alltable' id="checkingPerfDeviceNetwork">
+                         <div class="alltable_head">
+                             <p>网卡</p>
+                         </div>
+                         <tr>
+                             <th>网卡型号</th><th>网卡速度</th>
+                         </tr>
+                     </table>
+                     <br />
+                     <table class='alltable' id="checkingPerfDeviceDisk">
+                         <div class="alltable_head">
+                             <p>硬盘</p>
+                         </div>
+                         <tr>
+                             <th>主板型号</th>
+                         </tr>
+                     </table>
                  </div>
 			 </div>
 		 </div>
