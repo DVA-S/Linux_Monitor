@@ -10,8 +10,6 @@ body{
 	width: 100%;
 	background-size: 500%;
 	overflow: hidden;
-	/* 禁止文字选中 */
-	-webkit-user-select:none;
 }
 /* 定位方式 */
 *{
@@ -58,6 +56,8 @@ body{
 	text-align: center;
 	line-height: 5vh;
 	box-shadow:2px 2px 2px 2px #000;
+	/* 禁止文字选中 */
+	-webkit-user-select:none;
 }
 /* 所有按钮 > 导航栏按钮 ：按钮下效果 */
 .host_btn:active, .user_btn:active, .panel_btn:active, .setup_btn:active, .checking_btn:active, .submit:active{
@@ -76,6 +76,8 @@ body{
 	text-align: center;
 	line-height: 7vh;
 	box-shadow:2px 2px 2px 2px #000;
+	/* 禁止文字选中 */
+	-webkit-user-select:none;
 }
 .host_left_all:active,.host_left_list:active,.host_left_addhost:active,.checking_left_link:active,.checking_left_test:active,.checking_left_port:active,.checking_left_device:active,.user_left_webUser:active,.user_left_deviceUser:active,.user_left_addUser:active{
 	box-shadow:inset 2px 2px 2px 2px #000;

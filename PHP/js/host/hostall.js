@@ -11,9 +11,7 @@ runHostCount();
 function hostcountback(){
     chartDom = document.getElementById('hostall');
     myChart = echarts.init(chartDom);
-    var option;
-
-    option = {
+    var option = {
         tooltip: {
             trigger: 'item'
         },
@@ -54,6 +52,5 @@ function hostcountback(){
             }
         ]
     };
-
     option && myChart.setOption(option);
 }
