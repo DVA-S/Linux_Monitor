@@ -366,9 +366,28 @@ input{
 /**********************************************添加表单*********************************************/
 
 /**********************************************系统设置*********************************************/
-.setup_package,.setup_about,.setup_clock,.setup_exit{
-	width: 25%;
+/*外围框架*/
+.setup_package, .setup_about, .setup_clock, .setup_exit{
+	width: 20%;
+	height: 75%;
+	border-radius: 3%;
+	background-color: #1196F3;
+	box-shadow: 4px 4px 4px 4px #BBB;
+}
+.sysTitle{
 	height: 100%;
-	border-radius: 4px;
+	width: 100%;
+	border-radius: 3%;
+}
+.sysBody{
+	text-shadow: #888 2px 2px 3px;
+	display: none;
+	font-size: 14px;
+	background-color: rgb(255 231 91);
+	height: 100%;
+	width: 92%;
+	top: -100%;
+	border-radius: 3%;
+	padding-left: 8%;
 }
 /**********************************************系统设置*********************************************/

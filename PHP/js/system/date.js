@@ -25,7 +25,7 @@ function runDate(){
         seconds = "0"+seconds;
     }
     //var newDate = year+"年"+month+"月"+date+"日"+week+hour+":"+minutes+":"+seconds;
-    document.getElementById("clock").innerHTML = year+"年"+month+"月"+date+"日"+week+"<br>"+hour+":"+minutes+":"+seconds;
+    document.getElementById("clock").innerHTML = year+"年"+month+"月"+date+"日"+week+"<br>"+"<br>"+hour+":"+minutes+":"+seconds;
     setTimeout('runDate()',1000);
 }
 runDate();

@@ -380,33 +380,31 @@ E
 		 </div>
 		 
 		 <!-- 系统设置 -->
-		 <div class="setup" id="setup" style="border-radius: 10%;">
+		 <div class="setup" id="setup">
         <!--  组件信息 -->
              <div onmouseover="(function (){
                     document.getElementById('package_info').style.display='block';
                     document.getElementById('package_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';})()"
-                  onmouseout="(function (){document.getElementById('package_info').style.display='block';
+                  onmouseout="(function (){
+                    document.getElementById('package_info').style.display='block';
                     document.getElementById('package_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
-                  class="setup_package"
+                  class="setup_package" style="left: 6%;top: 10%;"
              >
                 <!-- 标题 -->
-                 <div style="background-color: #4add60;height: 100%;width: 100%;border-radius: 10%;">
-                    <h1 style="writing-mode:tb-rl;top: 33vh;left: 22vh;">组  件  信  息</h1>
+                 <div class="sysTitle" style="background-color: #4add60;">
+                    <h2 style="writing-mode:tb-rl;top: 22vh;left: 8vw;">组  件  信  息</h2>
                  </div>
                 <!-- 内容 -->
-                 <div id="package_info" style="display: none;font-size: 14px;background-color: rgb(255 231 91);height: 100%;width: 90%;padding-left: 10%;top: -100%;border-radius: 10%;">
+                 <div class="sysBody" id="package_info">
                     <code style="text-shadow: #888 2px 2px 3px;">
                         <?php
                         echo "<br>";
                         echo "<br>";
                         echo "<h2 style='text-align: center;left:-5%;'>组件信息</h2>";
                         echo "<br>";
-                        echo "<br>";
                         echo `echo "<b>PHP版本：</b><br>" && php -v | sed -n '1p' | sed 's/$/<br>/g'`;
                         echo "<br>";
-                        echo "<br>";
                         echo `echo "<b>Apache2版本：</b><br>" && apache2 -v | sed 's/$/<br>/g'`;
-                        echo "<br>";
                         echo "<br>";
                         echo `echo "<b>MySQL版本：</b><br>" && mysql --version`;
                         ?>
@@ -417,28 +415,64 @@ E
              <div onmouseover="(function (){
                     document.getElementById('clock_info').style.display='block';
                     document.getElementById('clock_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';})()"
-                  onmouseout="(function (){document.getElementById('clock_info').style.display='block';
+                  onmouseout="(function (){
+                    document.getElementById('clock_info').style.display='block';
                     document.getElementById('clock_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
-                     class="setup_clock" style="left: 25%;top: -100%;"
+                     class="setup_clock" style="left: 29%;top: -65%;"
              >
                 <!-- 标题 -->
-                 <div style="background-color: #813cbd;height: 100%;width: 100%;border-radius: 10%;">
-                     <h1 style="writing-mode:tb-rl;top: 33vh;left: 22vh;">系  统  时  间</h1>
+                 <div class="sysTitle" style="background-color: #813cbd;height: 100%;width: 100%;border-radius: 3%;">
+                     <h2 style="writing-mode:tb-rl;top: 22vh;left: 8vw;">系  统  时  间</h2>
                  </div>
                  <!-- 内容 -->
-                 <div id="clock_info" style="display: none;font-size: 14px;background-color: rgb(255 231 91);height: 100%;width: 90%;padding-left: 10%;top: -100%;border-radius: 10%;">
+                 <div class="sysBody" id="clock_info">
                      <br><br>
                      <h2 style='text-align: center;left:-5%;'>系统时间</h2>
-                     <p id="clock"></p>
+                     <br><br>
+                     <h2 id="clock" style=""></h2>
                      <script src="js/system/date.js"></script>
                  </div>
-
              </div>
              <!--  关于 -->
-             <div class="setup_about" style="background-color: #FFF;left: 50%;top: -200%;">关于</div>
+             <div onmouseover="(function (){
+                    document.getElementById('about_info').style.display='block';
+                    document.getElementById('about_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';})()"
+                  onmouseout="(function (){
+                    document.getElementById('about_info').style.display='block';
+                    document.getElementById('about_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
+                     class="setup_about" style="left: 52%;top: -140%;"
+             >
+                 <!-- 标题 -->
+                 <div class="sysTitle" style="background-color: #4add60;height: 100%;width: 100%;border-radius: 3%;">
+                     <h2 style="writing-mode:tb-rl;top: 22vh;left: 8vw;">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于</h2>
+                 </div>
+                 <!-- 内容 -->
+                 <div class="sysBody" id="about_info">
+                     <br><br>
+                     <h2 style='text-align: center;left:-5%;'>关  于</h2>
+                     <br><br>
+                     <p>阿巴阿巴……</p>
+                 </div>
+             </div>
              <!--  退出登录 -->
-             <div class="setup_exit" style="background-color: #DDD;left: 75%;top: -300%;">
-                 <button onclick="loginout()">退出登录</button>
+             <div onmouseover="(function (){
+                    document.getElementById('exit_info').style.display='block';
+                    document.getElementById('exit_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';})()"
+                  onmouseout="(function (){
+                    document.getElementById('exit_info').style.display='block';
+                    document.getElementById('exit_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
+                     class="setup_exit" style="left: 75%;top: -215%;">
+                 <!-- 标题 -->
+                 <div class="sysTitle" style="background-color: #813cbd;height: 100%;width: 100%;border-radius: 3%;">
+                     <h2 style="writing-mode:tb-rl;top: 22vh;left: 8vw;">退&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出</h2>
+                 </div>
+                 <!-- 内容 -->
+                 <div class="sysBody" id="exit_info">
+                     <br><br>
+                     <h2 style='text-align: center;left:-5%;'>退  出</h2>
+                     <br><br>
+                     <button onclick="loginout()">退出登录</button>
+                 </div>
              </div>
 		 </div>
         <!-- 放在页面底部可以读到上面元素的ID值 -->
