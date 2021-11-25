@@ -94,7 +94,7 @@ jQuery：
     $.get()
     $.post()
 使用位置：
-    在bysj-for-wxk/js/kuangjia.js文件中，读取php接口数据
+    在bysj-for-wxk/js/kuangjia.js文件中，用于前端操作对应的后台数据交互
 ```
 Echarts:
 ```

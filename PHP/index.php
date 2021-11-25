@@ -50,7 +50,7 @@
 			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">用户管理</div>
 			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this)">系统设置</div>
 		 </div>
-
+E
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
              <div class="view" id="memory" style="top: 2%;left: 3%;">
@@ -380,10 +380,67 @@
 		 </div>
 		 
 		 <!-- 系统设置 -->
-		 <div class="setup" id="setup">
-             <button onclick="loginout()">退出登录</button>
-		 </div>
+		 <div class="setup" id="setup" style="border-radius: 10%;">
+        <!--  组件信息 -->
+             <div onmouseover="(function (){
+                    document.getElementById('package_info').style.display='block';
+                    document.getElementById('package_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';})()"
+                  onmouseout="(function (){document.getElementById('package_info').style.display='block';
+                    document.getElementById('package_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
+                  class="setup_package"
+             >
+                <!-- 标题 -->
+                 <div style="background-color: #4add60;height: 100%;width: 100%;border-radius: 10%;">
+                    <h1 style="writing-mode:tb-rl;top: 33vh;left: 22vh;">组  件  信  息</h1>
+                 </div>
+                <!-- 内容 -->
+                 <div id="package_info" style="display: none;font-size: 14px;background-color: rgb(255 231 91);height: 100%;width: 90%;padding-left: 10%;top: -100%;border-radius: 10%;">
+                    <code style="text-shadow: #888 2px 2px 3px;">
+                        <?php
+                        echo "<br>";
+                        echo "<br>";
+                        echo "<h2 style='text-align: center;left:-5%;'>组件信息</h2>";
+                        echo "<br>";
+                        echo "<br>";
+                        echo `echo "<b>PHP版本：</b><br>" && php -v | sed -n '1p' | sed 's/$/<br>/g'`;
+                        echo "<br>";
+                        echo "<br>";
+                        echo `echo "<b>Apache2版本：</b><br>" && apache2 -v | sed 's/$/<br>/g'`;
+                        echo "<br>";
+                        echo "<br>";
+                        echo `echo "<b>MySQL版本：</b><br>" && mysql --version`;
+                        ?>
+                     </code>
+                 </div>
+             </div>
+             <!--  时间 -->
+             <div onmouseover="(function (){
+                    document.getElementById('clock_info').style.display='block';
+                    document.getElementById('clock_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';})()"
+                  onmouseout="(function (){document.getElementById('clock_info').style.display='block';
+                    document.getElementById('clock_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
+                     class="setup_clock" style="left: 25%;top: -100%;"
+             >
+                <!-- 标题 -->
+                 <div style="background-color: #813cbd;height: 100%;width: 100%;border-radius: 10%;">
+                     <h1 style="writing-mode:tb-rl;top: 33vh;left: 22vh;">系  统  时  间</h1>
+                 </div>
+                 <!-- 内容 -->
+                 <div id="clock_info" style="display: none;font-size: 14px;background-color: rgb(255 231 91);height: 100%;width: 90%;padding-left: 10%;top: -100%;border-radius: 10%;">
+                     <br><br>
+                     <h2 style='text-align: center;left:-5%;'>系统时间</h2>
+                     <p id="clock"></p>
+                     <script src="js/system/date.js"></script>
+                 </div>
 
+             </div>
+             <!--  关于 -->
+             <div class="setup_about" style="background-color: #FFF;left: 50%;top: -200%;">关于</div>
+             <!--  退出登录 -->
+             <div class="setup_exit" style="background-color: #DDD;left: 75%;top: -300%;">
+                 <button onclick="loginout()">退出登录</button>
+             </div>
+		 </div>
         <!-- 放在页面底部可以读到上面元素的ID值 -->
         <!-- 保持登录一段时间 判定phpSession的值，为1表示已经登录 -->
 <!--        问题：无法重置登录cookie的时间-->
