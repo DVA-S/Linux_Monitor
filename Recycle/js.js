@@ -1,6 +1,5 @@
 //此处为弃用的代码
 
-
 // var xmlHttpHostCountUbuntu = new XMLHttpRequest();
 // var xmlHttpHostCountCentOS = new XMLHttpRequest();
 // var xmlHttpHostCountMySQL = new XMLHttpRequest();

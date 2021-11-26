@@ -7,14 +7,15 @@
 		<script type="text/javascript" src="js/echars.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Inspection and Monitoring</title>
-
 	</head>
     <!-- 根据session判断是否登录 -->
     <!-- session_start()函数前不能有任何代码输出到浏览器，最好加在页面头部，或者先用ob_start()函数打开输出缓冲区。-->
     <?php
         session_start();
         $status = $_SESSION["loginStatus"];
-//        echo "<script>console.log('loginStatus:',{$_SESSION['loginStatus']});</script>";
+        //离开时显示的面板
+        $view = $_COOKIE['panelView'];
+//        echo "<script>console.log('loginStatus:',{$view});</script>";
     ?>
 	<body>
 		<!-- 登录页 -->
@@ -336,7 +337,7 @@
                              <input id="phone" style="position: absolute;top: 83%;left: 33%;" type="text" name="phone" maxlength="20">
                              <br>
                              <br>
-                             <div class="floatWindowsBtn ok" onclick="addUserSys()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
+                             <div class="floatWindowsBtn ok" onclick="addUserSys();location.reload();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
                              <div class="floatWindowsBtn ok" onclick="(function (){document.getElementById('addSysUser').style.display='none';})()" style="left: 30%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭</div>
                          </form>
                      </div>
@@ -370,7 +371,7 @@
                              <input id="passwdDev" style="position: absolute;top: 38%;left: 33%;" type="password" name="passwdDev" maxlength="20">
                              <br>
                              <br>
-                             <div class="floatWindowsBtn ok" onclick="addUserDev()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
+                             <div class="floatWindowsBtn ok" onclick="addUserDev();location.reload();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
                              <div class="floatWindowsBtn ok" onclick="(function (){document.getElementById('addSysUserDev').style.display='none';
                              })();" style="left: 30%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭</div>
                          </form>
@@ -494,6 +495,25 @@
 		        document.getElementById('panel').style.display='block';
 		        document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
 		 		</script>";
+                switch ($view){
+                    case 0:
+                          echo "<script>lastView($view);</script>";
+                        break;
+                    case 1:
+                        echo "<script>lastView($view);</script>";
+                        break;
+                    case 2:
+                        echo "<script>lastView($view);</script>";
+                        break;
+                    case 3:
+                        echo "<script>lastView($view);</script>";
+                        break;
+                    case 4:
+                        echo "<script>lastView($view);</script>";
+                        break;
+                    default:
+                        break;
+                }
             }
         ?>
 	</body>
