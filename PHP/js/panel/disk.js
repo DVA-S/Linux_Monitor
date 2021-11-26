@@ -104,7 +104,6 @@ runDisk();
 
 
 
-
 // function disk(){
 //     $.get(
 //         "php/panel/disk.php",{"type":"diskwrite"},
