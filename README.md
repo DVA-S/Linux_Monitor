@@ -106,7 +106,11 @@ Echarts:
         https://echarts.apache.org/examples/zh/editor.html?c=line-marker
     图表2：堆叠面积图
         https://echarts.apache.org/examples/zh/editor.html?c=area-stack
+    图表3：环形图
+        https://echarts.apache.org/examples/zh/editor.html?c=pie-doughnut
 使用位置：
-    在bysj-for-wxk/js/panel/*.js文件中，读取php接口数据
-    在bysj-for-wxk/js/host/hostall.js文件中，读取php接口数据
+    图表1,2:
+        在bysj-for-wxk/js/panel/*.js文件中，读取php接口数据
+    图表3:    
+        在bysj-for-wxk/js/host/hostall.js文件中，读取php接口数据
 ```
