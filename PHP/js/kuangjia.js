@@ -378,6 +378,7 @@ function loginout(){
 }
 /* - ---------------------------------------------------------------------------------单击事件----------------------------------------------------------------------------------- */
 
+/* - ---------------------------------------------------------------------------------监控面板----------------------------------------------------------------------------------- */
 //刷新事件&加载动画（实时刷新可以传入一个时间间隔参数）
 function loading(){
 	var windowsSizeNoView = -document.body.clientWidth+'px';
@@ -396,6 +397,115 @@ function loading(){
 		}
 	},15000);
 }
+
+//图表
+function viewCharts(panelId,Atitle,Btitle,unit){
+	//报错：There is a chart instance already initialized on the dom.解决方法0.1
+	if(chartDom != null && chartDom != "" && chartDom != undefined){
+		echarts.dispose(document.getElementById(panelId))
+	}
+	// if(xmlHttpdCpuTime.readyState == 4){
+	//     if(xmlHttpdCpuTime.status == 200){
+	// responseText解析：https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/responseText
+	switch (panelId){
+		case 'memory':
+			date = datatime = xmlHttpMemoryTime.responseText.split(",");
+			dataA = memused = xmlHttpMemoryUsed.responseText.split(",");
+			dataB = memfree = xmlHttpMemoryFree.responseText.split(",");
+			break;
+		case 'disk':
+			date = datatime = xmlHttpDiskTime.responseText.split(",");
+			dataA =diskwrite = xmlHttpDiskWrite.responseText.split(",");
+			dataB =diskread = xmlHttpDiskRead.responseText.split(",");
+			break;
+		case 'network':
+			date = datatime = xmlHttpdNetworkTime.responseText.split(",");
+			dataA =diskwrite = xmlHttpNetworkUp.responseText.split(",");
+			dataB =diskread = xmlHttpNetworkDown.responseText.split(",");
+			break;
+		case 'cpu':
+			date = xmlHttpdCpuTime.responseText.split(",");
+			dataA = xmlHttpCpuUsed.responseText.split(",");
+			dataB = xmlHttpCpuFree.responseText.split(",");
+			break;
+		default:
+			break;
+	}
+
+	//There is a chart instance already initialized on the dom.解决方法0.1
+	chartDom = document.getElementById(panelId);
+	myChart = echarts.init(chartDom);
+	var option = {
+		animation: false,
+		title: {
+			text: panelId
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {
+				type: 'cross',
+				label: {
+					backgroundColor: '#6a7985'
+				}
+			}
+		},
+		legend: {
+			data: [Atitle, Btitle]
+		},
+		toolbox: {
+			feature: {
+				saveAsImage: {}
+			}
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '1%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				boundaryGap: false,
+				data: [date[0],date[1],date[2],date[3],date[4],date[5],date[6],date[7],date[8],date[9],date[10],date[11],date[12],date[13],date[14],date[15],date[16],date[17],date[18],date[19]]
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				axisLabel: {
+					formatter: '{value} '+unit
+				}
+			}
+		],
+		series: [
+			{
+				name: Atitle,
+				type: 'line',
+				stack: 'Total',
+				areaStyle: {},
+				emphasis: {
+					focus: 'series'
+				},
+				data: [dataA[0],dataA[1],dataA[2],dataA[3],dataA[4],dataA[5],dataA[6],dataA[7],dataA[8],dataA[9],dataA[10],dataA[11],dataA[12],dataA[13],dataA[14],dataA[15],dataA[16],dataA[17],dataA[18],dataA[19]]
+			},
+			{
+				name: Btitle,
+				type: 'line',
+				stack: 'Total',
+				areaStyle: {},
+				emphasis: {
+					focus: 'series'
+				},
+				data: [dataB[0],dataB[1],dataB[2],dataB[3],dataB[4],dataB[5],dataB[6],dataB[7],dataB[8],dataB[9],dataB[10],dataB[11],dataB[12],dataB[13],dataB[14],dataB[15],dataB[16],dataB[17],dataB[18],dataB[19]]
+			}
+		]
+	};
+	option && myChart.setOption(option);
+}
+/* - ---------------------------------------------------------------------------------监控面板----------------------------------------------------------------------------------- */
+
+
 
 
 
