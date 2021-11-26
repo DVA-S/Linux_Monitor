@@ -97,13 +97,13 @@ jQuery：
     在bysj-for-wxk/js/kuangjia.js文件中，用于前端操作对应的后台数据交互
 ```
 Echarts:
+~~图表1：未来一周气温变化
+https://echarts.apache.org/examples/zh/editor.html?c=line-marker~~
 ```
 版本：
     v5.2.2  2021-11-01
     
 利用点：
-    图表1：未来一周气温变化
-        https://echarts.apache.org/examples/zh/editor.html?c=line-marker
     图表2：堆叠面积图
         https://echarts.apache.org/examples/zh/editor.html?c=area-stack
     图表3：环形图

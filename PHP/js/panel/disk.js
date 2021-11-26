@@ -8,7 +8,7 @@ function runDisk(){
     xmlHttpDiskRead = pgGet("http://192.168.157.128/php/panel/disk.php?type=diskread",diskback);
 }
 function diskback(){
-    viewCharts('disk',"读速度","写速度","KB/s");
+    viewCharts('disk',"写速度","读速度","KB/s");
 }
 // function diskback(){
 //     if(chartDom != null && chartDom != "" && chartDom != undefined){
