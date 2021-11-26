@@ -41,6 +41,15 @@ function hostcountback(){
                         fontWeight: 'bold'
                     }
                 },
+                itemStyle: {
+                    normal: {
+                        // 设置扇形的阴影
+                        shadowBlur: 8,
+                        shadowColor: '#000',
+                        shadowOffsetX: 8,
+                        shadowOffsetY: 8
+                    }
+                },
                 labelLine: {
                     show: false
                 },
