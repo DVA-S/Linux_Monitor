@@ -341,3 +341,18 @@ function pgGet(url,back){
 	xmlHttp.send(null);
 	return xmlHttp;
 }
+
+//鼠标右击
+// function rightClick(){
+// 	//这一步是为了阻止右击时系统默认的弹出框
+// 	document.getElementById("exit_info").oncontextmenu = function(e){
+// 		e.preventDefault();
+// 	};
+// 	//在这里你就可以自己定义事件的函数啦
+// 	document.getElementById("exit_info").onmouseup=function(oEvent) {
+// 		if (!oEvent) oEvent=window.event;
+// 		if (oEvent.button==2) {
+// 			alert('鼠标右击了')
+// 		}
+// 	}
+// }

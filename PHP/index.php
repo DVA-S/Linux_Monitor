@@ -50,7 +50,7 @@
 			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">用户管理</div>
 			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this)">系统设置</div>
 		 </div>
-E
+
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
              <div class="view" id="memory" style="top: 2%;left: 3%;">
@@ -296,7 +296,7 @@ E
 			  <!-- 右侧面板 -->
 			  <div class="user_right">
 			  	 <div class="user_right_webUser" id="user_right_WebUser">
-                     <table class='alltable'>
+                     <table id="alltable" class='alltable'>
                          <div class="alltable_head">
                              <p>系统用户列表</p>
                          </div>
@@ -307,7 +307,7 @@ E
                      </table>
                      <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;" onclick="addUserWindows()">添加用户</button>
                      <div id="addSysUser" class="floatWindows">
-                         <form class="addWindows" style="height: 85%;">
+                         <form class="addWindows">
                              <h4 align="center">添加系统用户</h4>
                              <label for="username" style="position: absolute;top: 7%;left: 22%;">姓&nbsp;&nbsp;&nbsp;名：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
@@ -325,19 +325,19 @@ E
                              <br>
                              <br>
                              <label for="email" style="position: absolute;top: 52%;left: 22%;">邮&nbsp;&nbsp;&nbsp;箱：</label>
-                             <input id="email" style="position: absolute;top: 53%;left: 33%;" type="email" name="email">
+                             <input id="email" style="position: absolute;top: 53%;left: 33%;" type="email" name="email" maxlength="20">
                              <br>
                              <br>
                              <label for="sex" style="position: absolute;top: 67%;left: 22%;">性&nbsp;&nbsp;&nbsp;别：</label>
-                             <input id="sex" style="position: absolute;top: 68%;left: 33%;" type="text" name="sex">
+                             <input id="sex" style="position: absolute;top: 68%;left: 33%;" type="text" name="sex" maxlength="20">
                              <br>
                              <br>
                              <label for="phone" style="position: absolute;top: 82%;left: 22%;">电&nbsp;&nbsp;&nbsp;话：</label>
-                             <input id="phone" style="position: absolute;top: 83%;left: 33%;" type="text" name="phone">
+                             <input id="phone" style="position: absolute;top: 83%;left: 33%;" type="text" name="phone" maxlength="20">
                              <br>
                              <br>
                              <div class="floatWindowsBtn ok" onclick="addUserSys()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
-                             <div class="floatWindowsBtn ok" onclick="function guanbi(){document.getElementById('addSysUser').style.display='none'} guanbi();" style="left: 30%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭</div>
+                             <div class="floatWindowsBtn ok" onclick="(function (){document.getElementById('addSysUser').style.display='none';})()" style="left: 30%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭</div>
                          </form>
                      </div>
                  </div>
@@ -353,7 +353,7 @@ E
                      </table>
                      <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;" onclick="addUserWindowsDev()">添加用户</button>
                      <div id="addSysUserDev" class="floatWindows">
-                         <form class="addWindows" style="height: 85%;">
+                         <form class="addWindows">
                              <h4 align="center">添加设备用户</h4>
                              <label for="ipaddressDev" style="position: absolute;top: 7%;left: 22%;">IP地址：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
@@ -371,7 +371,8 @@ E
                              <br>
                              <br>
                              <div class="floatWindowsBtn ok" onclick="addUserDev()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
-                             <div class="floatWindowsBtn ok" onclick="function guanbi(){document.getElementById('addSysUserDev').style.display='none'} guanbi();" style="left: 30%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭</div>
+                             <div class="floatWindowsBtn ok" onclick="(function (){document.getElementById('addSysUserDev').style.display='none';
+                             })();" style="left: 30%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭</div>
                          </form>
                      </div>
                  </div>
@@ -392,15 +393,14 @@ E
              >
                 <!-- 标题 -->
                  <div class="sysTitle" style="background-color: #4add60;">
-                    <h2 style="writing-mode:tb-rl;top: 22vh;left: 8vw;">组  件  信  息</h2>
+                    <h2 class="sysTitleTitle">组  件  信  息</h2>
                  </div>
                 <!-- 内容 -->
                  <div class="sysBody" id="package_info">
+                     <br><br>
+                     <h2 class="sysBodyTitle">组件信息</h2>
                     <code style="text-shadow: #888 2px 2px 3px;">
                         <?php
-                        echo "<br>";
-                        echo "<br>";
-                        echo "<h2 style='text-align: center;left:-5%;'>组件信息</h2>";
                         echo "<br>";
                         echo `echo "<b>PHP版本：</b><br>" && php -v | sed -n '1p' | sed 's/$/<br>/g'`;
                         echo "<br>";
@@ -422,12 +422,12 @@ E
              >
                 <!-- 标题 -->
                  <div class="sysTitle" style="background-color: #813cbd;height: 100%;width: 100%;border-radius: 3%;">
-                     <h2 style="writing-mode:tb-rl;top: 22vh;left: 8vw;">系  统  时  间</h2>
+                     <h2 class="sysTitleTitle">系  统  时  间</h2>
                  </div>
                  <!-- 内容 -->
                  <div class="sysBody" id="clock_info">
                      <br><br>
-                     <h2 style='text-align: center;left:-5%;'>系统时间</h2>
+                     <h2 class="sysBodyTitle">系统时间</h2>
                      <br><br>
                      <h2 id="clock" style=""></h2>
                      <script src="js/system/date.js"></script>
@@ -444,12 +444,12 @@ E
              >
                  <!-- 标题 -->
                  <div class="sysTitle" style="background-color: #4add60;height: 100%;width: 100%;border-radius: 3%;">
-                     <h2 style="writing-mode:tb-rl;top: 22vh;left: 8vw;">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于</h2>
+                     <h2 class="sysTitleTitle">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于</h2>
                  </div>
                  <!-- 内容 -->
                  <div class="sysBody" id="about_info">
                      <br><br>
-                     <h2 style='text-align: center;left:-5%;'>关  于</h2>
+                     <h2 class="sysBodyTitle">关  于</h2>
                      <br><br>
                      <p>阿巴阿巴……</p>
                  </div>
@@ -463,13 +463,13 @@ E
                     document.getElementById('exit_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
                      class="setup_exit" style="left: 75%;top: -215%;">
                  <!-- 标题 -->
-                 <div class="sysTitle" style="background-color: #813cbd;height: 100%;width: 100%;border-radius: 3%;">
-                     <h2 style="writing-mode:tb-rl;top: 22vh;left: 8vw;">退&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出</h2>
+                 <div class="sysTitle" style="background-color: #813cbd;">
+                     <h2 class="sysTitleTitle">退&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出</h2>
                  </div>
                  <!-- 内容 -->
                  <div class="sysBody" id="exit_info">
                      <br><br>
-                     <h2 style='text-align: center;left:-5%;'>退  出</h2>
+                     <h2 class="sysBodyTitle">退  出</h2>
                      <br><br>
                      <button onclick="loginout()">退出登录</button>
                  </div>
