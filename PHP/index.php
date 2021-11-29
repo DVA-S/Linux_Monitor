@@ -90,7 +90,7 @@
                              <p>设备列表</p>
                          </div>
                          <tr>
-                             <th>主机名</th><th>类型</th><th>地址</th><th>内存</th><th>网卡速率</th><th>硬盘</th>
+                             <th>主机名</th><th>类型</th><th>地址</th><th>内存</th><th>网卡速率</th><th>硬盘</th><th>操作</th>
                          </tr>
                          <?php echo file_get_contents('http://localhost/php/host/List.php'); ?>
                      </table>
@@ -162,7 +162,7 @@
                              <br />
                              <br />
                              <label for="hostpasswdChecking" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
-                             <input id="hostpasswdChecking" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="hostpasswdChecking" name="hostpasswd">
+                             <input id="hostpasswdChecking" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
                              <br />
                              <br />
                              <div class="ok" id="hostDisk" style="position: absolute;top: 51%;left: 20%;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;硬盘</div>
@@ -192,7 +192,7 @@
                              <br />
                              <br />
                              <label for="hostpasswdCheckingPort" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
-                             <input id="hostpasswdCheckingPort" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="hostpasswdCheckingPort" name="hostpasswd">
+                             <input id="hostpasswdCheckingPort" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
                              <br />
                              <br />
                              <div class="ok" id="hostDisk"  onclick="hostPort()">&nbsp;&nbsp;&nbsp;&nbsp;端口检测</div>
@@ -223,7 +223,7 @@
                              <br />
                              <br />
                              <label for="hostpasswdCheckingDevice" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
-                             <input id="hostpasswdCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="hostpasswdCheckingDevice" name="hostpasswd">
+                             <input id="hostpasswdCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
                              <br />
                              <br />
                              <div class="ok" id="hostDisk"  onclick="hostDevice()">&nbsp;&nbsp;&nbsp;&nbsp;设备检测</div>
@@ -470,7 +470,7 @@
                      <br><br>
                      <h2 class="sysBodyTitle">退  出</h2>
                      <br><br>
-                     <button onclick="loginout()">退出登录</button>
+                     <button onclick="loginout()" style="height: 20vh;width: 10vw;border-radius: 100%;left: 15%;top: 10%;">退出登录</button>
                  </div>
              </div>
 		 </div>
@@ -480,12 +480,8 @@
         <?php
             if($status==1){
                 echo "<script>
-		 		//登录框  forwards属性会让对象停留在终点
-		        document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';
-		        
-                //BUG:登录成功后,刷新任何界面,登录表单会出现一秒钟然后消失. --  解决方法:设置登陆成功后&&播放完登录动画后,移除登录盒子.
-                //平移登录动画时,每次刷新都会重复登录动画.改进登陆动画后,出现了此BUG                		                
-		        document.getElementById('login_div').remove();      
+                //BUG0:平移登录动画时,每次刷新都会重复登录动画.改进登陆动画后 > BUG1:登录成功后,刷新任何界面,登录表单会出现一秒钟然后消失. --  解决方法:设置登陆成功后&&播放完登录动画后,移除登录盒子
+                //加了几个刷新按钮后，bug又回来了  --  最终方法：登录表单只有读不到登录session时才会出现,也就是说登录状态时，不对登陆表单做任何操作。（多余）
 		        
 		        //主页
 		        document.getElementById('head_div').style.display='block';
@@ -512,6 +508,11 @@
                     default:
                         break;
                 }
+            }else{
+                echo "<script>
+                document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
+		        document.getElementById('login_div').style.display='block';
+		 		</script>";
             }
         ?>
 	</body>

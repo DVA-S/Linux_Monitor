@@ -23,13 +23,13 @@ mysqli_select_db($con,"bysj");
 // 设置编码，防止中文乱码
 mysqli_set_charset($con, "utf8");
 //利用数据行数判定登录
-$stmt = $con->prepare("select host_name,host_type,host_ip,mem_total,network_speed,disk_all from bysj.host");
-$stmt->bind_result($host_name,$host_type,$host_ip,$mem_total,$network_speed,$disk_all);
+$stmt = $con->prepare("select id,host_name,host_type,host_ip,mem_total,network_speed,disk_all from bysj.host");
+$stmt->bind_result($id,$host_name,$host_type,$host_ip,$mem_total,$network_speed,$disk_all);
 $stmt->execute();
 while($stmt->fetch()){
     echo "
     <tr>
-        <td>$host_name</td><td>$host_type</td><td>$host_ip</td><td>$mem_total MB</td><td>$network_speed</td><td>$disk_all</td>
+        <td>$host_name</td><td>$host_type</td><td>$host_ip</td><td>$mem_total MB</td><td>$network_speed</td><td>$disk_all</td><td id='host_$id' class='deleteBtn' onclick='deleteHost(this)'>删除</td>
     </tr>";
 }
 ?>

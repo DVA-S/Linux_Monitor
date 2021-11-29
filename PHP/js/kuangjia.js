@@ -218,6 +218,22 @@ function viewPanel(view_btn){
 /* - ---------------------------------------------------------------------------------动作交互----------------------------------------------------------------------------------- */
 
 /* - ---------------------------------------------------------------------------------单击事件----------------------------------------------------------------------------------- */
+//设备管理 -- 删除设备
+function deleteHost(element){
+	hostID=element.id.slice(5);
+	// console.log(hostID);
+	res=confirm("确认删除？");
+	if(res==true){
+		//传入数据ID，调用php删除接口，刷新
+		$.get(
+			"php/host/DeleteHost.php",{"hostID":hostID}
+		);
+		setTimeout(function (){
+			location.reload()
+		},1500);
+	}
+}
+
 //自动巡检 -- 添加主机
 function addHost(){
 	var ipaddress =$("#ipaddress").val();
@@ -225,10 +241,13 @@ function addHost(){
 	var passwd = $("#hostpasswd").val();
 	$.get(
 		"php/host/AddHost.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd},
-		function(data,status){
-			console.log("数据: \n" + data + "\n状态: " + status);
-		}
+		// function(data,status){
+			// console.log("数据: \n" + data + "\n状态: " + status);
+		// }
 	);
+	setTimeout(function (){
+		location.reload()
+	},1500);
 }
 
 //用户管理 -- 添加用户

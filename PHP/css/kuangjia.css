@@ -84,6 +84,16 @@ body{
 	background-color: #FFF;
 	font-size: 15.5px;
 }
+/* 所有按钮 > 删除按钮 */
+.deleteBtn{
+	background-color: #13c185;
+}
+.deleteBtn:hover{
+	background-color: #ff2929;
+}
+.deleteBtn:active{
+	background-color: #9f1c1c;
+}
 /**********************************************所有按钮*********************************************/
 
 /**********************************************动   画*********************************************/
@@ -173,7 +183,8 @@ body{
 	top: -95%;
 	left: 32.5%;
 	border-radius: 8px;
-	animation:0.5s ease 0s 1 normal forwards running login_loginView;
+	display: none;
+	/*animation:0.5s ease 0s 1 normal forwards running login_loginView;*/
 }
 .logo{
 	width: 50%;
