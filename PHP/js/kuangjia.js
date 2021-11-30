@@ -55,6 +55,10 @@ function keyLogin(){
 	if (event.keyCode==13)  //回车键的键值为13
 		document.getElementById("loginbtn").click(); //调用登录按钮的登录事件
 }
+function keySearchHost(){
+	if (event.keyCode==13)  //回车键的键值为13
+		document.getElementById("searchHostBtn").click(); //调用登录按钮的登录事件
+}
 
 //登录 -- 判断显示动画、设置Cookie
 function loginOkAnimation(){
@@ -245,7 +249,7 @@ function SearchHost(){
 	var searchHost =$("#searchHost").val();
 	$.get(
 		"php/host/SearchHost.php",{"search":searchHost},
-		function(data,status){
+		function(data){
 			document.getElementById("SearchTr").innerHTML=data;
 		}
 	);

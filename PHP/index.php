@@ -87,8 +87,8 @@
 				 <div class="host_right_list" id="host_right_list">
                      <div class="alltable_head">
                          <p>设备列表</p>
-                         <input id="searchHost" type="text" style="height: 4vh;width: 24vw;top: -6vh;left: 45vw;background-color: #ddd;border-radius: 3px;color: #000;box-shadow: 2px 2px 2px 2px #888;"maxlength="20">
-                         <div class="ok" onclick="SearchHost()" style="height: 4vh;width: 4vw;line-height: 3.5vh;left: 70vw;">搜索</div>
+                         <input id="searchHost" type="text" placeholder="  名称/类型/地址" style="height: 4vh;width: 24vw;top: -6vh;left: 45vw;background-color: #ddd;border-radius: 3px;color: #000;box-shadow: 2px 2px 2px 2px #888;" maxlength="20" onkeydown="keySearchHost()">
+                         <div id="searchHostBtn" class="ok" onclick="SearchHost()" style="height: 4vh;width: 4vw;line-height: 3.5vh;left: 70vw;">搜索</div>
                      </div>
                      <table id="SearchTr" class='alltable'>
                          <tr>
@@ -117,13 +117,35 @@
                              <input id="hostpasswd" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
                              <br />
                              <br />
-                             <div class="ok" onclick="addHost()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
+                             <div class="ok" onclick="addHost()" style="left: 60vw;top: 1.3vh;line-height: 3.5vh;">&nbsp;&nbsp;添加</div>
                          </form>
+                         <div style="position:absolute;top: 12vh;">
+                             <p><i><b>所使用的主机用户必须支持远程ssh登录</b></i></p>
+                             <p>Ubuntu开启root用户远程登录方法如下：</p>
+                             <br>
+                             <p style="background-color: #EEE;line-height: 25px;padding-top: 0.5vh;padding-bottom: 0.5vh;width: 70vw;top: -1vh;">
+                                 &nbsp;&nbsp;#&nbsp;apt update <br>
+                                 &nbsp;&nbsp;#&nbsp;echo "\033[33mROOT远程登陆\033[0m" <br>
+                                 &nbsp;&nbsp;#&nbsp;apt -y install openssh-server <br>
+                                 &nbsp;&nbsp;#&nbsp;cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak <br>
+                                 &nbsp;&nbsp;#&nbsp;sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config <br>
+                                 &nbsp;&nbsp;#&nbsp;sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config <br>
+                                 &nbsp;&nbsp;#&nbsp;systemctl restart sshd <br>
+                             </p>
+                             <p>CentOS默认开启root远程登录，如果无法访问可尝试关闭防火墙和selinux</p>
+                             <br>
+                             <p style="background-color: #EEE;line-height: 25px;padding-top: 0.5vh;padding-bottom: 0.5vh;width: 70vw;top: -1vh;">
+                                 &nbsp;&nbsp;#&nbsp;systemctl stop firewalld <br>
+                                 &nbsp;&nbsp;#&nbsp;iptables -F <br>
+                                 &nbsp;&nbsp;#&nbsp;iptables -X <br>
+                                 &nbsp;&nbsp;#&nbsp;iptables -Z <br>
+                                 &nbsp;&nbsp;#&nbsp;iptables-save <br>
+                                 &nbsp;&nbsp;#&nbsp;setenforce 0 <br>
+                         </div>
                      </div>
                  </div>
-			 </div>
-		 </div>
-
+             </div>
+         </div>
 		 <!-- 自动巡检 -->
 		 <div class="checking" id="checking">
 			 <!-- 左侧边栏 -->
