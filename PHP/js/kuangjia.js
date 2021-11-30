@@ -171,9 +171,9 @@ function viewPanel(view_btn){
 			 // ##BUG:所有面板都显示过后，无法跳转切换 ##例如：从2到4后，虽然实际显示的是4，但view的值是3 ##所以解决方法之一为：做动作前先清场，大概属于一刀切方法，很简单。
 			 $('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			//点击当前面板右边的按钮
-			// 离开动画--当前面板左移
-			document.getElementById(panel_list[view]).style.display="block";
-			document.getElementById(panel_list[view]).style.animation="0.5s ease forwards running btn_switch_CenterGoLeftHide";
+			// 离开动画--当前面板左移(BUG:导航栏按钮--应该是将要显示前的面板离开)
+			document.getElementById(panel_list[panel_list.indexOf(view_btn)-1]).style.display="block";
+			document.getElementById(panel_list[panel_list.indexOf(view_btn)-1]).style.animation="0.5s ease forwards running btn_switch_CenterGoLeftHide";
 			// 进入动画--当前元素从右边到中间显示 不加绝对定位动画会上天
 			document.getElementById(view_btn).style.display="block";
 			document.getElementById(view_btn).style.position="absolute";
@@ -186,8 +186,8 @@ function viewPanel(view_btn){
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			// 点击当前面板左边的按钮
 			// 离开动画--当前面板右移
-			document.getElementById(panel_list[view]).style.display="block";
-			document.getElementById(panel_list[view]).style.animation="0.5s ease forwards running btn_switch_CenterGoRightHide";
+			document.getElementById(panel_list[panel_list.indexOf(view_btn)+1]).style.display="block";
+			document.getElementById(panel_list[panel_list.indexOf(view_btn)+1]).style.animation="0.5s ease forwards running btn_switch_CenterGoRightHide";
 			// 进入动画--当前元素从左边到中间显示
 			document.getElementById(view_btn).style.display="block";
 			document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_LeftGoCenterShow";
@@ -195,19 +195,21 @@ function viewPanel(view_btn){
 			console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+">>向右");
 			//将最后一次显示的面板存入cookie
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
+			break;
 		}else if(view===panel_list.indexOf(view_btn)){
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
-			// 点击当前面板按钮
-			// 刷新动画--当前元素显示
-			//BUG:只能显示一次🤔
-			document.getElementById(view_btn).style.display="block";
-			document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
-			document.getElementById(view_btn).style.position="absolute";
+			// $('#panel,#checking,#user,#host,#setup').css('display', 'none');
+			// // 点击当前面板按钮
+			// // 刷新动画--当前元素显示
+			// //BUG:只能显示一次🤔
+			// document.getElementById(view_btn).style.display="block";
+			// document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
+			// document.getElementById(view_btn).style.position="absolute";
 			console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"刷新显示");
 			//将最后一次显示的面板存入cookie
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
+			break;
 		}
-		break;
+
 		case 5:case 6:case 7:
 		$('#host_right_list,#host_right_addhost,#host_right_all').css('display', 'none');
 		document.getElementById(view_btn).style.display="block";		break;
