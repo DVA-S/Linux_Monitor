@@ -102,7 +102,15 @@
                          <p>添加设备</p>
                      </div>
                      <div class="addhost_form">
-                         <form action="#" method="get">
+                         <form action="#" method="get"
+                               onmouseover="(function (){
+                                document.getElementById('tip').style.display='block';
+                                document.getElementById('tip').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
+                                })()";
+                               onmouseout="(function (){
+                                document.getElementById('tip').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';
+                                })()"
+                         >
                              <label for="ipaddress" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
                              <input id="ipaddress" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddress" maxlength="20">
@@ -117,9 +125,9 @@
                              <input id="hostpasswd" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
                              <br />
                              <br />
-                             <div class="ok" onclick="addHost()" style="left: 60vw;top: 1.3vh;line-height: 3.5vh;">&nbsp;&nbsp;添加</div>
+                             <div class="ok" onclick="addHost()" style="line-height: 3.5vh;">&nbsp;&nbsp;添加</div>
                          </form>
-                         <div style="position:absolute;top: 12vh;">
+                         <div id="tip" style="position:absolute;top: 12vh;display: none;">
                              <p><i><b>所使用的主机用户必须支持远程ssh登录</b></i></p>
                              <p>Ubuntu开启root用户远程登录方法如下：</p>
                              <br>
@@ -189,9 +197,9 @@
                              <input id="hostpasswdChecking" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
                              <br />
                              <br />
-                             <div class="ok" id="hostDisk" style="position: absolute;top: 51%;left: 20%;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;硬盘</div>
-                             <div class="ok" id="hostNetwork" style="position: absolute;top: 51%;left: 40%;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网络</div>
-                             <div class="ok" id="hostCpu" style="position: absolute;top: 51%;left: 60%;" onclick="hostPerf(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;处理器</div>
+                             <div class="ok" id="hostDisk" style="position: absolute;top: 51%;left: 20%;" onclick="hostPerf(this)">&nbsp;硬盘</div>
+                             <div class="ok" id="hostNetwork" style="position: absolute;top: 51%;left: 40%;" onclick="hostPerf(this)">&nbsp;网络</div>
+                             <div class="ok" id="hostCpu" style="position: absolute;top: 51%;left: 60%;" onclick="hostPerf(this)">&nbsp;处理器</div>
                          </form>
                      </div>
                      <br />
@@ -219,7 +227,7 @@
                              <input id="hostpasswdCheckingPort" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
                              <br />
                              <br />
-                             <div class="ok" id="hostDisk"  onclick="hostPort()">&nbsp;&nbsp;&nbsp;&nbsp;端口检测</div>
+                             <div class="ok" id="hostDisk"  onclick="hostPort()">&nbsp;端口检测</div>
                          </form>
                      </div>
                      <br />
@@ -250,7 +258,7 @@
                              <input id="hostpasswdCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
                              <br />
                              <br />
-                             <div class="ok" id="hostDisk"  onclick="hostDevice()">&nbsp;&nbsp;&nbsp;&nbsp;设备检测</div>
+                             <div class="ok" id="hostDisk"  onclick="hostDevice()">&nbsp;设备检测</div>
                          </form>
                      </div>
                      <br />
@@ -359,8 +367,8 @@
                              <input id="phone" style="position: absolute;top: 83%;left: 33%;" type="text" name="phone" maxlength="20">
                              <br>
                              <br>
-                             <div class="floatWindowsBtn ok" onclick="addUserSys();location.reload();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
-                             <div class="floatWindowsBtn ok" onclick="(function (){document.getElementById('addSysUser').style.display='none';})()" style="left: 30%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭</div>
+                             <div class="floatWindowsBtn ok" onclick="addUserSys();location.reload();">&nbsp;添加</div>
+                             <div class="floatWindowsBtn ok" onclick="(function (){document.getElementById('addSysUser').style.display='none';})()" style="left: 30%;">&nbsp;关闭</div>
                          </form>
                      </div>
                  </div>
@@ -393,9 +401,9 @@
                              <input id="passwdDev" style="position: absolute;top: 38%;left: 33%;" type="password" name="passwdDev" maxlength="20">
                              <br>
                              <br>
-                             <div class="floatWindowsBtn ok" onclick="addUserDev();location.reload();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加</div>
+                             <div class="floatWindowsBtn ok" onclick="addUserDev();location.reload();">&nbsp;添加</div>
                              <div class="floatWindowsBtn ok" onclick="(function (){document.getElementById('addSysUserDev').style.display='none';
-                             })();" style="left: 30%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭</div>
+                             })();" style="left: 30%;">&nbsp;关闭</div>
                          </form>
                      </div>
                  </div>
