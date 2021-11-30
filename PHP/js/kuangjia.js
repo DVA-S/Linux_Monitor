@@ -155,15 +155,21 @@ function viewPanel(view_btn){
 		case 0:case 1:case 2:case 3:case 4:
 		// 点击按钮在当前窗口的左边或者右边 初始位置:top:8%;left:2.5%; 显示位置:top:100vh*0.08 or 100%*0.08 && *0.025 隐藏位置:top:50px left:-100vh
 		//确定正在显示面板在数组中的位置（得到数组下标）
-		for(i=0;i<=4;i++){
-			if(getPanelView(i)){
-				view=i;
-			}
-		}
-		//switch主体 - 获取按钮点击传来的ID，判断该ID在数组中的位置（返回数字）;正在显示面板下标和点击按钮将要显示的面板的下标作比较
-		if(view<panel_list.indexOf(view_btn)){
-			// ##BUG:所有面板都显示过后，无法跳转切换 ##例如：从2到4后，虽然实际显示的是4，但view的值是3 ##所以解决方法之一为：做动作前先清场，大概属于一刀切方法，很简单。
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
+		if( getPanelView(0) ) {
+			view=0;
+		}else if( getPanelView(1) ) {
+			view=1;
+		}else if( getPanelView(2) ) {
+			view=2;
+		}else if( getPanelView(3) ) {
+			view=3;
+		}else if( getPanelView(4) ) {
+			view=4; }
+
+		 //switch主体 - 获取按钮点击传来的ID，判断该ID在数组中的位置（返回数字）;正在显示面板下标和点击按钮将要显示的面板的下标作比较
+		 if(view<panel_list.indexOf(view_btn)){
+			 // ##BUG:所有面板都显示过后，无法跳转切换 ##例如：从2到4后，虽然实际显示的是4，但view的值是3 ##所以解决方法之一为：做动作前先清场，大概属于一刀切方法，很简单。
+			 $('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			//点击当前面板右边的按钮
 			// 离开动画--当前面板左移
 			document.getElementById(panel_list[view]).style.display="block";
@@ -174,7 +180,7 @@ function viewPanel(view_btn){
 			document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_RightGoCenterShow";
 			console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"<<向左");
 			//将最后一次显示的面板存入cookie
-			setCookie("panelView",panel_list.indexOf(view_btn),600);
+			setCookie("panelView",view,600);
 			break;
 		}else if(view>panel_list.indexOf(view_btn)){
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
@@ -260,7 +266,7 @@ function addUserWindowsDev(){
 }
 //添加数据
 function addUserSys(){
-	var username =$("#username").val();
+	var username =$("#usernameAdd").val();
 	var userAdd =$("#userAdd").val();
 	var userAddPasswd =$("#userAddPasswd").val();
 	var email =$("#email").val();

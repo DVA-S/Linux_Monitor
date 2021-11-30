@@ -14,7 +14,7 @@
         session_start();
         $status = $_SESSION["loginStatus"];
         //离开时显示的面板
-        $view = $_COOKIE['panelView'];
+        $viewStatus = $_COOKIE['panelView'];
 //        echo "<script>console.log('loginStatus:',{$view});</script>";
     ?>
 	<body>
@@ -308,9 +308,9 @@
                      <div id="addSysUser" class="floatWindows">
                          <form class="addWindows">
                              <h4 align="center">添加系统用户</h4>
-                             <label for="username" style="position: absolute;top: 7%;left: 22%;">姓&nbsp;&nbsp;&nbsp;名：</label>
+                             <label for="usernameAdd" style="position: absolute;top: 7%;left: 22%;">姓&nbsp;&nbsp;&nbsp;名：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="username" style="position: absolute;top: 8%;left: 33%;" type="text" name="username" maxlength="20">
+                             <input id="usernameAdd" style="position: absolute;top: 8%;left: 33%;" type="text" name="username" maxlength="20">
                              <br>
                              <br>
                              <label for="userAdd" style="position: absolute;top: 22%;left: 22%;">用户名：</label>
@@ -428,7 +428,7 @@
                      <br><br>
                      <h2 class="sysBodyTitle">系统时间</h2>
                      <br><br>
-                     <h2 id="clock" style=""></h2>
+                     <h3 id="clock" style=""></h3>
                      <script src="js/system/date.js"></script>
                  </div>
              </div>
@@ -443,14 +443,15 @@
              >
                  <!-- 标题 -->
                  <div class="sysTitle" style="background-color: #4add60;height: 100%;width: 100%;border-radius: 3%;">
-                     <h2 class="sysTitleTitle">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于</h2>
+                     <h2 class="sysTitleTitle">邮  件  告  警</h2>
                  </div>
                  <!-- 内容 -->
                  <div class="sysBody" id="about_info">
                      <br><br>
-                     <h2 class="sysBodyTitle">关  于</h2>
+                     <h2 class="sysBodyTitle">告警设置</h2>
                      <br><br>
-                     <p>阿巴阿巴……</p>
+                     <p>触发条件：</p><br>
+                     <p>收件人：</p>
                  </div>
              </div>
              <!--  退出登录 -->
@@ -489,21 +490,21 @@
 		        document.getElementById('panel').style.display='block';
 		        document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
 		 		</script>";
-                switch ($view){
+                switch ($viewStatus){
                     case 0:
-                          echo "<script>lastView($view);</script>";
+                          echo "<script>lastView($viewStatus);</script>";
                         break;
                     case 1:
-                        echo "<script>lastView($view);</script>";
+                        echo "<script>lastView($viewStatus);</script>";
                         break;
                     case 2:
-                        echo "<script>lastView($view);</script>";
+                        echo "<script>lastView($viewStatus);</script>";
                         break;
                     case 3:
-                        echo "<script>lastView($view);</script>";
+                        echo "<script>lastView($viewStatus);</script>";
                         break;
                     case 4:
-                        echo "<script>lastView($view);</script>";
+                        echo "<script>lastView($viewStatus);</script>";
                         break;
                     default:
                         break;
