@@ -180,7 +180,7 @@ function viewPanel(view_btn){
 			document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_RightGoCenterShow";
 			console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"<<向左");
 			//将最后一次显示的面板存入cookie
-			setCookie("panelView",view,600);
+			setCookie("panelView",panel_list.indexOf(view_btn),600);
 			break;
 		}else if(view>panel_list.indexOf(view_btn)){
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
@@ -192,7 +192,7 @@ function viewPanel(view_btn){
 			document.getElementById(view_btn).style.display="block";
 			document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_LeftGoCenterShow";
 			document.getElementById(view_btn).style.position="absolute";
-			console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+">>向右");
+			console.log('当前显示为：'+panel_list.indexOf(view_btn),"点击为：",panel_list.indexOf(view_btn)+">>向右");
 			//将最后一次显示的面板存入cookie
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
 			break;
@@ -204,12 +204,11 @@ function viewPanel(view_btn){
 			// document.getElementById(view_btn).style.display="block";
 			// document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
 			// document.getElementById(view_btn).style.position="absolute";
-			console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"刷新显示");
+			console.log('当前显示为：'+panel_list.indexOf(view_btn),"点击为：",panel_list.indexOf(view_btn)+"刷新显示");
 			//将最后一次显示的面板存入cookie
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
 			break;
 		}
-
 		case 5:case 6:case 7:
 		$('#host_right_list,#host_right_addhost,#host_right_all').css('display', 'none');
 		document.getElementById(view_btn).style.display="block";		break;
