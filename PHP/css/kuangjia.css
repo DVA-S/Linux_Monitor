@@ -45,7 +45,7 @@ body{
 	border-radius: 5px;
 }
 /* 所有按钮 > 导航栏按钮 */
-.host_btn, .user_btn, .panel_btn, .setup_btn, .checking_btn{
+.host_btn, .user_btn, .panel_btn, .setup_btn, .checking_btn, .ok{
 	width: 10%;
 	height: 90%;
 	float: left;

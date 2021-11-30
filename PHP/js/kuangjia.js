@@ -240,6 +240,16 @@ function deleteHost(element){
 		},1500);
 	}
 }
+//设备管理 -- 搜索设备
+function SearchHost(){
+	var searchHost =$("#searchHost").val();
+	$.get(
+		"php/host/SearchHost.php",{"search":searchHost},
+		function(data,status){
+			document.getElementById("SearchTr").innerHTML=data;
+		}
+	);
+}
 
 //自动巡检 -- 添加主机
 function addHost(){

@@ -85,10 +85,12 @@
                      </div>
                  </div>
 				 <div class="host_right_list" id="host_right_list">
-                     <table class='alltable'>
-                         <div class="alltable_head">
-                             <p>设备列表</p>
-                         </div>
+                     <div class="alltable_head">
+                         <p>设备列表</p>
+                         <input id="searchHost" type="text" style="height: 4vh;width: 24vw;top: -6vh;left: 45vw;background-color: #ddd;border-radius: 3px;color: #000;box-shadow: 2px 2px 2px 2px #888;"maxlength="20">
+                         <div class="ok" onclick="SearchHost()" style="height: 4vh;width: 4vw;line-height: 3.5vh;left: 70vw;">搜索</div>
+                     </div>
+                     <table id="SearchTr" class='alltable'>
                          <tr>
                              <th>主机名</th><th>类型</th><th>地址</th><th>内存</th><th>网卡速率</th><th>硬盘</th><th>操作</th>
                          </tr>
