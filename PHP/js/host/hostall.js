@@ -25,11 +25,6 @@ function hostcountback(){
                 type: 'pie',
                 radius: ['40%', '70%'],
                 avoidLabelOverlap: false,
-                itemStyle: {
-                    borderRadius: 10,
-                    borderColor: '#fff',
-                    borderWidth: 2
-                },
                 label: {
                     show: false,
                     position: 'center'
@@ -42,6 +37,9 @@ function hostcountback(){
                     }
                 },
                 itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2,
                     normal: {
                         // 设置扇形的阴影
                         shadowBlur: 8,
@@ -56,7 +54,7 @@ function hostcountback(){
                 data: [
                     { value: xmlHttpHostCountUbuntu.responseText, name: 'Ubuntu' },
                     { value: xmlHttpHostCountCentOS.responseText, name: 'CentOS' },
-                    { value: xmlHttpHostCountMySQL.responseText, name: 'MySQL' }
+                    { value: xmlHttpHostCountMySQL.responseText, name: 'Other' }
                 ]
             }
         ]

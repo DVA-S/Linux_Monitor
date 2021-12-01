@@ -244,6 +244,18 @@ function deleteHost(element){
 		},1500);
 	}
 }
+//设备管理 -- 连通性检测
+function linkHostStatus(element){
+	hostIP=element.id;
+	// console.log(hostIP);
+	$.get(
+		"php/checking/hostLink.php",{"hostIP":hostIP},
+		function (data){
+			document.getElementById('Status'+hostIP).innerText=data;
+		}
+	);
+
+}
 //设备管理 -- 搜索设备
 function SearchHost(){
 	var searchHost =$("#searchHost").val();
@@ -346,20 +358,20 @@ function hostPerf(element){
 }
 
 //自动巡检 -- 连通性检测ping
-function hostLink(){
-	document.getElementById("alltable").innerHTML="<table class='alltable' id=\"alltable\">\n" +
-		"                         <tr>\n" +
-		"                             <th>主机名</th><th>地址</th><th>延时</th>\n" +
-		"                         </tr>\n" +
-		"                     </table>" +
-		"<img src=\"img/loading.gif\" style=\"position: relative;left: 100%;top: 0;opacity: 0.5;width: 100%;\" />";
-	$.get(
-		"php/checking/hostLink.php",{},
-		function(data){
-			document.getElementById("alltable").innerHTML=data;
-		}
-	);
-}
+// function hostLink(){
+// 	document.getElementById("alltable").innerHTML="<table class='alltable' id=\"alltable\">\n" +
+// 		"                         <tr>\n" +
+// 		"                             <th>主机名</th><th>类型</th><th>地址</th><th>状态</th><th>操作</th>\n" +
+// 		"                         </tr>\n" +
+// 		"                     </table>" +
+// 		"<img src=\"img/loading.gif\" style=\"position: relative;left: 100%;top: 0;opacity: 0.5;width: 100%;\" />";
+// 	$.get(
+// 		"php/checking/hostLinkList.php",{},
+// 		function(data){
+// 			document.getElementById("alltable").innerHTML=data;
+// 		}
+// 	);
+// }
 
 //自动巡检 -- 获取端口信息
 function hostPort(){

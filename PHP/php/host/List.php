@@ -27,6 +27,7 @@ $stmt = $con->prepare("select id,host_name,host_type,host_ip,mem_total,network_s
 $stmt->bind_result($id,$host_name,$host_type,$host_ip,$mem_total,$network_speed,$disk_all);
 $stmt->execute();
 while($stmt->fetch()){
+//  按钮上绑定主机ID
     echo "
     <tr>
         <td>$host_name</td><td>$host_type</td><td>$host_ip</td><td>$mem_total MB</td><td>$network_speed</td><td>$disk_all</td><td id='host_$id' class='deleteBtn' onclick='deleteHost(this)'>删除</td>

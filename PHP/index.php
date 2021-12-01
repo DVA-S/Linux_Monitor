@@ -109,7 +109,7 @@
                                 })()";
                                onmouseout="(function (){
                                 document.getElementById('tip').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';
-                                })()"
+                                })()";
                          >
                              <label for="ipaddress" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
@@ -159,7 +159,7 @@
 			 <!-- 左侧边栏 -->
 			 <div class="checking_left">
 			 	 <!-- 连通性检测 -- Ping/可登录 -->
-			 	 <div class="checking_left_link" title="Ping命令检测" onclick="btnOnClick(this)">连通性检测</div>
+			 	 <div class="checking_left_link" title="Ping命令检测" onclick="btnOnClick(this);">连通性检测</div>
 			 	 <!-- 性能检测 -- disk读写/网速/CPU/内存 -->
 			 	 <div class="checking_left_test" title="磁盘、网络、处理器性能" onclick="btnOnClick(this)">性能检测</div>
 			 	 <!-- 端口检测 -- 主机暴露端口 -->
@@ -174,11 +174,8 @@
                          <div class="alltable_head">
                              <p>设备列表</p>
                          </div>
-                         <tr>
-                             <th>主机名</th><th>地址</th><th>延时</th>
-                         </tr>
+                         <?php echo file_get_contents('http://localhost/php/checking/hostLinkList.php'); ?>
                      </table>
-                     <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;" onclick="hostLink()">开始检测</button>
                  </div>
 			 	 <div class="checking_right_test" id="checking_right_test">
                      <div class="addhost_form" style="height: 18%;">
