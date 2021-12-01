@@ -29,12 +29,12 @@
 				<form action="#" method="post"">
                     <label for="username" style="font-size: 14px;color: #000;">用户名：</label>
 					<!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-					<input id="username" placeholder="admin" autofocus="autofocus" style="border: 1px solid #888;height: 8%;width: 94%;padding: 1% 2%;border-radius: 2px;margin-top: 5px;" type="text" name="username" maxlength="20" onkeydown="keyLogin()">
+					<input id="username" autofocus="autofocus" style="border: 1px solid #888;height: 10%;width: 94%;padding: 1% 2%;border-radius: 2px;margin-top: 5px;" type="text" name="username" maxlength="20" onkeydown="keyLogin()">
 					<br /><br />
 					<label for="passwd" style="font-size: 14px;color: #000;">密码：</label>
-					<input id="passwd" placeholder="回车可登录" style="border: 1px solid #888;height: 8%;width: 94%;padding: 1% 2%;border-radius: 2px;margin-top: 5px;" type="password" name="passwd"  onkeydown="keyLogin()">
+					<input id="passwd" style="border: 1px solid #888;height: 10%;width: 94%;padding: 1% 2%;border-radius: 2px;margin-top: 5px;" type="password" name="passwd"  onkeydown="keyLogin()">
 					<br /><br /><br />
-					<input id="loginbtn" class="submit" type="button" value="登  录" onclick="loginOkAnimation()">
+					<input id="loginbtn" class="submit" type="button" value="登  录" onclick="loginOkAnimation()" style="top: 0%;">
 				</form>
 			</div>
             <p style="color: #CCC;position: relative;top: 25%;left: 17vh;font-size: 2.2vh;">自动化运维与监控系统@2021 by ***</p>
@@ -136,7 +136,6 @@
                              <br>
                              <p style="background-color: #EEE;line-height: 25px;padding-top: 0.5vh;padding-bottom: 0.5vh;width: 70vw;top: -1vh;">
                                  &nbsp;&nbsp;#&nbsp;apt update <br>
-                                 &nbsp;&nbsp;#&nbsp;echo "\033[33mROOT远程登陆\033[0m" <br>
                                  &nbsp;&nbsp;#&nbsp;apt -y install openssh-server <br>
                                  &nbsp;&nbsp;#&nbsp;cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak <br>
                                  &nbsp;&nbsp;#&nbsp;sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config <br>
