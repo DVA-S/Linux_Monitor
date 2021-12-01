@@ -35,7 +35,7 @@ body{
 /*  所有按钮 > 登录按钮 active选择器无法更改行内式元素样式 */
 .submit{
 	top: 8%;
-	background-color: #1196F3;
+	background-color: #2d5ba3;
 	width: 100%;
 	height: 5vh;
 	border: none;
@@ -62,10 +62,10 @@ body{
 }
 /* 所有按钮 > 导航栏按钮 ：按钮下效果 */
 .host_btn:active, .user_btn:active, .panel_btn:active, .setup_btn:active, .checking_btn:active, .submit:active{
-	opacity: 0.8;
+	opacity: 0.9;
 	box-shadow:inset 2px 2px 2px 2px #000;
-	font-size: 15.5px;
 	border-radius: 3px;
+	background-color: #0b306a;
 }
 /* 所有按钮 > 面板按钮 */
 .host_left_all,.host_left_list,.host_left_addhost,.checking_left_link,.checking_left_test,.checking_left_port,.checking_left_device,.user_left_webUser,.user_left_deviceUser,.user_left_addUser{
@@ -85,8 +85,8 @@ body{
 }
 .host_left_all:active,.host_left_list:active,.host_left_addhost:active,.checking_left_link:active,.checking_left_test:active,.checking_left_port:active,.checking_left_device:active,.user_left_webUser:active,.user_left_deviceUser:active,.user_left_addUser:active{
 	box-shadow:inset 2px 2px 2px 2px #000;
-	background-color: #FFF;
-	font-size: 15.5px;
+	background-color: #495164;
+	font-size: 13.5px;
 }
 /* 所有按钮 > 删除按钮 */
 .deleteBtn{
@@ -101,6 +101,12 @@ body{
 /**********************************************所有按钮*********************************************/
 
 /**********************************************动   画*********************************************/
+/* 登录页 > 输入框 */
+@keyframes inputLogin {
+	from{box-shadow: 1px 1px 1px 1px #000;}
+	to{box-shadow: 0px 0px 8px #3062ac;}
+}
+
 /* 登录页 > 显示 逐渐出现 */
 @keyframes login_loginView {
 	from{opacity: 0;}
@@ -168,7 +174,7 @@ body{
 .head_div{
 	width: 100%;
 	height: 6%;
-	background: linear-gradient(308deg,#6a50d9 0,#4283d1 100%);
+	background: linear-gradient(350deg,#122778,#4c87e3 100%);
 	border-radius: 0 0 4px 4px;
 	top: 0;
 	left: 0;
@@ -181,11 +187,11 @@ body{
 /**********************************************登录页 *********************************************/
 /* DIV 登录页 登录框 */
 .login_div{
-	width: 35%;
-	height: 80%;
-	background-color: rgb(24 27 31);
-	top: -95%;
-	left: 32.5%;
+	width: 30%;
+	height: 60%;
+	background-color: #FFF;
+	top: -90vh;
+	left: 35.5vw;
 	border-radius: 8px;
 	display: none;
 	/*animation:0.5s ease 0s 1 normal forwards running login_loginView;*/
@@ -194,20 +200,23 @@ body{
 	width: 50%;
 	height: 25%;
 	left: 25%;
-	top: 5%;
 	border-radius: 100%;
 }
 .login_form{
 	width: 80%;
 	height: 60%;
 	left: 10%;
-	top: 8%;
+	top: 4%;
 }
 .login_form form{
 	width: 80%;
 	height: 85%;
 	left: 10%;
 	top: 12.5%;
+}
+/* 输入框动效 */
+#username:focus,#passwd:focus{
+	animation: 0.5s ease 0s 1 normal forwards running inputLogin;
 }
 /**********************************************登录页 *********************************************/
 
@@ -345,7 +354,7 @@ input{
 }
 .ok:active{
 	box-shadow:inset 1px 1px 1px 1px #000;
-	background-color: #DDD;
+	background-color: #0848ab;
 	font-size: 13.5px;
 }
 /**********************************************面板表格*********************************************/

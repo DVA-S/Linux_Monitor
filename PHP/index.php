@@ -27,12 +27,12 @@
 			</div>
 			<div class="login_form" id="login_form">
 				<form action="#" method="post"">
-                    <label for="username" style="font-size: 14px;color: #CCCCDC;">用户名：</label>
+                    <label for="username" style="font-size: 14px;color: #000;">用户名：</label>
 					<!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-					<input id="username" placeholder="admin" autofocus="autofocus" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 2px;margin-top: 5px;" type="text" name="username" maxlength="20" onkeydown="keyLogin()">
+					<input id="username" placeholder="admin" autofocus="autofocus" style="border: 1px solid #888;height: 8%;width: 94%;padding: 1% 2%;border-radius: 2px;margin-top: 5px;" type="text" name="username" maxlength="20" onkeydown="keyLogin()">
 					<br /><br />
-					<label for="passwd" style="font-size: 14px;color: #CCCCDC;">密码：</label>
-					<input id="passwd" placeholder="回车可登录" style="height: 8%;width: 94%;padding: 1% 2%;border-radius: 2px;margin-top: 5px;" type="password" name="passwd"  onkeydown="keyLogin()">
+					<label for="passwd" style="font-size: 14px;color: #000;">密码：</label>
+					<input id="passwd" placeholder="回车可登录" style="border: 1px solid #888;height: 8%;width: 94%;padding: 1% 2%;border-radius: 2px;margin-top: 5px;" type="password" name="passwd"  onkeydown="keyLogin()">
 					<br /><br /><br />
 					<input id="loginbtn" class="submit" type="button" value="登  录" onclick="loginOkAnimation()">
 				</form>
@@ -128,7 +128,7 @@
                              <input id="hostpasswd" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
                              <br />
                              <br />
-                             <div class="ok" onclick="addHost()" style="line-height: 3.5vh;">&nbsp;&nbsp;添加</div>
+                             <div class="ok" onclick="addHost()" style="line-height: 3.5vh;height: 4vh;">&nbsp;&nbsp;添加</div>
                          </form>
                          <div id="tip" style="position:absolute;top: 12vh;display: none;">
                              <p><i><b>所使用的主机用户必须支持远程ssh登录</b></i></p>
