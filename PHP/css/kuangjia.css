@@ -20,7 +20,7 @@ body{
 	/* 1vh等于视口高度的1% */
 	height: 100vh;
 	width: 100%;
-	background-image: linear-gradient(180deg,#0c4774,#9C27B0);
+	background-image: linear-gradient(180deg,#0062ad,#0b1750);
 	background-size: 100%;
 	/* 毛玻璃 */
 	-webkit-filter: blur(4px);
@@ -50,12 +50,13 @@ body{
 	height: 90%;
 	float: left;
 	/* 五个按钮占50%，每个按钮有左右两个边距，25%/5=5% = 居中 */
-	margin: 0 5% 0 5%;
-	background-color: #FFF;
+	margin: 0 0.5vw;
+	background: initial;
 	border-radius: 3px;
 	text-align: center;
 	line-height: 5vh;
 	box-shadow:1px 1px 1px 1px #111;
+	color: #FFF;
 	/* 禁止文字选中 */
 	-webkit-user-select:none;
 }
@@ -68,14 +69,17 @@ body{
 }
 /* 所有按钮 > 面板按钮 */
 .host_left_all,.host_left_list,.host_left_addhost,.checking_left_link,.checking_left_test,.checking_left_port,.checking_left_device,.user_left_webUser,.user_left_deviceUser,.user_left_addUser{
-	height: 8%;
-	background-color: #DDD;
+	height: 6vh;
+	width: 92%;
+	background-color: #555f76;
 	margin-left: 2%;
 	margin-right: 2%;
 	border-radius: 4px;
 	text-align: center;
-	line-height: 7vh;
-	box-shadow:2px 2px 2px 2px #000;
+	line-height: 5vh;
+	box-shadow:1px 1px 1px 1px #1a1c22;
+	color: #fff;
+	font-size: 14px;
 	/* 禁止文字选中 */
 	-webkit-user-select:none;
 }
@@ -164,7 +168,7 @@ body{
 .head_div{
 	width: 100%;
 	height: 6%;
-	background-color: #04233a;
+	background: linear-gradient(308deg,#6a50d9 0,#4283d1 100%);
 	border-radius: 0 0 4px 4px;
 	top: 0;
 	left: 0;
@@ -221,9 +225,9 @@ body{
 }
 /* 内容面板 第二层 > 左侧边栏： 设备管理，自动巡检，用户管理 */
 .host_left,.checking_left,.user_left{
-	width: 15%;
+	width: 6%;
 	height: 100%;
-	background-color: #0d5d98;
+	background-color: #3c4353;
 	border-radius: 4px;
 }
 /* 内容面板 第二层 > 左侧边栏 > 按钮： 设备总览/列表/添加、连通性/性能/端口/硬件检测、系统/设备/添加用户 */
@@ -252,6 +256,7 @@ body{
 .host_right_all,.user_right_webUser,.checking_right_link,.host_right_list,.user_right_deviceUser,.checking_right_test,.host_right_addhost,.checking_right_port,.user_right_addUser,.checking_right_device{
 	width: 100%;
 	height: 100%;
+	left: -8vw;
 	display: block;
 }
 /**********************************************内容面板*********************************************/
@@ -314,7 +319,7 @@ input{
 	font-size: 14px;
 	top: 2%;
 	left: 2%;
-	width: 96%;
+	width: 100%;
 	height: 8%;
 	border-radius: 4px;
 	background-color: #EEE;
@@ -322,7 +327,7 @@ input{
 }
 .form_input{
 	height: 8%;
-	width: 20%;
+	width: 17%;
 	padding: 0.5%;
 	border-radius: 3px;
 }
@@ -331,10 +336,10 @@ input{
 	height: 20%;
 	width: 10%;
 	border-radius: 5px;
-	left: 82%;
-	top: 8%;
+	left: 66vw;
+	top: 1vh;
 	position: absolute;
-	background-color: #FFF;
+	background-color: #0c64eb;
 	box-shadow: 2px 2px 2px 2px #bbb;
 	line-height: 3.5vh;
 }

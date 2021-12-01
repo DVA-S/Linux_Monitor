@@ -43,6 +43,9 @@
 		 <!-- 导航栏 -->
 		 <div class="head_div" id="head_div">
             <!--loading（）：点击监控面板按钮 重新触发刷新事件-->
+             <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="" style="width: 25vw;box-shadow: none;">
+                 <img alt="logo" src="img/logo.png" width="10%" style="left: -30%;/* box-shadow: 1px 1px 1px 1px #000; */">
+             </div>
 			 <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="btnOnClick(this);loading();">监控面板</div>
 			 <div class="host_btn" title="设备的总览、列表、添加" onclick="btnOnClick(this)">设备管理</div>
 			 <div class="checking_btn" title="设备的连通、性能、端口、硬件" onclick="btnOnClick(this)">自动巡检</div>
