@@ -13,7 +13,7 @@ expect -c "
     expect \"password:\"
     send \"$passwd\r\"
     expect \"#\"
-    send \"sh /opt/addhost.sh\r\"
+    send \"sh /opt/AddHost.sh\r\"
     expect eof
     "
 `;

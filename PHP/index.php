@@ -51,6 +51,8 @@
 			 <div class="checking_btn" title="设备的连通、性能、端口、硬件" onclick="btnOnClick(this)">自动巡检</div>
 			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">用户管理</div>
 			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this)">系统设置</div>
+             <p id="clock" style="top: 40%;left: 2.5%;color: #FFF;font-family: fantasy;display: inline;"></p>
+             <script src="js/system/date.js"></script>
 		 </div>
 
 		 <!-- 监控面板 -->
@@ -411,7 +413,7 @@
 		 </div>
 		 
 		 <!-- 系统设置 -->
-		 <div class="setup" id="setup">
+		 <div class="setup" id="setup" style="background: inherit;">
         <!--  组件信息 -->
              <div onmouseover="(function (){
                     document.getElementById('package_info').style.display='block';
@@ -422,7 +424,7 @@
                   class="setup_package" style="left: 6%;top: 10%;"
              >
                 <!-- 标题 -->
-                 <div class="sysTitle" style="background-color: #4add60;">
+                 <div class="sysTitle">
                     <h2 class="sysTitleTitle">组  件  信  息</h2>
                  </div>
                 <!-- 内容 -->
@@ -451,16 +453,15 @@
                      class="setup_clock" style="left: 29%;top: -65%;"
              >
                 <!-- 标题 -->
-                 <div class="sysTitle" style="background-color: #813cbd;height: 100%;width: 100%;border-radius: 3%;">
-                     <h2 class="sysTitleTitle">系  统  时  间</h2>
+                 <div class="sysTitle" style="height: 100%;width: 100%;border-radius: 3%;">
+                     <h2 class="sysTitleTitle">系  统  脚  本</h2>
                  </div>
                  <!-- 内容 -->
                  <div class="sysBody" id="clock_info">
                      <br><br>
-                     <h2 class="sysBodyTitle">系统时间</h2>
+                     <h2 class="sysBodyTitle">系统脚本</h2>
                      <br><br>
-                     <h3 id="clock" style=""></h3>
-                     <script src="js/system/date.js"></script>
+
                  </div>
              </div>
              <!--  关于 -->
@@ -473,7 +474,7 @@
                      class="setup_about" style="left: 52%;top: -140%;"
              >
                  <!-- 标题 -->
-                 <div class="sysTitle" style="background-color: #4add60;height: 100%;width: 100%;border-radius: 3%;">
+                 <div class="sysTitle" style="height: 100%;width: 100%;border-radius: 3%;">
                      <h2 class="sysTitleTitle">邮  件  告  警</h2>
                  </div>
                  <!-- 内容 -->
@@ -494,7 +495,7 @@
                     document.getElementById('exit_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
                      class="setup_exit" style="left: 75%;top: -215%;">
                  <!-- 标题 -->
-                 <div class="sysTitle" style="background-color: #813cbd;">
+                 <div class="sysTitle" style="">
                      <h2 class="sysTitleTitle">退&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出</h2>
                  </div>
                  <!-- 内容 -->
