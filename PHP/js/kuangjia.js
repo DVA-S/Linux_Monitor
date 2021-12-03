@@ -251,7 +251,7 @@ function linkHostStatus(element){
 	$.get(
 		"php/checking/hostLink.php",{"hostIP":hostIP},
 		function (data){
-			document.getElementById('Status'+hostIP).innerText=data;
+			document.getElementById('Status'+hostIP).innerHTML=data;
 		}
 	);
 

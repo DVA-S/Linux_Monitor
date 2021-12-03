@@ -173,7 +173,9 @@
 			 	<div class="checking_left_device" title="硬件信息" onclick="btnOnClick(this)">硬件检测</div>
 			 </div>
 			 <!-- 右侧面板 -->
+
 			 <div class="checking_right">
+                 <!-- 连通性检测 -->
 			 	 <div class="checking_right_link" id="checking_right_link">
                      <table class='alltable' id="alltable">
                          <div class="alltable_head">
@@ -182,6 +184,7 @@
                          <?php echo file_get_contents('http://localhost/php/checking/hostLinkList.php'); ?>
                      </table>
                  </div>
+                <!-- 性能测试 -->
 			 	 <div class="checking_right_test" id="checking_right_test">
                      <div class="addhost_form" style="height: 18%;">
                          <form action="#" method="get">
@@ -212,6 +215,7 @@
                          </div>
                      </table>
                  </div>
+                 <!-- 端口检测 -->
 			 	 <div class="checking_right_port" id="checking_right_port">
                      <div class="addhost_form">
                          <form action="#" method="get">
@@ -243,6 +247,7 @@
                          </tr>
                      </table>
                  </div>
+                 <!-- 硬件检测 -->
 				 <div class="checking_right_device" id="checking_right_device" style="overflow-y: scroll;width: 81vw;">
                      <div class="addhost_form">
                          <form action="#" method="get">

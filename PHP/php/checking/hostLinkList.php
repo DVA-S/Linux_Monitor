@@ -23,12 +23,15 @@ echo "
     <th>主机名</th><th>类型</th><th>地址</th><th>状态</th><th>操作</th>
 </tr>";
 while($stmt->fetch()){
+    //$host_ip传递IP地址到接口，Status$host_ip传回ping结果
      echo "
     <tr>
         <td>$host_name</td>
         <td>$host_type</td>
         <td>$host_ip</td>
-        <td id='Status$host_ip'>未知</td>
+        <td id='Status$host_ip'>
+            <img src='./img/none.png' width='12%'>
+        </td>
         <td id='$host_ip' class='deleteBtn' onclick='linkHostStatus(this)'>Ping</td>
     </tr>
     ";
