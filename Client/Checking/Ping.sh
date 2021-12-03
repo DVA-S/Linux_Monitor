@@ -5,3 +5,4 @@ if [ $? -eq 0 ]; then
     else
       echo "<img src='./img/stop.png' width='12%'>";
 fi
+resat
