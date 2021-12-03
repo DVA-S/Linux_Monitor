@@ -13,7 +13,7 @@ addhost)
   sh /mnt/hgfs/Client/InsertData.sh > /opt/kill &
   ;;
 "stop")
-  kill $(cat /opt/kill)
+  kill $(cat /opt/kill) ; echo "" > /opt/kill
   ;;
 esac
 
