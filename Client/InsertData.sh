@@ -75,6 +75,9 @@ disk(){
 	`date +"%Y%m%d%T" | sed 's/://g'`
 	);" > /dev/null 2>&1
 }
+#当前进程号
+echo $$
+
 while(true)
 do
 {

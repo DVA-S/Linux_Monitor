@@ -10,7 +10,10 @@ addhost)
   sh /mnt/hgfs/Client/AddHostCurl.sh $2
   ;;
 "start")
-  sh /mnt/hgfs/Client/InsertData.sh &
+  sh /mnt/hgfs/Client/InsertData.sh > /opt/kill &
+  ;;
+"stop")
+  kill $(cat /opt/kill)
   ;;
 esac
 
@@ -18,4 +21,3 @@ esac
 #添加按钮（安装Client）
 #提示在客户端执行添加命令
 #添加命令（通过API向数据库添加主机信息）
-
