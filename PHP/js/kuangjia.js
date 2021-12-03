@@ -273,9 +273,15 @@ function addHost(){
 	var username =$("#hostuser").val();
 	var passwd = $("#hostpasswd").val();
 	$.get(
-		"jaina.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd},
+		"jaina.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd}
 	);
-	alert("请在设备上执行# jaina addhost 192.168.157.128");
+	//获取服务器IP
+	$.get(
+		"php/ServerIP.php",{},
+		function (data){
+			alert('请在要添加的设备上执行 # jaina addhost '+data);
+		});
+
 	setTimeout(function (){
 		location.reload()
 	},1500);

@@ -12,7 +12,7 @@ memory(){
 	            `echo $(cat /proc/swaps | sed -n '2p' | awk '{print $4}') 1024 | awk '{print $1/$2}'`,
 	            `free -m | sed -n '3p' | awk '{print $4}'`,
 	            `date +"%Y%m%d%T" | sed 's/://g'`
-	            );"
+	            );" > /dev/null 2>&1
 	  else
 	    mysql -uroot -pEsxi0000. -h192.168.157.128 -e "insert into bysj.memory (host_ip,mem_used,mem_free,swap_used,swap_free,data_time) values
       	      (
@@ -22,7 +22,7 @@ memory(){
       	      `echo $(cat /proc/swaps | sed -n '2p' | awk '{print $4}') 1024 | awk '{print $1/$2}'`,
       	      `free -m | sed -n '3p' | awk '{print $4}'`,
       	      `date +"%Y%m%d%T" | sed 's/://g'`
-      	      );"
+      	      );" > /dev/null 2>&1
 	  fi
 }
 
@@ -33,7 +33,7 @@ cpu(){
 	`echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}')\'`,
 	`echo $(vmstat -w 2 2 | sed -n '4p' | awk -F ' ' '{print $13,$14}') | awk '{print $1+$2}'`,
 	`date +"%Y%m%d%T" | sed 's/://g'`
-	);"
+	);" > /dev/null 2>&1
 }
 
 
@@ -49,7 +49,7 @@ network(){
     	`echo $(sar -n DEV 1 1 | grep "平均时间:" | awk -F ' ' '{print $6}' | sed -n '2,4p') | awk '{print $1+$2+$3}'`,
     	`echo $(sar -n DEV 1 1 | grep "平均时间:" | awk -F ' ' '{print $5}' | sed -n '2,4p') | awk '{print $1+$2+$3}'`,
     	`date +"%Y%m%d%T" | sed 's/://g'`
-    	);"
+    	);" > /dev/null 2>&1
   else
     	mysql -uroot -pEsxi0000. -h192.168.157.128 -e "insert into bysj.network(host_ip,network_name,network_up,network_down,data_time)
     	values(
@@ -58,7 +58,7 @@ network(){
     	`echo $(sar -n DEV 1 1 | grep Average: | awk -F ' ' '{print $6}' | sed -n '2,4p') | awk '{print $1+$2+$3}'`,
     	`echo $(sar -n DEV 1 1 | grep Average: | awk -F ' ' '{print $5}' | sed -n '2,4p') | awk '{print $1+$2+$3}'`,
     	`date +"%Y%m%d%T" | sed 's/://g'`
-    	);"
+    	);" > /dev/null 2>&1
   fi
 }
 
@@ -73,7 +73,7 @@ disk(){
 	`echo $(df -h | grep "/$" | awk -F ' ' '{print $3}' | sed 's/G//g')`,
 	`echo $(df -h | grep "/$" | awk -F ' ' '{print $4}' | sed 's/G//g')`,
 	`date +"%Y%m%d%T" | sed 's/://g'`
-	);"
+	);" > /dev/null 2>&1
 }
 while(true)
 do

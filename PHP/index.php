@@ -51,7 +51,7 @@
 			 <div class="checking_btn" title="设备的连通、性能、端口、硬件" onclick="btnOnClick(this)">自动巡检</div>
 			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">用户管理</div>
 			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this)">系统设置</div>
-             <p id="clock" style="top: 40%;left: 2.5%;color: #FFF;font-family: fantasy;display: inline;"></p>
+             <p id="clock" style="top: 40%;left: 25vw;color: #FFF;font-family: fantasy;display: inline;"></p>
              <script src="js/system/date.js"></script>
 		 </div>
 
@@ -107,12 +107,13 @@
                          <p>添加设备</p>
                      </div>
                      <div class="addhost_form">
+                         <!-- 选中/未选中输入框，面板动作 -->
                          <form action="#" method="get"
-                               onmouseover="(function (){
+                               onfocusin="(function (){
                                 document.getElementById('tip').style.display='block';
                                 document.getElementById('tip').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
                                 })()"
-                               onmouseout="(function (){
+                               onfocusout="(function (){
                                 document.getElementById('tip').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';
                                 })()"
                          >
@@ -123,7 +124,7 @@
                              <br />
                              <label for="hostuser" style="position: absolute;top: 8%;left: 30%;">用户名：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="hostuser" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuser" maxlength="20">
+                             <input id="hostuser" placeholder="root" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuser" maxlength="20">
                              <br />
                              <br />
                              <label for="hostpasswd" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
