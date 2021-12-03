@@ -21,6 +21,10 @@ createTB(){
 	passwd varchar(20) not null
 	);
 	"
+  #设置ip唯一
+	mysql -uroot -pEsxi0000. -e "
+	alter table bysj.host add unique(host_ip);
+	";
 
 	#内存表
 	mysql -uroot -pEsxi0000. -e "
