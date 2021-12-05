@@ -6,4 +6,3 @@ if [ $? -eq 0 ]; then
       echo "<img src='./img/stop.png' width='12%'>";
 fi
 resat
-分支测试

@@ -246,12 +246,13 @@ function deleteHost(element){
 }
 //设备管理 -- 连通性检测
 function linkHostStatus(element){
-	hostIP=element.id;
+	hostID=element.id;
 	// console.log(hostIP);
 	$.get(
-		"php/checking/hostLink.php",{"hostIP":hostIP},
+		"php/checking/hostLink.php",{"hostID":hostID},
 		function (data){
-			document.getElementById('Status'+hostIP).innerHTML=data;
+			document.getElementById("Status"+hostID).innerHTML=data;
+			// console.log(hostID);
 		}
 	);
 
