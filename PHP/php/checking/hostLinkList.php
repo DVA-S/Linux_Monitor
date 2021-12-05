@@ -29,10 +29,10 @@ while($stmt->fetch()){
         <td>$host_name</td>
         <td>$host_type</td>
         <td>$host_ip</td>
-        <td id='Status$host_ip'>
+        <td id='Statushost_$id'>
             <img src='./img/none.png' width='12%'>
         </td>
-        <td id='$host_ip' class='deleteBtn' onclick='linkHostStatus(this)'>Ping</td>
+        <td id='host_$id' class='deleteBtn' onclick='linkHostStatus(this)'>Ping</td>
     </tr>
     ";
 }
