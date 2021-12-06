@@ -9,7 +9,7 @@ mysqli_set_charset($con, "utf8");
 //利用数据行数判定登录
 $stmt = $con->prepare("delete from bysj.host where id=?");
 $stmt->bind_param("i",$hostID);
-$stmt->bind_result($Count);
+//$stmt->bind_result($Count);
 $stmt->execute();
 
 ?>

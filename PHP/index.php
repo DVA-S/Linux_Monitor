@@ -34,7 +34,7 @@
 					<label for="passwd" style="font-size: 14px;color: #000;">密码：</label>
 					<input id="passwd" style="border: 1px solid #888;height: 10%;width: 94%;padding: 1% 2%;border-radius: 2px;margin-top: 5px;" type="password" name="passwd"  onkeydown="keyLogin()">
 					<br /><br /><br />
-					<input id="loginbtn" class="submit" type="button" value="登  录" onclick="loginOkAnimation()" style="top: 0%;">
+					<input id="loginbtn" class="submit" type="button" value="登  录" onclick="loginJudge()" style="top: 0%;">
 				</form>
 			</div>
             <p style="color: #CCC;position: relative;top: 25%;left: 17vh;font-size: 2.2vh;">自动化运维与监控系统@2021 by ***</p>
@@ -106,55 +106,18 @@
                      <div class="alltable_head">
                          <p>添加设备</p>
                      </div>
-                     <div class="addhost_form">
-                         <!-- 选中/未选中输入框，面板动作 -->
-                         <form action="#" method="get"
-                               onfocusin="(function (){
-                                document.getElementById('tip').style.display='block';
-                                document.getElementById('tip').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
-                                })()"
-                               onfocusout="(function (){
-                                document.getElementById('tip').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';
-                                })()"
-                         >
-                             <label for="ipaddress" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
-                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="ipaddress" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddress" maxlength="20">
-                             <br />
-                             <br />
-                             <label for="hostuser" style="position: absolute;top: 8%;left: 30%;">用户名：</label>
-                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="hostuser" placeholder="root" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuser" maxlength="20">
-                             <br />
-                             <br />
-                             <label for="hostpasswd" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
-                             <input id="hostpasswd" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
-                             <br />
-                             <br />
-                             <div class="ok" onclick="addHost()" style="line-height: 3.5vh;height: 4vh;">&nbsp;&nbsp;添加</div>
-                         </form>
-                         <div id="tip" style="position:absolute;top: 12vh;display: none;">
-                             <p><i><b>所使用的主机用户必须支持远程ssh登录</b></i></p>
-                             <p>Ubuntu开启root用户远程登录方法如下：</p>
-                             <br>
+                     <div class="addhost_form" style="height: 68vh;">
+<!--                         <div id="tip" style="position:absolute;top: 12vh;display: block;">-->
+                             <p><i><b>第一步 - 安装：</b></i></p> <br>
                              <p style="background-color: #EEE;line-height: 25px;padding-top: 0.5vh;padding-bottom: 0.5vh;width: 70vw;top: -1vh;">
-                                 &nbsp;&nbsp;#&nbsp;apt update <br>
-                                 &nbsp;&nbsp;#&nbsp;apt -y install openssh-server <br>
-                                 &nbsp;&nbsp;#&nbsp;cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak <br>
-                                 &nbsp;&nbsp;#&nbsp;sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config <br>
-                                 &nbsp;&nbsp;#&nbsp;sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config <br>
-                                 &nbsp;&nbsp;#&nbsp;systemctl restart sshd <br>
+                                 &nbsp;&nbsp;#&nbsp;wget http://<?php echo file_get_contents('http://192.168.157.128/php/ServerIP.php'); ?>/Client/ -P /opt/ <br>
+                                 &nbsp;&nbsp;#&nbsp;wget -nc -B http://<?php echo file_get_contents('http://192.168.157.128/php/ServerIP.php'); ?>/Client/ -F -nH --cut-dirs=3 -i /opt/index.html -P /etc/jaina/ <br>
+                                 &nbsp;&nbsp;#&nbsp;mv /etc/jaina/jaina.sh /usr/bin/jaina && chmod a+x /usr/bin/jaina <br>
                              </p>
-                             <p>CentOS默认开启root远程登录，如果无法访问可尝试关闭防火墙和selinux</p>
-                             <br>
+                             <p><i><b>第二步 - 添加设备：</b></i></p> <br>
                              <p style="background-color: #EEE;line-height: 25px;padding-top: 0.5vh;padding-bottom: 0.5vh;width: 70vw;top: -1vh;">
-                                 &nbsp;&nbsp;#&nbsp;systemctl stop firewalld <br>
-                                 &nbsp;&nbsp;#&nbsp;iptables -F <br>
-                                 &nbsp;&nbsp;#&nbsp;iptables -X <br>
-                                 &nbsp;&nbsp;#&nbsp;iptables -Z <br>
-                                 &nbsp;&nbsp;#&nbsp;iptables-save <br>
-                                 &nbsp;&nbsp;#&nbsp;setenforce 0 <br>
-                         </div>
+                                 &nbsp;&nbsp;#&nbsp;jaina addhost  <?php echo file_get_contents('http://192.168.157.128/php/ServerIP.php'); ?> <br>
+<!--                         </div>-->
                      </div>
                  </div>
              </div>
@@ -187,25 +150,27 @@
                 <!-- 性能测试 -->
 			 	 <div class="checking_right_test" id="checking_right_test">
                      <div class="addhost_form" style="height: 18%;">
-                         <form action="#" method="get">
-                             <label for="ipaddressChecking" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
-                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="ipaddressChecking" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddressChecking" maxlength="20">
-                             <br />
-                             <br />
-                             <label for="hostuserChecking" style="position: absolute;top: 8%;left: 30%;">用户名：</label>
-                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="hostuserChecking" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuserChecking" maxlength="20">
-                             <br />
-                             <br />
-                             <label for="hostpasswdChecking" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
-                             <input id="hostpasswdChecking" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
-                             <br />
-                             <br />
+<!--                         <form action="#" method="get">-->
+<!--                             <label for="ipaddressChecking" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>-->
+<!--                             <input id="ipaddressChecking" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddressChecking" maxlength="20">-->
+<!--                             <br />-->
+<!--                             <br />-->
+<!--                             <label for="hostuserChecking" style="position: absolute;top: 8%;left: 30%;">用户名：</label>-->
+<!--                             <input id="hostuserChecking" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuserChecking" maxlength="20">-->
+<!--                             <br />-->
+<!--                             <br />-->
+<!--                             <label for="hostpasswdChecking" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>-->
+<!--                             <input id="hostpasswdChecking" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">-->
+<!--                             <br />-->
+<!--                             <br />-->
+                         <select id="perfSingle">
+                             <option value ="volvo">请选择主机</option>
+                             <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php'); ?>
+                         </select>
                              <div class="ok" id="hostDisk" style="position: absolute;top: 51%;left: 20%;" onclick="hostPerf(this)">&nbsp;硬盘</div>
                              <div class="ok" id="hostNetwork" style="position: absolute;top: 51%;left: 40%;" onclick="hostPerf(this)">&nbsp;网络</div>
                              <div class="ok" id="hostCpu" style="position: absolute;top: 51%;left: 60%;" onclick="hostPerf(this)">&nbsp;处理器</div>
-                         </form>
+<!--                         </form>-->
                      </div>
                      <br />
                      <br />

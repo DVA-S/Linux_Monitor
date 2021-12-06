@@ -61,7 +61,7 @@ function keySearchHost(){
 }
 
 //登录 -- 判断显示动画、设置Cookie
-function loginOkAnimation(){
+function loginJudge(){
 	var username =$("#username").val();
 	var passwd = $("#passwd").val();
 	$.post(
@@ -270,22 +270,22 @@ function SearchHost(){
 
 //自动巡检 -- 添加主机
 function addHost(){
-	var ipaddress =$("#ipaddress").val();
-	var username =$("#hostuser").val();
-	var passwd = $("#hostpasswd").val();
-	$.get(
-		"jaina.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd}
-	);
-	//获取服务器IP
-	$.get(
-		"php/ServerIP.php",{},
-		function (data){
-			alert('请在要添加的设备上执行 # jaina addhost '+data);
-		});
-
-	setTimeout(function (){
-		location.reload()
-	},1500);
+	// var ipaddress =$("#ipaddress").val();
+	// var username =$("#hostuser").val();
+	// var passwd = $("#hostpasswd").val();
+	// $.get(
+	// 	"jaina.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd}
+	// );
+	// //获取服务器IP
+	// $.get(
+	// 	"php/ServerIP.php",{},
+	// 	function (data){
+	// 		alert('请在要添加的设备上执行 # jaina addhost '+data);
+	// 	});
+	//
+	// setTimeout(function (){
+	// 	location.reload()
+	// },1500);
 }
 
 //用户管理 -- 添加用户
@@ -328,10 +328,13 @@ function addUserDev(){
 function hostPerf(element){
 	document.getElementById("checkingPerf").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;opacity: 0.5;width: 30%;\" />";
 	var go=element.id;
-	console.log(go);
-	var ipaddress =$("#ipaddressChecking").val();
-	var username =$("#hostuserChecking").val();
-	var passwd = $("#hostpasswdChecking").val();
+	// console.log(go);
+	// var ipaddress =$("#ipaddressChecking").val();
+	// var username =$("#hostuserChecking").val();
+	// var passwd = $("#hostpasswdChecking").val();
+
+	//获取下拉列表的值
+
 	switch (go){
 		case 'hostDisk':
 			$.get(
@@ -361,22 +364,6 @@ function hostPerf(element){
 			break;
 	}
 }
-
-//自动巡检 -- 连通性检测ping
-// function hostLink(){
-// 	document.getElementById("alltable").innerHTML="<table class='alltable' id=\"alltable\">\n" +
-// 		"                         <tr>\n" +
-// 		"                             <th>主机名</th><th>类型</th><th>地址</th><th>状态</th><th>操作</th>\n" +
-// 		"                         </tr>\n" +
-// 		"                     </table>" +
-// 		"<img src=\"img/loading.gif\" style=\"position: relative;left: 100%;top: 0;opacity: 0.5;width: 100%;\" />";
-// 	$.get(
-// 		"php/checking/hostLinkList.php",{},
-// 		function(data){
-// 			document.getElementById("alltable").innerHTML=data;
-// 		}
-// 	);
-// }
 
 //自动巡检 -- 获取端口信息
 function hostPort(){
