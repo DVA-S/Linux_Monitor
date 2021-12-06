@@ -10,6 +10,7 @@
 $ipaddress = isset($_GET['ipaddress']) ? htmlspecialchars($_GET['ipaddress']) : '';
 $username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : '';
 $passwd = isset($_GET['passwd']) ? htmlspecialchars($_GET['passwd']) : '';
+
 $type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 
 switch ($type){

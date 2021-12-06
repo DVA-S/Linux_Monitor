@@ -1,4 +1,5 @@
 <?php
+//参数 = host_177
 $hostID = isset($_GET['hostID']) ? htmlspecialchars($_GET['hostID']) : '';
 $hostID = substr($hostID,5);
 
