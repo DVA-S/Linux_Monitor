@@ -222,8 +222,7 @@ function viewPanel(view_btn){
 		case 12:case 13:case 14:case 15:
 		$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').css('display', 'none');
 		document.getElementById(view_btn).style.display="block";		break;
-		default:
-			break;
+		default:														break;
 	}
 }
 /* - ---------------------------------------------------------------------------------动作交互----------------------------------------------------------------------------------- */
@@ -246,10 +245,18 @@ function deleteHost(element){
 }
 //设备管理 -- 连通性检测
 function linkHostStatus(element){
+	//(host_177)
 	hostID=element.id;
-	// console.log(hostIP);
+	hostID = hostID.replace("ping","");
+
+	//删除ping  ipping177
+	hostIP="ip"+hostID;
+	console.log(hostIP.replace("ping",""));
+
+	clientIP = document.getElementById(hostIP.replace("ping","")).innerText;
+	console.log(clientIP);
 	$.get(
-		"php/checking/hostLink.php",{"hostID":hostID},
+		"Server/Checking/ServerSocket.php",{"type":"ping"+hostID,"clientIP":clientIP},
 		function (data){
 			document.getElementById("Status"+hostID).innerHTML=data;
 			// console.log(hostID);
@@ -328,33 +335,39 @@ function addUserDev(){
 function hostPerf(element){
 	document.getElementById("checkingPerf").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;opacity: 0.5;width: 30%;\" />";
 	var go=element.id;
-	// console.log(go);
-	// var ipaddress =$("#ipaddressChecking").val();
-	// var username =$("#hostuserChecking").val();
-	// var passwd = $("#hostpasswdChecking").val();
-
-	//获取下拉列表的值
 
 	switch (go){
 		case 'hostDisk':
+			//获取下拉列表的值(Singlehost_181)
+			var hostIP = $("#perfSingle").val();
+			//多出一个空格引发的血案
+			hostIP = hostIP.replace("Singlehost_","");
 			$.get(
-				"php/checking/hostPerformance.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,"type":"disk"},
+				"../Server/Checking/ServerSocket.php",{"type":"disk","clientIP":hostIP},
 				function(data){
 					document.getElementById("checkingPerf").innerHTML=data;
 				}
 			);
 			break;
 		case 'hostNetwork':
+			//获取下拉列表的值(Singlehost_181)
+			var hostIP = $("#perfSingle").val();
+			//多出一个空格引发的血案
+			hostIP = hostIP.replace("Singlehost_","");
 			$.get(
-				"php/checking/hostPerformance.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,"type":"network"},
+				"../Server/Checking/ServerSocket.php",{"type":"nets","clientIP":hostIP},
 				function(data){
 					document.getElementById("checkingPerf").innerHTML=data;
 				}
 			);
 			break;
 		case 'hostCpu':
+			//获取下拉列表的值(Singlehost_181)
+			var hostIP = $("#perfSingle").val();
+			//多出一个空格引发的血案
+			hostIP = hostIP.replace("Singlehost_","");
 			$.get(
-				"php/checking/hostPerformance.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,"type":"cpu"},
+				"../Server/Checking/ServerSocket.php",{"type":"cpus","clientIP":hostIP},
 				function(data){
 					document.getElementById("checkingPerf").innerHTML=data;
 				}
@@ -364,6 +377,9 @@ function hostPerf(element){
 			break;
 	}
 }
+//点击按钮，从客户端发送hostCpu到服务器，服务器如果收到hostCpu则执行命令，并将命令发送到客户端，客户端输出到前端。
+//问题是 客户端发消息的格式，“.=”是什么意思。
+//弄清楚了的话,比较省接口.
 
 //自动巡检 -- 获取端口信息
 function hostPort(){

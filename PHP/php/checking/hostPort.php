@@ -3,6 +3,7 @@ $ipaddress = isset($_GET['ipaddress']) ? htmlspecialchars($_GET['ipaddress']) : 
 $username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : '';
 $passwd = isset($_GET['passwd']) ? htmlspecialchars($_GET['passwd']) : '';
 
+// jaina 待优化的代码 下次提交将会用socket的方式实现
 $ssh = `
         expect -c "
         spawn /usr/bin/ssh $username@$ipaddress
