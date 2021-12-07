@@ -164,7 +164,7 @@
 <!--                             <br />-->
 <!--                             <br />-->
                          <select id="perfSingle">
-                             <option value ="volvo">请选择主机</option>
+                             <option value ="">请选择主机</option>
                              <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php'); ?>
                          </select>
                              <div class="ok" id="hostDisk" style="position: absolute;top: 51%;left: 20%;" onclick="hostPerf(this)">&nbsp;硬盘</div>
