@@ -163,13 +163,13 @@
 <!--                             <input id="hostpasswdChecking" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">-->
 <!--                             <br />-->
 <!--                             <br />-->
-                         <select id="perfSingle">
+                         <select id="perfSingle" style="top: 33%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                              <option value ="">请选择主机</option>
                              <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php'); ?>
                          </select>
-                             <div class="ok" id="hostDisk" style="position: absolute;top: 51%;left: 20%;" onclick="hostPerf(this)">&nbsp;硬盘</div>
-                             <div class="ok" id="hostNetwork" style="position: absolute;top: 51%;left: 40%;" onclick="hostPerf(this)">&nbsp;网络</div>
-                             <div class="ok" id="hostCpu" style="position: absolute;top: 51%;left: 60%;" onclick="hostPerf(this)">&nbsp;处理器</div>
+                             <div class="ok" id="hostDisk" style="position: absolute;top: 38%;left: 34%;" onclick="hostPerf(this)">&nbsp;硬盘</div>
+                             <div class="ok" id="hostNetwork" style="position: absolute;top: 38%;left: 46%;" onclick="hostPerf(this)">&nbsp;网络</div>
+                             <div class="ok" id="hostCpu" style="position: absolute;top: 38%;left: 58%;" onclick="hostPerf(this)">&nbsp;处理器</div>
 <!--                         </form>-->
                      </div>
                      <br />
@@ -183,23 +183,11 @@
                  <!-- 端口检测 -->
 			 	 <div class="checking_right_port" id="checking_right_port">
                      <div class="addhost_form">
-                         <form action="#" method="get">
-                             <label for="ipaddressCheckingPort" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
-                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="ipaddressCheckingPort" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddressCheckingPort" maxlength="20">
-                             <br />
-                             <br />
-                             <label for="hostuserCheckingPort" style="position: absolute;top: 8%;left: 30%;">用户名：</label>
-                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="hostuserCheckingPort" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuserCheckingPort" maxlength="20">
-                             <br />
-                             <br />
-                             <label for="hostpasswdCheckingPort" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
-                             <input id="hostpasswdCheckingPort" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
-                             <br />
-                             <br />
-                             <div class="ok" id="hostDisk"  onclick="hostPort()">&nbsp;端口检测</div>
-                         </form>
+                         <select id="perfSinglePort" style="top: 14%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
+                             <option value ="">请选择主机</option>
+                             <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php'); ?>
+                         </select>
+                         <div class="ok" id="hostDisk" style="position: absolute;top: 23%;left: 34%;height: 50%;" onclick="hostPort()">&nbsp;端口检测</div>
                      </div>
                      <br />
                      <br />
@@ -216,22 +204,25 @@
 				 <div class="checking_right_device" id="checking_right_device" style="overflow-y: scroll;width: 81vw;">
                      <div class="addhost_form">
                          <form action="#" method="get">
-                             <label for="ipaddressCheckingDevice" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>
-                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="ipaddressCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddressCheckingDevice" maxlength="20">
-                             <br />
-                             <br />
-                             <label for="hostuserCheckingDevice" style="position: absolute;top: 8%;left: 30%;">用户名：</label>
-                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="hostuserCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuserCheckingDevice" maxlength="20">
-                             <br />
-                             <br />
-                             <label for="hostpasswdCheckingDevice" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>
-                             <input id="hostpasswdCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">
-                             <br />
-                             <br />
-                             <div class="ok" id="hostDisk"  onclick="hostDevice()">&nbsp;设备检测</div>
-                         </form>
+<!--                             <label for="ipaddressCheckingDevice" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>-->
+<!--                             <input id="ipaddressCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddressCheckingDevice" maxlength="20">-->
+<!--                             <br />-->
+<!--                             <br />-->
+<!--                             <label for="hostuserCheckingDevice" style="position: absolute;top: 8%;left: 30%;">用户名：</label>-->
+<!--                             <input id="hostuserCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuserCheckingDevice" maxlength="20">-->
+<!--                             <br />-->
+<!--                             <br />-->
+<!--                             <label for="hostpasswdCheckingDevice" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>-->
+<!--                             <input id="hostpasswdCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">-->
+<!--                             <br />-->
+<!--                             <br />-->
+                             <select id="perfSingleDevice" style="top: 14%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
+                                 <option value ="">请选择主机</option>
+                                 <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php'); ?>
+                             </select>
+                             <div class="ok" id="hostDisk" style="position: absolute;top: 23%;left: 34%;height: 50%;" onclick="hostDevice()">&nbsp;设备检测</div>
+<!--                         </form>-->
+
                      </div>
                      <br />
                      <br />

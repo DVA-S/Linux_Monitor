@@ -33,7 +33,6 @@ if(!socket_write($socket, $in, strlen($in))) {
     echo "<img src='/img/stop.png' width='12%'>";
     exit();
 }
-//socket_write($socket, $in, strlen($in));
 
 //读取指定长度的数据
 while($out = socket_read($socket, 2048)) {

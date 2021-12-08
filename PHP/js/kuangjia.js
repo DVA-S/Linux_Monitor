@@ -383,50 +383,69 @@ function hostPerf(element){
 
 //自动巡检 -- 获取端口信息
 function hostPort(){
-	var ipaddress =$("#ipaddressPort").val();
-	var username =$("#hostuserPort").val();
-	var passwd = $("#hostpasswdPort").val();
+	document.getElementById("checkingPerfPort").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;opacity: 0.5;width: 30%;\" />";
+
+	//获取下拉列表的值(Singlehost_181)
+	var hostIP = $("#perfSinglePort").val();
+	//多出一个空格引发的血案
+	hostIP = hostIP.replace("Singlehost_","");
 	$.get(
-		"php/checking/hostPort.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd},
+		"../Server/Checking/ServerSocket.php",{"type":"port","clientIP":hostIP},
 		function(data){
-			document.getElementById("checkingPerfPort").innerHTML=data;
+			document.getElementById("checkingPerfPort").innerHTML="<tr>\n" +
+				"    <th>主机名</th><th>地址</th><th>端口类型</th><th>端口</th><th>进程</th>\n" +
+				"</tr>"+data;
 		}
 	);
 }
 
 //自动巡检 -- 获取硬件信息
 function hostDevice(){
-	var ipaddress =$("#ipaddressCheckingDevice").val();
-	var username =$("#hostuserCheckingDevice").val();
-	var passwd = $("#hostpasswdCheckingDevice").val();
+	document.getElementById("checkingPerfDevice").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;opacity: 0.5;width: 30%;\" />";
+
+	//获取下拉列表的值(Singlehost_181)
+	var hostIP = $("#perfSingleDevice").val();
+	//多出一个空格引发的血案
+	hostIP = hostIP.replace("Singlehost_","");
+
 	$.get(
-		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,type:"cpu"},
+		"../Server/Checking/ServerSocket.php",{"type":"cpui","clientIP":hostIP},
 		function(data){
-			document.getElementById("checkingPerfDevice").innerHTML=data;
+			document.getElementById("checkingPerfDevice").innerHTML="        <tr>\n" +
+				"            <th>CPU核心</th><th>CPU型号</th><th>CPU频率</th>\n" +
+				"        </tr>"+"<tr>"+data+"</tr>";
 		}
 	);
 	$.get(
-		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,type:"mother"},
+		"../Server/Checking/ServerSocket.php",{"type":"moth","clientIP":hostIP},
 		function(data){
-			document.getElementById("checkingPerfDeviceMother").innerHTML=data;
+			document.getElementById("checkingPerfDeviceMother").innerHTML="<tr>\n" +
+				"            <th>主板型号</th>\n" +
+				"        </tr>"+"<tr>"+data+"</tr>";
 		}
 	);
 	$.get(
-		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,type:"memory"},
+		"../Server/Checking/ServerSocket.php",{"type":"memo","clientIP":hostIP},
 		function(data){
-			document.getElementById("checkingPerfDeviceMemory").innerHTML=data;
+			document.getElementById("checkingPerfDeviceMemory").innerHTML="        <tr>\n" +
+				"            <th>内存条数</th><th>内存大小</th><th>频率</th>\n" +
+				"        </tr>"+"<tr>"+data+"</tr>";
 		}
 	);
 	$.get(
-		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,type:"network"},
+		"../Server/Checking/ServerSocket.php",{"type":"neti","clientIP":hostIP},
 		function(data){
-			document.getElementById("checkingPerfDeviceNetwork").innerHTML=data;
+			document.getElementById("checkingPerfDeviceNetwork").innerHTML="        <tr>\n" +
+				"            <th>网卡型号</th><th>网卡速度</th>\n" +
+				"        </tr>"+"<tr>"+data+"</tr>";
 		}
 	);
 	$.get(
-		"php/checking/hostDevice.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd,type:"disk"},
+		"../Server/Checking/ServerSocket.php",{"type":"diki","clientIP":hostIP},
 		function(data){
-			document.getElementById("checkingPerfDeviceDisk").innerHTML=data;
+			document.getElementById("checkingPerfDeviceDisk").innerHTML="        <tr>\n" +
+				"            <th>硬盘数量</th><th>磁盘驱动器</th><th>硬盘容量</th>\n" +
+				"        </tr>"+"<tr>"+data+"</tr>";
 		}
 	);
 }

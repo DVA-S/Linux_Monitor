@@ -10,6 +10,12 @@ case $1 in
   echo "    testcpus                          查看cpu运行情况"
   echo "    testdisk                          测试磁盘读写速度"
   echo "    testnets                          测试网络传输速度"
+  echo "    testport                          查看开放的端口"
+  echo "    testcpui                          查看cpu型号等信息"
+  echo "    testmoth                          查看主板信息"
+  echo "    testmemo                          查看内存信息"
+  echo "    testneti                          查看网卡信息"
+  echo "    testdiki                          查看硬盘信息"
   ;;
 "addhost")
   sh /etc/jaina/AddHostCurl.sh $2
@@ -33,6 +39,31 @@ case $1 in
 #  `speedtest --list`(测速时的意外情况)
   echo `speedtest | grep :`
   ;;
+"testport")
+  echo `sh /etc/jaina/Port.sh`
+  ;;
+"testcpui")
+  echo `cat /proc/cpuinfo | grep processor | wc -l | sed 's/^/<td>/g' | sed 's/$/<\/td>/g'`
+  echo `cat /proc/cpuinfo | sed -n '5p' | awk -F ':' '{print $2}' | sed 's/^/<td>/g' | sed 's/$/<\/td>/g'`
+  echo `cat /proc/cpuinfo | sed -n '8p' | awk -F ':' '{print $2}' | sed 's/$/ GHz<\/td>/g' | sed 's/^/<td>/g'`
+  ;;
+"testmoth")
+  echo `cat /opt/device_all |grep -A16 "Base Board Information$" | grep "Product Name:" |awk -F ':' '{print $2}' | sed 's/$/<\/td>/g' | sed 's/^/<td>/g'`
+  ;;
+"testmemo")
+  echo `cat /opt/device_all |grep -A16 "Memory Device$" | grep "MB$" | wc -l | sed 's/$/<\/td>/g' | sed 's/^/<td>/g'`
+  echo `cat /opt/device_all |grep -A16 "Memory Device$" | grep "MB$" | sed 's/$/<\/td>/g' | sed 's/^/<td>/g'`
+  echo `cat /opt/device_all |grep -A16 "Memory Device$" | grep "MHz$" | sed 's/$/<\/td>/g' | sed 's/^/<td>/g'`
+  ;;
+"testneti")
+  echo `lspci | grep Ethernet | sed 's/$/<\/td>/g' | sed 's/^/<td>/g' | sed -n '1p'`
+  echo `echo \'$(ethtool $(ip a | grep "<" | awk -F ":" '{print $2}'| sed 's/^ //g' | sed -n '2p') |  grep -i speed | awk -F ":" '{print $2}' | sed 's/^ //g') | sed 's/$/<\/td>/g' | sed 's/^/<td>/g'`
+  ;;
+"testdiki")
+  echo `lsblk -S | grep disk |wc -l | sed 's/$/<\/td>/g' | sed 's/^/<td>/g'`
+  echo `lspci | grep SCSI | sed 's/$/<\/td>/g' | sed 's/^/<td>/g'`
+  echo `lsblk | grep ^sd | awk '{print $4}' | sed 's/$/<\/td>/g' | sed 's/^/<td>/g'`
+  ;;
 "start")
   sh /etc/jaina/InsertData.sh > /etc/jaina/JainaStatus &
   ;;
@@ -40,3 +71,4 @@ case $1 in
   kill $(cat /etc/jaina/JainaStatus) ; echo "" > /etc/jaina/JainaStatus
   ;;
 esac
+

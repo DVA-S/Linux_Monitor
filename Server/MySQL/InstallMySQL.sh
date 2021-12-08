@@ -159,6 +159,7 @@ createTB(){
 	data_time datetime  not null
 	);
 	"
+
 	#日志表
 	mysql -uroot -pEsxi0000. -e "
 	use bysj;
@@ -170,19 +171,19 @@ createTB(){
 	);
 	"
 
-		#系统用户表
-  	mysql -uroot -pEsxi0000. -e "
-  	use bysj;
-  	create table if not exists sysUser (
-  	id int(255) not null primary key auto_increment,
-  	username varchar(20) null,
-  	user varchar(20) not null,
-  	passwd varchar(20) not null,
-  	email varchar(30)  null,
-  	sex varchar(8) null,
-  	phone int(255) null
-  	);
-  	"
+	#系统用户表
+  mysql -uroot -pEsxi0000. -e "
+  use bysj;
+  create table if not exists sysUser (
+  id int(255) not null primary key auto_increment,
+  username varchar(20) null,
+  user varchar(20) not null,
+  passwd varchar(20) not null,
+  email varchar(30)  null,
+  sex varchar(8) null,
+  phone int(255) null
+  );
+  "
 
   	#设备用户表
     mysql -uroot -pEsxi0000. -e "
