@@ -43,7 +43,7 @@
 		 <!-- 导航栏 -->
 		 <div class="head_div" id="head_div">
             <!--loading（）：点击监控面板按钮 重新触发刷新事件-->
-             <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="" style="width: 7vw;box-shadow: none;">
+             <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="" style="width: 7vw;box-shadow: none;background-image: none;">
                  <img alt="logo" src="img/logo.png" width="38%" style="left: 20%;">
              </div>
 			 <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="btnOnClick(this);loading();">监控面板</div>
@@ -150,19 +150,6 @@
                 <!-- 性能测试 -->
 			 	 <div class="checking_right_test" id="checking_right_test">
                      <div class="addhost_form" style="height: 18%;">
-<!--                         <form action="#" method="get">-->
-<!--                             <label for="ipaddressChecking" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>-->
-<!--                             <input id="ipaddressChecking" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddressChecking" maxlength="20">-->
-<!--                             <br />-->
-<!--                             <br />-->
-<!--                             <label for="hostuserChecking" style="position: absolute;top: 8%;left: 30%;">用户名：</label>-->
-<!--                             <input id="hostuserChecking" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuserChecking" maxlength="20">-->
-<!--                             <br />-->
-<!--                             <br />-->
-<!--                             <label for="hostpasswdChecking" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>-->
-<!--                             <input id="hostpasswdChecking" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">-->
-<!--                             <br />-->
-<!--                             <br />-->
                          <select id="perfSingle" style="top: 33%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                              <option value ="">请选择主机</option>
                              <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php'); ?>
@@ -170,7 +157,6 @@
                              <div class="ok" id="hostDisk" style="position: absolute;top: 38%;left: 34%;" onclick="hostPerf(this)">&nbsp;硬盘</div>
                              <div class="ok" id="hostNetwork" style="position: absolute;top: 38%;left: 46%;" onclick="hostPerf(this)">&nbsp;网络</div>
                              <div class="ok" id="hostCpu" style="position: absolute;top: 38%;left: 58%;" onclick="hostPerf(this)">&nbsp;处理器</div>
-<!--                         </form>-->
                      </div>
                      <br />
                      <br />
@@ -204,25 +190,11 @@
 				 <div class="checking_right_device" id="checking_right_device" style="overflow-y: scroll;width: 81vw;">
                      <div class="addhost_form">
                          <form action="#" method="get">
-<!--                             <label for="ipaddressCheckingDevice" style="position: absolute;top: 8%;left: 2%;">IP地址：</label>-->
-<!--                             <input id="ipaddressCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 8%;" type="text" name="ipaddressCheckingDevice" maxlength="20">-->
-<!--                             <br />-->
-<!--                             <br />-->
-<!--                             <label for="hostuserCheckingDevice" style="position: absolute;top: 8%;left: 30%;">用户名：</label>-->
-<!--                             <input id="hostuserCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 36%;" type="text" name="hostuserCheckingDevice" maxlength="20">-->
-<!--                             <br />-->
-<!--                             <br />-->
-<!--                             <label for="hostpasswdCheckingDevice" style="position: absolute;top: 8%;left: 58%;">密&nbsp;&nbsp;&nbsp;码：</label>-->
-<!--                             <input id="hostpasswdCheckingDevice" class="form_input" style="position: absolute;top: 8%;left: 64%;" type="password" name="hostpasswd">-->
-<!--                             <br />-->
-<!--                             <br />-->
                              <select id="perfSingleDevice" style="top: 14%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                                  <option value ="">请选择主机</option>
                                  <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php'); ?>
                              </select>
                              <div class="ok" id="hostDisk" style="position: absolute;top: 23%;left: 34%;height: 50%;" onclick="hostDevice()">&nbsp;设备检测</div>
-<!--                         </form>-->
-
                      </div>
                      <br />
                      <br />
