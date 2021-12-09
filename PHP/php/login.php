@@ -1,7 +1,7 @@
 <?php
     $user = isset($_POST['user']) ? htmlspecialchars($_POST['user']) : '';
     $passwd = isset($_POST['passwd']) ? htmlspecialchars($_POST['passwd']) : '';
-    $passwd = hash('sha256',$passwd);
+//    $passwd = hash('sha256',isset($_POST['passwd']) ? htmlspecialchars($_POST['passwd']) : '');
     $con = null;
     $login_status = null;
 

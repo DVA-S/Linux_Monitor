@@ -44,8 +44,8 @@
 		 <!-- 导航栏 -->
 		 <div class="head_div" id="head_div">
             <!--loading（）：点击监控面板按钮 重新触发刷新事件-->
-             <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="" style="width: 7vw;box-shadow: none;background-image: none;">
-                 <img alt="logo" src="img/logo.png" width="38%" style="left: 20%;">
+             <div class="panel_btn" title="当前用户" onclick="" style="width: 4vw;box-shadow: none;background-image: none;margin: 0;top: -4px;border-radius: 100px;">
+                 <img alt="logo" src="img/logo.png" width="70%" style="left: 20%;">
              </div>
 			 <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="btnOnClick(this);loading();">监控面板</div>
 			 <div class="host_btn" title="设备的总览、列表、添加" onclick="btnOnClick(this)">设备管理</div>
@@ -268,12 +268,10 @@
                          </tr>
                          <?php echo file_get_contents('http://localhost/php/user/userList.php'); ?>
                      </table>
-                     <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;" onclick="addUserWindows()">添加用户</button>
+                     <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;border: none;" onclick="addUserWindows()">添加用户</button>
                      <div id="addSysUser" class="floatWindows">
                          <form class="addWindows">
                              <h4 align="center">添加系统用户</h4>
-<!--                             <label for="usernameAdd" style="position: absolute;top: 7%;left: 22%;">姓&nbsp;&nbsp;&nbsp;名：</label>-->
-<!--                             <input id="usernameAdd" style="position: absolute;top: 8%;left: 33%;" type="text" name="usernameAdd" maxlength="20">-->
                              <br>
                              <br>
                              <label for="userAdd" style="position: absolute;top: 22%;left: 22%;">用户名：</label>
@@ -303,8 +301,11 @@
                              <input id="phone" style="position: absolute;top: 83%;left: 33%;" type="text" name="phone" maxlength="20">
                              <br>
                              <br>
-                             <div class="floatWindowsBtn ok" onclick="addUserSys();location.reload();">&nbsp;添加</div>
-                             <div class="floatWindowsBtn ok" onclick="(function (){document.getElementById('addSysUser').style.display='none';})()" style="left: 30%;">&nbsp;关闭</div>
+                             <div class="floatWindowsBtn ok" onclick="addUserSys();location.reload();" style="top: 92%;">&nbsp;添加</div>
+                             <div class="floatWindowsBtn ok" onclick="(function (){
+
+                                 document.getElementById('addSysUser').style.animation='0.5s ease forwards running login_loginOk';
+                             })()" style="left: 30%;top: 92%;">&nbsp;关闭</div>
                          </form>
                      </div>
                  </div>
@@ -318,7 +319,7 @@
                          </tr>
                          <?php echo file_get_contents('http://localhost/php/user/devList.php'); ?>
                      </table>
-                     <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;" onclick="addUserWindowsDev()">添加用户</button>
+                     <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;border: none;" onclick="addUserWindowsDev()">添加用户</button>
                      <div id="addSysUserDev" class="floatWindows">
                          <form class="addWindows">
                              <h4 align="center">添加设备用户</h4>
@@ -337,9 +338,12 @@
                              <input id="passwdDev" style="position: absolute;top: 38%;left: 33%;" type="password" name="passwdDev" maxlength="20">
                              <br>
                              <br>
-                             <div class="floatWindowsBtn ok" onclick="addUserDev();location.reload();">&nbsp;添加</div>
-                             <div class="floatWindowsBtn ok" onclick="(function (){document.getElementById('addSysUserDev').style.display='none';
-                             })();" style="left: 30%;">&nbsp;关闭</div>
+                             <div class="floatWindowsBtn ok" onclick="addUserDev();location.reload();" style="top: 92%;">&nbsp;添加</div>
+                             <div class="floatWindowsBtn ok" onclick="(function (){
+
+                                 document.getElementById('addSysUserDev').style.animation='0.5s ease forwards running login_loginOk';
+                             }
+                             )();" style="left: 30%;top: 92%;">&nbsp;关闭</div>
                          </form>
                      </div>
                  </div>

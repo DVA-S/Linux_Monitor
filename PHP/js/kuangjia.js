@@ -63,7 +63,9 @@ function keySearchHost(){
 //登录 -- 判断显示动画、设置Cookie
 function loginJudge(){
 	var username =$("#username").val();
-	var passwd = $("#passwd").val();
+	//去空格后，哈希加密 ( 此处加密的好处是，1，密码不会以明文的方式在网络上传输 2，即使是网站管理员也不知道你的密码 )
+	var passwd = SHA256_hash($("#passwd").val().replace(" ",""));
+
 	$.post(
 		"php/login.php",{"user":username,"passwd":passwd},
 		function(data,status){
@@ -299,9 +301,11 @@ function addHost(){
 //弹窗
 function addUserWindows(){
 	document.getElementById("addSysUser").style.display="block";
+	document.getElementById("addSysUser").style.animation="0.5s ease forwards running index_panel_loginOk";
 }
 function addUserWindowsDev(){
 	document.getElementById("addSysUserDev").style.display="block";
+	document.getElementById("addSysUserDev").style.animation="0.5s ease forwards running index_panel_loginOk";
 }
 //添加数据
 function addUserSys(){
