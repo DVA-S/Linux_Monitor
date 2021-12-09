@@ -23,6 +23,7 @@ case $1 in
   echo {`date`}-{$1-$2}-{Status:$?} >> /var/log/jaina.log
   ;;
 "ping")
+  #参数2是在client中根据ID从数据库中查询出来的
   ping -c 3 $2 > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         res="<img src='/img/go.png' width='12%'>";

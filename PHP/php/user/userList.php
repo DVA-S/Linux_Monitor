@@ -6,7 +6,6 @@
 //$type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 $con = null;
 $id  = null;
-$username = null;
 $user = null;
 $email = null;
 $sex = null;
@@ -17,14 +16,19 @@ mysqli_select_db($con,"bysj");
 // 设置编码，防止中文乱码
 mysqli_set_charset($con, "utf8");
 //利用数据行数判定登录
-$stmt = $con->prepare("select id,username,user,email,sex,phone from bysj.sysUser;");
-$stmt->bind_result($id,$username,$user,$email,$sex,$phone);
+$stmt = $con->prepare("select id,user,email,sex,phone from bysj.sysUser;");
+$stmt->bind_result($id,$user,$email,$sex,$phone);
 $stmt->execute();
-
 while($stmt->fetch()){
+    if ($sex == "man"){
+        $sex = "<img src='/img/man.png' style='height: 4vh;'>";
+    }
+    else{
+        $sex = "<img src='/img/woman.png' style='height: 4vh;'>";
+    }
     echo "
     <tr>
-        <td>$id</td><td>$username</td><td>$user</td><td>$email</td><td>$sex</td><td>$phone</td>
+        <td>$id</td><td>$user</td><td>$email</td><td>$sex</td><td>$phone</td>
     </tr>";
 }
 

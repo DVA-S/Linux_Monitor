@@ -5,6 +5,7 @@
 		<script type="text/javascript" src="js/kuangjia.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/echars.js"></script>
+		<script type="text/javascript" src="js/jssha256.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Inspection and Monitoring</title>
 	</head>
@@ -250,14 +251,10 @@
 		 <div class="user" id="user">
 			 <!-- 左侧边栏 -->
 			  <div class="user_left">
-			  	 <!-- 用户列表 -- 登录 -->
-<!--			  	 <div class="user_left_list" onclick="btnOnClick(this)">用户列表</div>-->
 			  	 <!-- 系统用户 -- web用户 -->
 			  	 <div class="user_left_webUser" title="可登录本界面" onclick="btnOnClick(this)">系统用户</div>
 			  	 <!-- 设备用户 -- 主机用户 -->
 			  	 <div class="user_left_deviceUser" title="可登录设备" onclick="btnOnClick(this)">设备用户</div>
-			 	 <!-- 添加用户 -- 系统用户/设备用户 -->
-<!--			  	<div class="user_left_addUser" title="添加某种用户" onclick="btnOnClick(this)">添加用户</div>-->
 			  </div>
 			  <!-- 右侧面板 -->
 			  <div class="user_right">
@@ -267,7 +264,7 @@
                              <p>系统用户列表</p>
                          </div>
                          <tr>
-                             <th>ID</th><th>姓名</th><th>用户名</th><th>邮箱</th><th>性别</th><th>电话</th>
+                             <th>ID</th><th>用户名</th><th>邮箱</th><th>性别</th><th>电话</th>
                          </tr>
                          <?php echo file_get_contents('http://localhost/php/user/userList.php'); ?>
                      </table>
@@ -275,9 +272,8 @@
                      <div id="addSysUser" class="floatWindows">
                          <form class="addWindows">
                              <h4 align="center">添加系统用户</h4>
-                             <label for="usernameAdd" style="position: absolute;top: 7%;left: 22%;">姓&nbsp;&nbsp;&nbsp;名：</label>
-                             <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="usernameAdd" style="position: absolute;top: 8%;left: 33%;" type="text" name="username" maxlength="20">
+<!--                             <label for="usernameAdd" style="position: absolute;top: 7%;left: 22%;">姓&nbsp;&nbsp;&nbsp;名：</label>-->
+<!--                             <input id="usernameAdd" style="position: absolute;top: 8%;left: 33%;" type="text" name="usernameAdd" maxlength="20">-->
                              <br>
                              <br>
                              <label for="userAdd" style="position: absolute;top: 22%;left: 22%;">用户名：</label>
@@ -295,7 +291,12 @@
                              <br>
                              <br>
                              <label for="sex" style="position: absolute;top: 67%;left: 22%;">性&nbsp;&nbsp;&nbsp;别：</label>
-                             <input id="sex" style="position: absolute;top: 68%;left: 33%;" type="text" name="sex" maxlength="20">
+<!--                             <input id="sex" style="position: absolute;top: 68%;left: 33%;" type="text" name="sex" maxlength="20">-->
+                             <select id="sex" style="position: absolute;top: 68%;left: 33%;">
+                                 <option value ="">请选择性别</option>
+                                 <option value="man">男</option>
+                                 <option value="woman">女</option>
+                             </select>
                              <br>
                              <br>
                              <label for="phone" style="position: absolute;top: 82%;left: 22%;">电&nbsp;&nbsp;&nbsp;话：</label>

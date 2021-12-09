@@ -305,14 +305,18 @@ function addUserWindowsDev(){
 }
 //添加数据
 function addUserSys(){
-	var username =$("#usernameAdd").val();
 	var userAdd =$("#userAdd").val();
+	userAdd = userAdd.replace(" ","");
+
 	var userAddPasswd =$("#userAddPasswd").val();
+	userAddPasswd = userAddPasswd.replace(" ","");
+	userAddPasswd = SHA256_hash(userAddPasswd);
+
 	var email =$("#email").val();
 	var sex =$("#sex").val();
 	var phone =$("#phone").val();
-	$.get(
-		"php/user/AddUser.php",{"username":username,"user":userAdd,"passwd":userAddPasswd,"email":email,"sex":sex,"phone":phone},
+	$.post(
+		"php/user/AddUser.php",{"user":userAdd,"passwd":userAddPasswd,"email":email,"sex":sex,"phone":phone},
 		function(){
 			document.getElementById('addSysUser').style.display='none';
 		}

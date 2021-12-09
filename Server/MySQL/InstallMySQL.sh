@@ -171,17 +171,16 @@ createTB(){
 	);
 	"
 
-	#系统用户表
+	#系统用户表 -- 要在前端去掉空格 姓名、账号、密码
   mysql -uroot -pEsxi0000. -e "
   use bysj;
   create table if not exists sysUser (
   id int(255) not null primary key auto_increment,
-  username varchar(20) null,
-  user varchar(20) not null,
-  passwd varchar(20) not null,
+  user varchar(20) not null unique,
+  passwd char(64) not null,
   email varchar(30)  null,
-  sex varchar(8) null,
-  phone int(255) null
+  sex varchar(5) null,
+  phone char(11) null
   );
   "
 
@@ -201,13 +200,12 @@ db=`mysql --version 2> /dev/null | awk -F ' ' '{print $1}'`
 if [ $db ]
 then
 	#建库、建表
-	mysql -uroot -pEsxi0000. -e "create database if not exists bysj character set utf8 collate utf8_bin;"
-	createTB
-	#echo "已安装数据库"
+	mysql -uroot -pEsxi0000. -e "set global character_set_server=gbk;"
+	mysql -uroot -pEsxi0000. -e "create database if not exists bysj character set utf8 collate utf8;"
+	mysql -uroot -pEsxi0000. -e "set global character_set_database=gbk;"
 else
 	installDB
 	#建库、建表
-	mysql -uroot -pEsxi0000. -e "create database if not exists bysj character set utf8 collate utf8_bin;"
+	mysql -uroot -pEsxi0000. -e "create database if not exists bysj character set utf8 collate utf8;"
 	createTB
-	#echo "未安装数据库"
 fi
