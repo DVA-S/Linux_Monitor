@@ -5,6 +5,7 @@
     $con = null;
     $login_status = null;
     $createdate = null;
+
     require_once "linkDB.php";
     // 选择数据库
     mysqli_select_db($con,"bysj");
@@ -15,13 +16,10 @@
     $stmt->bind_result($createdate);
     $stmt->execute();
     while($stmt->fetch()){}
+
     $yanzhi = "JainaProudmoore";
     $all = $passwd.$createdate.$yanzhi;
-
-//    echo $all."\n";
-
     $passwd = hash('sha256',$all);
-//    echo $passwd;
 
     $stmt->free_result();
     $stmt->close();
@@ -31,7 +29,6 @@
     $stmt->bind_param("ss",$user,$passwd);
     $stmt->bind_result($login_status);
     $stmt->execute();
-
     //判定登录--输出查询数据的行数
     while($stmt->fetch()){
      echo $login_status;

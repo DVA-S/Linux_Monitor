@@ -223,7 +223,7 @@ body{
 	top: 12.5%;
 }
 /* 输入框动效 */
-#username:focus,#passwd:focus{
+#username:focus,#passwd:focus,#userAdd:focus,#userAddPasswd:focus,#email:focus,#sex:focus,#phone:focus,#ipaddressDev:focus,#userDev:focus,#passwdDev:focus{
 	animation: 0.5s ease 0s 1 normal forwards running inputLogin;
 }
 /**********************************************登录页 *********************************************/
@@ -381,13 +381,13 @@ input{
 	position: absolute;
 }
 .addWindows{
-	height: 85%;
+	height: 80%;
 }
-.addWindows input{
-	height: 6%;
+#addSysUser input,#addSysUserDev input{
+	border: 1px solid #888;
+	height: 3vh;
 	width: 44%;
 	margin-left: 3%;
-	box-shadow: 1px 1px 1px 2px #999;
 	border-radius: 4px;
 	background-color: #DDD;
 }
@@ -396,7 +396,6 @@ input{
 	height: 4vh;
 	left: 54%;
 	top: 100%;
-	/*background-color: #DDD;*/
 	position: absolute;
 	border-radius: 2px;
 	box-shadow: 1px 1px 1px 2px #888;

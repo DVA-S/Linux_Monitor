@@ -271,40 +271,38 @@
                      <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;border: none;" onclick="addUserWindows()">添加用户</button>
                      <div id="addSysUser" class="floatWindows">
                          <form class="addWindows">
-                             <h4 align="center">添加系统用户</h4>
+                             <h4 align="center" style="top: -5%;">添加系统用户</h4>
                              <br>
                              <br>
-                             <label for="userAdd" style="position: absolute;top: 22%;left: 22%;">用户名：</label>
+                             <label for="userAdd" style="position: absolute;top: 18%;left: 22%;">用户名：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="userAdd" style="position: absolute;top: 23%;left: 33%;" type="text" name="userAdd" maxlength="20">
+                             <input id="userAdd" style="position: absolute;top: 18%;left: 39%;" type="text" name="userAdd" maxlength="20">
                              <br>
                              <br>
-                             <label for="userAddPasswd" style="position: absolute;top: 37%;left: 22%;">密&nbsp;&nbsp;&nbsp;码：</label>
+                             <label for="userAddPasswd" style="position: absolute;top: 28%;left: 22%;">密&nbsp;&nbsp;&nbsp;码：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="userAddPasswd" style="position: absolute;top: 38%;left: 33%;" type="password" name="userAddPasswd" maxlength="20">
+                             <input id="userAddPasswd" style="position: absolute;top: 28%;left: 39%;" type="password" name="userAddPasswd" maxlength="20">
                              <br>
                              <br>
-                             <label for="email" style="position: absolute;top: 52%;left: 22%;">邮&nbsp;&nbsp;&nbsp;箱：</label>
-                             <input id="email" style="position: absolute;top: 53%;left: 33%;" type="email" name="email" maxlength="20">
+                             <label for="email" style="position: absolute;top: 38%;left: 22%;">邮&nbsp;&nbsp;&nbsp;箱：</label>
+                             <input id="email" style="position: absolute;top: 38%;left: 39%;" type="email" name="email" maxlength="20">
                              <br>
                              <br>
-                             <label for="sex" style="position: absolute;top: 67%;left: 22%;">性&nbsp;&nbsp;&nbsp;别：</label>
-                             <select id="sex" style="position: absolute;top: 68%;left: 33%;">
+                             <label for="sex" style="position: absolute;top: 48%;left: 22%;">性&nbsp;&nbsp;&nbsp;别：</label>
+                             <select id="sex" style="position: absolute;top: 48%;left: 39%;margin-left: 3%;">
                                  <option value ="">请选择性别</option>
                                  <option value="man">男</option>
                                  <option value="woman">女</option>
                              </select>
+                             <label for="phone" style="position: absolute;top: 58%;left: 22%;">电&nbsp;&nbsp;&nbsp;话：</label>
+                             <input id="phone" style="position: absolute;top: 58%;left: 39%;" type="text" name="phone" maxlength="20">
                              <br>
                              <br>
-                             <label for="phone" style="position: absolute;top: 82%;left: 22%;">电&nbsp;&nbsp;&nbsp;话：</label>
-                             <input id="phone" style="position: absolute;top: 83%;left: 33%;" type="text" name="phone" maxlength="20">
-                             <br>
-                             <br>
-                             <div class="floatWindowsBtn ok" onclick="addUserSys();location.reload();" style="top: 92%;">&nbsp;添加</div>
+                             <div class="floatWindowsBtn ok" onclick="addUserSys();location.reload();" style="top: 78%;">&nbsp;添加</div>
                              <div class="floatWindowsBtn ok" onclick="(function (){
                                  document.getElementById('addSysUser').style.animation='0.5s ease forwards running login_loginOk';
                                  document.getElementById('addSysUser').style.display='none';
-                             })()" style="left: 30%;top: 92%;">&nbsp;关闭</div>
+                             })()" style="left: 30%;top: 78%;">&nbsp;关闭</div>
                          </form>
                      </div>
                  </div>
@@ -321,28 +319,28 @@
                      <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;border: none;" onclick="addUserWindowsDev()">添加用户</button>
                      <div id="addSysUserDev" class="floatWindows">
                          <form class="addWindows">
-                             <h4 align="center">添加设备用户</h4>
-                             <label for="ipaddressDev" style="position: absolute;top: 7%;left: 22%;">IP地址：</label>
+                             <h4 align="center" style="top: -5%;">添加设备用户</h4>
+                             <label for="ipaddressDev" style="position: absolute;top: 18%;left: 22%;">IP地址：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="ipaddressDev" style="position: absolute;top: 8%;left: 33%;" type="text" name="ipaddressDev" maxlength="20">
+                             <input id="ipaddressDev" style="position: absolute;top: 18%;left: 39%;" type="text" name="ipaddressDev" maxlength="20">
                              <br>
                              <br>
-                             <label for="userDev" style="position: absolute;top: 22%;left: 22%;">用户名：</label>
+                             <label for="userDev" style="position: absolute;top: 30%;left: 22%;">用户名：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="userDev" style="position: absolute;top: 23%;left: 33%;" type="text" name="userDev" maxlength="20">
+                             <input id="userDev" style="position: absolute;top: 30%;left: 39%;" type="text" name="userDev" maxlength="20">
                              <br>
                              <br>
-                             <label for="passwdDev" style="position: absolute;top: 37%;left: 22%;">密&nbsp;&nbsp;&nbsp;码：</label>
+                             <label for="passwdDev" style="position: absolute;top: 42%;left: 22%;">密&nbsp;&nbsp;&nbsp;码：</label>
                              <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                             <input id="passwdDev" style="position: absolute;top: 38%;left: 33%;" type="password" name="passwdDev" maxlength="20">
+                             <input id="passwdDev" style="position: absolute;top: 42%;left: 39%;" type="password" name="passwdDev" maxlength="20">
                              <br>
                              <br>
-                             <div class="floatWindowsBtn ok" onclick="addUserDev();location.reload();" style="top: 92%;">&nbsp;添加</div>
+                             <div class="floatWindowsBtn ok" onclick="addUserDev();location.reload();" style="top: 75%;">&nbsp;添加</div>
                              <div class="floatWindowsBtn ok" onclick="(function (){
                                  document.getElementById('addSysUserDev').style.animation='0.5s ease forwards running login_loginOk';
                                  document.getElementById('addSysUserDev').style.display='none'
                              }
-                             )();" style="left: 30%;top: 92%;">&nbsp;关闭</div>
+                             )();" style="left: 30%;top: 75%;">&nbsp;关闭</div>
                          </form>
                      </div>
                  </div>
