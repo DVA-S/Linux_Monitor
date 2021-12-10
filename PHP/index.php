@@ -52,7 +52,7 @@
 			 <div class="checking_btn" title="设备的连通、性能、端口、硬件" onclick="btnOnClick(this)">自动巡检</div>
 			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">用户管理</div>
 			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this)">系统设置</div>
-             <p id="clock" style="top: 18%;left: 31vw;color: #FFF;font-family: fantasy;display: inline;"></p>
+             <p id="clock" style="top: 18%;left: 30vw;color: #FFF;font-family: fantasy;display: inline;"></p>
              <script src="js/system/date.js"></script>
 		 </div>
 
@@ -188,14 +188,14 @@
                      </table>
                  </div>
                  <!-- 硬件检测 -->
-				 <div class="checking_right_device" id="checking_right_device" style="overflow-y: scroll;width: 81vw;">
+				 <div class="checking_right_device" id="checking_right_device" style="overflow-y: scroll;overflow-x: clip;width: 81vw;">
                      <div class="addhost_form">
                          <form action="#" method="get">
-                             <select id="perfSingleDevice" style="top: 14%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
+                             <select id="perfSingleDevice" style="top: 14%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;margin-top: 0.5%;">
                                  <option value ="">请选择主机</option>
                                  <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php'); ?>
                              </select>
-                             <div class="ok" id="hostDisk" style="position: absolute;top: 23%;left: 34%;height: 50%;" onclick="hostDevice()">&nbsp;设备检测</div>
+                             <div class="ok" id="hostDisk" style="position: absolute;top: 23%;left: 34%;height: 66%;" onclick="hostDevice()">&nbsp;设备检测</div>
                      </div>
                      <br />
                      <br />
