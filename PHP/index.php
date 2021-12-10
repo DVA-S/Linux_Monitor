@@ -52,7 +52,7 @@
 			 <div class="checking_btn" title="设备的连通、性能、端口、硬件" onclick="btnOnClick(this)">自动巡检</div>
 			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">用户管理</div>
 			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this)">系统设置</div>
-             <p id="clock" style="top: 40%;left: 25vw;color: #FFF;font-family: fantasy;display: inline;"></p>
+             <p id="clock" style="top: 18%;left: 31vw;color: #FFF;font-family: fantasy;display: inline;"></p>
              <script src="js/system/date.js"></script>
 		 </div>
 
@@ -303,8 +303,8 @@
                              <br>
                              <div class="floatWindowsBtn ok" onclick="addUserSys();location.reload();" style="top: 92%;">&nbsp;添加</div>
                              <div class="floatWindowsBtn ok" onclick="(function (){
-
                                  document.getElementById('addSysUser').style.animation='0.5s ease forwards running login_loginOk';
+                                 document.getElementById('addSysUser').style.display='none'
                              })()" style="left: 30%;top: 92%;">&nbsp;关闭</div>
                          </form>
                      </div>
@@ -340,8 +340,8 @@
                              <br>
                              <div class="floatWindowsBtn ok" onclick="addUserDev();location.reload();" style="top: 92%;">&nbsp;添加</div>
                              <div class="floatWindowsBtn ok" onclick="(function (){
-
                                  document.getElementById('addSysUserDev').style.animation='0.5s ease forwards running login_loginOk';
+                                 document.getElementById('addSysUserDev').style.display='none'
                              }
                              )();" style="left: 30%;top: 92%;">&nbsp;关闭</div>
                          </form>
