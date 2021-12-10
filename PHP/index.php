@@ -289,7 +289,6 @@
                              <br>
                              <br>
                              <label for="sex" style="position: absolute;top: 67%;left: 22%;">性&nbsp;&nbsp;&nbsp;别：</label>
-<!--                             <input id="sex" style="position: absolute;top: 68%;left: 33%;" type="text" name="sex" maxlength="20">-->
                              <select id="sex" style="position: absolute;top: 68%;left: 33%;">
                                  <option value ="">请选择性别</option>
                                  <option value="man">男</option>
@@ -304,7 +303,7 @@
                              <div class="floatWindowsBtn ok" onclick="addUserSys();location.reload();" style="top: 92%;">&nbsp;添加</div>
                              <div class="floatWindowsBtn ok" onclick="(function (){
                                  document.getElementById('addSysUser').style.animation='0.5s ease forwards running login_loginOk';
-                                 document.getElementById('addSysUser').style.display='none'
+                                 document.getElementById('addSysUser').style.display='none';
                              })()" style="left: 30%;top: 92%;">&nbsp;关闭</div>
                          </form>
                      </div>

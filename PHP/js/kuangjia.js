@@ -64,9 +64,10 @@ function keySearchHost(){
 function loginJudge(){
 	var username =$("#username").val();
 	//去空格后，哈希加密 ( 此处加密的好处是，1，密码不会以明文的方式在网络上传输 2，即使是网站管理员也不知道你的密码 )
+	//第一次加密
 	var passwd = SHA256_hash($("#passwd").val().replace(" ",""));
-
-	$.post(
+	// alert(passwd);
+	$.get(
 		"php/login.php",{"user":username,"passwd":passwd},
 		function(data,status){
 			console.log("数据: \n" + data + "\n状态: " + status);
@@ -311,20 +312,25 @@ function addUserWindowsDev(){
 function addUserSys(){
 	var userAdd =$("#userAdd").val();
 	userAdd = userAdd.replace(" ","");
+	if (userAdd == ""){
+		alert("用户名为空！");
+	}else{
+		//第一次加密
+		var userAddPasswd =$("#userAddPasswd").val();
+		userAddPasswd = userAddPasswd.replace(" ","");
+		userAddPasswd = SHA256_hash(userAddPasswd);
 
-	var userAddPasswd =$("#userAddPasswd").val();
-	userAddPasswd = userAddPasswd.replace(" ","");
-	userAddPasswd = SHA256_hash(userAddPasswd);
-
-	var email =$("#email").val();
-	var sex =$("#sex").val();
-	var phone =$("#phone").val();
-	$.post(
-		"php/user/AddUser.php",{"user":userAdd,"passwd":userAddPasswd,"email":email,"sex":sex,"phone":phone},
-		function(){
-			document.getElementById('addSysUser').style.display='none';
-		}
-	);
+		var email =$("#email").val();
+		var sex =$("#sex").val();
+		var phone =$("#phone").val();
+		$.get(
+			"php/user/AddUser.php",{"user":userAdd,"passwd":userAddPasswd,"email":email,"sex":sex,"phone":phone},
+			function(){
+				document.getElementById('addSysUser').style.animation='0.5s ease forwards running login_loginOk';
+				document.getElementById('addSysUser').style.display='none';
+			}
+		);
+	}
 }
 function addUserDev(){
 	var ipaddr =$("#ipaddressDev").val();
@@ -333,7 +339,8 @@ function addUserDev(){
 	$.get(
 		"php/user/AddDevUser.php",{"ipaddr":ipaddr,"user":user,"passwd":passwd},
 		function(){
-			alert("OK!");
+			// alert("OK!");
+			document.getElementById('addSysUserDev').style.animation='0.5s ease forwards running login_loginOk';
 			document.getElementById('addSysUserDev').style.display='none';
 		}
 	);

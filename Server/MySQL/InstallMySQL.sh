@@ -180,7 +180,8 @@ createTB(){
   passwd char(64) not null,
   email varchar(30)  null,
   sex varchar(5) null,
-  phone char(11) null
+  phone char(11) null,
+  createdate datetime not null
   );
   "
 

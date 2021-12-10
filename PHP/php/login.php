@@ -1,15 +1,31 @@
 <?php
-    $user = isset($_POST['user']) ? htmlspecialchars($_POST['user']) : '';
-    $passwd = isset($_POST['passwd']) ? htmlspecialchars($_POST['passwd']) : '';
-//    $passwd = hash('sha256',isset($_POST['passwd']) ? htmlspecialchars($_POST['passwd']) : '');
+    $user = isset($_GET['user']) ? htmlspecialchars($_GET['user']) : '';
+    $passwd = isset($_GET['passwd']) ? htmlspecialchars($_GET['passwd']) : '';
+
     $con = null;
     $login_status = null;
-
+    $createdate = null;
     require_once "linkDB.php";
     // 选择数据库
     mysqli_select_db($con,"bysj");
     // 设置编码，防止中文乱码
     mysqli_set_charset($con, "utf8");
+    $stmt = $con->prepare("select createdate from bysj.sysUser where user = ?");
+    $stmt->bind_param("s",$user);
+    $stmt->bind_result($createdate);
+    $stmt->execute();
+    while($stmt->fetch()){}
+    $yanzhi = "JainaProudmoore";
+    $all = $passwd.$createdate.$yanzhi;
+
+//    echo $all."\n";
+
+    $passwd = hash('sha256',$all);
+//    echo $passwd;
+
+    $stmt->free_result();
+    $stmt->close();
+
     //利用数据行数判定登录
     $stmt = $con->prepare("select count(*) as login_status from bysj.sysUser where user = ? and passwd = ?");
     $stmt->bind_param("ss",$user,$passwd);
@@ -20,6 +36,7 @@
     while($stmt->fetch()){
      echo $login_status;
     }
+
     //如果登录成功，在关闭窗口前都不需要重新登录
     function keepLogin($login_status,$user){
         if ($login_status==1){
