@@ -350,98 +350,54 @@
 		 
 		 <!-- 系统设置 -->
 		 <div class="setup" id="setup" style="background: inherit;">
-        <!--  组件信息 -->
-             <div onmouseover="(function (){
-                    document.getElementById('package_info').style.display='block';
-                    document.getElementById('package_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';})()"
-                  onmouseout="(function (){
-                    document.getElementById('package_info').style.display='block';
-                    document.getElementById('package_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
-                  class="setup_package" style="left: 6%;top: 10%;"
-             >
-                <!-- 标题 -->
-                 <div class="sysTitle">
-                    <h2 class="sysTitleTitle">组  件  信  息</h2>
-                 </div>
-                <!-- 内容 -->
-                 <div class="sysBody" id="package_info">
-                     <br><br>
-                     <h2 class="sysBodyTitle">组件信息</h2>
-                    <code style="text-shadow: #888 2px 2px 3px;">
-                        <?php
-                        echo "<br>";
-                        echo `echo "<b>PHP版本：</b><br>" && php -v | sed -n '1p' | sed 's/$/<br>/g'`;
-                        echo "<br>";
-                        echo `echo "<b>Apache2版本：</b><br>" && apache2 -v | sed 's/$/<br>/g'`;
-                        echo "<br>";
-                        echo `echo "<b>MySQL版本：</b><br>" && mysql --version`;
-                        ?>
-                     </code>
-                 </div>
+        <!--  时间 -->
+             <div onclick="(function (){
+                 document.getElementById('setup_info').style.animation='0.5s ease forwards running isBig';
+             })()" id="setup_info" class="setup_clock" class="sysTitle" style="left: 6%;top: 10%;">
+                 <h2 class="sysTitleTitle">系  统  脚  本</h2>
              </div>
-             <!--  时间 -->
-             <div onmouseover="(function (){
-                    document.getElementById('clock_info').style.display='block';
-                    document.getElementById('clock_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';})()"
-                  onmouseout="(function (){
-                    document.getElementById('clock_info').style.display='block';
-                    document.getElementById('clock_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
-                     class="setup_clock" style="left: 29%;top: -65%;"
-             >
-                <!-- 标题 -->
-                 <div class="sysTitle" style="height: 100%;width: 100%;border-radius: 3%;">
-                     <h2 class="sysTitleTitle">系  统  脚  本</h2>
-                 </div>
-                 <!-- 内容 -->
-                 <div class="sysBody" id="clock_info">
-                     <br><br>
-                     <h2 class="sysBodyTitle">系统脚本</h2>
-                     <br><br>
 
-                 </div>
+             <!--  脚本 -->
+             <div onclick="(function (){
+                 document.getElementById('setup_script').style.animation='0.5s ease forwards running isBig1';
+             })()" id="setup_script" class="setup_clock" class="sysTitle" style="left: 29%;top: -65%;">
+                     <h2 class="sysTitleTitle">系  统  脚  本</h2>
              </div>
+
              <!--  关于 -->
-             <div onmouseover="(function (){
-                    document.getElementById('about_info').style.display='block';
-                    document.getElementById('about_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';})()"
-                  onmouseout="(function (){
-                    document.getElementById('about_info').style.display='block';
-                    document.getElementById('about_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
-                     class="setup_about" style="left: 52%;top: -140%;"
-             >
-                 <!-- 标题 -->
-                 <div class="sysTitle" style="height: 100%;width: 100%;border-radius: 3%;">
+             <div onclick="(function (){
+                 document.getElementById('setup_email').style.animation='0.5s ease forwards running isBig2';
+             })()" id="setup_email" class="setup_about" class="sysTitle" style="left: 52%;top: -140%;">
                      <h2 class="sysTitleTitle">邮  件  告  警</h2>
-                 </div>
-                 <!-- 内容 -->
-                 <div class="sysBody" id="about_info">
-                     <br><br>
-                     <h2 class="sysBodyTitle">告警设置</h2>
-                     <br><br>
-                     <p>触发条件：</p><br>
-                     <p>收件人：</p>
-                 </div>
              </div>
+
              <!--  退出登录 -->
-             <div onmouseover="(function (){
-                    document.getElementById('exit_info').style.display='block';
-                    document.getElementById('exit_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';})()"
-                  onmouseout="(function (){
-                    document.getElementById('exit_info').style.display='block';
-                    document.getElementById('exit_info').style.animation='0.5s ease 0s 1 normal forwards running login_loginOk';})()"
-                     class="setup_exit" style="left: 75%;top: -215%;">
-                 <!-- 标题 -->
-                 <div class="sysTitle" style="">
-                     <h2 class="sysTitleTitle">退&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出</h2>
-                 </div>
-                 <!-- 内容 -->
-                 <div class="sysBody" id="exit_info">
-                     <br><br>
-                     <h2 class="sysBodyTitle">退  出</h2>
-                     <br><br>
-                     <button onclick="loginout()" style="height: 20vh;width: 10vw;border-radius: 100%;left: 15%;top: 10%;">退出登录</button>
-                 </div>
+             <div onclick="(function (){
+                 if ($('#setup_logout').attr('class') == 'isBig3B'){
+                   $('#setup_logout').removeClass('isBig3B');
+                   $('#setup_logout').addClass('isBig3A');
+                 }else if ($('#setup_logout').attr('class') == 'setup_exit isBig3A') {
+                     $('#setup_logout').removeClass('isBig3A');
+                   $('#setup_logout').addClass('isBig3B');
+                 }else if ($('#setup_logout').attr('class') == 'setup_exit isBig3B'){
+                     $('#setup_logout').removeClass('isBig3B');
+                    $('#setup_logout').addClass('isBig3A');
+                 }else if ($('#setup_logout').attr('class') == 'setup_exit isBig3A isBig3B'){
+                     $('#setup_logout').removeClass('isBig3A');
+                     $('#setup_logout').removeClass('isBig3B');
+                    $('#setup_logout').addClass('isBig3A');
+                 }else {
+                     $('#setup_logout').addClass('isBig3A');
+                 }
+             })()"id="setup_logout"  class="setup_exit" style="left: 75%;top: -215%;" class="sysTitle">
+                 <h2 class="sysTitleTitle">退&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出</h2>
+
              </div>
+<!--             <button onclick="(function (){-->
+<!--                 //    移除类-->
+<!--                 $('#setup_logout').removeClass('isBig3A');-->
+<!--                 $('#setup_logout').addClass('isBig3B');-->
+<!--             })()">关闭</button>-->
 		 </div>
         <!-- 放在页面底部可以读到上面元素的ID值 -->
         <!-- 保持登录一段时间 判定phpSession的值，为1表示已经登录 -->
