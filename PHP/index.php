@@ -13,10 +13,12 @@
     <!-- session_start()函数前不能有任何代码输出到浏览器，最好加在页面头部，或者先用ob_start()函数打开输出缓冲区。-->
     <?php
         session_start();
+        //初始化，为了防止报未定义错误错。应该不影响登录,才怪
+//        $_SESSION["loginStatus"] = 0;
+//        setCookie("panelView",0);
         $status = $_SESSION["loginStatus"];
         //离开时显示的面板
         $viewStatus = $_COOKIE['panelView'];
-//        echo "<script>console.log('loginStatus:',{$view});</script>";
     ?>
 	<body>
 		<!-- 登录页 -->
@@ -265,7 +267,10 @@
                          <tr>
                              <th>ID</th><th>用户名</th><th>邮箱</th><th>性别</th><th>电话</th>
                          </tr>
-                         <?php echo file_get_contents('http://localhost/php/user/userList.php'); ?>
+                         <?php
+
+                         echo file_get_contents('http://localhost/php/user/userList.php');
+                         ?>
                      </table>
                      <div class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;border: none;line-height: 200%;" onclick="addUserWindows()">添加用户</div>
                      <div id="addSysUser" class="floatWindows">
@@ -373,16 +378,18 @@
 <!--        问题：无法重置登录cookie的时间-->
         <?php
             if($status==1){
+                //前端保持
                 echo "<script>
                 //BUG0:平移登录动画时,每次刷新都会重复登录动画.改进登陆动画后 > BUG1:登录成功后,刷新任何界面,登录表单会出现一秒钟然后消失. --  解决方法:设置登陆成功后&&播放完登录动画后,移除登录盒子
-                //加了几个刷新按钮后，bug又回来了  --  最终方法：登录表单只有读不到登录session时才会出现,也就是说登录状态时，不对登陆表单做任何操作。（多余）
-		        
+                //加了几个刷新按钮后，bug又回来了  --  最终方法：登录表单只有读不到登录session时才会出现
 		        //主页
 		        document.getElementById('head_div').style.display='block';
 		        document.getElementById('head_div').style.animation='0.5s ease 0s 1 normal forwards running index_head_loginOk';
 		        document.getElementById('panel').style.display='block';
 		        document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
 		 		</script>";
+                $_SESSION['loginStatus']=1;
+
                 switch ($viewStatus){
                     case 0:
                           echo "<script>lastView($viewStatus);</script>";
@@ -402,6 +409,31 @@
                     default:
                         break;
                 }
+                //后端保持
+                $con=null;
+                require_once "php/linkDB.php";
+                // 选择数据库
+                mysqli_select_db($con,"bysj");
+                // 设置编码，防止中文乱码
+                mysqli_set_charset($con, "utf8");
+                $user=$_SESSION['loginUser'];
+
+                //创建并更新用户Token
+                $yanzhi = "JainaProudmoore";
+                $createdate = date("Y-m-d h:i:s");
+                $all = $user.$yanzhi.$createdate;
+                $token = hash('sha256',$all);
+
+
+                $stmt = $con->prepare("update bysj.userToken set token = ?,data = ? where username = ?");
+                $stmt->bind_param("sss",$token,$createdate,$user);
+                $stmt->execute();
+
+                //token输出点
+                $_SESSION['Token'] = $token;
+
+                $stmt->free_result();
+                $stmt->close();
             }else{
                 echo "<script>
                 document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';

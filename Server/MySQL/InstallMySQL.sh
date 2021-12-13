@@ -185,6 +185,17 @@ createTB(){
   );
   "
 
+  #用户Token表
+  mysql -uroot -pEsxi0000. -e "
+  use bysj;
+  create table if not exists userToken (
+  id int(255) not null primary key auto_increment,
+  username varchar(20) not null unique,
+  token char(64) not null unique,
+  data datetime not null
+  );
+  "
+
   	#设备用户表
     mysql -uroot -pEsxi0000. -e "
     use bysj;
