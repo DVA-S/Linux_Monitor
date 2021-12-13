@@ -229,7 +229,7 @@ function viewPanel(view_btn){
 	}
 }
 
-//系统设置 -- 动画判断
+//系统设置 -- 点击执行动画
 function sysSetup(id,initialClass,AClass,BClass){
 	if ($('#'+id).attr('class') == BClass){
 		$('#'+id).removeClass(BClass);

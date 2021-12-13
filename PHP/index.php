@@ -27,7 +27,7 @@
                 <img src="img/logo.png" alt="这是logo！" style="width: 50%;left: 22.5%;top: 20%;"/>
 			</div>
 			<div class="login_form" id="login_form">
-				<form action="#" method="post"">
+				<form action="#" method="post">
                     <label for="username" style="font-size: 14px;color: #000;">用户名：</label>
 					<!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
 					<input id="username" autofocus="autofocus" style="border: 1px solid #888;height: 10%;width: 94%;padding: 1% 2%;border-radius: 2px;margin-top: 5px;" type="text" name="username" maxlength="20" onkeydown="keyLogin()">
@@ -108,7 +108,6 @@
                          <p>添加设备</p>
                      </div>
                      <div class="addhost_form" style="height: 68vh;">
-<!--                         <div id="tip" style="position:absolute;top: 12vh;display: block;">-->
                              <p><i><b>第一步 - 安装：</b></i></p> <br>
                              <p style="background-color: #EEE;line-height: 25px;padding-top: 0.5vh;padding-bottom: 0.5vh;width: 70vw;top: -1vh;">
                                  &nbsp;&nbsp;#&nbsp;wget http://<?php echo file_get_contents('http://192.168.157.128/php/ServerIP.php'); ?>/Client/ -P /opt/ <br>
@@ -268,7 +267,7 @@
                          </tr>
                          <?php echo file_get_contents('http://localhost/php/user/userList.php'); ?>
                      </table>
-                     <button class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;border: none;" onclick="addUserWindows()">添加用户</button>
+                     <div class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;border: none;line-height: 200%;" onclick="addUserWindows()">添加用户</div>
                      <div id="addSysUser" class="floatWindows">
                          <form class="addWindows">
                              <h4 align="center" style="top: -5%;">添加系统用户</h4>
@@ -344,7 +343,6 @@
                          </form>
                      </div>
                  </div>
-
 			  </div>
 		 </div>
 		 
@@ -369,11 +367,6 @@
              <div onclick="sysSetup('setup_logout','setup_exit','isBig3A','isBig3B')" id="setup_logout"  class="setup_exit" style="left: 75%;top: -215%;" class="sysTitle">
                  <h2 class="sysTitleTitle">退&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出</h2>
              </div>
-<!--             <button onclick="(function (){-->
-<!--                 //    移除类-->
-<!--                 $('#setup_logout').removeClass('isBig3A');-->
-<!--                 $('#setup_logout').addClass('isBig3B');-->
-<!--             })()">关闭</button>-->
 		 </div>
         <!-- 放在页面底部可以读到上面元素的ID值 -->
         <!-- 保持登录一段时间 判定phpSession的值，为1表示已经登录 -->
