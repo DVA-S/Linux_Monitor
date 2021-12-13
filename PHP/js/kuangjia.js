@@ -228,6 +228,29 @@ function viewPanel(view_btn){
 		default:														break;
 	}
 }
+
+//系统设置 -- 动画判断
+function sysSetup(id,initialClass,AClass,BClass){
+	if ($('#'+id).attr('class') == BClass){
+		$('#'+id).removeClass(BClass);
+		$('#'+id).addClass(AClass);
+	}else if ($('#'+id).attr('class') == initialClass+" "+AClass) {
+		$('#'+id).removeClass(AClass);
+		$('#'+id).addClass(BClass);
+	}else if ($('#'+id).attr('class') == initialClass+" "+BClass){
+		$('#'+id).removeClass(BClass);
+		$('#'+id).addClass(AClass);
+	}else if ($('#'+id).attr('class') == initialClass+" "+AClass+" "+BClass){
+		$('#'+id).removeClass(AClass);
+		$('#'+id).removeClass(BClass);
+		$('#'+id).addClass(AClass);
+	}else {
+		$('#'+id).addClass(AClass);
+		// alert(initialClass+" "+AClass);
+		// alert($('#'+'#'+id).attr('class'));
+	}
+}
+
 /* - ---------------------------------------------------------------------------------动作交互----------------------------------------------------------------------------------- */
 
 /* - ---------------------------------------------------------------------------------单击事件----------------------------------------------------------------------------------- */

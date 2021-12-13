@@ -174,9 +174,10 @@ body{
 	from{opacity: 0;}
 	to{left:2.5%;opacity: 1;}
 }
+
 /* 系统设置动画 */
 /* 第一个 */
-@keyframes isBig {
+@keyframes isBigA {
 	from{
 		/*left: 75%;*/
 		/*top: 10%;*/
@@ -189,11 +190,33 @@ body{
 		position: relative;
 		background-color: #FFF;
 		z-index: 1;
-		border-radius: 6px;
+		border-radius: 30px;
 	}
 }
+@keyframes isBigB {
+	from{
+		width: 85vw;
+		top: 10%;
+		left: 6%;
+		position: relative;
+		background-color: #FFF;
+		z-index: 1;
+		border-radius: 30px;
+	}
+	to{
+		top: 10%;
+		left: 6%;
+	}
+}
+.isBigA{
+	animation: 0.5s ease forwards running isBigA;
+}
+.isBigB{
+	animation: 0.5s ease forwards running isBigB;
+}
+
 /* 第二个 */
-@keyframes isBig1 {
+@keyframes isBig1A {
 	from{
 		/*left: 75%;*/
 		/*top: 10%;*/
@@ -206,11 +229,33 @@ body{
 		position: relative;
 		background-color: #FFF;
 		z-index: 1;
-		border-radius: 6px;
+		border-radius: 30px;
 	}
 }
+@keyframes isBig1B {
+	from{
+		width: 85vw;
+		top: -65%;
+		left: 6%;
+		position: relative;
+		background-color: #FFF;
+		z-index: 1;
+		border-radius: 30px;
+	}
+	to{
+		top: -65%;
+		left: 29%;
+	}
+}
+.isBig1A{
+	animation: 0.5s ease forwards running isBig1A;
+}
+.isBig1B{
+	animation: 0.5s ease forwards running isBig1B;
+}
+
 /* 第三个 */
-@keyframes isBig2 {
+@keyframes isBig2A {
 	from{
 		/*left: 75%;*/
 		/*top: 10%;*/
@@ -223,19 +268,37 @@ body{
 		position: relative;
 		background-color: #FFF;
 		z-index: 1;
-		border-radius: 6px;
+		border-radius: 30px;
 	}
 }
+@keyframes isBig2B {
+	from{
+		width: 85vw;
+		top: -140%;
+		left: 6%;
+		position: relative;
+		background-color: #FFF;
+		z-index: 1;
+		border-radius: 30px;
+	}
+	to{
+		left: 52%;
+		top: -140%;
+	}
+}
+.isBig2A{
+	animation: 0.5s ease forwards running isBig2A;
+}
+.isBig2B{
+	animation: 0.5s ease forwards running isBig2B;
+}
+
 /* 第四个 */
 @keyframes isBig3A {
 	from{
-		left: 75%;
-		top: -215%;
-		position: relative;
-		width: 20%;
-		height: 75%;
-		border-radius: 3%;
-		box-shadow: 4px 4px 4px 4px #071340;
+		/*left: 75%;*/
+		/*top: -10%;*/
+		/*position: absolute;*/
 	}
 	to{
 		width: 85vw;
@@ -244,7 +307,7 @@ body{
 		position: relative;
 		background-color: #FFF;
 		z-index: 1;
-		border-radius: 6px;
+		border-radius: 30px;
 		height: 75%;
 	}
 }
@@ -256,7 +319,7 @@ body{
 		position: relative;
 		background-color: #FFF;
 		z-index: 1;
-		border-radius: 6px;
+		border-radius: 30px;
 		height: 75%;
 	}
 	to{
@@ -272,11 +335,9 @@ body{
 .isBig3A{
 	animation: 0.5s ease forwards running isBig3A;
 }
-
 .isBig3B{
 	animation: 0.5s ease forwards running isBig3B;
 }
-
 /**********************************************动   画*********************************************/
 
 /**********************************************导航栏 *********************************************/

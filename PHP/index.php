@@ -351,47 +351,23 @@
 		 <!-- 系统设置 -->
 		 <div class="setup" id="setup" style="background: inherit;">
         <!--  时间 -->
-             <div onclick="(function (){
-                 document.getElementById('setup_info').style.animation='0.5s ease forwards running isBig';
-             })()" id="setup_info" class="setup_clock" class="sysTitle" style="left: 6%;top: 10%;">
-                 <h2 class="sysTitleTitle">系  统  脚  本</h2>
+             <div onclick="sysSetup('setup_info','setup_package','isBigA','isBigB')" id="setup_info" class="setup_package" class="sysTitle" style="left: 6%;top: 10%;">
+                 <h2 class="sysTitleTitle">系  统  组   件</h2>
              </div>
 
              <!--  脚本 -->
-             <div onclick="(function (){
-                 document.getElementById('setup_script').style.animation='0.5s ease forwards running isBig1';
-             })()" id="setup_script" class="setup_clock" class="sysTitle" style="left: 29%;top: -65%;">
+             <div onclick="sysSetup('setup_script','setup_clock','isBig1A','isBig1B')" id="setup_script" class="setup_clock" class="sysTitle" style="left: 29%;top: -65%;">
                      <h2 class="sysTitleTitle">系  统  脚  本</h2>
              </div>
 
              <!--  关于 -->
-             <div onclick="(function (){
-                 document.getElementById('setup_email').style.animation='0.5s ease forwards running isBig2';
-             })()" id="setup_email" class="setup_about" class="sysTitle" style="left: 52%;top: -140%;">
+             <div onclick="sysSetup('setup_email','setup_about','isBig2A','isBig2B')" id="setup_email" class="setup_about" class="sysTitle" style="left: 52%;top: -140%;">
                      <h2 class="sysTitleTitle">邮  件  告  警</h2>
              </div>
 
              <!--  退出登录 -->
-             <div onclick="(function (){
-                 if ($('#setup_logout').attr('class') == 'isBig3B'){
-                   $('#setup_logout').removeClass('isBig3B');
-                   $('#setup_logout').addClass('isBig3A');
-                 }else if ($('#setup_logout').attr('class') == 'setup_exit isBig3A') {
-                     $('#setup_logout').removeClass('isBig3A');
-                   $('#setup_logout').addClass('isBig3B');
-                 }else if ($('#setup_logout').attr('class') == 'setup_exit isBig3B'){
-                     $('#setup_logout').removeClass('isBig3B');
-                    $('#setup_logout').addClass('isBig3A');
-                 }else if ($('#setup_logout').attr('class') == 'setup_exit isBig3A isBig3B'){
-                     $('#setup_logout').removeClass('isBig3A');
-                     $('#setup_logout').removeClass('isBig3B');
-                    $('#setup_logout').addClass('isBig3A');
-                 }else {
-                     $('#setup_logout').addClass('isBig3A');
-                 }
-             })()"id="setup_logout"  class="setup_exit" style="left: 75%;top: -215%;" class="sysTitle">
+             <div onclick="sysSetup('setup_logout','setup_exit','isBig3A','isBig3B')" id="setup_logout"  class="setup_exit" style="left: 75%;top: -215%;" class="sysTitle">
                  <h2 class="sysTitleTitle">退&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出</h2>
-
              </div>
 <!--             <button onclick="(function (){-->
 <!--                 //    移除类-->
