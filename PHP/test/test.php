@@ -1,6 +1,6 @@
 <html>
 <head>
-    <script src="../js/kuangjia.js"></script>
+    <script src="../js/allJS.js"></script>
 </head>
 <body>
 <p id="ad"></p>

@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Socket测试</title>
-        <script type="text/javascript" src="../js/jquery.js"></script>
+        <script type="text/javascript" src="../js/kuangjia/jquery.js"></script>
     </head>
 
     <body>

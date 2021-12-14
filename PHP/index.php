@@ -2,9 +2,9 @@
 <html lang="zh">
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/kuangjia.css"/>
-		<script type="text/javascript" src="js/kuangjia.js"></script>
-		<script type="text/javascript" src="js/jquery.js"></script>
-		<script type="text/javascript" src="js/echars.js"></script>
+		<script type="text/javascript" src="js/allJS.js"></script>
+		<script type="text/javascript" src="js/kuangjia/jquery.js"></script>
+		<script type="text/javascript" src="js/kuangjia/echars.js"></script>
 		<script type="text/javascript" src="js/jssha256.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Inspection and Monitoring</title>
