@@ -268,8 +268,9 @@
                              <th>ID</th><th>用户名</th><th>邮箱</th><th>性别</th><th>电话</th>
                          </tr>
                          <?php
-
-                         echo file_get_contents('http://localhost/php/user/userList.php');
+                         $username = $_SESSION['loginUser'];
+                         $token = $_SESSION['Token'];
+                         echo file_get_contents('http://localhost/php/user/userList.php?username='.$username."&token=".$token);
                          ?>
                      </table>
                      <div class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;border: none;line-height: 200%;" onclick="addUserWindows()">添加用户</div>
@@ -410,30 +411,32 @@
                         break;
                 }
                 //后端保持
-                $con=null;
-                require_once "php/linkDB.php";
-                // 选择数据库
-                mysqli_select_db($con,"bysj");
-                // 设置编码，防止中文乱码
-                mysqli_set_charset($con, "utf8");
+//                $con=null;
+//                require_once "php/linkDB.php";
+//                // 选择数据库
+//                mysqli_select_db($con,"bysj");
+//                // 设置编码，防止中文乱码
+//                mysqli_set_charset($con, "utf8");
                 $user=$_SESSION['loginUser'];
 
-                //创建并更新用户Token
+                //创建并更新用户Token hash256+时间存在memcached,base64存在session
                 $yanzhi = "JainaProudmoore";
-                $createdate = date("Y-m-d h:i:s");
-                $all = $user.$yanzhi.$createdate;
-                $token = hash('sha256',$all);
+                $all = $user.$yanzhi;
+                $hashToken = hash('sha256',$all)."--".date("Y-m-d h:i:s");;
+                $token = base64_encode($hashToken);
 
+                $memcache = new Memcache;             //创建一个memcache对象
+                $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
+                $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
 
-                $stmt = $con->prepare("update bysj.userToken set token = ?,data = ? where username = ?");
-                $stmt->bind_param("sss",$token,$createdate,$user);
-                $stmt->execute();
-
-                //token输出点
                 $_SESSION['Token'] = $token;
-
-                $stmt->free_result();
-                $stmt->close();
+//                $stmt = $con->prepare("update bysj.userToken set token = ?,data = ? where username = ?");
+//                $stmt->bind_param("sss",$token,$createdate,$user);
+//                $stmt->execute();
+                //token输出点
+//                $_SESSION['Token'] = $token;
+//                $stmt->free_result();
+//                $stmt->close();
             }else{
                 echo "<script>
                 document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';

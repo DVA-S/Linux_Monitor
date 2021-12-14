@@ -25,7 +25,7 @@
     $stmt->close();
 
 //如果登录成功，在关闭窗口前都不需要重新登录
-function keepLogin($login_status,$user,$con){
+function keepLogin($login_status,$user){
     if ($login_status==1){
         //单位：秒 十分钟
         $lifeTime = 1 * 600;
@@ -40,27 +40,32 @@ function keepLogin($login_status,$user,$con){
 //        echo $user;
         $_SESSION['loginUser']=$user;
 
-        //创建Token到数据库和session
+        //创建Token到数据库(memcached)和session(cookie) 解密base64后得到sha256+时间去memcached验证
         $yanzhi = "JainaProudmoore";
-        $createdate = date("Y-m-d h:i:s");
-        $all = $user.$yanzhi.$createdate;
-        $token = hash('sha256',$all);
-//        echo $token;
+        $all = $user.$yanzhi;
+        $hashToken = hash('sha256',$all)."--".date("Y-m-d h:i:s");
+        $token = base64_encode($hashToken);
 
-        $stmt = $con->prepare("update bysj.userToken set token = ?,data = ? where username = ?");
-        $stmt->bind_param("sss",$token,$createdate,$user);
-        $stmt->execute();
-
-        //token输出点
+        //memcache方案
+        $memcache = new Memcache;             //创建一个memcache对象
+        $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
+        $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
+//        $get_value = $memcache->get('UserToken');   //从内存中取出key的值
+//        echo $get_value;
         $_SESSION['Token'] = $token;
 
-        $stmt->free_result();
-        $stmt->close();
+        //数据库+session方案
+//        $stmt = $con->prepare("update bysj.userToken set token = ?,data = ? where username = ?");
+//        $stmt->bind_param("sss",$token,$createdate,$user);
+//        $stmt->execute();
+        //token输出点
+//        $_SESSION['Token'] = $token;
+//        $stmt->free_result();
+//        $stmt->close();
     }else{
         session_start();
         session_regenerate_id(true);
-        $_SESSION['loginStatus']=123;
-        setCookie("panelView",0,600);
+        $_SESSION['loginStatus']=0;
     }
 }
 
@@ -74,7 +79,7 @@ function keepLogin($login_status,$user,$con){
      echo $login_status;
     }
 
-    keepLogin($login_status,$user,$con);
+    keepLogin($login_status,$user);
 
     $stmt->free_result();
     $stmt->close();

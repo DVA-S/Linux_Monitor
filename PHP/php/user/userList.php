@@ -4,32 +4,45 @@
 //第二次：封装类 >> 同上
 //第三次：转为接口 >> OK 不过,不安全(还要区分用户)
 //$type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
-$con = null;
-$id  = null;
-$user = null;
-$email = null;
-$sex = null;
-$phone = null;
 
-require_once "../linkDB.php";
-mysqli_select_db($con,"bysj");
+$token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; //base64编码
+$username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : ''; //base64编码
+
+
+$memcache = new Memcache;             //创建一个memcache对象
+$memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
+$get_value = $memcache->get($username.'UserToken');   //从内存中取出key的值
+
+if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) == $get_value){
+    $con = null;
+    $id  = null;
+    $user = null;
+    $email = null;
+    $sex = null;
+    $phone = null;
+
+    require_once "../linkDB.php";
+    mysqli_select_db($con,"bysj");
 // 设置编码，防止中文乱码
-mysqli_set_charset($con, "utf8");
+    mysqli_set_charset($con, "utf8");
 //利用数据行数判定登录
-$stmt = $con->prepare("select id,user,email,sex,phone from bysj.sysUser;");
-$stmt->bind_result($id,$user,$email,$sex,$phone);
-$stmt->execute();
-while($stmt->fetch()){
-    if ($sex == "man"){
-        $sex = "<img src='/img/man.png' style='height: 4vh;'>";
-    }
-    else{
-        $sex = "<img src='/img/woman.png' style='height: 4vh;'>";
-    }
-    echo "
+    $stmt = $con->prepare("select id,user,email,sex,phone from bysj.sysUser;");
+    $stmt->bind_result($id,$user,$email,$sex,$phone);
+    $stmt->execute();
+    while($stmt->fetch()){
+        if ($sex == "man"){
+            $sex = "<img src='/img/man.png' style='height: 4vh;'>";
+        }
+        else{
+            $sex = "<img src='/img/woman.png' style='height: 4vh;'>";
+        }
+        echo "
     <tr>
         <td>$id</td><td>$user</td><td>$email</td><td>$sex</td><td>$phone</td>
     </tr>";
+    }
+}else{
+    echo "error!";
 }
 
 ?>
