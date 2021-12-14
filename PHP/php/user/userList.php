@@ -6,7 +6,7 @@
 //$type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 
 $token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; //base64编码
-$username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : ''; //base64编码
+$username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : '';
 
 
 $memcache = new Memcache;             //创建一个memcache对象

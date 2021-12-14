@@ -71,7 +71,11 @@ function loginJudge(){
 		"php/login.php",{"user":username,"passwd":passwd},
 		function(data,status){
 			console.log("数据: \n" + data + "\n状态: " + status);
-			if(data==1){
+			var obj = JSON.parse(data);
+			setCookie("UserName",obj.username);
+			setCookie("Token",obj.token);
+
+			if(obj.status == 1){
 				// 登录框  forwards属性会让对象停留在终点
 				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginOk";
 				// 主页

@@ -14,11 +14,27 @@
     <?php
         session_start();
         //初始化，为了防止报未定义错误错。应该不影响登录,才怪
-//        $_SESSION["loginStatus"] = 0;
-//        setCookie("panelView",0);
+        //        $_SESSION["loginStatus"] = 0;
+        //        setCookie("panelView",0);
         $status = $_SESSION["loginStatus"];
         //离开时显示的面板
         $viewStatus = $_COOKIE['panelView'];
+        if ($status == 1){
+            $user=$_COOKIE['UserName'];
+
+            //创建并更新用户Token hash256+时间存在memcached,base64存在session
+            $yanzhi = "JainaProudmoore";
+            $all = $user.$yanzhi;
+            $hashToken = hash('sha256',$all)."--".date("Y-m-d h:i:s");;
+            $token = base64_encode($hashToken);
+
+            $memcache = new Memcache;             //创建一个memcache对象
+            $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
+            $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
+
+            setcookie("UserName",$user);
+            setcookie("Token",$token);
+        }
     ?>
 	<body>
 		<!-- 登录页 -->
@@ -268,8 +284,13 @@
                              <th>ID</th><th>用户名</th><th>邮箱</th><th>性别</th><th>电话</th>
                          </tr>
                          <?php
-                         $username = $_SESSION['loginUser'];
-                         $token = $_SESSION['Token'];
+                         //这返回的是上一个cookie -- 已修正
+                         $username = $_COOKIE['UserName'];
+//                         $token = $_COOKIE['Token'];
+//                         echo "<script>
+//                         console.log('$username');
+//                         console.log('$token');
+//                         </script>";
                          echo file_get_contents('http://localhost/php/user/userList.php?username='.$username."&token=".$token);
                          ?>
                      </table>
@@ -391,52 +412,8 @@
 		 		</script>";
                 $_SESSION['loginStatus']=1;
 
-//                switch ($viewStatus){
-//                    case 0:
-                          echo "<script>lastView($viewStatus);</script>";
-//                        break;
-//                    case 1:
-//                        echo "<script>lastView($viewStatus);</script>";
-//                        break;
-//                    case 2:
-//                        echo "<script>lastView($viewStatus);</script>";
-//                        break;
-//                    case 3:
-//                        echo "<script>lastView($viewStatus);</script>";
-//                        break;
-//                    case 4:
-//                        echo "<script>lastView($viewStatus);</script>";
-//                        break;
-//                    default:
-//                        break;
-//                }
-                //后端保持
-//                $con=null;
-//                require_once "php/linkDB.php";
-//                // 选择数据库
-//                mysqli_select_db($con,"bysj");
-//                // 设置编码，防止中文乱码
-//                mysqli_set_charset($con, "utf8");
-                $user=$_SESSION['loginUser'];
-
-                //创建并更新用户Token hash256+时间存在memcached,base64存在session
-                $yanzhi = "JainaProudmoore";
-                $all = $user.$yanzhi;
-                $hashToken = hash('sha256',$all)."--".date("Y-m-d h:i:s");;
-                $token = base64_encode($hashToken);
-
-                $memcache = new Memcache;             //创建一个memcache对象
-                $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
-                $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
-
-                $_SESSION['Token'] = $token;
-//                $stmt = $con->prepare("update bysj.userToken set token = ?,data = ? where username = ?");
-//                $stmt->bind_param("sss",$token,$createdate,$user);
-//                $stmt->execute();
-                //token输出点
-//                $_SESSION['Token'] = $token;
-//                $stmt->free_result();
-//                $stmt->close();
+                //显示离开时的面板
+                echo "<script>lastView($viewStatus);</script>";
             }else{
                 echo "<script>
                 document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
