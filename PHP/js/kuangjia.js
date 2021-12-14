@@ -72,10 +72,11 @@ function loginJudge(){
 		function(data,status){
 			console.log("数据: \n" + data + "\n状态: " + status);
 			var obj = JSON.parse(data);
-			setCookie("UserName",obj.username);
-			setCookie("Token",obj.token);
 
 			if(obj.status == 1){
+				setCookie("UserName",obj.username,10);
+				setCookie("Token",obj.token,10);
+
 				// 登录框  forwards属性会让对象停留在终点
 				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginOk";
 				// 主页

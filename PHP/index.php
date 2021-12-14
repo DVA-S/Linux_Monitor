@@ -12,29 +12,35 @@
     <!-- 根据session判断是否登录 -->
     <!-- session_start()函数前不能有任何代码输出到浏览器，最好加在页面头部，或者先用ob_start()函数打开输出缓冲区。-->
     <?php
-        session_start();
-        //初始化，为了防止报未定义错误错。应该不影响登录,才怪
-        //        $_SESSION["loginStatus"] = 0;
-        //        setCookie("panelView",0);
-        $status = $_SESSION["loginStatus"];
-        //离开时显示的面板
-        $viewStatus = $_COOKIE['panelView'];
-        if ($status == 1){
-            $user=$_COOKIE['UserName'];
+    $user=$_COOKIE['UserName'];
+    //获取登录cookie
+    $hashAndData = explode("--",base64_decode($_COOKIE['Status']));
 
-            //创建并更新用户Token hash256+时间存在memcached,base64存在session
-            $yanzhi = "JainaProudmoore";
-            $all = $user.$yanzhi;
-            $hashToken = hash('sha256',$all)."--".date("Y-m-d h:i:s");;
-            $token = base64_encode($hashToken);
+    //将日期转换为时间戳 注：时间戳即秒数
+    $now = strtotime(date("Y-m-d h:i:s"));
+    $datatime = strtotime($hashAndData[1]);
 
-            $memcache = new Memcache;             //创建一个memcache对象
-            $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
-            $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
+    //离开时显示的面板
+    $viewStatus = $_COOKIE['panelView'];
 
-            setcookie("UserName",$user);
-            setcookie("Token",$token);
-        }
+    if (hash('sha256',$user."wxk") == $hashAndData[0] && $now-$datatime <= 600){
+       //刷新有效期
+       setcookie('Status',base64_encode(hash('sha256',$user."wxk")."--".date("Y-m-d h:i:s")),time()+600,'/');
+
+        //创建并更新用户Token hash256+时间存在memcached,base64存在session
+        $yanzhi = "JainaProudmoore";
+        $all = $user.$yanzhi;
+        $hashToken = hash('sha256',$all)."--".date("Y-m-d h:i:s");;
+        $token = base64_encode($hashToken);
+
+        $memcache = new Memcache;             //创建一个memcache对象
+        $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
+        $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
+
+        //单位秒
+        setcookie("UserName",$user,time()+600);
+        setcookie("Token",$token,time()+600);
+    }
     ?>
 	<body>
 		<!-- 登录页 -->
@@ -399,7 +405,7 @@
         <!-- 保持登录一段时间 判定phpSession的值，为1表示已经登录 -->
 <!--        问题：无法重置登录cookie的时间-->
         <?php
-            if($status==1){
+            if(hash('sha256',$user."wxk") == $hashAndData[0] && $now-$datatime <= 600){
                 //前端保持
                 echo "<script>
                 //BUG0:平移登录动画时,每次刷新都会重复登录动画.改进登陆动画后 > BUG1:登录成功后,刷新任何界面,登录表单会出现一秒钟然后消失. --  解决方法:设置登陆成功后&&播放完登录动画后,移除登录盒子
@@ -410,7 +416,6 @@
 		        document.getElementById('panel').style.display='block';
 		        document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
 		 		</script>";
-                $_SESSION['loginStatus']=1;
 
                 //显示离开时的面板
                 echo "<script>lastView($viewStatus);</script>";

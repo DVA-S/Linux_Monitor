@@ -3,11 +3,9 @@
 //第一次：require_once 引入php >> 无论引入多少只能显示一个输出，而且会扰乱布局
 //第二次：封装类 >> 同上
 //第三次：转为接口 >> OK 不过,不安全(还要区分用户)
-//$type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 
 $token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; //base64编码
 $username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : '';
-
 
 $memcache = new Memcache;             //创建一个memcache对象
 $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
