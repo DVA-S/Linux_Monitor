@@ -50,18 +50,8 @@ function keepLogin($login_status,$user){
         $memcache = new Memcache;             //创建一个memcache对象
         $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
         $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
-//        $get_value = $memcache->get('UserToken');   //从内存中取出key的值
-//        echo $get_value;
-        $_SESSION['Token'] = $token;
 
-        //数据库+session方案
-//        $stmt = $con->prepare("update bysj.userToken set token = ?,data = ? where username = ?");
-//        $stmt->bind_param("sss",$token,$createdate,$user);
-//        $stmt->execute();
-        //token输出点
-//        $_SESSION['Token'] = $token;
-//        $stmt->free_result();
-//        $stmt->close();
+        $_SESSION['Token'] = $token;
     }else{
         session_start();
         session_regenerate_id(true);

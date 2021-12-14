@@ -391,25 +391,25 @@
 		 		</script>";
                 $_SESSION['loginStatus']=1;
 
-                switch ($viewStatus){
-                    case 0:
+//                switch ($viewStatus){
+//                    case 0:
                           echo "<script>lastView($viewStatus);</script>";
-                        break;
-                    case 1:
-                        echo "<script>lastView($viewStatus);</script>";
-                        break;
-                    case 2:
-                        echo "<script>lastView($viewStatus);</script>";
-                        break;
-                    case 3:
-                        echo "<script>lastView($viewStatus);</script>";
-                        break;
-                    case 4:
-                        echo "<script>lastView($viewStatus);</script>";
-                        break;
-                    default:
-                        break;
-                }
+//                        break;
+//                    case 1:
+//                        echo "<script>lastView($viewStatus);</script>";
+//                        break;
+//                    case 2:
+//                        echo "<script>lastView($viewStatus);</script>";
+//                        break;
+//                    case 3:
+//                        echo "<script>lastView($viewStatus);</script>";
+//                        break;
+//                    case 4:
+//                        echo "<script>lastView($viewStatus);</script>";
+//                        break;
+//                    default:
+//                        break;
+//                }
                 //后端保持
 //                $con=null;
 //                require_once "php/linkDB.php";
