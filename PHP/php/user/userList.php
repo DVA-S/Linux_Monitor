@@ -33,6 +33,12 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
     $stmt = $con->prepare("select id,user,email,sex,phone from bysj.sysUser;");
     $stmt->bind_result($id,$user,$email,$sex,$phone);
     $stmt->execute();
+
+    echo "
+    <tr>
+        <th>ID</th><th>用户名</th><th>邮箱</th><th>性别</th><th>电话</th>
+    </tr>
+    ";
     while($stmt->fetch()){
         if ($sex == "man"){
             $sex = "<img src='/img/man.png' style='height: 4vh;'>";

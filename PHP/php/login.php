@@ -36,7 +36,7 @@
 function keepLogin($login_status,$user,$rtJson){
     if ($login_status==1){
         //保持登录 登录成功后设置 哈希前：8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918--2021-12-14 04:09:44 单位：秒 十分钟
-        setcookie('Status',base64_encode(hash('sha256',$user."wxk")."--".date("Y-m-d h:i:s")),time()+600,'/');
+//        setcookie('Status',base64_encode(hash('sha256',$user."wxk")."--".date("Y-m-d h:i:s")),time()+600,'/');
 
         //创建Token到数据库(memcached)和session(cookie) 解密base64后得到sha256+时间去memcached验证
         $yanzhi = "JainaProudmoore";
@@ -55,9 +55,9 @@ function keepLogin($login_status,$user,$rtJson){
         $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
         $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
     }else{
-        session_start();
-        session_regenerate_id(true);
-        $_SESSION['loginStatus']=0;
+//        session_start();
+//        session_regenerate_id(true);
+//        $_SESSION['loginStatus']=0;
     }
 }
 

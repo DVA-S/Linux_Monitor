@@ -1,3 +1,58 @@
+
+<?php
+//            if(hash('sha256',$user."wxk") == $hashAndData[0] && $now-$datatime <= 600){
+//                //前端保持
+//                echo "<script>
+//                //BUG0:平移登录动画时,每次刷新都会重复登录动画.改进登陆动画后 > BUG1:登录成功后,刷新任何界面,登录表单会出现一秒钟然后消失. --  解决方法:设置登陆成功后&&播放完登录动画后,移除登录盒子
+//                //加了几个刷新按钮后，bug又回来了  --  最终方法：登录表单只有读不到登录session时才会出现
+//		        //主页
+//		        document.getElementById('head_div').style.display='block';
+//		        document.getElementById('head_div').style.animation='0.5s ease 0s 1 normal forwards running index_head_loginOk';
+//		        document.getElementById('panel').style.display='block';
+//		        document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
+//		 		</script>";
+//                //显示离开时的面板
+//                echo "<script>lastView($viewStatus);</script>";
+//            }else{
+//                //拒绝登录动画
+//                echo "<script>
+//                document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
+//		        document.getElementById('login_div').style.display='block';
+//		 		</script>";
+//            }
+?>
+
+
+<?php
+//    //登录的用户名
+//    $user=$_COOKIE['UserName'];
+//    //获取保持登录的cookie
+//    $hashAndData = explode("--",base64_decode($_COOKIE['Status']));
+//    //将日期转换为时间戳 注：时间戳即秒数
+//    $now = strtotime(date("Y-m-d h:i:s"));
+//    $datatime = strtotime($hashAndData[1]);
+//    //离开时显示的面板
+//    $viewStatus = $_COOKIE['panelView'];
+//
+//    //验证cookie中的数据合法性和有效性
+//    if (hash('sha256',$user."wxk") == $hashAndData[0] && $now-$datatime <= 600){
+//       //刷新有效期
+//       setcookie('Status',base64_encode(hash('sha256',$user."wxk")."--".date("Y-m-d h:i:s")),time()+600,'/');
+//        //创建并更新用户Token hash256+时间存在memcached,base64存在cookie
+//        $yanzhi = "JainaProudmoore";
+//        $all = $user.$yanzhi;
+//        $hashToken = hash('sha256',$all)."--".date("Y-m-d h:i:s");;
+//        $token = base64_encode($hashToken);
+//        $memcache = new Memcache;             //创建一个memcache对象
+//        $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
+//        $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
+//        //单位秒
+//        setcookie("UserName",$user,time()+600);
+//        setcookie("Token",$token,time()+600);
+//    }
+?>
+
+
 <!-- 保持登录一段时间 判定phpSession的值，为1表示已经登录 -->
 <!--        问题：无法重置登录cookie的时间-->
 <!-- 根据session判断是否登录 -->

@@ -42,6 +42,12 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
     $stmt = $con->prepare("select id,host_name,host_type,host_ip,mem_total,network_speed,disk_all from bysj.host");
     $stmt->bind_result($id, $host_name, $host_type, $host_ip, $mem_total, $network_speed, $disk_all);
     $stmt->execute();
+
+    echo "
+    <tr>
+        <th>主机名</th><th>类型</th><th>地址</th><th>内存</th><th>网卡速率</th><th>硬盘</th><th>操作</th>
+    </tr>
+    ";
     while ($stmt->fetch()) {
 //  按钮上绑定主机ID
         echo "

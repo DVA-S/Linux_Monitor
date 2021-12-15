@@ -109,23 +109,23 @@ function getPanelView(list){
 //根据传入面板值，显示离开时的面板
 function lastView(view){
 	switch (view){
-		case 0:
+		case '0':
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			document.getElementById('panel').style.display='block';
 			break;
-		case 1:
+		case '1':
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			document.getElementById('host').style.display='block';
 			break;
-		case 2:
+		case '2':
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			document.getElementById('checking').style.display='block';
 			break;
-		case 3:
+		case '3':
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			document.getElementById('user').style.display='block';
 			break;
-		case 4:
+		case '4':
 			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			document.getElementById('setup').style.display='block';
 			break;
