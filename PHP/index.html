@@ -38,11 +38,21 @@
              <div class="panel_btn" title="当前用户" onclick="" style="width: 4vw;box-shadow: none;background-image: none;margin: 0;top: -4px;border-radius: 100px;">
                  <img alt="logo" src="img/logo.png" width="70%" style="left: 20%;">
              </div>
-			 <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="btnOnClick(this);loading();">监控面板</div>
-			 <div class="host_btn" title="设备的总览、列表、添加" onclick="btnOnClick(this)">设备管理</div>
-			 <div class="checking_btn" title="设备的连通、性能、端口、硬件" onclick="btnOnClick(this)">自动巡检</div>
-			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this)">用户管理</div>
-			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this)">系统设置</div>
+			 <div class="panel_btn" title="内存、硬盘、网络、处理器图表" onclick="btnOnClick(this);(function (){setTimeout(
+                 function (){oneFlush();},470
+			 )})()
+                 (function (){
+                     	if (getCookie('flushPanel') == 1){
+                            // alert('正在刷新呢！');
+                        }else{
+                            loading();
+                        }
+                 })()
+                 ">监控面板</div>
+			 <div class="host_btn" title="设备的总览、列表、添加" onclick="btnOnClick(this);(function (){setCookie('flushPanel',0,10);})()">设备管理</div>
+			 <div class="checking_btn" title="设备的连通、性能、端口、硬件" onclick="btnOnClick(this);(function (){setCookie('flushPanel',0,10);})()">自动巡检</div>
+			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this);(function (){setCookie('flushPanel',0,10);})()">用户管理</div>
+			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this);(function (){setCookie('flushPanel',0,10);})()">系统设置</div>
              <p id="clock" style="top: 18%;left: 30vw;color: #FFF;font-family: fantasy;display: inline;"></p>
              <script src="js/system/date.js"></script>
 		 </div>

@@ -1,3 +1,27 @@
+//自动巡检 -- 添加主机
+function addHost(){
+	// var ipaddress =$("#ipaddress").val();
+	// var username =$("#hostuser").val();
+	// var passwd = $("#hostpasswd").val();
+	// $.get(
+	// 	"jaina.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd}
+	// );
+	// //获取服务器IP
+	// $.get(
+	// 	"php/ServerIP.php",{},
+	// 	function (data){
+	// 		alert('请在要添加的设备上执行 # jaina addhost '+data);
+	// 	});
+	//
+	// setTimeout(function (){
+	// 	location.reload()
+	// },1500);
+}
+
+
+
+
+
 //此处为弃用的代码
 
 // var xmlHttpHostCountUbuntu = new XMLHttpRequest();

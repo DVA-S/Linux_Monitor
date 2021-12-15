@@ -179,7 +179,7 @@ function viewPanel(view_btn){
 		}else if( getPanelView(3) ) {
 			view=3;
 		}else if( getPanelView(4) ) {
-			view=4; }
+			view=4;}
 
 		 //switch主体 - 获取按钮点击传来的ID，判断该ID在数组中的位置（返回数字）;正在显示面板下标和点击按钮将要显示的面板的下标作比较
 		 if(view<panel_list.indexOf(view_btn)){
@@ -307,26 +307,6 @@ function SearchHost(){
 			document.getElementById("SearchTr").innerHTML=data;
 		}
 	);
-}
-
-//自动巡检 -- 添加主机
-function addHost(){
-	// var ipaddress =$("#ipaddress").val();
-	// var username =$("#hostuser").val();
-	// var passwd = $("#hostpasswd").val();
-	// $.get(
-	// 	"jaina.php",{"ipaddress":ipaddress,"username":username,"passwd":passwd}
-	// );
-	// //获取服务器IP
-	// $.get(
-	// 	"php/ServerIP.php",{},
-	// 	function (data){
-	// 		alert('请在要添加的设备上执行 # jaina addhost '+data);
-	// 	});
-	//
-	// setTimeout(function (){
-	// 	location.reload()
-	// },1500);
 }
 
 //用户管理 -- 添加用户
@@ -517,9 +497,11 @@ function loading(){
 			document.getElementById("disk").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 			document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 			document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
-			//loading()也嵌套在runNetwork()之中
+			//loading()和runNetwork()为无限嵌套函数
 			setTimeout("runNetwork();runMemory();runDisk();runCpu();",200);
 			// console.log("动画结束");
+			//刷新状态
+			setCookie("flushPanel",1,10);
 		}
 	},10000);
 }
@@ -530,12 +512,13 @@ function oneFlush(){
 	document.getElementById("disk").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 	document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 	document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
-	//loading()也嵌套在runNetwork()之中
 	// runNetwork(); 不用直接调用runNetwork() 是因为他和loading()是无限嵌套函数，会产生两个无限循环，具体表现为监控面板每十秒刷新两次
 	xmlHttpdNetworkTime = pgGet("http://192.168.157.128/php/panel/network.php?type=datatime&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
 	xmlHttpNetworkUp = pgGet("http://192.168.157.128/php/panel/network.php?type=networkup&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
 	xmlHttpNetworkDown = pgGet("http://192.168.157.128/php/panel/network.php?type=networkdown&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
 	runMemory();runDisk();runCpu();
+	//刷新状态
+	setCookie("flushPanel",1,10);
 }
 
 //图表
