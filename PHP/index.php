@@ -119,7 +119,7 @@
                          <tr>
                              <th>主机名</th><th>类型</th><th>地址</th><th>内存</th><th>网卡速率</th><th>硬盘</th><th>操作</th>
                          </tr>
-                         <?php echo file_get_contents('http://localhost/php/host/List.php'); ?>
+                         <?php echo file_get_contents('http://localhost/php/host/List.php?username='.$user."&token=".$token); ?>
                      </table>
                  </div>
 				 <div class="host_right_addhost" id="host_right_addhost">
@@ -163,7 +163,7 @@
                          <div class="alltable_head">
                              <p>设备列表</p>
                          </div>
-                         <?php echo file_get_contents('http://localhost/php/checking/hostLinkList.php'); ?>
+                         <?php echo file_get_contents('http://localhost/php/checking/hostLinkList.php?username='.$user."&token=".$token); ?>
                      </table>
                  </div>
                 <!-- 性能测试 -->
@@ -171,7 +171,7 @@
                      <div class="addhost_form" style="height: 18%;">
                          <select id="perfSingle" style="top: 33%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                              <option value ="">请选择主机</option>
-                             <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php'); ?>
+                             <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php?username='.$user."&token=".$token); ?>
                          </select>
                              <div class="ok" id="hostDisk" style="position: absolute;top: 38%;left: 34%;" onclick="hostPerf(this)">&nbsp;硬盘</div>
                              <div class="ok" id="hostNetwork" style="position: absolute;top: 38%;left: 46%;" onclick="hostPerf(this)">&nbsp;网络</div>
@@ -190,7 +190,7 @@
                      <div class="addhost_form">
                          <select id="perfSinglePort" style="top: 14%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                              <option value ="">请选择主机</option>
-                             <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php'); ?>
+                             <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php?username='.$user."&token=".$token); ?>
                          </select>
                          <div class="ok" id="hostDisk" style="position: absolute;top: 23%;left: 34%;height: 50%;" onclick="hostPort()">&nbsp;端口检测</div>
                      </div>
@@ -211,7 +211,7 @@
                          <form action="#" method="get">
                              <select id="perfSingleDevice" style="top: 14%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;margin-top: 0.5%;">
                                  <option value ="">请选择主机</option>
-                                 <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php'); ?>
+                                 <?php echo file_get_contents('http://localhost/php/checking/hostSingleList.php?username='.$user."&token=".$token); ?>
                              </select>
                              <div class="ok" id="hostDisk" style="position: absolute;top: 23%;left: 34%;height: 66%;" onclick="hostDevice()">&nbsp;设备检测</div>
                      </div>

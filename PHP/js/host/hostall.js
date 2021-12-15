@@ -3,9 +3,9 @@ var xmlHttpHostCountCentOS;
 var xmlHttpHostCountMySQL;
 
 function runHostCount(){
-    xmlHttpHostCountUbuntu= pgGet("http://192.168.157.128/php/host/Count.php?type=Ubuntu",hostcountback);
-    xmlHttpHostCountCentOS = pgGet("http://192.168.157.128/php/host/Count.php?type=CentOS",hostcountback);
-    xmlHttpHostCountMySQL = pgGet("http://192.168.157.128/php/host/Count.php?type=MySQL",hostcountback);
+    xmlHttpHostCountUbuntu= pgGet("http://192.168.157.128/php/host/Count.php?type=Ubuntu&username="+getCookie("UserName")+"&token="+getCookie("Token"),hostcountback);
+    xmlHttpHostCountCentOS = pgGet("http://192.168.157.128/php/host/Count.php?type=CentOS&username="+getCookie("UserName")+"&token="+getCookie("Token"),hostcountback);
+    xmlHttpHostCountMySQL = pgGet("http://192.168.157.128/php/host/Count.php?type=MySQL&username="+getCookie("UserName")+"&token="+getCookie("Token"),hostcountback);
 }
 runHostCount();
 function hostcountback(){

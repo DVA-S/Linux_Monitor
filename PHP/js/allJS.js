@@ -352,7 +352,7 @@ function addUserSys(){
 		var sex =$("#sex").val();
 		var phone =$("#phone").val();
 		$.get(
-			"php/user/AddUser.php",{"user":userAdd,"passwd":userAddPasswd,"email":email,"sex":sex,"phone":phone},
+			"php/user/AddUser.php",{"username":getCookie("UserName"),"token":getCookie("Token"),"user":userAdd,"passwd":userAddPasswd,"email":email,"sex":sex,"phone":phone},
 			function(){
 				document.getElementById('addSysUser').style.animation='0.5s ease forwards running login_loginOk';
 				document.getElementById('addSysUser').style.display='none';

@@ -8,7 +8,6 @@ $token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; //base64
 $username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : '';
 
 $hashAndData = explode("--",base64_decode($token));
-
 //将日期转换为时间戳 注：时间戳即秒数
 $now = strtotime(date("Y-m-d h:i:s"));
 $datatime = strtotime($hashAndData[1]);
