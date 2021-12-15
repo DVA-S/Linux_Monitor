@@ -85,6 +85,9 @@ function loginJudge(){
 				document.getElementById("panel").style.display="block";
 				document.getElementById("panel").style.animation="0.5s ease 0s 1 normal forwards running index_panel_loginOk";
 				console.log("logOK!");
+
+				//刷新监控面板 -- 解决：避免刚登陆时图表缩成一团
+				oneFlush();
 			}else{
 				//拒绝动画
 				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginNo";
@@ -514,10 +517,25 @@ function loading(){
 			document.getElementById("disk").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 			document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 			document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
+			//loading()也嵌套在runNetwork()之中
 			setTimeout("runNetwork();runMemory();runDisk();runCpu();",200);
 			// console.log("动画结束");
 		}
 	},10000);
+}
+//单次刷新监控面板
+function oneFlush(){
+	// //此动画主要用来清空图表刷新数据时的异常闪动
+	document.getElementById("memory").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
+	document.getElementById("disk").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
+	document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
+	document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
+	//loading()也嵌套在runNetwork()之中
+	// runNetwork(); 不用直接调用runNetwork() 是因为他和loading()是无限嵌套函数，会产生两个无限循环，具体表现为监控面板每十秒刷新两次
+	xmlHttpdNetworkTime = pgGet("http://192.168.157.128/php/panel/network.php?type=datatime&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
+	xmlHttpNetworkUp = pgGet("http://192.168.157.128/php/panel/network.php?type=networkup&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
+	xmlHttpNetworkDown = pgGet("http://192.168.157.128/php/panel/network.php?type=networkdown&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
+	runMemory();runDisk();runCpu();
 }
 
 //图表
@@ -526,9 +544,6 @@ function viewCharts(panelId,Atitle,Btitle,unit){
 	if(chartDom != null && chartDom != "" && chartDom != undefined){
 		echarts.dispose(document.getElementById(panelId))
 	}
-	// if(xmlHttpdCpuTime.readyState == 4){
-	//     if(xmlHttpdCpuTime.status == 200){
-	// responseText解析：https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/responseText
 	switch (panelId){
 		case 'memory':
 			date = datatime = xmlHttpMemoryTime.responseText.split(",");
@@ -575,9 +590,9 @@ function viewCharts(panelId,Atitle,Btitle,unit){
 			data: [Atitle, Btitle]
 		},
 		toolbox: {
-			feature: {
-				saveAsImage: {}
-			}
+			// feature: {
+			// 	saveAsImage: {}
+			// }
 		},
 		grid: {
 			left: '3%',

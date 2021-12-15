@@ -46,7 +46,6 @@
              <p id="clock" style="top: 18%;left: 30vw;color: #FFF;font-family: fantasy;display: inline;"></p>
              <script src="js/system/date.js"></script>
 		 </div>
-
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
              <div class="view" id="memory" style="top: 2%;left: 3%;">
@@ -414,6 +413,9 @@
                         document.getElementById('panel').style.display='block';
                         document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
                         lastView(getCookie('panelView'));
+
+                        //刷新监控面板 -- 解决：避免刷新后图表缩成一团
+                        oneFlush();
                     }else{
                         document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
                         document.getElementById('login_div').style.display='block';
