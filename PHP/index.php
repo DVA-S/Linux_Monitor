@@ -9,34 +9,29 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Inspection and Monitoring</title>
 	</head>
-    <!-- 根据session判断是否登录 -->
-    <!-- session_start()函数前不能有任何代码输出到浏览器，最好加在页面头部，或者先用ob_start()函数打开输出缓冲区。-->
     <?php
+    //登录的用户名
     $user=$_COOKIE['UserName'];
-    //获取登录cookie
+    //获取保持登录的cookie
     $hashAndData = explode("--",base64_decode($_COOKIE['Status']));
-
     //将日期转换为时间戳 注：时间戳即秒数
     $now = strtotime(date("Y-m-d h:i:s"));
     $datatime = strtotime($hashAndData[1]);
-
     //离开时显示的面板
     $viewStatus = $_COOKIE['panelView'];
 
+    //验证cookie中的数据合法性和有效性
     if (hash('sha256',$user."wxk") == $hashAndData[0] && $now-$datatime <= 600){
        //刷新有效期
        setcookie('Status',base64_encode(hash('sha256',$user."wxk")."--".date("Y-m-d h:i:s")),time()+600,'/');
-
-        //创建并更新用户Token hash256+时间存在memcached,base64存在session
+        //创建并更新用户Token hash256+时间存在memcached,base64存在cookie
         $yanzhi = "JainaProudmoore";
         $all = $user.$yanzhi;
         $hashToken = hash('sha256',$all)."--".date("Y-m-d h:i:s");;
         $token = base64_encode($hashToken);
-
         $memcache = new Memcache;             //创建一个memcache对象
         $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
         $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
-
         //单位秒
         setcookie("UserName",$user,time()+600);
         setcookie("Token",$token,time()+600);
@@ -290,14 +285,7 @@
                              <th>ID</th><th>用户名</th><th>邮箱</th><th>性别</th><th>电话</th>
                          </tr>
                          <?php
-                         //这返回的是上一个cookie -- 已修正
-                         $username = $_COOKIE['UserName'];
-//                         $token = $_COOKIE['Token'];
-//                         echo "<script>
-//                         console.log('$username');
-//                         console.log('$token');
-//                         </script>";
-                         echo file_get_contents('http://localhost/php/user/userList.php?username='.$username."&token=".$token);
+                         echo file_get_contents('http://localhost/php/user/userList.php?username='.$user."&token=".$token);
                          ?>
                      </table>
                      <div class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;border: none;line-height: 200%;" onclick="addUserWindows()">添加用户</div>
@@ -402,8 +390,6 @@
              </div>
 		 </div>
         <!-- 放在页面底部可以读到上面元素的ID值 -->
-        <!-- 保持登录一段时间 判定phpSession的值，为1表示已经登录 -->
-<!--        问题：无法重置登录cookie的时间-->
         <?php
             if(hash('sha256',$user."wxk") == $hashAndData[0] && $now-$datatime <= 600){
                 //前端保持
@@ -416,10 +402,10 @@
 		        document.getElementById('panel').style.display='block';
 		        document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
 		 		</script>";
-
                 //显示离开时的面板
                 echo "<script>lastView($viewStatus);</script>";
             }else{
+                //拒绝登录动画
                 echo "<script>
                 document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
 		        document.getElementById('login_div').style.display='block';

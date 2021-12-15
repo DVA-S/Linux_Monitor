@@ -1,3 +1,8 @@
+<!-- 保持登录一段时间 判定phpSession的值，为1表示已经登录 -->
+<!--        问题：无法重置登录cookie的时间-->
+<!-- 根据session判断是否登录 -->
+<!-- session_start()函数前不能有任何代码输出到浏览器，最好加在页面头部，或者先用ob_start()函数打开输出缓冲区。-->
+
 <!--memory表格-->
 <script>
     var chartDom = document.getElementById('memory');

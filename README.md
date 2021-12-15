@@ -114,3 +114,18 @@ https://echarts.apache.org/examples/zh/editor.html?c=line-marker~~
     图表3:    
         在bysj-for-wxk/js/host/hostall.js文件中，读取php接口数据
 ```
+Memcached：
+```
+版本：
+    VERSION 1.5.22
+安装：
+    sudo apt-get install memcached
+    apt -y install php-memcache
+运行：
+    memcached -p 11211 -m 64m -d -u root -l 192.168.157.128
+利用点：
+    将用户Token存储在服务器内存中，避免数据持久化。
+位置：
+    php/login.php
+    index.php
+```
