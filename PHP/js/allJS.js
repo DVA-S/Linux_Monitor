@@ -270,7 +270,7 @@ function deleteHost(element){
 	if(res==true){
 		//传入数据ID，调用php删除接口，刷新
 		$.get(
-			"php/host/DeleteHost.php",{"hostID":hostID}
+			"php/host/DeleteHost.php",{"hostID":hostID,"username":getCookie("UserName"),"token":getCookie("Token")}
 		);
 		setTimeout(function (){
 			location.reload()
@@ -302,7 +302,7 @@ function linkHostStatus(element){
 function SearchHost(){
 	var searchHost =$("#searchHost").val();
 	$.get(
-		"php/host/SearchHost.php",{"search":searchHost},
+		"php/host/SearchHost.php",{"search":searchHost,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
 			document.getElementById("SearchTr").innerHTML=data;
 		}
