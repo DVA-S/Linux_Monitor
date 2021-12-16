@@ -6,6 +6,11 @@
 		<script type="text/javascript" src="js/kuangjia/jquery.js"></script>
 		<script type="text/javascript" src="js/kuangjia/echars.js"></script>
 		<script type="text/javascript" src="js/jssha256.js"></script>
+
+        <!--    图表    -->
+        <script src="js/host/hostall.js"></script>
+
+
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Inspection and Monitoring</title>
 	</head>
@@ -44,7 +49,7 @@
 			 <div class="user_btn" title="系统用户、设备用户、添加" onclick="btnOnClick(this);(function (){setCookie('flushPanel',0,10);})()">用户管理</div>
 			 <div class="setup_btn" title="退出登录、修改密码、系统状态、查看日志" onclick="btnOnClick(this);(function (){setCookie('flushPanel',0,10);})()">系统设置</div>
              <p id="clock" style="top: 18%;left: 30vw;color: #FFF;font-family: fantasy;display: inline;"></p>
-             <script src="js/system/date.js"></script>
+<!--     Jaina 待删除        <script src="js/system/date.js"></script>-->
 		 </div>
 		 <!-- 监控面板 -->
 		 <div class="panel" id="panel">
@@ -77,7 +82,7 @@
 			 <div class="host_right">
 				 <div class="host_right_all" id="host_right_all">
                      <div id="hostall" style="width: 90vh;height: 90vh;padding-left: 28%;padding-top: 3%;">
-                         <script src="js/host/hostall.js"></script>
+<!--              Jaina 待删除           <script src="js/host/hostall.js"></script>-->
                      </div>
                  </div>
 				 <div class="host_right_list" id="host_right_list">
@@ -88,12 +93,12 @@
                      </div>
                      <table id="SearchTr" class='alltable'>
                          <script>
-                             $.get(
-                                 "php/host/List.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
-                                 function (data){
-                                    document.getElementById("SearchTr").innerHTML=data;
-                                 }
-                             );
+                             // $.get(  Jaina 待删除
+                             //     "php/host/List.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+                             //     function (data){
+                             //        document.getElementById("SearchTr").innerHTML=data;
+                             //     }
+                             // );
                          </script>
                      </table>
                  </div>
@@ -139,12 +144,12 @@
                      </div>
                      <table class='alltable' id="alltable">
                          <script>
-                             $.get(
-                                 "php/checking/hostLinkList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
-                                 function (data){
-                                     document.getElementById("alltable").innerHTML=data;
-                                 }
-                             );
+                             // $.get(      Jaina 待删除
+                             //     "php/checking/hostLinkList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+                             //     function (data){
+                             //         document.getElementById("alltable").innerHTML=data;
+                             //     }
+                             // );
                          </script>
                      </table>
                  </div>
@@ -153,12 +158,12 @@
                      <div class="addhost_form" style="height: 18%;">
                          <select id="perfSingle" style="top: 33%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                              <script>
-                                 $.get(
-                                     "php/checking/hostSingleList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
-                                     function (data){
-                                         document.getElementById("perfSingle").innerHTML=data;
-                                     }
-                                 );
+                                 // $.get(  Jaina 待删除
+                                 //     "php/checking/hostSingleList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+                                 //     function (data){
+                                 //         document.getElementById("perfSingle").innerHTML=data;
+                                 //     }
+                                 // );
                              </script>
                          </select>
                              <div class="ok" id="hostDisk" style="position: absolute;top: 38%;left: 34%;" onclick="hostPerf(this)">&nbsp;硬盘</div>
@@ -179,12 +184,12 @@
                          <select id="perfSinglePort" style="top: 14%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                              <option value ="">请选择主机</option>
                              <script>
-                                 $.get(
-                                     "php/checking/hostSingleList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
-                                     function (data){
-                                         document.getElementById("perfSinglePort").innerHTML=data;
-                                     }
-                                 );
+                                 // $.get(Jaina 待删除
+                                 //     "php/checking/hostSingleList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+                                 //     function (data){
+                                 //         document.getElementById("perfSinglePort").innerHTML=data;
+                                 //     }
+                                 // );
                              </script>
                          </select>
                         <!-- Jaina 这儿曾有重复的ID hostDisk -->
@@ -208,12 +213,12 @@
                              <select id="perfSingleDevice" style="top: 14%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;margin-top: 0.5%;">
                                  <option value ="">请选择主机</option>
                                  <script>
-                                     $.get(
-                                         "php/checking/hostSingleList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
-                                         function (data){
-                                             document.getElementById("perfSingleDevice").innerHTML=data;
-                                         }
-                                     );
+                                     // $.get( Jaina 待删除
+                                     //     "php/checking/hostSingleList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+                                     //     function (data){
+                                     //         document.getElementById("perfSingleDevice").innerHTML=data;
+                                     //     }
+                                     // );
                                  </script>
                              </select>
                              <div class="ok" id="hostDev" style="position: absolute;top: 23%;left: 34%;height: 66%;" onclick="hostDevice()">&nbsp;设备检测</div>
@@ -286,12 +291,12 @@
                      </div>
                      <table id="alltableSysUser" class='alltable'>
                          <script>
-                             $.get(
-                                 "php/user/userList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
-                                 function (data){
-                                     document.getElementById("alltableSysUser").innerHTML=data;
-                                 }
-                             );
+                             // $.get( Jaina 待删除
+                             //     "php/user/userList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+                             //     function (data){
+                             //         document.getElementById("alltableSysUser").innerHTML=data;
+                             //     }
+                             // );
                          </script>
                      </table>
                      <div class="ok" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;border: none;line-height: 200%;" onclick="addUserWindows()">添加用户</div>
@@ -414,8 +419,11 @@
                         document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
                         lastView(getCookie('panelView'));
 
-                        //刷新监控面板 -- 解决：避免刷新后图表缩成一团
+                        //刷新监控面板(登陆成功后，就会立马刷新数据) -- 解决：避免刷新后图表缩成一团
                         oneFlush();
+
+                        //刷新所有查询数据
+                        allFlush();
                     }else{
                         document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
                         document.getElementById('login_div').style.display='block';

@@ -1,3 +1,83 @@
+/* - ---------------------------------------------------------------------------------数据请求----------------------------------------------------------------------------------- */
+//设备管理 -- 设备列表
+function hostList(){
+	$.get(
+		"php/host/List.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+		function (data){
+			document.getElementById("SearchTr").innerHTML=data;
+		}
+	);
+}
+//导航栏 -- 时间
+function runDate(){
+	var time = new Date();//获取系统当前时间
+	var year = time.getFullYear();
+	var month = time.getMonth()+1;
+	var date= time.getDate();//系统时间月份中的日
+	var day = time.getDay();//系统时间中的星期值
+	var weeks = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+	var week = weeks[day];//显示为星期几
+	var hour = time.getHours();
+	var minutes = time.getMinutes();
+	var seconds = time.getSeconds();
+	if(month<10){
+		month = "0"+month;
+	}
+	if(date<10){
+		date = "0"+date;
+	}
+	if(hour<10){
+		hour = "0"+hour;
+	}
+	if(minutes<10){
+		minutes = "0"+minutes;
+	}
+	if(seconds<10){
+		seconds = "0"+seconds;
+	}
+	//var newDate = year+"年"+month+"月"+date+"日"+week+hour+":"+minutes+":"+seconds;
+	document.getElementById("clock").innerHTML = year+"-"+month+"-"+date+" "+hour+":"+minutes+":"+seconds;
+	setTimeout('runDate()',1000);
+}
+//自动巡检 -- 设备列表
+function hostLinkList(){
+	$.get(
+		"php/checking/hostLinkList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+		function (data){
+			document.getElementById("alltable").innerHTML=data;
+		}
+	);
+}
+//自动巡检 -- 下拉选矿
+function hostSingleList(id){
+	$.get(
+		"php/checking/hostSingleList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+		function (data){
+			document.getElementById(id).innerHTML=data;
+		}
+	);
+}
+//用户管理 -- 系统用户列表
+function userList(){
+	$.get(
+		"php/user/userList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+		function (data){
+			document.getElementById("alltableSysUser").innerHTML=data;
+		}
+	);
+}
+function allFlush(){
+	hostList();
+	runDate();
+	hostall();
+	hostLinkList();
+	hostSingleList("perfSingle");
+	hostSingleList("perfSinglePort");
+	hostSingleList("perfSingleDevice");
+	userList();
+}
+
+/* - ---------------------------------------------------------------------------------数据请求----------------------------------------------------------------------------------- */
 /* - ------------------------------------------------------------------------------- -全局变量--------------------------- ----------------------------------------------------- - */
 //echars图表变量
 var chartDom;var myChart;
@@ -60,7 +140,7 @@ function keySearchHost(){
 		document.getElementById("searchHostBtn").click(); //调用登录按钮的登录事件
 }
 
-//登录 -- 判断显示动画、设置Cookie
+//登录判断 -- 显示动画、设置Cookie
 function loginJudge(){
 	var username =$("#username").val();
 	//去空格后，哈希加密 ( 此处加密的好处是，1，密码不会以明文的方式在网络上传输 2，即使是网站管理员也不知道你的密码 )
@@ -73,7 +153,7 @@ function loginJudge(){
 			console.log("数据: \n" + data + "\n状态: " + status);
 			var obj = JSON.parse(data);
 
-			if(obj.status == 1){
+			if(obj.status == 1){	//登录成功
 				setCookie("UserName",obj.username,10);
 				setCookie("Token",obj.token,10);
 
@@ -88,6 +168,9 @@ function loginJudge(){
 
 				//刷新监控面板 -- 解决：避免刚登陆时图表缩成一团
 				oneFlush();
+
+				allFlush();
+
 			}else{
 				//拒绝动画
 				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginNo";
@@ -184,7 +267,8 @@ function viewPanel(view_btn){
 		 //switch主体 - 获取按钮点击传来的ID，判断该ID在数组中的位置（返回数字）;正在显示面板下标和点击按钮将要显示的面板的下标作比较
 		 if(view<panel_list.indexOf(view_btn)){
 			 // ##BUG:所有面板都显示过后，无法跳转切换 ##例如：从2到4后，虽然实际显示的是4，但view的值是3 ##所以解决方法之一为：做动作前先清场，大概属于一刀切方法，很简单。
-			 $('#panel,#checking,#user,#host,#setup').css('display', 'none');
+			 // $('#panel,#checking,#user,#host,#setup').css('display', 'none');
+			 $('#panel,#checking,#user,#host,#setup').hide();
 			//点击当前面板右边的按钮
 			// 离开动画--当前面板左移(BUG:导航栏按钮--应该是将要显示前的面板离开)
 			document.getElementById(panel_list[panel_list.indexOf(view_btn)-1]).style.display="block";
@@ -198,7 +282,8 @@ function viewPanel(view_btn){
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
 			break;
 		}else if(view>panel_list.indexOf(view_btn)){
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
+			// $('#panel,#checking,#user,#host,#setup').css('display', 'none');
+			 $('#panel,#checking,#user,#host,#setup').hide();
 			// 点击当前面板左边的按钮
 			// 离开动画--当前面板右移
 			document.getElementById(panel_list[panel_list.indexOf(view_btn)+1]).style.display="block";
@@ -213,20 +298,24 @@ function viewPanel(view_btn){
 			break;
 		}else if(view===panel_list.indexOf(view_btn)){
 			// $('#panel,#checking,#user,#host,#setup').css('display', 'none');
+			 $('#panel,#checking,#user,#host,#setup').hide();
 			// // 点击当前面板按钮
 			// // 刷新动画--当前元素显示
 			// //BUG:只能显示一次🤔
-			// document.getElementById(view_btn).style.display="block";
-			// document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
-			// document.getElementById(view_btn).style.position="absolute";
+			document.getElementById(view_btn).style.display="block";
+			document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
+			document.getElementById(view_btn).style.position="absolute";
 			console.log('当前显示为：'+panel_list.indexOf(view_btn),"点击为：",panel_list.indexOf(view_btn)+"刷新显示");
 			//将最后一次显示的面板存入cookie
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
 			break;
 		}
 		case 5:case 6:case 7:
-		$('#host_right_list,#host_right_addhost,#host_right_all').css('display', 'none');
-		document.getElementById(view_btn).style.display="block";		break;
+		// $('#host_right_list,#host_right_addhost,#host_right_all').css('display', 'none');
+		$('#host_right_list,#host_right_addhost,#host_right_all').hide();
+		// document.getElementById(view_btn).style.display="block";
+		$('#'+view_btn).show();
+		break;
 		case 8:case 9:case 10:case 11:
 		$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').css('display', 'none');
 		document.getElementById(view_btn).style.display="block";	    break;

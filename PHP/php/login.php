@@ -55,9 +55,11 @@ function keepLogin($login_status,$user,$rtJson){
         $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
         $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
     }else{
-//        session_start();
-//        session_regenerate_id(true);
-//        $_SESSION['loginStatus']=0;
+        //返回json数据
+        $rtJson->status = 0;
+        $rtJson->username = null;
+        $rtJson->token = null;
+        echo json_encode($rtJson);
     }
 }
 
