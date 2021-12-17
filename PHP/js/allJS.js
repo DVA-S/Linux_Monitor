@@ -379,13 +379,12 @@ function linkHostStatus(element){
 	clientIP = document.getElementById(hostIP.replace("ping","")).innerText;
 	console.log(clientIP);
 	$.get(
-		"Server/Checking/ServerSocket.php",{"type":"ping"+hostID,"clientIP":clientIP},
+		"Server/Checking/ServerSocket.php",{"type":"ping"+hostID,"clientIP":clientIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function (data){
 			document.getElementById("Status"+hostID).innerHTML=data;
 			// console.log(hostID);
 		}
 	);
-
 }
 //设备管理 -- 搜索设备
 function SearchHost(){
@@ -458,7 +457,7 @@ function hostPerf(element){
 			//多出一个空格引发的血案
 			hostIP = hostIP.replace("Singlehost_","");
 			$.get(
-				"../Server/Checking/ServerSocket.php",{"type":"disk","clientIP":hostIP},
+				"../Server/Checking/ServerSocket.php",{"type":"disk","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 				function(data){
 					document.getElementById("checkingPerf").innerHTML=data;
 				}
@@ -470,7 +469,7 @@ function hostPerf(element){
 			//多出一个空格引发的血案
 			hostIP = hostIP.replace("Singlehost_","");
 			$.get(
-				"../Server/Checking/ServerSocket.php",{"type":"nets","clientIP":hostIP},
+				"../Server/Checking/ServerSocket.php",{"type":"nets","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 				function(data){
 					document.getElementById("checkingPerf").innerHTML=data;
 				}
@@ -482,7 +481,7 @@ function hostPerf(element){
 			//多出一个空格引发的血案
 			hostIP = hostIP.replace("Singlehost_","");
 			$.get(
-				"../Server/Checking/ServerSocket.php",{"type":"cpus","clientIP":hostIP},
+				"../Server/Checking/ServerSocket.php",{"type":"cpus","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 				function(data){
 					document.getElementById("checkingPerf").innerHTML=data;
 				}
@@ -505,7 +504,7 @@ function hostPort(){
 	//多出一个空格引发的血案
 	hostIP = hostIP.replace("Singlehost_","");
 	$.get(
-		"../Server/Checking/ServerSocket.php",{"type":"port","clientIP":hostIP},
+		"../Server/Checking/ServerSocket.php",{"type":"port","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
 			document.getElementById("checkingPerfPort").innerHTML="<tr>\n" +
 				"    <th>主机名</th><th>地址</th><th>端口类型</th><th>端口</th><th>进程</th>\n" +
@@ -524,7 +523,7 @@ function hostDevice(){
 	hostIP = hostIP.replace("Singlehost_","");
 
 	$.get(
-		"../Server/Checking/ServerSocket.php",{"type":"cpui","clientIP":hostIP},
+		"../Server/Checking/ServerSocket.php",{"type":"cpui","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
 			document.getElementById("checkingPerfDevice").innerHTML="        <tr>\n" +
 				"            <th>CPU核心</th><th>CPU型号</th><th>CPU频率</th>\n" +
@@ -532,7 +531,7 @@ function hostDevice(){
 		}
 	);
 	$.get(
-		"../Server/Checking/ServerSocket.php",{"type":"moth","clientIP":hostIP},
+		"../Server/Checking/ServerSocket.php",{"type":"moth","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
 			document.getElementById("checkingPerfDeviceMother").innerHTML="<tr>\n" +
 				"            <th>主板型号</th>\n" +
@@ -540,7 +539,7 @@ function hostDevice(){
 		}
 	);
 	$.get(
-		"../Server/Checking/ServerSocket.php",{"type":"memo","clientIP":hostIP},
+		"../Server/Checking/ServerSocket.php",{"type":"memo","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
 			document.getElementById("checkingPerfDeviceMemory").innerHTML="        <tr>\n" +
 				"            <th>内存条数</th><th>内存大小</th><th>频率</th>\n" +
@@ -548,7 +547,7 @@ function hostDevice(){
 		}
 	);
 	$.get(
-		"../Server/Checking/ServerSocket.php",{"type":"neti","clientIP":hostIP},
+		"../Server/Checking/ServerSocket.php",{"type":"neti","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
 			document.getElementById("checkingPerfDeviceNetwork").innerHTML="        <tr>\n" +
 				"            <th>网卡型号</th><th>网卡速度</th>\n" +
@@ -556,7 +555,7 @@ function hostDevice(){
 		}
 	);
 	$.get(
-		"../Server/Checking/ServerSocket.php",{"type":"diki","clientIP":hostIP},
+		"../Server/Checking/ServerSocket.php",{"type":"diki","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
 			document.getElementById("checkingPerfDeviceDisk").innerHTML="        <tr>\n" +
 				"            <th>硬盘数量</th><th>磁盘驱动器</th><th>硬盘容量</th>\n" +

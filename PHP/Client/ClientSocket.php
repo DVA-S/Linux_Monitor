@@ -1,26 +1,20 @@
 <?php
-//数据库
-
 //问题1：数据库不能远程连接 :: /etc/mysql/mysql.conf.d/mysql.cnf >> #bind-address = 127.0.0.1
 $servername = "192.168.157.128";
 $username = "root";
 $password = "Esxi0000.";
 // 创建连接
 $con = new mysqli($servername, $username, $password);
-
-
-
 // 选择数据库
 mysqli_select_db($con,"bysj");
 // 设置编码，防止中文乱码
 mysqli_set_charset($con, "utf8");
 
-
 //设置无限请求超时时间
 set_time_limit(0);
 
 $ip = `ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}'`;
-$port = 58468;
+$port = 1094;
 
 //创建socket
 if(($sock = socket_create(AF_INET,SOCK_STREAM,SOL_TCP)) < 0) {

@@ -1,4 +1,82 @@
+<!--Jaina php打包项目 phar-->
+index.php
+<?php
+require_once "phar://test.phar/test.php";
+$config = parse_ini_file("config.ini");
+AppManager::run($config);
+?>
 
+test.php
+<?php
+class AppManager
+{
+    public static function run($config) {
+        echo "Application is now running with the following configuration... ";
+        var_dump($config);
+    }
+}
+?>
+
+config.ini
+[database]
+host=localhost
+db=bysj
+user=root
+pass=Esxi0000.
+
+createPhar.php
+<?php
+$srcRoot = "/root/PHRA/src";
+$buildRoot = "/root/PHRA/build";
+
+$phar = new Phar($buildRoot . "/test.phar",
+    FilesystemIterator::CURRENT_AS_FILEINFO |       FilesystemIterator::KEY_AS_FILENAME, "test.phar");
+$phar["index.php"] = file_get_contents($srcRoot . "/index.php");
+$phar["test.php"] = file_get_contents($srcRoot . "/test.php");
+$phar->setStub($phar->createDefaultStub("index.php"));
+
+copy($srcRoot . "/config.ini", $buildRoot . "/config.ini");
+?>
+
+php配置文件：
+/etc/php/7.4/cli/php.ini readonly = Off
+
+运行：
+将phar和ini放到网站根目录
+访问页
+<?php
+require "test.phar";
+?>
+
+结果：
+Application is now running with the following configuration... array(4) { ["host"]=> string(9) "localhost" ["db"]=> string(4) "bysj" ["user"]=> string(4) "root" ["pass"]=> string(9) "Esxi0000." }
+
+目录结构：
+root@ubuntu:~/PHAR# tree .
+.
+├── build
+│   ├── config.ini
+│   └── test.phar
+├── createPhar.php
+└── src
+├── config.ini
+├── index.php
+└── test.php
+
+2 directories, 6 files
+root@ubuntu:~/PHAR# cd ..
+root@ubuntu:~# tree PHAR/
+PHAR/
+├── build
+│   ├── config.ini
+│   └── test.phar
+├── createPhar.php
+└── src
+├── config.ini
+├── index.php
+└── test.php
+
+2 directories, 6 files
 
 
 // function networkback(){
