@@ -3,9 +3,7 @@
 function hostList(){
 	$.get(
 		"php/host/List.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
-		function (data){
-			document.getElementById("SearchTr").innerHTML=data;
-		}
+		function (data){ document.getElementById("SearchTr").innerHTML=data; }
 	);
 }
 //导航栏 -- 时间
@@ -20,21 +18,11 @@ function runDate(){
 	var hour = time.getHours();
 	var minutes = time.getMinutes();
 	var seconds = time.getSeconds();
-	if(month<10){
-		month = "0"+month;
-	}
-	if(date<10){
-		date = "0"+date;
-	}
-	if(hour<10){
-		hour = "0"+hour;
-	}
-	if(minutes<10){
-		minutes = "0"+minutes;
-	}
-	if(seconds<10){
-		seconds = "0"+seconds;
-	}
+	if(month<10){ month = "0"+month; }
+	if(date<10){ date = "0"+date; }
+	if(hour<10){ hour = "0"+hour; }
+	if(minutes<10){ minutes = "0"+minutes; }
+	if(seconds<10){ seconds = "0"+seconds; }
 	//var newDate = year+"年"+month+"月"+date+"日"+week+hour+":"+minutes+":"+seconds;
 	document.getElementById("clock").innerHTML = year+"-"+month+"-"+date+" "+hour+":"+minutes+":"+seconds;
 	setTimeout('runDate()',1000);
@@ -43,27 +31,21 @@ function runDate(){
 function hostLinkList(){
 	$.get(
 		"php/checking/hostLinkList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
-		function (data){
-			document.getElementById("alltable").innerHTML=data;
-		}
+		function (data){ document.getElementById("alltable").innerHTML=data; }
 	);
 }
 //自动巡检 -- 下拉选矿
 function hostSingleList(id){
 	$.get(
 		"php/checking/hostSingleList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
-		function (data){
-			document.getElementById(id).innerHTML=data;
-		}
+		function (data){ document.getElementById(id).innerHTML=data; }
 	);
 }
 //用户管理 -- 系统用户列表
 function userList(){
 	$.get(
 		"php/user/userList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
-		function (data){
-			document.getElementById("alltableSysUser").innerHTML=data;
-		}
+		function (data){ document.getElementById("alltableSysUser").innerHTML=data; }
 	);
 }
 function allFlush(){
@@ -131,13 +113,11 @@ function getCookie(cname){
 
 /* - ---------------------------------------------------------------------------------登录界面----------------------------------------------------------------------------------- */
 //回车登录(在输入框调用)
-function keyLogin(){
-	if (event.keyCode==13)  //回车键的键值为13
-		document.getElementById("loginbtn").click(); //调用登录按钮的登录事件
+function keyLogin(){ //回车键的键值为13
+	if (event.keyCode==13)		document.getElementById("loginbtn").click(); //调用登录按钮的登录事件
 }
-function keySearchHost(){
-	if (event.keyCode==13)  //回车键的键值为13
-		document.getElementById("searchHostBtn").click(); //调用登录按钮的登录事件
+function keySearchHost(){ //回车键的键值为13
+	if (event.keyCode==13)		document.getElementById("searchHostBtn").click(); //调用登录按钮的登录事件
 }
 
 //登录判断 -- 显示动画、设置Cookie
@@ -146,13 +126,11 @@ function loginJudge(){
 	//去空格后，哈希加密 ( 此处加密的好处是，1，密码不会以明文的方式在网络上传输 2，即使是网站管理员也不知道你的密码 )
 	//第一次加密
 	var passwd = SHA256_hash($("#passwd").val().replace(" ",""));
-	// alert(passwd);
 	$.get(
 		"php/login.php",{"user":username,"passwd":passwd},
 		function(data,status){
 			console.log("数据: \n" + data + "\n状态: " + status);
 			var obj = JSON.parse(data);
-
 			if(obj.status == 1){	//登录成功
 				setCookie("UserName",obj.username,10);
 				setCookie("Token",obj.token,10);
@@ -160,9 +138,9 @@ function loginJudge(){
 				// 登录框  forwards属性会让对象停留在终点
 				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginOk";
 				// 主页
-				document.getElementById("head_div").style.display="block";
+				$('#head_div').show();
 				document.getElementById("head_div").style.animation="0.5s ease 0s 1 normal forwards running index_head_loginOk";
-				document.getElementById("panel").style.display="block";
+				$('#panel').show();
 				document.getElementById("panel").style.animation="0.5s ease 0s 1 normal forwards running index_panel_loginOk";
 				console.log("logOK!");
 
@@ -194,78 +172,44 @@ function getPanelView(list){
 function lastView(view){
 	switch (view){
 		case '0':
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
-			document.getElementById('panel').style.display='block';
-			break;
+			$('#panel,#checking,#user,#host,#setup').hide();			$('#panel').show();			break;
 		case '1':
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
-			document.getElementById('host').style.display='block';
-			break;
+			$('#panel,#checking,#user,#host,#setup').hide();			$('#host').show();			break;
 		case '2':
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
-			document.getElementById('checking').style.display='block';
-			break;
+			$('#panel,#checking,#user,#host,#setup').hide();			$('#checking').show();		break;
 		case '3':
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
-			document.getElementById('user').style.display='block';
-			break;
+			$('#panel,#checking,#user,#host,#setup').hide();			$('#user').show();			break;
 		case '4':
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
-			document.getElementById('setup').style.display='block';
-			break;
-		default:
-			break;
+			$('#panel,#checking,#user,#host,#setup').hide();			$('#setup').show();			break;
+		default:			break;
 	}
 }
 //保持最后离开的子面板
 function lastViewClild(view){
 	switch (view){
 		case '5':
-			$('#host_right_list,#host_right_addhost,#host_right_all').hide();
-			$('#host_right_all').show();
-			break;
+			$('#host_right_list,#host_right_addhost,#host_right_all').hide();			$('#host_right_all').show();			break;
 		case '6':
-			$('#host_right_list,#host_right_addhost,#host_right_all').hide();
-			$('#host_right_list').show();
-			break;
+			$('#host_right_list,#host_right_addhost,#host_right_all').hide();			$('#host_right_list').show();			break;
 		case '7':
-			$('#host_right_list,#host_right_addhost,#host_right_all').hide();
-			$('#host_right_addhost').show();
-			break;
+			$('#host_right_list,#host_right_addhost,#host_right_all').hide();			$('#host_right_addhost').show();		break;
 		case '8':
-			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
-			$('#checking_right_link').show();
-			break;
+			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();		$('#checking_right_link').show();		break;
 		case '9':
-			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
-			$('#checking_right_test').show();
-			break;
+			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();		$('#checking_right_test').show();		break;
 		case '10':
-			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
-			$('#checking_right_port').show();
-			break;
+			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();		$('#checking_right_port').show();		break;
 		case '11':
-			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
-			$('#checking_right_device').show();
-			break;
+			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();		$('#checking_right_device').show();		break;
 		case '12':
-			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
-			$('#user_right_List').show();
-			break;
+			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();			$('#user_right_List').show();			break;
 		case '13':
-			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
-			$('#user_right_WebUser').show();
-			break;
+			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();			$('#user_right_WebUser').show();		break;
 		case '14':
-			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
-			$('#user_right_DeviceUser').show();
-			break;
+			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();			$('#user_right_DeviceUser').show();		break;
 		case '15':
-			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
-			$('#user_right_AddUser').show();
-			break;
-		default:
-			break;
+			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();			$('#user_right_AddUser').show();		break;
+		default:			break;
 	}
 }
 // btnOnClick(this)根据按钮的类名，传出右侧面板ID到view_panel()
@@ -278,18 +222,18 @@ function btnOnClick(element){
 		case 'checking_btn': 			viewPanel('checking');  			break;
 		case 'user_btn': 				viewPanel('user');  				break;
 		case 'setup_btn': 				viewPanel('setup');  				break;
-		case 'host_left_all': 			viewPanel('host_right_all');  		setCookie("Child",5);	break;
-		case 'host_left_list': 			viewPanel('host_right_list'); 		setCookie("Child",6);	break;
-		case 'host_left_addhost': 		viewPanel('host_right_addhost');    setCookie("Child",7);	break;
-		case 'checking_left_link': 		viewPanel('checking_right_link');   setCookie("Child",8);	break;
-		case 'checking_left_test': 		viewPanel('checking_right_test');   setCookie("Child",9);	break;
-		case 'checking_left_port': 		viewPanel('checking_right_port');   setCookie("Child",10);	break;
-		case 'checking_left_device': 	viewPanel('checking_right_device'); setCookie("Child",11);	break;
-		case 'user_left_list': 			viewPanel('user_right_List');  	    setCookie("Child",12);	break;
-		case 'user_left_webUser': 		viewPanel('user_right_WebUser');    setCookie("Child",13);	break;
-		case 'user_left_deviceUser': 	viewPanel('user_right_DeviceUser'); setCookie("Child",14);	break;
-		case 'user_left_addUser': 		viewPanel('user_right_AddUser');    setCookie("Child",15);	break;
-		default:
+		case 'host_left_all': 			viewPanel('host_right_all');  		setCookie("Child",5,600);break;
+		case 'host_left_list': 			viewPanel('host_right_list'); 		setCookie("Child",6,600);break;
+		case 'host_left_addhost': 		viewPanel('host_right_addhost');    setCookie("Child",7,600);break;
+		case 'checking_left_link': 		viewPanel('checking_right_link');   setCookie("Child",8,600);break;
+		case 'checking_left_test': 		viewPanel('checking_right_test');   setCookie("Child",9,600);break;
+		case 'checking_left_port': 		viewPanel('checking_right_port');   setCookie("Child",10,600);break;
+		case 'checking_left_device': 	viewPanel('checking_right_device'); setCookie("Child",11,600);break;
+		case 'user_left_list': 			viewPanel('user_right_List');  	    setCookie("Child",12,600);break;
+		case 'user_left_webUser': 		viewPanel('user_right_WebUser');    setCookie("Child",13,600);break;
+		case 'user_left_deviceUser': 	viewPanel('user_right_DeviceUser'); setCookie("Child",14,600);break;
+		case 'user_left_addUser': 		viewPanel('user_right_AddUser');    setCookie("Child",15,600);break;
+		default: 	break;
 	}
 }
 
@@ -315,7 +259,6 @@ function viewPanel(view_btn){
 		 //switch主体 - 获取按钮点击传来的ID，判断该ID在数组中的位置（返回数字）;正在显示面板下标和点击按钮将要显示的面板的下标作比较
 		 if(view<panel_list.indexOf(view_btn)){
 			 // ##BUG:所有面板都显示过后，无法跳转切换 ##例如：从2到4后，虽然实际显示的是4，但view的值是3 ##所以解决方法之一为：做动作前先清场，大概属于一刀切方法，很简单。
-			 // $('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			 $('#panel,#checking,#user,#host,#setup').hide();
 			//点击当前面板右边的按钮
 			// 离开动画--当前面板左移(BUG:导航栏按钮--应该是将要显示前的面板离开)
@@ -330,7 +273,6 @@ function viewPanel(view_btn){
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
 			break;
 		}else if(view>panel_list.indexOf(view_btn)){
-			// $('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			 $('#panel,#checking,#user,#host,#setup').hide();
 			// 点击当前面板左边的按钮
 			// 离开动画--当前面板右移
@@ -345,18 +287,16 @@ function viewPanel(view_btn){
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
 			break;
 		}else if(view===panel_list.indexOf(view_btn)){
-			// $('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			 $('#panel,#checking,#user,#host,#setup').hide();
-			// // 点击当前面板按钮
-			// // 刷新动画--当前元素显示
-			// //BUG:只能显示一次🤔
+			// 点击当前面板按钮
+			// 刷新动画--当前元素显示
+			// BUG:只能显示一次🤔
 			document.getElementById(view_btn).style.display="block";
 			document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
 			document.getElementById(view_btn).style.position="absolute";
 			console.log('当前显示为：'+panel_list.indexOf(view_btn),"点击为：",panel_list.indexOf(view_btn)+"刷新显示");
 			//将最后一次显示的面板存入cookie
-			setCookie("panelView",panel_list.indexOf(view_btn),600);
-			break;
+			setCookie("panelView",panel_list.indexOf(view_btn),600);			break;
 		}
 		case 5:case 6:case 7:
 		$('#host_right_list,#host_right_addhost,#host_right_all').hide();
@@ -371,23 +311,46 @@ function viewPanel(view_btn){
 	}
 }
 
-//系统设置 -- 点击执行动画
+//系统设置 -- 点击执行动画 有三个状态：从左向右分别是“初始状态”、“将展开”、“将收缩”
 function sysSetup(id,initialClass,AClass,BClass){
-	if ($('#'+id).attr('class') == BClass){
-		$('#'+id).removeClass(BClass);
-		$('#'+id).addClass(AClass);
-	}else if ($('#'+id).attr('class') == initialClass+" "+AClass) {
+	if($('#'+id).attr('class') == initialClass+" "+AClass) {
+		//收缩
 		$('#'+id).removeClass(AClass);
 		$('#'+id).addClass(BClass);
+		$('#Body'+id).hide();
+
+		$('#Tit'+id).show();
 	}else if ($('#'+id).attr('class') == initialClass+" "+BClass){
+		//展开
 		$('#'+id).removeClass(BClass);
 		$('#'+id).addClass(AClass);
+		$('#Body'+id).show();
+
+		$('#Tit'+id).hide();
 	}else if ($('#'+id).attr('class') == initialClass+" "+AClass+" "+BClass){
+		//展开
 		$('#'+id).removeClass(AClass);
 		$('#'+id).removeClass(BClass);
 		$('#'+id).addClass(AClass);
+		$('#Body'+id).show();
+
+		$('#Tit'+id).hide();
 	}else {
+		//展开
 		$('#'+id).addClass(AClass);
+		$('#Body'+id).show();
+
+		//标题隐藏
+		$('#Tit'+id).hide();
+	}
+}
+//阻止OnClick事件穿透(阻止事件冒泡)
+function cancelBubble(e) {
+	var evt = e ? e : window.event;
+	if(evt.stopPropagation) { //W3C
+		evt.stopPropagation();
+	} else { //IE
+		evt.cancelBubble = true;
 	}
 }
 
@@ -404,9 +367,7 @@ function deleteHost(element){
 		$.get(
 			"php/host/DeleteHost.php",{"hostID":hostID,"username":getCookie("UserName"),"token":getCookie("Token")}
 		);
-		setTimeout(function (){
-			location.reload()
-		},1500);
+		setTimeout(function (){ location.reload() },1500);
 	}
 }
 //设备管理 -- 连通性检测
@@ -423,10 +384,7 @@ function linkHostStatus(element){
 	console.log(clientIP);
 	$.get(
 		"Server/Checking/ServerSocket.php",{"type":"ping"+hostID,"clientIP":clientIP,"username":getCookie("UserName"),"token":getCookie("Token")},
-		function (data){
-			document.getElementById("Status"+hostID).innerHTML=data;
-			// console.log(hostID);
-		}
+		function (data){ document.getElementById("Status"+hostID).innerHTML=data; }
 	);
 }
 //设备管理 -- 搜索设备
@@ -434,21 +392,17 @@ function SearchHost(){
 	var searchHost =$("#searchHost").val();
 	$.get(
 		"php/host/SearchHost.php",{"search":searchHost,"username":getCookie("UserName"),"token":getCookie("Token")},
-		function(data){
-			document.getElementById("SearchTr").innerHTML=data;
-		}
+		function(data){ document.getElementById("SearchTr").innerHTML=data; }
 	);
 }
 
 //用户管理 -- 添加用户
 //弹窗
 function addUserWindows(){
-	document.getElementById("addSysUser").style.display="block";
-	document.getElementById("addSysUser").style.animation="0.5s ease forwards running index_panel_loginOk";
+	$('#addSysUser').show(); document.getElementById("addSysUser").style.animation="0.5s ease forwards running index_panel_loginOk";
 }
 function addUserWindowsDev(){
-	document.getElementById("addSysUserDev").style.display="block";
-	document.getElementById("addSysUserDev").style.animation="0.5s ease forwards running index_panel_loginOk";
+	$('#addSysUserDev').show(); document.getElementById("addSysUserDev").style.animation="0.5s ease forwards running index_panel_loginOk";
 }
 //添加数据
 function addUserSys(){
@@ -469,7 +423,7 @@ function addUserSys(){
 			"php/user/AddUser.php",{"username":getCookie("UserName"),"token":getCookie("Token"),"user":userAdd,"passwd":userAddPasswd,"email":email,"sex":sex,"phone":phone},
 			function(){
 				document.getElementById('addSysUser').style.animation='0.5s ease forwards running login_loginOk';
-				document.getElementById('addSysUser').style.display='none';
+				$('#addSysUser').hide();
 			}
 		);
 	}
@@ -481,9 +435,8 @@ function addUserDev(){
 	$.get(
 		"php/user/AddDevUser.php",{"ipaddr":ipaddr,"user":user,"passwd":passwd},
 		function(){
-			// alert("OK!");
 			document.getElementById('addSysUserDev').style.animation='0.5s ease forwards running login_loginOk';
-			document.getElementById('addSysUserDev').style.display='none';
+			$('#addSysUserDev').hide();
 		}
 	);
 }
@@ -528,10 +481,8 @@ function hostPerf(element){
 				function(data){
 					document.getElementById("checkingPerf").innerHTML=data;
 				}
-			);
-			break;
-		default:
-			break;
+			);			break;
+		default:		break;
 	}
 }
 //点击按钮，从客户端发送hostCpu到服务器，服务器如果收到hostCpu则执行命令，并将命令发送到客户端，客户端输出到前端。
@@ -549,9 +500,7 @@ function hostPort(){
 	$.get(
 		"../Server/Checking/ServerSocket.php",{"type":"port","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
-			document.getElementById("checkingPerfPort").innerHTML="<tr>\n" +
-				"    <th>主机名</th><th>地址</th><th>端口类型</th><th>端口</th><th>进程</th>\n" +
-				"</tr>"+data;
+			document.getElementById("checkingPerfPort").innerHTML="<tr>\n" + "<th>主机名</th><th>地址</th><th>端口类型</th><th>端口</th><th>进程</th>\n" + "</tr>" + data;
 		}
 	);
 }
@@ -568,41 +517,31 @@ function hostDevice(){
 	$.get(
 		"../Server/Checking/ServerSocket.php",{"type":"cpui","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
-			document.getElementById("checkingPerfDevice").innerHTML="        <tr>\n" +
-				"            <th>CPU核心</th><th>CPU型号</th><th>CPU频率</th>\n" +
-				"        </tr>"+"<tr>"+data+"</tr>";
+			document.getElementById("checkingPerfDevice").innerHTML="<tr>\n" + "<th>CPU核心</th><th>CPU型号</th><th>CPU频率</th>\n" + "</tr>" + "<tr>" + data + "</tr>";
 		}
 	);
 	$.get(
 		"../Server/Checking/ServerSocket.php",{"type":"moth","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
-			document.getElementById("checkingPerfDeviceMother").innerHTML="<tr>\n" +
-				"            <th>主板型号</th>\n" +
-				"        </tr>"+"<tr>"+data+"</tr>";
+			document.getElementById("checkingPerfDeviceMother").innerHTML="<tr>\n" + "<th>主板型号</th>\n" + "</tr>" + "<tr>" + data + "</tr>";
 		}
 	);
 	$.get(
 		"../Server/Checking/ServerSocket.php",{"type":"memo","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
-			document.getElementById("checkingPerfDeviceMemory").innerHTML="        <tr>\n" +
-				"            <th>内存条数</th><th>内存大小</th><th>频率</th>\n" +
-				"        </tr>"+"<tr>"+data+"</tr>";
+			document.getElementById("checkingPerfDeviceMemory").innerHTML="<tr>\n" + "<th>内存条数</th><th>内存大小</th><th>频率</th>\n" + "</tr>" + "<tr>" + data + "</tr>";
 		}
 	);
 	$.get(
 		"../Server/Checking/ServerSocket.php",{"type":"neti","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
-			document.getElementById("checkingPerfDeviceNetwork").innerHTML="        <tr>\n" +
-				"            <th>网卡型号</th><th>网卡速度</th>\n" +
-				"        </tr>"+"<tr>"+data+"</tr>";
+			document.getElementById("checkingPerfDeviceNetwork").innerHTML="<tr>\n" + "<th>网卡型号</th><th>网卡速度</th>\n" + "</tr>" + "<tr>" + data + "</tr>";
 		}
 	);
 	$.get(
 		"../Server/Checking/ServerSocket.php",{"type":"diki","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
-			document.getElementById("checkingPerfDeviceDisk").innerHTML="        <tr>\n" +
-				"            <th>硬盘数量</th><th>磁盘驱动器</th><th>硬盘容量</th>\n" +
-				"        </tr>"+"<tr>"+data+"</tr>";
+			document.getElementById("checkingPerfDeviceDisk").innerHTML="<tr>\n" +	"<th>硬盘数量</th><th>磁盘驱动器</th><th>硬盘容量</th>\n" + "</tr>" + "<tr>" + data + "</tr>";
 		}
 	);
 }
@@ -648,7 +587,7 @@ function oneFlush(){
 	xmlHttpNetworkUp = pgGet("http://192.168.157.128/php/panel/network.php?type=networkup&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
 	xmlHttpNetworkDown = pgGet("http://192.168.157.128/php/panel/network.php?type=networkdown&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
 	runMemory();runDisk();runCpu();
-	//刷新状态
+	//刷新状态标志
 	setCookie("flushPanel",1,10);
 }
 
@@ -666,13 +605,13 @@ function viewCharts(panelId,Atitle,Btitle,unit){
 			break;
 		case 'disk':
 			date = datatime = xmlHttpDiskTime.responseText.split(",");
-			dataA =diskwrite = xmlHttpDiskWrite.responseText.split(",");
-			dataB =diskread = xmlHttpDiskRead.responseText.split(",");
+			dataA = diskwrite = xmlHttpDiskWrite.responseText.split(",");
+			dataB = diskread = xmlHttpDiskRead.responseText.split(",");
 			break;
 		case 'network':
 			date = datatime = xmlHttpdNetworkTime.responseText.split(",");
-			dataA =diskwrite = xmlHttpNetworkUp.responseText.split(",");
-			dataB =diskread = xmlHttpNetworkDown.responseText.split(",");
+			dataA = diskwrite = xmlHttpNetworkUp.responseText.split(",");
+			dataB = diskread = xmlHttpNetworkDown.responseText.split(",");
 			break;
 		case 'cpu':
 			date = xmlHttpdCpuTime.responseText.split(",");
