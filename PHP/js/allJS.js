@@ -168,9 +168,7 @@ function loginJudge(){
 
 				//刷新监控面板 -- 解决：避免刚登陆时图表缩成一团
 				oneFlush();
-
 				allFlush();
-
 			}else{
 				//拒绝动画
 				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginNo";
@@ -219,7 +217,57 @@ function lastView(view){
 			break;
 	}
 }
-
+//保持最后离开的子面板
+function lastViewClild(view){
+	switch (view){
+		case '5':
+			$('#host_right_list,#host_right_addhost,#host_right_all').hide();
+			$('#host_right_all').show();
+			break;
+		case '6':
+			$('#host_right_list,#host_right_addhost,#host_right_all').hide();
+			$('#host_right_list').show();
+			break;
+		case '7':
+			$('#host_right_list,#host_right_addhost,#host_right_all').hide();
+			$('#host_right_addhost').show();
+			break;
+		case '8':
+			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
+			$('#checking_right_link').show();
+			break;
+		case '9':
+			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
+			$('#checking_right_test').show();
+			break;
+		case '10':
+			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
+			$('#checking_right_port').show();
+			break;
+		case '11':
+			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
+			$('#checking_right_device').show();
+			break;
+		case '12':
+			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
+			$('#user_right_List').show();
+			break;
+		case '13':
+			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
+			$('#user_right_WebUser').show();
+			break;
+		case '14':
+			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
+			$('#user_right_DeviceUser').show();
+			break;
+		case '15':
+			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
+			$('#user_right_AddUser').show();
+			break;
+		default:
+			break;
+	}
+}
 // btnOnClick(this)根据按钮的类名，传出右侧面板ID到view_panel()
 function btnOnClick(element){
 	var go=element.className;
@@ -230,17 +278,17 @@ function btnOnClick(element){
 		case 'checking_btn': 			viewPanel('checking');  			break;
 		case 'user_btn': 				viewPanel('user');  				break;
 		case 'setup_btn': 				viewPanel('setup');  				break;
-		case 'host_left_all': 			viewPanel('host_right_all');  		break;
-		case 'host_left_list': 			viewPanel('host_right_list'); 		break;
-		case 'host_left_addhost': 		viewPanel('host_right_addhost');    break;
-		case 'checking_left_link': 		viewPanel('checking_right_link');   break;
-		case 'checking_left_test': 		viewPanel('checking_right_test');   break;
-		case 'checking_left_port': 		viewPanel('checking_right_port');   break;
-		case 'checking_left_device': 	viewPanel('checking_right_device'); break;
-		case 'user_left_list': 			viewPanel('user_right_List');  	    break;
-		case 'user_left_webUser': 		viewPanel('user_right_WebUser');    break;
-		case 'user_left_deviceUser': 	viewPanel('user_right_DeviceUser'); break;
-		case 'user_left_addUser': 		viewPanel('user_right_AddUser');    break;
+		case 'host_left_all': 			viewPanel('host_right_all');  		setCookie("Child",5);	break;
+		case 'host_left_list': 			viewPanel('host_right_list'); 		setCookie("Child",6);	break;
+		case 'host_left_addhost': 		viewPanel('host_right_addhost');    setCookie("Child",7);	break;
+		case 'checking_left_link': 		viewPanel('checking_right_link');   setCookie("Child",8);	break;
+		case 'checking_left_test': 		viewPanel('checking_right_test');   setCookie("Child",9);	break;
+		case 'checking_left_port': 		viewPanel('checking_right_port');   setCookie("Child",10);	break;
+		case 'checking_left_device': 	viewPanel('checking_right_device'); setCookie("Child",11);	break;
+		case 'user_left_list': 			viewPanel('user_right_List');  	    setCookie("Child",12);	break;
+		case 'user_left_webUser': 		viewPanel('user_right_WebUser');    setCookie("Child",13);	break;
+		case 'user_left_deviceUser': 	viewPanel('user_right_DeviceUser'); setCookie("Child",14);	break;
+		case 'user_left_addUser': 		viewPanel('user_right_AddUser');    setCookie("Child",15);	break;
 		default:
 	}
 }
@@ -311,17 +359,14 @@ function viewPanel(view_btn){
 			break;
 		}
 		case 5:case 6:case 7:
-		// $('#host_right_list,#host_right_addhost,#host_right_all').css('display', 'none');
 		$('#host_right_list,#host_right_addhost,#host_right_all').hide();
-		// document.getElementById(view_btn).style.display="block";
-		$('#'+view_btn).show();
-		break;
+		$('#'+view_btn).show();											break;
 		case 8:case 9:case 10:case 11:
-		$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').css('display', 'none');
-		document.getElementById(view_btn).style.display="block";	    break;
+		$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
+		$('#'+view_btn).show();	    									break;
 		case 12:case 13:case 14:case 15:
-		$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').css('display', 'none');
-		document.getElementById(view_btn).style.display="block";		break;
+		$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
+		$('#'+view_btn).show();											break;
 		default:														break;
 	}
 }
@@ -343,8 +388,6 @@ function sysSetup(id,initialClass,AClass,BClass){
 		$('#'+id).addClass(AClass);
 	}else {
 		$('#'+id).addClass(AClass);
-		// alert(initialClass+" "+AClass);
-		// alert($('#'+'#'+id).attr('class'));
 	}
 }
 

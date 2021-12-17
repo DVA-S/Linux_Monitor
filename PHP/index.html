@@ -404,21 +404,23 @@
                 function (data){
                     var obj = JSON.parse(data);
                     if (obj.status == 1){
+                        //重置时间
                         setCookie("UserName",obj.username,10);
                         setCookie("Token",obj.token,10);
-
-                        document.getElementById('head_div').style.display='block';
+                        //显示内容面板
                         document.getElementById('head_div').style.animation='0.5s ease 0s 1 normal forwards running index_head_loginOk';
+                        document.getElementById('head_div').style.display='block';
                         document.getElementById('panel').style.display='block';
                         document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
+                        //显示离开时的面板和子面板
                         lastView(getCookie('panelView'));
-
+                        lastViewClild(getCookie('Child'));
                         //刷新监控面板(登陆成功后，就会立马刷新数据) -- 解决：避免刷新后图表缩成一团
                         oneFlush();
-
                         //刷新所有查询数据
                         allFlush();
                     }else{
+                        //播放拒绝动画
                         document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
                         document.getElementById('login_div').style.display='block';
                     }
