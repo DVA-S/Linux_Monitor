@@ -23,6 +23,8 @@ stages:
               - ./
         commands:
           - php --version
+          - ip a
+          - pwd
 permissions:
   - role: admin
     members: []
