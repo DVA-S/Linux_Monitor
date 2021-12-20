@@ -1,6 +1,6 @@
 <?php
 //问题1：数据库不能远程连接 :: /etc/mysql/mysql.conf.d/mysql.cnf >> #bind-address = 127.0.0.1
-$servername = "192.168.157.128";
+$servername = "127.0.0.1";
 $username = "root";
 $password = "Esxi0000.";
 // 创建连接
@@ -82,7 +82,7 @@ do{
                 break;
             case "port":
                 $msg = `/usr/bin/jaina testport`;
-                //$msg = <tr> <td>ubuntu</td> <td>192.168.157.128</td> <td>tcp</td> <td>58468 </td> <td>2675841/php </td> </tr>
+                //$msg = <tr> <td>ubuntu</td> <td>127.0.0.1</td> <td>tcp</td> <td>58468 </td> <td>2675841/php </td> </tr>
                 echo "发送:" . $msg;
                 socket_write($msgsock, $msg, strlen($msg));
                 break;

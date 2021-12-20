@@ -122,7 +122,7 @@ Memcached：
     sudo apt-get install memcached
     apt -y install php-memcache
 运行：
-    memcached -p 11211 -m 64m -d -u root -l 192.168.157.128
+    memcached -p 11211 -m 64m -d -u root -l 127.0.0.1
 利用点：
     将用户Token存储在服务器内存中，避免数据持久化。
 位置：

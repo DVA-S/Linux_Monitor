@@ -328,4 +328,4 @@ class WebSocket {
     }
 }
 
-$ws = new WebSocket("192.168.157.128", "8888");
+$ws = new WebSocket("127.0.0.1", "8888");
