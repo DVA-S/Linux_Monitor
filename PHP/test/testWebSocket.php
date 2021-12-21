@@ -9,7 +9,7 @@
 <button onclick="testSocket()">发送请求</button>
 <p id="request">NULL</p>
 <script>
-    var ws = new WebSocket("ws://192.168.157.128:8888");
+    var ws = new WebSocket("ws://127.0.0.1:8888");
 
     ws.onopen = function() {
         // console.log("Connection open ...");

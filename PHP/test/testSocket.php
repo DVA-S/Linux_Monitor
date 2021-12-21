@@ -3,7 +3,7 @@
 //$sock = null;
 //$msgsock = null;
 //require_once "Socket8888.php";
-$address = '192.168.157.128';
+$address = '127.0.0.1';
 $port = 8888;
 $sock = socket_create(AF_INET,SOCK_STREAM,SOL_TCP);
 //端口复用

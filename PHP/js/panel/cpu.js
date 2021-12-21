@@ -3,9 +3,9 @@ var xmlHttpCpuUsed;
 var xmlHttpCpuFree;
 
 function runCpu(){
-    xmlHttpdCpuTime = pgGet("http://192.168.157.128/php/panel/cpu.php?type=datatime&username="+getCookie("UserName")+"&token="+getCookie("Token"),cpuback);
-    xmlHttpCpuUsed = pgGet("http://192.168.157.128/php/panel/cpu.php?type=cpuused&username="+getCookie("UserName")+"&token="+getCookie("Token"),cpuback);
-    xmlHttpCpuFree = pgGet("http://192.168.157.128/php/panel/cpu.php?type=cpufree&username="+getCookie("UserName")+"&token="+getCookie("Token"),cpuback);
+    xmlHttpdCpuTime = pgGet("http://127.0.0.1/php/panel/cpu.php?type=datatime&username="+getCookie("UserName")+"&token="+getCookie("Token"),cpuback);
+    xmlHttpCpuUsed = pgGet("http://127.0.0.1/php/panel/cpu.php?type=cpuused&username="+getCookie("UserName")+"&token="+getCookie("Token"),cpuback);
+    xmlHttpCpuFree = pgGet("http://127.0.0.1/php/panel/cpu.php?type=cpufree&username="+getCookie("UserName")+"&token="+getCookie("Token"),cpuback);
 }
 
 function cpuback(){

@@ -4,7 +4,7 @@
 #传入参数        >
 
 while [ true ]; do
-    if [ $(exec 8<>/dev/tcp/192.168.157.128/9999 && cat <&8) = "test" ]
+    if [ $(exec 8<>/dev/tcp/127.0.0.1/9999 && cat <&8) = "test" ]
     then
       echo "收到1！"
     else

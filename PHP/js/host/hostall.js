@@ -5,9 +5,9 @@ function hostall(){
 
 //将数据返回到back函数
     function runHostCount(){
-        xmlHttpHostCountUbuntu= pgGet("http://192.168.157.128/php/host/Count.php?type=Ubuntu&username="+getCookie("UserName")+"&token="+getCookie("Token"),hostcountback);
-        xmlHttpHostCountCentOS = pgGet("http://192.168.157.128/php/host/Count.php?type=CentOS&username="+getCookie("UserName")+"&token="+getCookie("Token"),hostcountback);
-        xmlHttpHostCountMySQL = pgGet("http://192.168.157.128/php/host/Count.php?type=MySQL&username="+getCookie("UserName")+"&token="+getCookie("Token"),hostcountback);
+        xmlHttpHostCountUbuntu= pgGet("http://127.0.0.1/php/host/Count.php?type=Ubuntu&username="+getCookie("UserName")+"&token="+getCookie("Token"),hostcountback);
+        xmlHttpHostCountCentOS = pgGet("http://127.0.0.1/php/host/Count.php?type=CentOS&username="+getCookie("UserName")+"&token="+getCookie("Token"),hostcountback);
+        xmlHttpHostCountMySQL = pgGet("http://127.0.0.1/php/host/Count.php?type=MySQL&username="+getCookie("UserName")+"&token="+getCookie("Token"),hostcountback);
     }
     runHostCount();
     function hostcountback(){
