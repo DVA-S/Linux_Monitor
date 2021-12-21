@@ -2,22 +2,6 @@
 #2021年12月2日15点58分
 #这是客户端，需要放到/usr/bin/下，且有可执行权限
 case $1 in
-"")
-  echo "    addhost <ServerIPAddress>               添加主机到服务器"
-  echo "    ping <IPAddress>                  测试连通行,返回img标签"
-  echo "    start                             运行jaina服务"
-  echo "    stop                              停止jaina服务"
-  echo "    status                            查看jaina服务状态"
-  echo "    testcpus                          查看cpu运行情况"
-  echo "    testdisk                          测试磁盘读写速度"
-  echo "    testnets                          测试网络传输速度"
-  echo "    testport                          查看开放的端口"
-  echo "    testcpui                          查看cpu型号等信息"
-  echo "    testmoth                          查看主板信息"
-  echo "    testmemo                          查看内存信息"
-  echo "    testneti                          查看网卡信息"
-  echo "    testdiki                          查看硬盘信息"
-  ;;
 "addhost")
   sh /etc/jaina/AddHostCurl.sh $2
   echo {`date`}-{$1-$2}-{Status:$?} >> /var/log/jaina.log
@@ -35,21 +19,35 @@ case $1 in
   #写入日志
   echo {`date`}-{$1}-{$res} >> /var/log/jaina.log
     ;;
-"start")
+"start-server")
   sh /etc/jaina/InsertData.sh > /etc/jaina/JainaStatus &
   sleep 1
   echo {`date`}-{$1}-{PID:`cat /etc/jaina/JainaStatus`} >> /var/log/jaina.log
   ;;
-"stop")
+"start-client")
+  php /var/www/html/Client/ClientSocket.php >> /var/log/jaina.log &
+  sleep 1
+  echo {`date`}-{$1}-{PID:`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`} >> /var/log/jaina.log
+  ;;
+"stop-server")
+  echo {`date`}-{$1}-{PID:`cat /etc/jaina/JainaStatus`}-{kill} >> /var/log/jaina.log
   echo {`date`}-{$1}-{Kill PID:`cat /etc/jaina/JainaStatus`} >> /var/log/jaina.log
   kill $(cat /etc/jaina/JainaStatus) ; echo "" > /etc/jaina/JainaStatus
+  ;;
+"stop-client")
+  echo {`date`}-{$1}-{PID:`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'` >> /var/log/jaina.log
+  kill `netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`
   ;;
 "status")
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep VmSize | sed 's/VmSize:/Memory:/g'
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep VmPeak | sed 's/VmPeak:/Max Memory:/g'
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep State:
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep ^Pid:
-  echo {`date`}-{$1}-{Position: /proc/`cat /etc/jaina/JainaStatus`/status} >> /var/log/jaina.log
+  cat /proc/`cat /etc/jaina/ClientStatus`/status | grep VmSize | sed 's/VmSize:/Memory:/g'
+  cat /proc/`cat /etc/jaina/ClientStatus`/status | grep VmPeak | sed 's/VmPeak:/Max Memory:/g'
+  cat /proc/`cat /etc/jaina/ClientStatus`/status | grep State:
+  cat /proc/`cat /etc/jaina/ClientStatus`/status | grep ^Pid:
+  echo {`date`}-{$1}-{Position: /proc/`cat /etc/jaina/JainaStatus`/status and /proc/`cat /etc/jaina/ClientStatus`/status} >> /var/log/jaina.log
  ;;
 "testcpus")
   res=`uptime`
@@ -104,5 +102,27 @@ case $1 in
   echo `lsblk | grep ^sd | awk '{print $4}' | sed 's/$/<\/td>/g' | sed 's/^/<td>/g'`
   echo {`date`}-{$1}-{$res} >> /var/log/jaina.log
   ;;
+*)
+  echo " 用法: jaina <选项> "
+  echo ""
+  echo " 毕业设计的客户端 用来启动采集服务和client代理... "
+  echo ""
+  echo " 选项： "
+  echo "    addhost <ServerIPAddress>         添加主机到服务器"
+  echo "    ping <IPAddress>                  测试连通行,返回img标签"
+  echo "    start-server                      开始采集主机性能指标"
+  echo "    start-client                      运行client代理，接收执行server命令"
+  echo "    stop-server                       停止采集主机性能指标"
+  echo "    stop-client                       运行client代理，接收执行server命令"
+  echo "    status                            查看服务状态"
+  echo "    testcpus                          查看cpu运行情况"
+  echo "    testdisk                          测试磁盘读写速度"
+  echo "    testnets                          测试网络传输速度"
+  echo "    testport                          查看开放的端口"
+  echo "    testcpui                          查看cpu型号等信息"
+  echo "    testmoth                          查看主板信息"
+  echo "    testmemo                          查看内存信息"
+  echo "    testneti                          查看网卡信息"
+  echo "    testdiki                          查看硬盘信息"
+  ;;
 esac
-
