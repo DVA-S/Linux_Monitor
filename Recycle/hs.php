@@ -1,5 +1,4 @@
 <!--Jaina php打包项目 phar-->
-主页
 index.php
 <?php
 require_once "phar://test.phar/test.php";
@@ -7,7 +6,6 @@ $config = parse_ini_file("config.ini");
 AppManager::run($config);
 ?>
 
-这是一个类里面的函数
 test.php
 <?php
 class AppManager
@@ -19,7 +17,6 @@ class AppManager
 }
 ?>
 
-配置文件：
 config.ini
 [database]
 host=localhost
@@ -27,20 +24,18 @@ db=bysj
 user=root
 pass=Esxi0000.
 
-打包操作：
 createPhar.php
 <?php
-$srcRoot = "/root/PHAR/src";
-$buildRoot = "/root/PHAR/build";
+$srcRoot = "/root/PHRA/src";
+$buildRoot = "/root/PHRA/build";
 
 $phar = new Phar($buildRoot . "/test.phar",
     FilesystemIterator::CURRENT_AS_FILEINFO |       FilesystemIterator::KEY_AS_FILENAME, "test.phar");
-$phar->buildFromDirectory($srcRoot. '/');
-$phar->setStub($phar->createDefaultStub("index.html"));
+$phar["index.php"] = file_get_contents($srcRoot . "/index.php");
+$phar["test.php"] = file_get_contents($srcRoot . "/test.php");
+$phar->setStub($phar->createDefaultStub("index.php"));
 
-//$phar["index.php"] = file_get_contents($srcRoot . "/index.php");
-//$phar["test.php"] = file_get_contents($srcRoot . "/test.php");
-//copy($srcRoot . "/config.ini", $buildRoot . "/config.ini");
+copy($srcRoot . "/config.ini", $buildRoot . "/config.ini");
 ?>
 
 php配置文件：
@@ -57,6 +52,19 @@ require "test.phar";
 Application is now running with the following configuration... array(4) { ["host"]=> string(9) "localhost" ["db"]=> string(4) "bysj" ["user"]=> string(4) "root" ["pass"]=> string(9) "Esxi0000." }
 
 目录结构：
+root@ubuntu:~/PHAR# tree .
+.
+├── build
+│   ├── config.ini
+│   └── test.phar
+├── createPhar.php
+└── src
+├── config.ini
+├── index.php
+└── test.php
+
+2 directories, 6 files
+root@ubuntu:~/PHAR# cd ..
 root@ubuntu:~# tree PHAR/
 PHAR/
 ├── build
