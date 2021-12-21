@@ -391,6 +391,48 @@ function sysSetup(id,initialClass,AClass,BClass){
 	}
 }
 
+//系统设置 -- 点击执行动画 有三个状态：从左向右分别是“初始状态”、“将展开”、“将收缩”
+function sysSetup(id,initialClass,AClass,BClass){
+	if($('#'+id).attr('class') == initialClass+" "+AClass) {
+		//收缩
+		$('#'+id).removeClass(AClass);
+		$('#'+id).addClass(BClass);
+		$('#Body'+id).hide();
+
+		$('#Tit'+id).show();
+	}else if ($('#'+id).attr('class') == initialClass+" "+BClass){
+		//展开
+		$('#'+id).removeClass(BClass);
+		$('#'+id).addClass(AClass);
+		$('#Body'+id).show();
+
+		$('#Tit'+id).hide();
+	}else if ($('#'+id).attr('class') == initialClass+" "+AClass+" "+BClass){
+		//展开
+		$('#'+id).removeClass(AClass);
+		$('#'+id).removeClass(BClass);
+		$('#'+id).addClass(AClass);
+		$('#Body'+id).show();
+
+		$('#Tit'+id).hide();
+	}else {
+		//展开
+		$('#'+id).addClass(AClass);
+		$('#Body'+id).show();
+
+		//标题隐藏
+		$('#Tit'+id).hide();
+	}
+}
+//阻止OnClick事件穿透(阻止事件冒泡)
+function cancelBubble(e) {
+	var evt = e ? e : window.event;
+	if(evt.stopPropagation) { //W3C
+		evt.stopPropagation();
+	} else { //IE
+		evt.cancelBubble = true;
+	}
+}
 /* - ---------------------------------------------------------------------------------动作交互----------------------------------------------------------------------------------- */
 
 /* - ---------------------------------------------------------------------------------单击事件----------------------------------------------------------------------------------- */
@@ -644,9 +686,9 @@ function oneFlush(){
 	document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 	document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 	// runNetwork(); 不用直接调用runNetwork() 是因为他和loading()是无限嵌套函数，会产生两个无限循环，具体表现为监控面板每十秒刷新两次
-	xmlHttpdNetworkTime = pgGet("http://127.0.0.1/php/panel/network.php?type=datatime&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
-	xmlHttpNetworkUp = pgGet("http://127.0.0.1/php/panel/network.php?type=networkup&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
-	xmlHttpNetworkDown = pgGet("http://127.0.0.1/php/panel/network.php?type=networkdown&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
+	xmlHttpdNetworkTime = pgGet("http://192.168.157.128/php/panel/network.php?type=datatime&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
+	xmlHttpNetworkUp = pgGet("http://192.168.157.128/php/panel/network.php?type=networkup&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
+	xmlHttpNetworkDown = pgGet("http://192.168.157.128/php/panel/network.php?type=networkdown&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
 	runMemory();runDisk();runCpu();
 	//刷新状态
 	setCookie("flushPanel",1,10);
