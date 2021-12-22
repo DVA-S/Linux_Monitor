@@ -81096,7 +81096,7 @@
       };
 
       TooltipHTMLContent.prototype.dispose = function () {
-        this.el.parentNode.removeChild(this.el);
+        // this.el.parentNode.removeChild(this.el);
       };
 
       return TooltipHTMLContent;

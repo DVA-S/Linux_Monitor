@@ -1,6 +1,6 @@
 ### Linux服务器自动巡检与监控系统的设计与实现
 
-tip：
+tip：  
 1,VMware共享文件夹权限问题
 ```
 sudo umount /mnt/hgfs
@@ -13,6 +13,10 @@ set character_set_server=gbk;
 
 set global character_set_database=gbk;
 set global character_set_server=gbk;
+```
+3,模拟负载
+```
+stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 10s
 ```
 任务进度：
     2021年11月4日：数据采集完成、交互界面完成

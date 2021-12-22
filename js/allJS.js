@@ -150,7 +150,7 @@ function loginJudge(){
 	$.get(
 		"php/login.php",{"user":username,"passwd":passwd},
 		function(data,status){
-			console.log("数据: \n" + data + "\n状态: " + status);
+			// console.log("数据: \n" + data + "\n状态: " + status);
 			var obj = JSON.parse(data);
 
 			if(obj.status == 1){	//登录成功
@@ -371,57 +371,35 @@ function viewPanel(view_btn){
 	}
 }
 
-//系统设置 -- 点击执行动画
-function sysSetup(id,initialClass,AClass,BClass){
-	if ($('#'+id).attr('class') == BClass){
-		$('#'+id).removeClass(BClass);
-		$('#'+id).addClass(AClass);
-	}else if ($('#'+id).attr('class') == initialClass+" "+AClass) {
-		$('#'+id).removeClass(AClass);
-		$('#'+id).addClass(BClass);
-	}else if ($('#'+id).attr('class') == initialClass+" "+BClass){
-		$('#'+id).removeClass(BClass);
-		$('#'+id).addClass(AClass);
-	}else if ($('#'+id).attr('class') == initialClass+" "+AClass+" "+BClass){
-		$('#'+id).removeClass(AClass);
-		$('#'+id).removeClass(BClass);
-		$('#'+id).addClass(AClass);
-	}else {
-		$('#'+id).addClass(AClass);
-	}
-}
-
 //系统设置 -- 点击执行动画 有三个状态：从左向右分别是“初始状态”、“将展开”、“将收缩”
 function sysSetup(id,initialClass,AClass,BClass){
 	if($('#'+id).attr('class') == initialClass+" "+AClass) {
 		//收缩
 		$('#'+id).removeClass(AClass);
 		$('#'+id).addClass(BClass);
+		//内容隐藏
 		$('#Body'+id).hide();
-
-		$('#Tit'+id).show();
+		//标题位移
+		$('#Tit'+id).css('left','9vw');
 	}else if ($('#'+id).attr('class') == initialClass+" "+BClass){
 		//展开
 		$('#'+id).removeClass(BClass);
 		$('#'+id).addClass(AClass);
 		$('#Body'+id).show();
-
-		$('#Tit'+id).hide();
+		$('#Tit'+id).css('left','3vw');
 	}else if ($('#'+id).attr('class') == initialClass+" "+AClass+" "+BClass){
 		//展开
 		$('#'+id).removeClass(AClass);
 		$('#'+id).removeClass(BClass);
 		$('#'+id).addClass(AClass);
 		$('#Body'+id).show();
-
-		$('#Tit'+id).hide();
+		$('#Tit'+id).css('left','3vw');
 	}else {
 		//展开
 		$('#'+id).addClass(AClass);
 		$('#Body'+id).show();
-
 		//标题隐藏
-		$('#Tit'+id).hide();
+		$('#Tit'+id).css('left','3vw');
 	}
 }
 //阻止OnClick事件穿透(阻止事件冒泡)

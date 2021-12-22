@@ -206,6 +206,18 @@ createTB(){
     passwd varchar(20) not null
     );
     "
+
+    #告警邮件表
+    mysql -uroot -pEsxi0000. -e "
+    use bysj;
+    create table if not exists eMail (
+    id int(255) not null primary key auto_increment,
+    cpu varchar(20) not null,
+    mem varchar(20) not null,
+    disk varchar(20) not null,
+    time varchar(20) not null
+    );
+    "
 }
 
 db=`mysql --version 2> /dev/null | awk -F ' ' '{print $1}'`

@@ -179,149 +179,135 @@ body{
 /* 第一个 展开 */
 @keyframes isBigA {
 	from{
-		/*left: 75%;*/
-		/*top: 10%;*/
-		/*position: absolute;*/
+		z-index: 0;
+		opacity: 0.5;
 	}
 	to{
-		width: 85vw;
+		width: 87vw;
 		top: 10%;
-		left: 6%;
+		left: 5%;
 		position: relative;
 		background-color: #FFF;
-		z-index: 1;
 		border-radius: 30px;
+		z-index: 5;
+		opacity: 1;
 	}
 }
 /* 收缩 */
 @keyframes isBigB {
 	from{
-		width: 85vw;
+		width: 87vw;
 		top: 10%;
-		left: 6%;
+		left: 5%;
 		position: relative;
 		background-color: #FFF;
-		z-index: 1;
+		z-index: 5;
 		border-radius: 30px;
 	}
 	to{
 		top: 10%;
 		left: 6%;
+		z-index: 0;
 	}
-}
-.isBigA{
-	animation: 0.5s ease forwards running isBigA;
-}
-.isBigB{
-	animation: 0.5s ease forwards running isBigB;
 }
 
 /* 第二个 */
 @keyframes isBig1A {
 	from{
-		/*left: 75%;*/
-		/*top: 10%;*/
-		/*position: absolute;*/
+		z-index: 0;
+		opacity: 0.5;
 	}
 	to{
-		width: 85vw;
+		width: 87vw;
 		top: -65%;
-		left: 6%;
+		left: 5%;
 		position: relative;
 		background-color: #FFF;
-		z-index: 1;
 		border-radius: 30px;
+		z-index: 10;
+		opacity: 1;
 	}
 }
 @keyframes isBig1B {
 	from{
-		width: 85vw;
+		width: 87vw;
 		top: -65%;
-		left: 6%;
+		left: 5%;
 		position: relative;
 		background-color: #FFF;
-		z-index: 1;
 		border-radius: 30px;
+		z-index: 10;
 	}
 	to{
 		top: -65%;
 		left: 29%;
+		z-index: 0;
 	}
-}
-.isBig1A{
-	animation: 0.5s ease forwards running isBig1A;
-}
-.isBig1B{
-	animation: 0.5s ease forwards running isBig1B;
 }
 
 /* 第三个 */
 @keyframes isBig2A {
 	from{
-		/*left: 75%;*/
-		/*top: 10%;*/
-		/*position: absolute;*/
+		z-index: 0;
+		opacity: 0.5;
 	}
 	to{
-		width: 85vw;
+		width: 87vw;
 		top: -140%;
-		left: 6%;
+		left: 5%;
 		position: relative;
-		background-color: #FFF;
-		z-index: 1;
+		/*background-color: #FFF;*/
 		border-radius: 30px;
+		/*background-image: linear-gradient(351deg,#ccd8ff,#ffffff);*/
+		z-index: 10;
+		opacity: 1;
 	}
 }
 @keyframes isBig2B {
 	from{
-		width: 85vw;
+		width: 87vw;
 		top: -140%;
-		left: 6%;
+		left: 5%;
 		position: relative;
-		background-color: #FFF;
-		z-index: 1;
+		/*background-color: #FFF;*/
 		border-radius: 30px;
+		z-index: 10;
 	}
 	to{
 		left: 52%;
 		top: -140%;
+		z-index: 0;
 	}
-}
-.isBig2A{
-	animation: 0.5s ease forwards running isBig2A;
-}
-.isBig2B{
-	animation: 0.5s ease forwards running isBig2B;
 }
 
 /* 第四个 */
 @keyframes isBig3A {
 	from{
-		/*left: 75%;*/
-		/*top: -10%;*/
-		/*position: absolute;*/
+		z-index: 0;
+		opacity: 0.5;
 	}
 	to{
-		width: 85vw;
+		width: 87vw;
 		top: -215%;
-		left: 6%;
+		left: 5%;
 		position: relative;
 		background-color: #FFF;
-		z-index: 1;
 		border-radius: 30px;
 		height: 75%;
+		z-index: 10;
+		opacity: 1;
 	}
 }
 @keyframes isBig3B {
 	from{
-		width: 85vw;
+		width: 87vw;
 		top: -215%;
-		left: 6%;
+		left: 5%;
 		position: relative;
 		background-color: #FFF;
-		z-index: 1;
 		border-radius: 30px;
 		height: 75%;
+		z-index: 10;
 	}
 	to{
 		left: 75%;
@@ -331,6 +317,7 @@ body{
 		height: 75%;
 		border-radius: 3%;
 		box-shadow: 4px 4px 4px 4px #071340;
+		z-index: 0;
 	}
 }
 .isBig3A{
@@ -338,6 +325,24 @@ body{
 }
 .isBig3B{
 	animation: 0.5s ease forwards running isBig3B;
+}
+.isBig2A{
+	animation: 0.5s ease forwards running isBig2A;
+}
+.isBig2B{
+	animation: 0.5s ease forwards running isBig2B;
+}
+.isBig1A{
+	animation: 0.5s ease forwards running isBig1A;
+}
+.isBig1B{
+	animation: 0.5s ease forwards running isBig1B;
+}
+.isBigA{
+	animation: 0.5s ease forwards running isBigA;
+}
+.isBigB{
+	animation: 0.5s ease forwards running isBigB;
 }
 /**********************************************动   画*********************************************/
 
@@ -575,6 +580,8 @@ input{
 	height: 75%;
 	border-radius: 3%;
 	box-shadow: 4px 4px 4px 4px #071340;
+	background-image: linear-gradient(90deg, rgb(115 122 139) 10%, rgb(0 255 184 / 10%) 10%),
+	linear-gradient(rgb(102 178 255) 10%, rgb(255 255 255) 10%);
 }
 /* 鼠标离开显示标题 */
 .sysTitle{
@@ -586,22 +593,20 @@ input{
 /*标题中的样式*/
 .sysTitleTitle{
 	writing-mode:tb-rl;
-	top: 22vh;
-	left: 8vw;
+	top: 26vh;
+	left: 9vw;
 	background-image: none;
 }
 /* 鼠标进入显示内容 */
 .sysBody{
-	text-shadow: #888 2px 2px 3px;
+	background-color: #FFF;
+	height: 87%;
+	width: 80%;
+	border-radius: 15px;
+	top: 10%;
+	left: 10%;
 	display: none;
-	font-size: 14px;
-	background-image: linear-gradient(225deg,#FFF,#FFF);
-	height: 100%;
-	width: 92%;
-	top: -100%;
-	border-radius: 3%;
-	padding-left: 8%;
-	color: #000;
+	position: absolute;
 }
 /* 内容中标题 */
 .sysBodyTitle{

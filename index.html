@@ -380,17 +380,23 @@
     <!--  时间 -->
     <div onclick="sysSetup('setup_info','setup_package','isBigA','isBigB')" id="setup_info" class="setup_package" class="sysTitle" style="left: 6%;top: 10%;">
         <h2 id="Titsetup_info" class="sysTitleTitle">系  统  组   件</h2>
+        <div id="Bodysetup_info" class="sysBody" onclick="cancelBubble()">
+
+        </div>
     </div>
 
     <!--  脚本 -->
     <div  onclick="sysSetup('setup_script','setup_clock','isBig1A','isBig1B')" id="setup_script" class="setup_clock" class="sysTitle" style="left: 29%;top: -65%;">
         <h2 id="Titsetup_script" class="sysTitleTitle">系  统  脚  本</h2>
+        <div id="Bodysetup_script" class="sysBody" onclick="cancelBubble()">
+
+        </div>
     </div>
 
     <!--  邮件 -->
     <div onclick="sysSetup('setup_email','setup_about','isBig2A','isBig2B')" id="setup_email" class="setup_about" class="sysTitle" style="left: 52%;top: -140%;">
         <h2 id="Titsetup_email" class="sysTitleTitle">邮  件  告  警</h2>
-        <div id="Bodysetup_email" class="sysBody">
+        <div id="Bodysetup_email" class="sysBody" onclick="cancelBubble()">
 
         </div>
     </div>
@@ -398,7 +404,9 @@
     <!--  退出登录 -->
     <div onclick="sysSetup('setup_logout','setup_exit','isBig3A','isBig3B')" id="setup_logout"  class="setup_exit" style="left: 75%;top: -215%;" class="sysTitle">
         <h2 id="Titsetup_logout" class="sysTitleTitle">退&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出</h2>
-        <div id="Bodysetup_logout" onclick="cancelBubble()" style="width: 100px;height: 100px;background-color: #000;display: none;"></div>
+        <div id="Bodysetup_logout" class="sysBody" onclick="cancelBubble()">
+
+        </div>
     </div>
 </div>
 <!-- 放在页面底部可以读到上面元素的ID值 -->
