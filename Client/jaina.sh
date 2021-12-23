@@ -22,32 +22,48 @@ case $1 in
 "start-server")
   sh /etc/jaina/InsertData.sh > /etc/jaina/JainaStatus &
   sleep 1
-  echo {`date`}-{$1}-{PID:`cat /etc/jaina/JainaStatus`} >> /var/log/jaina.log
+  echo {`date`}-{$1 Server}-{PID:`cat /etc/jaina/JainaStatus`} >> /var/log/jaina.log
   ;;
 "start-client")
   php /var/www/html/Client/ClientSocket.php >> /var/log/jaina.log &
   sleep 1
-  echo {`date`}-{$1}-{PID:`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`} >> /var/log/jaina.log
+  echo {`date`}-{$1 Client}-{PID:`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`} >> /var/log/jaina.log
+  ;;
+"start-email")
+  echo {`date`}-{$1 eMail}-{PID:`ps aux | grep setupEmail | grep php | awk '{print $2}'`}} >> /var/log/jaina.log
+  php /var/www/html/Server/Setup/setupEmail.php &
   ;;
 "stop-server")
-  echo {`date`}-{$1}-{PID:`cat /etc/jaina/JainaStatus`}-{kill} >> /var/log/jaina.log
-  echo {`date`}-{$1}-{Kill PID:`cat /etc/jaina/JainaStatus`} >> /var/log/jaina.log
+  echo {`date`}-{$1 Server}-{PID:`cat /etc/jaina/JainaStatus`} >> /var/log/jaina.log
   kill $(cat /etc/jaina/JainaStatus) ; echo "" > /etc/jaina/JainaStatus
   ;;
 "stop-client")
-  echo {`date`}-{$1}-{PID:`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'` >> /var/log/jaina.log
+  echo {`date`}-{$1 Client}-{PID:`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`} >> /var/log/jaina.log
   kill `netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`
   ;;
+"stop-email")
+  echo {`date`}-{$1 eMail}-{PID:`ps aux | grep setupEmail | grep php | awk '{print $2}'`} >> /var/log/jaina.log
+  kill `ps aux |  grep php | grep setupEmail | awk '{print $2}'`
+  ;;
 "status")
+  cat /proc/`cat /etc/jaina/JainaStatus`/status | grep Name
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep VmSize | sed 's/VmSize:/Memory:/g'
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep VmPeak | sed 's/VmPeak:/Max Memory:/g'
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep State:
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep ^Pid:
-  cat /proc/`cat /etc/jaina/ClientStatus`/status | grep VmSize | sed 's/VmSize:/Memory:/g'
-  cat /proc/`cat /etc/jaina/ClientStatus`/status | grep VmPeak | sed 's/VmPeak:/Max Memory:/g'
-  cat /proc/`cat /etc/jaina/ClientStatus`/status | grep State:
-  cat /proc/`cat /etc/jaina/ClientStatus`/status | grep ^Pid:
-  echo {`date`}-{$1}-{Position: /proc/`cat /etc/jaina/JainaStatus`/status and /proc/`cat /etc/jaina/ClientStatus`/status} >> /var/log/jaina.log
+  echo " "
+  cat /proc/`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`/status | grep Name
+  cat /proc/`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`/status | grep VmSize | sed 's/VmSize:/Memory:/g'
+  cat /proc/`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`/status | grep VmPeak | sed 's/VmPeak:/Max Memory:/g'
+  cat /proc/`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`/status | grep State:
+  cat /proc/`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`/status | grep ^Pid:
+  echo " "
+  cat /proc/`ps aux | grep setupEmail | grep php | awk '{print $2}'`/status | grep Name
+  cat /proc/`ps aux | grep setupEmail | grep php | awk '{print $2}'`/status | grep VmSize | sed 's/VmSize:/Memory:/g'
+  cat /proc/`ps aux | grep setupEmail | grep php | awk '{print $2}'`/status | grep VmPeak | sed 's/VmPeak:/Max Memory:/g'
+  cat /proc/`ps aux | grep setupEmail | grep php | awk '{print $2}'`/status | grep State:
+  cat /proc/`ps aux | grep setupEmail | grep php | awk '{print $2}'`/status | grep ^Pid:
+  echo {`date`}-{$1}-{Position: /proc/`cat /etc/jaina/JainaStatus`/status and /proc/`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`/status and /proc/`ps aux | grep setupEmail | grep php | awk '{print $2}'`/status} >> /var/log/jaina.log
  ;;
 "testcpus")
   res=`uptime`
@@ -102,6 +118,9 @@ case $1 in
   echo `lsblk | grep ^sd | awk '{print $4}' | sed 's/$/<\/td>/g' | sed 's/^/<td>/g'`
   echo {`date`}-{$1}-{$res} >> /var/log/jaina.log
   ;;
+"logs")
+  cat /var/log/jaina.log
+  ;;
 *)
   echo " 用法: jaina <选项> "
   echo ""
@@ -112,8 +131,10 @@ case $1 in
   echo "    ping <IPAddress>                  测试连通行,返回img标签"
   echo "    start-server                      开始采集主机性能指标"
   echo "    start-client                      运行client代理，接收执行server命令"
+  echo "    start-email                       开启邮件报警功能"
   echo "    stop-server                       停止采集主机性能指标"
   echo "    stop-client                       运行client代理，接收执行server命令"
+  echo "    stop-email                        停止邮件报警功能"
   echo "    status                            查看服务状态"
   echo "    testcpus                          查看cpu运行情况"
   echo "    testdisk                          测试磁盘读写速度"

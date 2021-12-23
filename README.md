@@ -18,6 +18,10 @@ set global character_set_server=gbk;
 ```
 stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 10s
 ```
+4,查看进程
+```
+ps aux
+```
 任务进度：
     2021年11月4日：数据采集完成、交互界面完成
 

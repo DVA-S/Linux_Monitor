@@ -76,7 +76,19 @@ function allFlush(){
 	hostSingleList("perfSingleDevice");
 	userList();
 }
-
+function flushToken(){
+	$.get(
+		"php/memcached.php",{"user":getCookie("UserName"),"token":getCookie("Token")},
+		function (data){
+			var obj = JSON.parse(data);
+			if (obj.status == 1){
+				//重置时间
+				setCookie("UserName",obj.username,10);
+				setCookie("Token",obj.token,10);
+			}
+		}
+	);
+}
 /* - ---------------------------------------------------------------------------------数据请求----------------------------------------------------------------------------------- */
 /* - ------------------------------------------------------------------------------- -全局变量--------------------------- ----------------------------------------------------- - */
 //echars图表变量
@@ -153,7 +165,7 @@ function loginJudge(){
 			// console.log("数据: \n" + data + "\n状态: " + status);
 			var obj = JSON.parse(data);
 
-			if(obj.status == 1){	//登录成功
+			if(obj.status == 1){	//登录成功,设置cookie NGZiMjdhNGY3YTRlNjljNzQwNjg4NzFhZTFlNzg4ODEzZDg5ZDA1OGM3MjNhMWRkNzcwNDE3OTRiM2RmYjU1Zi0tMjAyMS0xMi0yMyAwMToxMzoyNg==
 				setCookie("UserName",obj.username,10);
 				setCookie("Token",obj.token,10);
 
@@ -422,11 +434,15 @@ function deleteHost(element){
 	if(res==true){
 		//传入数据ID，调用php删除接口，刷新
 		$.get(
-			"php/host/DeleteHost.php",{"hostID":hostID,"username":getCookie("UserName"),"token":getCookie("Token")}
+			"php/host/DeleteHost.php",{"hostID":hostID,"username":getCookie("UserName"),"token":getCookie("Token")},
+			function (){
+				flushToken();
+			}
 		);
 		setTimeout(function (){
 			location.reload()
 		},1500);
+
 	}
 }
 //设备管理 -- 连通性检测
@@ -445,7 +461,7 @@ function linkHostStatus(element){
 		"Server/Checking/ServerSocket.php",{"type":"ping"+hostID,"clientIP":clientIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function (data){
 			document.getElementById("Status"+hostID).innerHTML=data;
-			// console.log(hostID);
+			flushToken();
 		}
 	);
 }
@@ -456,6 +472,7 @@ function SearchHost(){
 		"php/host/SearchHost.php",{"search":searchHost,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
 			document.getElementById("SearchTr").innerHTML=data;
+			flushToken();
 		}
 	);
 }
@@ -490,6 +507,7 @@ function addUserSys(){
 			function(){
 				document.getElementById('addSysUser').style.animation='0.5s ease forwards running login_loginOk';
 				document.getElementById('addSysUser').style.display='none';
+				flushToken();
 			}
 		);
 	}
@@ -504,6 +522,7 @@ function addUserDev(){
 			// alert("OK!");
 			document.getElementById('addSysUserDev').style.animation='0.5s ease forwards running login_loginOk';
 			document.getElementById('addSysUserDev').style.display='none';
+			flushToken();
 		}
 	);
 }
@@ -523,6 +542,7 @@ function hostPerf(element){
 				"../Server/Checking/ServerSocket.php",{"type":"disk","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 				function(data){
 					document.getElementById("checkingPerf").innerHTML=data;
+					flushToken();
 				}
 			);
 			break;
@@ -535,6 +555,7 @@ function hostPerf(element){
 				"../Server/Checking/ServerSocket.php",{"type":"nets","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 				function(data){
 					document.getElementById("checkingPerf").innerHTML=data;
+					flushToken();
 				}
 			);
 			break;
@@ -547,8 +568,10 @@ function hostPerf(element){
 				"../Server/Checking/ServerSocket.php",{"type":"cpus","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 				function(data){
 					document.getElementById("checkingPerf").innerHTML=data;
+					flushToken();
 				}
 			);
+			// flushToken();
 			break;
 		default:
 			break;
@@ -572,6 +595,7 @@ function hostPort(){
 			document.getElementById("checkingPerfPort").innerHTML="<tr>\n" +
 				"    <th>主机名</th><th>地址</th><th>端口类型</th><th>端口</th><th>进程</th>\n" +
 				"</tr>"+data;
+			flushToken();
 		}
 	);
 }
@@ -623,6 +647,7 @@ function hostDevice(){
 			document.getElementById("checkingPerfDeviceDisk").innerHTML="        <tr>\n" +
 				"            <th>硬盘数量</th><th>磁盘驱动器</th><th>硬盘容量</th>\n" +
 				"        </tr>"+"<tr>"+data+"</tr>";
+			flushToken();
 		}
 	);
 }

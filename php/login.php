@@ -35,9 +35,6 @@
 //如果登录成功，在关闭窗口前都不需要重新登录
 function keepLogin($login_status,$user,$rtJson){
     if ($login_status==1){
-        //保持登录 登录成功后设置 哈希前：8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918--2021-12-14 04:09:44 单位：秒 十分钟
-//        setcookie('Status',base64_encode(hash('sha256',$user."wxk")."--".date("Y-m-d h:i:s")),time()+600,'/');
-
         //创建Token到数据库(memcached)和session(cookie) 解密base64后得到sha256+时间去memcached验证
         $yanzhi = "JainaProudmoore";
         $all = $user.$yanzhi;
@@ -50,7 +47,7 @@ function keepLogin($login_status,$user,$rtJson){
         $rtJson->token = $token;
         echo json_encode($rtJson);
 
-        //memcache方案
+        //memcache 4fb27a4f7a4e69c74068871ae1e788813d89d058c723a1dd77041794b3dfb55f--2021-12-23 01:13:26
         $memcache = new Memcache;             //创建一个memcache对象
         $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
         $memcache->set($user.'UserToken', $hashToken,0,600);        //设置一个变量到内存中，有效期十分钟
@@ -69,9 +66,7 @@ function keepLogin($login_status,$user,$rtJson){
     $stmt->bind_result($login_status);
     $stmt->execute();
     //判定登录--输出查询数据的行数
-    while($stmt->fetch()){
-//     echo $login_status;
-    }
+    while($stmt->fetch()){}
 
     //last
     keepLogin($login_status,$user,$rtJson);

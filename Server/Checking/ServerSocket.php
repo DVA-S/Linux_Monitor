@@ -1,4 +1,5 @@
 <?php
+//向客户端发送消息type
 $type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 $clientIP = isset($_GET['clientIP']) ? htmlspecialchars($_GET['clientIP']) : '';
 $token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; //base64编码
@@ -16,7 +17,6 @@ $get_value = $memcache->get($username.'UserToken');   //从内存中取出key的
 
 //空值验证、sha256+date验证、有效期验证
 if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) == $get_value && $now-$datatime <= 600) {
-
     error_reporting(E_ALL);
 //设置无限请求超时时间
     set_time_limit(0);
@@ -53,6 +53,10 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
     while ($out = socket_read($socket, 2048)) {
         echo $out;
     }
+//    //memcache方案
+//    $memcache = new Memcache;             //创建一个memcache对象
+//    $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器
+//    $memcache->set($username.'UserToken', $hashAndData,0,600);        //设置一个变量到内存中，有效期十分钟
 
     socket_close($socket);
 }

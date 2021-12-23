@@ -28,7 +28,7 @@ if (hash('sha256',$all) == $hashAndData[0] && $now-$datatime <= 600){
     //创建并更新用户Token hash256+时间存在memcached,base64存在cookie
     $yanzhi = "JainaProudmoore";
     $all = $user.$yanzhi;
-    $hashToken = hash('sha256',$all)."--".date("Y-m-d h:i:s");;
+    $hashToken = hash('sha256',$all)."--".date("Y-m-d h:i:s");
     $token = base64_encode($hashToken);
     $memcache = new Memcache;             //创建一个memcache对象
     $memcache->connect('localhost', 11211) or die ("Could not connect"); //连接Memcached服务器

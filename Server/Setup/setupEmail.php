@@ -16,8 +16,7 @@ function emailSend(){
     $stmt->execute();
 
     while ($stmt->fetch()) {
-        echo "报警阈值：".PHP_EOL;
-        echo "CpuUsed:".$cpu."%,"."DiskFree:".$disk,"B,"."MemFree:".$mem,"MB,"."Time:".$time."S".PHP_EOL;
+        `echo \{$(date)\}-\{报警阈值：CpuUsed:$cpu%,DiskFree:$disk\B,MemFree:$mem MB,Time:$time S\} >> /var/log/jaina.log`;
     }
     $disk = str_replace('G','',$disk);
 
@@ -25,21 +24,18 @@ function emailSend(){
     $stmt->close();
 
     sleep($time);
-//    $con = null;
 
     //查询平均值
     $avg = null;
     $mem_free = null;
     $disk_free = null;
-//    require "/var/www/html/php/linkDB.php";
     $stmt = $con->prepare("select avg(cpu_used) as avg from (select data_time,cpu_used from bysj.cpu order by data_time desc limit 0,20) as cpu;");
     $stmt->bind_result($avg);
     $stmt->execute();
-    while ($stmt->fetch()) {
-        echo "CpuUsed:".$avg.PHP_EOL;
-    }
+    while ($stmt->fetch()) {    }
     if ($avg > $cpu){
-        `echo "CPU Used is $avg%!" | s-nail -s "Test" 1218304973@qq.com`;
+        `echo "CPU Used is $avg%!" | s-nail -s "CPU Alarm" 1218304973@qq.com`;
+        `echo \{$(date)\}-\{邮件内容：CPU Alarm,CPU Used is $avg%!\} >> /var/log/jaina.log`;
     }
     $stmt->free_result();
     $stmt->close();
@@ -47,11 +43,10 @@ function emailSend(){
     $stmt = $con->prepare("select avg(mem_free) as mem_free from (select data_time,mem_free from bysj.memory order by data_time desc limit 0,20) as mem;");
     $stmt->bind_result($mem_free);
     $stmt->execute();
-    while ($stmt->fetch()) {
-        echo "MemFree:".$mem_free.PHP_EOL;
-    }
+    while ($stmt->fetch()) {    }
     if ($mem_free < $mem){
-        `echo "Memory Free is $mem_free MB!" | s-nail -s "Test" 1218304973@qq.com`;
+        `echo "Memory Free is $mem_free MB!" | s-nail -s "Memory Alarm" 1218304973@qq.com`;
+        `echo \{$(date)\}-\{邮件内容：Memory Alarm,Memory Free is $mem_free MB!\} >> /var/log/jaina.log`;
     }
     $stmt->free_result();
     $stmt->close();
@@ -59,11 +54,10 @@ function emailSend(){
     $stmt = $con->prepare("select avg(disk_free) as disk_free from (select data_time,disk_free from bysj.disk order by data_time desc limit 0,20) as disk;");
     $stmt->bind_result($disk_free);
     $stmt->execute();
-    while ($stmt->fetch()) {
-        echo "DiskFree:".$disk_free.PHP_EOL;
-    }
+    while ($stmt->fetch()) {    }
     if ($disk_free < $disk){
-        `echo "Disk Free is $disk_free GB!" | s-nail -s "Test" 1218304973@qq.com`;
+        `echo "Disk Free is $disk_free GB!" | s-nail -s "Disk Alarm" 1218304973@qq.com`;
+        `echo \{$(date)\}-\{邮件内容：Disk Alarm,Disk Free is $disk_free GB!\} >> /var/log/jaina.log`;
     }
     $stmt->free_result();
     $stmt->close();
