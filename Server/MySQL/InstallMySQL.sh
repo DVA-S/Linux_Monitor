@@ -215,8 +215,14 @@ createTB(){
     cpu varchar(20) not null,
     mem varchar(20) not null,
     disk varchar(20) not null,
-    time varchar(20) not null
+    time varchar(20) not null,
+    email varchar(20) not null
     );
+    "
+    #初始化报警条件
+    mysql -uroot -pEsxi0000. -e "
+    use bysj;
+    insert into bysj.eMail(cpu,mem,disk,time) values("90","1024","5","60");
     "
 }
 

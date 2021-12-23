@@ -22,6 +22,10 @@ stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 10s
 ```
 ps aux
 ```
+5,SQL增加列
+```
+alter table tableName add columnName varchar(30);
+```
 任务进度：
     2021年11月4日：数据采集完成、交互界面完成
 

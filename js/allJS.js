@@ -652,6 +652,26 @@ function hostDevice(){
 	);
 }
 
+//邮件告警
+function eMailSend(){
+	var emailCPU =$("#emailCPU").val();
+	var emailMEM =$("#emailMEM").val();
+	var emailDISK =$("#emailDISK").val();
+	var emailTIME =$("#emailTIME").val();
+	var emailSetup =$("#emailSetup").val();
+	if ((emailCPU=="") || (emailMEM=="") || (emailTIME=="") || (emailSetup=="") || (emailDISK=="")){
+		alert("还没填完！");
+	}else{
+		$.get(
+			"../php/setup/setupEmailDB.php",{"cpu":emailCPU,"mem":emailMEM,"disk":emailDISK,"time":emailTIME,"email":emailSetup,"username":getCookie("UserName"),"token":getCookie("Token")},
+			function(){
+				alert("OK!");
+				flushToken();
+			}
+		);
+	}
+}
+
 //退出登录
 function loginout(){
 	setCookie("PHPSESSID", "", -1);
