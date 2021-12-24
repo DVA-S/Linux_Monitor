@@ -222,7 +222,7 @@ createTB(){
     #初始化报警条件
     mysql -uroot -pEsxi0000. -e "
     use bysj;
-    insert into bysj.eMail(cpu,mem,disk,time) values("90","1024","5","60");
+    insert into bysj.eMail(cpu,mem,disk,time,email) values("90","1024","5","60","1218304973@qq.com");
     "
 }
 
