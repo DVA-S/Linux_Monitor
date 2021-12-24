@@ -392,6 +392,7 @@ function sysSetup(id,initialClass,AClass,BClass){
 		//内容隐藏
 		$('#Body'+id).removeClass('viewHide');
 		$('#Body'+id).addClass('viewHide');
+		$('#Body'+id).hide();
 
 		//标题位移
 		$('#Tit'+id).css('left','9vw');
@@ -400,6 +401,7 @@ function sysSetup(id,initialClass,AClass,BClass){
 		$('#'+id).removeClass(BClass);
 		$('#'+id).addClass(AClass);
 		$('#Body'+id).removeClass('viewHide');
+		$('#Body'+id).show();
 		$('#Body'+id).addClass('viewShow');
 
 		$('#Tit'+id).css('left','3vw');
@@ -409,6 +411,7 @@ function sysSetup(id,initialClass,AClass,BClass){
 		$('#'+id).removeClass(BClass);
 		$('#'+id).addClass(AClass);
 		$('#Body'+id).removeClass('viewHide');
+		$('#Body'+id).show();
 		$('#Body'+id).addClass('viewShow');
 
 		$('#Tit'+id).css('left','3vw');
@@ -416,6 +419,7 @@ function sysSetup(id,initialClass,AClass,BClass){
 		//展开
 		$('#'+id).addClass(AClass);
 		$('#Body'+id).removeClass('viewHide');
+		$('#Body'+id).show();
 		$('#Body'+id).addClass('viewShow');
 
 		//标题隐藏

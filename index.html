@@ -338,7 +338,6 @@
     <div  class="setup_clock" class="sysTitle" id="setup_script" onclick="sysSetup('setup_script','setup_clock','isBig1A','isBig1B')" style="left: 29%;top: -65%;">
         <h2 class="sysTitleTitle" id="Titsetup_script">系  统  脚  本</h2>
         <div class="sysBody" id="Bodysetup_script" onclick="cancelBubble()">
-
         </div>
     </div>
 
@@ -346,7 +345,8 @@
     <div class="setup_about" class="sysTitle" id="setup_email" onclick="sysSetup('setup_email','setup_about','isBig2A','isBig2B')" style="left: 52%;top: -140%;">
         <h2 class="sysTitleTitle" id="Titsetup_email">邮  件  告  警</h2>
         <div class="sysBody" id="Bodysetup_email" onclick="cancelBubble()">
-            <select id="emailCPU" style="top: 33%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
+            <h3>&nbsp;告警条件</h3>
+            <select id="emailCPU" style="top: 18%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                 <option value="">CPU占用 (%)</option>
                 <option value="10">10 %</option>
                 <option value="30">30 %</option>
@@ -354,7 +354,7 @@
                 <option value="70">70 %</option>
                 <option value="90">90 %</option>
             </select>
-            <select id="emailMEM" style="top: 33%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
+            <select id="emailMEM" style="top: 18%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                 <option value="">MEM剩余 (MB)</option>
                 <option value="512">512 MB</option>
                 <option value="1024">1024 MB</option>
@@ -362,7 +362,7 @@
                 <option value="3072">3072 MB</option>
                 <option value="4096">4096 MB</option>
             </select>
-            <select id="emailDISK" style="top: 33%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
+            <select id="emailDISK" style="top: 18%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                 <option value="">DISK剩余 (GB)</option>
                 <option value="1">1 GB</option>
                 <option value="5">5 GB</option>
@@ -370,7 +370,7 @@
                 <option value="20">20 GB</option>
                 <option value="50">50 GB</option>
             </select>
-            <select id="emailTIME" style="top: 33%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
+            <select id="emailTIME" style="top: 18%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                 <option value="">轮询间隔 (s)</option>
                 <option value="10">10 s</option>
                 <option value="30">30 s</option>
@@ -378,9 +378,9 @@
                 <option value="120">120 s</option>
                 <option value="300">300 s</option>
             </select>
-            <label for="emailSetup" style="top: 48%;left: -53%;height: 5vh;width: 13vw;border-radius: 4px;">收件人：</label>
-            <input id="emailSetup" style="top: 39%;left: 31%;height: 5vh;width: 13vw;border-radius: 4px;background-color: #d8e0ed;" type="email" />
-            <button onclick="eMailSend()" style="top: 39%;left: 31%;height: 5vh;width: 13vw;border-radius: 4px;background-color: #d8e0ed;">提交</button>
+            <label for="emailSetup" style="top: 39%;left: 24%;height: 5vh;width: 13vw;border-radius: 4px;position: absolute;">收件人：</label>
+            <input id="emailSetup" style="top: 38%;left: 31.2%;height: 5vh;width: 13vw;border-radius: 4px;background-color: #d8e0ed;position: absolute;" type="email" />
+            <button onclick="eMailSend()" style="top: 38%;left: 50.2%;height: 5vh;width: 13vw;border-radius: 4px;background-color: #d8e0ed;position: absolute;border: none;box-shadow: 1px 1px 1px 1px #000;">提交</button>
         </div>
     </div>
 
