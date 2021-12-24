@@ -148,6 +148,13 @@ body{
 	from{opacity: 0;}
 	to{	opacity: 1;}
 }
+/* 系统设置 内部盒子出现动画 */
+.viewShow{
+	animation: 1s ease forwards running index_panel_loginOk;
+}
+.viewHide{
+	animation: 0.5s ease forwards running login_loginOk;
+}
 /* 主页面板切换效果 */
 /* 离开动画 从中间到左边 */
 @keyframes btn_switch_CenterGoLeftHide{
@@ -605,7 +612,8 @@ input{
 	border-radius: 15px;
 	top: 10%;
 	left: 10%;
-	display: none;
+	display: block;
+	opacity: 0;
 	position: absolute;
 }
 /* 内容中标题 */

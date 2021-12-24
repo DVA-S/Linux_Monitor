@@ -390,26 +390,34 @@ function sysSetup(id,initialClass,AClass,BClass){
 		$('#'+id).removeClass(AClass);
 		$('#'+id).addClass(BClass);
 		//内容隐藏
-		$('#Body'+id).hide();
+		$('#Body'+id).removeClass('viewHide');
+		$('#Body'+id).addClass('viewHide');
+
 		//标题位移
 		$('#Tit'+id).css('left','9vw');
 	}else if ($('#'+id).attr('class') == initialClass+" "+BClass){
 		//展开
 		$('#'+id).removeClass(BClass);
 		$('#'+id).addClass(AClass);
-		$('#Body'+id).show();
+		$('#Body'+id).removeClass('viewHide');
+		$('#Body'+id).addClass('viewShow');
+
 		$('#Tit'+id).css('left','3vw');
 	}else if ($('#'+id).attr('class') == initialClass+" "+AClass+" "+BClass){
 		//展开
 		$('#'+id).removeClass(AClass);
 		$('#'+id).removeClass(BClass);
 		$('#'+id).addClass(AClass);
-		$('#Body'+id).show();
+		$('#Body'+id).removeClass('viewHide');
+		$('#Body'+id).addClass('viewShow');
+
 		$('#Tit'+id).css('left','3vw');
 	}else {
 		//展开
 		$('#'+id).addClass(AClass);
-		$('#Body'+id).show();
+		$('#Body'+id).removeClass('viewHide');
+		$('#Body'+id).addClass('viewShow');
+
 		//标题隐藏
 		$('#Tit'+id).css('left','3vw');
 	}
