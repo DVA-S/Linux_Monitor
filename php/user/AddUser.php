@@ -20,7 +20,7 @@ $get_value = $memcache->get($username.'UserToken');   //从内存中取出key的
 if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) == $get_value && $now-$datatime <= 600) {
 
     if ($user == "") {
-        echo "<script>alert('请换个用户名！');</script>";
+        echo "请换个用户名！";
         exit;//退出当前脚本
     }
 
@@ -36,7 +36,6 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
     $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
     $sex = isset($_GET['sex']) ? htmlspecialchars($_GET['sex']) : '';
     $phone = isset($_GET['phone']) ? htmlspecialchars($_GET['phone']) : '';
-
     require_once "../linkDB.php";
 
     mysqli_select_db($con, "bysj");
@@ -47,7 +46,11 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
 
     $stmt->bind_param("ssssss", $user, $passwd, $email, $sex, $phone, $createdate);
 
-    $stmt->execute();
+    if ($stmt->execute()){
+        echo "OK!";
+    }else{
+        echo "无法插入数据库！";
+    }
 }else{
     echo "身份已失效！";
 }

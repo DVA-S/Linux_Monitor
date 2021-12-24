@@ -516,9 +516,11 @@ function addUserSys(){
 		var phone =$("#phone").val();
 		$.get(
 			"php/user/AddUser.php",{"username":getCookie("UserName"),"token":getCookie("Token"),"user":userAdd,"passwd":userAddPasswd,"email":email,"sex":sex,"phone":phone},
-			function(){
-				document.getElementById('addSysUser').style.animation='0.5s ease forwards running login_loginOk';
-				document.getElementById('addSysUser').style.display='none';
+			function(date){
+				alert(date);
+				//改为应用“类” 就会生效
+				// document.getElementById('addSysUser').style.animation='0.5s ease forwards running login_loginOk';
+				// document.getElementById('addSysUser').style.display='none';
 				flushToken();
 			}
 		);
