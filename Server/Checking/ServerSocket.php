@@ -39,7 +39,7 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
     }
 
     $in = null;
-// Jaina 点的问题
+// Jaina 点的问题不了解
     $in .= $type;
     $out = '';
 

@@ -211,6 +211,7 @@ createTB(){
     use bysj;
     create table if not exists eMail (
     id int(255) not null primary key auto_increment,
+    host_ip varchar(50) not null,
     cpu varchar(20) not null,
     mem varchar(20) not null,
     disk varchar(20) not null,
