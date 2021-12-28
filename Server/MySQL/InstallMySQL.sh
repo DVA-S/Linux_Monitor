@@ -110,8 +110,7 @@ createTB(){
 	"
 
 	#内存表
-  #修改 -- 2021年11月10日
-  #移除mem_cache字段
+  #修改 -- 2021年11月10日 移除mem_cache字段
 	mysql -uroot -pEsxi0000. -e "
 	use bysj;
 	create table if not exists memory (
@@ -226,7 +225,7 @@ createTB(){
     "
 }
 
-db=`mysql --version 2> /dev/null | awk -F ' ' '{print $1}'`
+db=$(mysql --version 2> /dev/null | awk -F ' ' '{print $1}')
 if [ $db ]
 then
 	#建库、建表

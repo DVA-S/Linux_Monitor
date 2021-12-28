@@ -30,8 +30,8 @@ case $1 in
   echo {`date`}-{$1 Client}-{PID:`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`} >> /var/log/jaina.log
   ;;
 "start-email")
-  echo {`date`}-{$1 eMail}-{PID:`ps aux | grep setupEmail | grep php | awk '{print $2}'`} >> /var/log/jaina.log
   php /var/www/html/Server/Setup/setupEmail.php &
+  echo {`date`}-{$1 eMail}-{PID:`ps aux | grep setupEmail | grep php | awk '{print $2}'`} >> /var/log/jaina.log
   ;;
 "stop-server")
   echo {`date`}-{$1 Server}-{PID:`cat /etc/jaina/JainaStatus`} >> /var/log/jaina.log

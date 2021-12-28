@@ -3,6 +3,7 @@
 $type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 $token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; //base64编码
 $username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : '';
+$panelip = isset($_GET['panelip']) ? htmlspecialchars($_GET['panelip']) : '';
 
 $hashAndData = explode("--",base64_decode($token));
 //将日期转换为时间戳 注：时间戳即秒数
@@ -26,39 +27,33 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
 // 设置编码，防止中文乱码
     mysqli_set_charset($con, "utf8");
 //利用数据行数判定登录
-    $stmt = $con->prepare("select data_time,disk_read,disk_write from (select data_time,disk_read,disk_write from bysj.disk order by data_time desc limit 0,20) AS disk order by data_time;");
+    $stmt = $con->prepare("select data_time,disk_read,disk_write from (select data_time,disk_read,disk_write from bysj.disk where host_ip = ? order by data_time desc limit 0,20) AS disk order by data_time;");
+    $stmt->bind_param("s",$panelip);
     $stmt->bind_result($data_time, $disk_read, $disk_write);
     $stmt->execute();
 
 //数组datalist的意义不大，但要用它输出最后一个数值
     if ($type == "datatime") {
         $num = 0;
-//    echo "[";
         while ($stmt->fetch()) {
             $datalist[$num] = $data_time;
             $num = $num++;
             echo "$datalist[$num]", ",";
-//        echo "'$datalist[$num]'",",";
         }
-//    echo "'$datalist[0]']";
     } else if ($type == "diskread") {
         $num = 0;
-//    echo "[";
         while ($stmt->fetch()) {
             $datalist[$num] = $disk_read;
             $num = $num--;
             echo "$disk_read", ",";
         }
-//    echo "'$datalist[0]']";
     } else if ($type == "diskwrite") {
         $num = 0;
-//    echo "[";
         while ($stmt->fetch()) {
             $datalist[$num] = $disk_write;
             $num = $num--;
             echo "$disk_write", ",";
         }
-//    echo "'$datalist[0]']";
     }
 }
 ?>

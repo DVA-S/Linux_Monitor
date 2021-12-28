@@ -39,7 +39,7 @@
     <div class="panel_btn" onclick="" style="width: 4vw;box-shadow: none;background-image: none;margin: 0;top: -4px;border-radius: 100px;" title="当前用户">
         <img alt="logo" src="img/logo.png" style="left: 20%;" width="70%">
     </div>
-    <div class="panel_btn" onclick="btnOnClick(this);(function (){if (getCookie('flushPanel') == 1){ }else{ loading(); }setTimeout( function (){oneFlush();},470 )})()" title="内存、硬盘、网络、处理器图表">监控面板</div>
+    <div class="panel_btn" onclick="btnOnClick(this);(function (){if (getCookie('flushPanel') == 1){ }else{ loading(); }setTimeout( function (){oneFlush(getCookie('panelHost'));},470 )})()" title="内存、硬盘、网络、处理器图表">监控面板</div>
     <div class="host_btn" onclick="btnOnClick(this);(function (){setCookie('flushPanel',0,10);})()" title="设备的总览、列表、添加">设备管理</div>
     <div class="checking_btn" onclick="btnOnClick(this);(function (){setCookie('flushPanel',0,10);})()" title="设备的连通、性能、端口、硬件">自动巡检</div>
     <div class="user_btn" onclick="btnOnClick(this);(function (){setCookie('flushPanel',0,10);})()" title="系统用户、设备用户、添加">用户管理</div>
@@ -49,6 +49,14 @@
 </div>
 <!-- 监控面板 -->
 <div class="panel" id="panel">
+    <select id="panelHost">
+        <option value="">请选择主机</option>
+    </select>
+    <button onclick="(function (){
+        setCookie('panelHost',$('#panelHost').val().substring(11));
+        //刷新监控面板(登陆成功后，就会立马刷新数据) -- 解决：避免刷新后图表缩成一团
+        oneFlush(getCookie('panelHost'));
+    })()">应用</button>
     <div class="view" id="memory" style="top: 2%;left: 3%;">
         <script src="js/panel/memory.js"></script>
     </div>
@@ -409,7 +417,7 @@
                 lastView(getCookie('panelView'));
                 lastViewClild(getCookie('Child'));
                 //刷新监控面板(登陆成功后，就会立马刷新数据) -- 解决：避免刷新后图表缩成一团
-                oneFlush();
+                oneFlush(getCookie("panelHost"));
                 //刷新所有查询数据
                 allFlush();
             }else{

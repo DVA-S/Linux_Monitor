@@ -2,6 +2,7 @@
 $type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 $token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; //base64编码
 $username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : '';
+$panelip = isset($_GET['panelip']) ? htmlspecialchars($_GET['panelip']) : '';
 
 $hashAndData = explode("--",base64_decode($token));
 //将日期转换为时间戳 注：时间戳即秒数
@@ -26,36 +27,31 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
     // 设置编码，防止中文乱码
     mysqli_set_charset($con, "utf8");
     //利用数据行数判定登录
-    $stmt = $con->prepare("select id,data_time,mem_used,mem_free from (select id,data_time,mem_used,mem_free from bysj.memory order by data_time desc limit 0,20) AS BtoS order by data_time;");
+    $stmt = $con->prepare("select id,data_time,mem_used,mem_free from (select id,data_time,mem_used,mem_free from bysj.memory where host_ip = ? order by data_time desc limit 0,20) AS BtoS order by data_time;");
+    $stmt->bind_param("s",$panelip);
     $stmt->bind_result($id,$data_time,$mem_used,$mem_free);
     $stmt->execute();
     if ($type == "datatime"){
         $num=0;
-    //    echo "[";
         while($stmt->fetch()){
             $datalist[$num]=$data_time;
             $num=$num++;
             echo "$datalist[$num]",",";
         }
-    //    echo "'$datalist[0]']";
     }else if ($type == "memused"){
         $num=0;
-    //    echo "[";
         while($stmt->fetch()){
             $datalist[$num]=$mem_used;
             $num=$num--;
             echo "$mem_used",",";
         }
-    //    echo "'$datalist[0]']";
     }else if($type == "memfree"){
         $num=0;
-    //    echo "[";
         while($stmt->fetch()){
             $datalist[$num]=$mem_free;
             $num=$num++;
             echo "$mem_free",",";
         }
-    //    echo "'$datalist[0]']";
     }
 }
 ?>

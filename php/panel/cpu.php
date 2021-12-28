@@ -1,9 +1,11 @@
 <?php
 //返回数据实例：2021-12-15 18:02:59,2021-12-15 18:02:59,2021-12-15 18:03:05,2021-12-15 18:03:05,2021-12-15 18:03:11,2021-12-15 18:03:11,2021-12-15 18:03:17,2021-12-15 18:03:17,2021-12-15 18:03:23,2021-12-15 18:03:23,2021-12-15 18:03:30,2021-12-15 18:03:30,2021-12-15 18:03:36,2021-12-15 18:03:36,2021-12-15 18:03:42,2021-12-15 18:03:42,2021-12-15 18:03:48,2021-12-15 18:03:48,2021-12-15 18:03:54,2021-12-15 18:03:54,
 
+//根据参数区分主机,这个参数预计为数据库中的 “host_ip”
 $type = isset($_GET['type']) ? htmlspecialchars($_GET['type']) : '';
 $token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; //base64编码
 $username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : '';
+$panelip = isset($_GET['panelip']) ? htmlspecialchars($_GET['panelip']) : '';
 
 $hashAndData = explode("--",base64_decode($token));
 //将日期转换为时间戳 注：时间戳即秒数
@@ -26,39 +28,34 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
     // 设置编码，防止中文乱码
     mysqli_set_charset($con, "utf8");
     //利用数据行数判定登录
-    $stmt = $con->prepare("select data_time,cpu_used from (select data_time,cpu_used from bysj.cpu order by data_time desc limit 0,20) AS cpu order by data_time;");
+    $stmt = $con->prepare("select data_time,cpu_used from (select data_time,cpu_used from bysj.cpu where host_ip = ? order by data_time desc limit 0,20) AS cpu order by data_time;");
+    $stmt->bind_param("s",$panelip);
     $stmt->bind_result($data_time,$cpu_used);
     $stmt->execute();
     if ($type == "datatime"){
         $num=0;
-    //    echo "[";
         while($stmt->fetch()){
             $datalist[$num]=$data_time;
             $num=$num++;
             echo "$datalist[$num]",",";
         }
-    //    echo "'$datalist[0]']";
     }else if ($type == "cpuused"){
         $num=0;
-    //    echo "[";
         while($stmt->fetch()){
             $datalist[$num]=$cpu_used;
             $num=$num--;
             echo "$cpu_used",",";
         }
-    //    echo "'$datalist[0]']";
     }else if ($type == "cpufree"){
         $num=0;
         $all=100;
         $cpufree=0;
-    //    echo "[";
         while($stmt->fetch()){
             $cpufree=$all-$cpu_used;
             $datalist[$num]=$cpu_used;
             $num=$num--;
             echo "$cpufree",",";
         }
-    //    echo "'$datalist[0]']";
     }
 }else{
     echo "登录超时！";

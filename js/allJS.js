@@ -74,6 +74,7 @@ function allFlush(){
 	hostSingleList("perfSingle");
 	hostSingleList("perfSinglePort");
 	hostSingleList("perfSingleDevice");
+	hostSingleList("panelHost");
 	userList();
 }
 function flushToken(){
@@ -708,7 +709,7 @@ function loading(){
 			document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 			document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 			//loading()和runNetwork()为无限嵌套函数
-			setTimeout("runNetwork();runMemory();runDisk();runCpu();",200);
+			setTimeout("runNetwork();runMemory();runDisk();runCpu(getCookie('panelHost'));",200);
 			// console.log("动画结束");
 			//刷新状态
 			setCookie("flushPanel",1,10);
@@ -723,9 +724,9 @@ function oneFlush(){
 	document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 	document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 	// runNetwork(); 不用直接调用runNetwork() 是因为他和loading()是无限嵌套函数，会产生两个无限循环，具体表现为监控面板每十秒刷新两次
-	xmlHttpdNetworkTime = pgGet("http://192.168.157.128/php/panel/network.php?type=datatime&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
-	xmlHttpNetworkUp = pgGet("http://192.168.157.128/php/panel/network.php?type=networkup&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
-	xmlHttpNetworkDown = pgGet("http://192.168.157.128/php/panel/network.php?type=networkdown&username="+getCookie("UserName")+"&token="+getCookie("Token"),networkback);
+	xmlHttpdNetworkTime = pgGet("http://192.168.157.128/php/panel/network.php?type=datatime&username="+getCookie("UserName")+"&token="+getCookie("Token")+"&panelip="+getCookie("panelHost"),networkback);
+	xmlHttpNetworkUp = pgGet("http://192.168.157.128/php/panel/network.php?type=networkup&username="+getCookie("UserName")+"&token="+getCookie("Token")+"&panelip="+getCookie("panelHost"),networkback);
+	xmlHttpNetworkDown = pgGet("http://192.168.157.128/php/panel/network.php?type=networkdown&username="+getCookie("UserName")+"&token="+getCookie("Token")+"&panelip="+getCookie("panelHost"),networkback);
 	runMemory();runDisk();runCpu();
 	//刷新状态
 	setCookie("flushPanel",1,10);
@@ -834,11 +835,6 @@ function viewCharts(panelId,Atitle,Btitle,unit){
 	option && myChart.setOption(option);
 }
 /* - ---------------------------------------------------------------------------------监控面板----------------------------------------------------------------------------------- */
-
-
-
-
-
 //鼠标右击
 // function rightClick(){
 // 	//这一步是为了阻止右击时系统默认的弹出框
