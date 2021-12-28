@@ -66,6 +66,7 @@ function userList(){
 		}
 	);
 }
+//加载所有数据（非监控面板）一次
 function allFlush(){
 	hostList();
 	runDate();
@@ -177,11 +178,16 @@ function loginJudge(){
 				document.getElementById("head_div").style.animation="0.5s ease 0s 1 normal forwards running index_head_loginOk";
 				document.getElementById("panel").style.display="block";
 				document.getElementById("panel").style.animation="0.5s ease 0s 1 normal forwards running index_panel_loginOk";
-				console.log("logOK!");
-
-				//刷新监控面板 -- 解决：避免刚登陆时图表缩成一团
-				oneFlush();
 				allFlush();
+				<!--    设置初始化监控面板    -->
+				setTimeout(
+					function (){
+						setCookie('panelHost',$('#panelHost').val().substring(11));
+						document.getElementById("viewPanelDev").innerText='正在显示：'+$('#panelHost').val().substring(11);
+						//刷新监控面板 -- 解决：避免刚登陆时图表缩成一团
+						oneFlush();
+					},500
+				);
 			}else{
 				//拒绝动画
 				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginNo";
@@ -709,7 +715,7 @@ function loading(){
 			document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 			document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 			//loading()和runNetwork()为无限嵌套函数
-			setTimeout("runNetwork();runMemory();runDisk();runCpu(getCookie('panelHost'));",200);
+			setTimeout("runNetwork();runMemory();runDisk();runCpu();",200);
 			// console.log("动画结束");
 			//刷新状态
 			setCookie("flushPanel",1,10);
@@ -755,7 +761,7 @@ function viewCharts(panelId,Atitle,Btitle,unit){
 			dataB =diskread = xmlHttpNetworkDown.responseText.split(",");
 			break;
 		case 'cpu':
-			date = xmlHttpdCpuTime.responseText.split(",");
+			date = xmlHttpCpuTime.responseText.split(",");
 			dataA = xmlHttpCpuUsed.responseText.split(",");
 			dataB = xmlHttpCpuFree.responseText.split(",");
 			break;
