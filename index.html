@@ -436,7 +436,9 @@
 
             }else{
                 //播放拒绝动画
-                document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
+                // document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
+                $("#login_div").removeClass('login_loginOk');
+                $("#login_div").addClass('login_loginView');
                 document.getElementById('login_div').style.display='block';
             }
         }

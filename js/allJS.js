@@ -166,7 +166,7 @@ function loginJudge(){
 	// alert(passwd);
 	$.get(
 		"php/login.php",{"user":username,"passwd":passwd},
-		function(data,status){
+		function(data){
 			// console.log("数据: \n" + data + "\n状态: " + status);
 			var obj = JSON.parse(data);
 
@@ -175,7 +175,8 @@ function loginJudge(){
 				setCookie("Token",obj.token,10);
 
 				// 登录框  forwards属性会让对象停留在终点
-				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginOk";
+				//document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginOk";
+				$("#login_div").addClass('login_loginOk');
 				// 主页
 				document.getElementById("head_div").style.display="block";
 				document.getElementById("head_div").style.animation="0.5s ease 0s 1 normal forwards running index_head_loginOk";
@@ -193,9 +194,13 @@ function loginJudge(){
 				);
 			}else{
 				//拒绝动画
-				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginNo";
-				// 延迟0.5秒刷新-重置登录失败动画
-				setTimeout(function(){ location.reload(); },500);
+				//document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginNo";
+				// $("#login_div").removeClass('login_loginOk');
+				$("#login_div").removeClass('login_loginNo');
+				$("#login_div").removeClass('login_loginView');
+
+				//设置延迟 js不会反复添加一个类 对于同一个类不会有变化过程
+				setTimeout(function(){ $("#login_div").addClass('login_loginNo'); },1);
 				console.log("logNO!");
 			}
 		}
