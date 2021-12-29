@@ -175,8 +175,8 @@ function loginJudge(){
 				setCookie("Token",obj.token,10);
 
 				// 登录框  forwards属性会让对象停留在终点
-				//document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginOk";
-				$("#login_div").addClass('login_loginOk');
+				document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginOk";
+				//$("#login_div").addClass('login_loginOk');
 				// 主页
 				document.getElementById("head_div").style.display="block";
 				document.getElementById("head_div").style.animation="0.5s ease 0s 1 normal forwards running index_head_loginOk";
