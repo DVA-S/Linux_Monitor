@@ -700,7 +700,9 @@ function eMailSend(){
 
 //退出登录
 function loginout(){
-	setCookie("PHPSESSID", "", -1);
+	setCookie("Token", "", -1);
+	setCookie("UserName", "", -1);
+	setCookie("panelHost", "", -1);
 	location.reload();
 }
 /* - ---------------------------------------------------------------------------------单击事件----------------------------------------------------------------------------------- */
