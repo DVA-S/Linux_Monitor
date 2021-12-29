@@ -46,18 +46,19 @@ case $1 in
   kill `ps aux |  grep php | grep setupEmail | awk '{print $2}'`
   ;;
 "status")
+  echo "Server: "
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep Name
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep VmSize | sed 's/VmSize:/Memory:/g'
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep VmPeak | sed 's/VmPeak:/Max Memory:/g'
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep State:
   cat /proc/`cat /etc/jaina/JainaStatus`/status | grep ^Pid:
-  echo " "
+  echo "Client： "
   cat /proc/`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`/status | grep Name
   cat /proc/`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`/status | grep VmSize | sed 's/VmSize:/Memory:/g'
   cat /proc/`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`/status | grep VmPeak | sed 's/VmPeak:/Max Memory:/g'
   cat /proc/`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`/status | grep State:
   cat /proc/`netstat -ntlp | grep 1094 | awk '{print $7}' | sed 's/\/php//g'`/status | grep ^Pid:
-  echo " "
+  echo "Email: "
   cat /proc/`ps aux | grep setupEmail | grep php | awk '{print $2}'`/status | grep Name
   cat /proc/`ps aux | grep setupEmail | grep php | awk '{print $2}'`/status | grep VmSize | sed 's/VmSize:/Memory:/g'
   cat /proc/`ps aux | grep setupEmail | grep php | awk '{print $2}'`/status | grep VmPeak | sed 's/VmPeak:/Max Memory:/g'

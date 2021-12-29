@@ -352,7 +352,10 @@
     <div class="setup_about" class="sysTitle" id="setup_email" onclick="sysSetup('setup_email','setup_about','isBig2A','isBig2B')" style="left: 52%;top: -140%;">
         <h2 class="sysTitleTitle" id="Titsetup_email">邮  件  告  警</h2>
         <div class="sysBody" id="Bodysetup_email" onclick="cancelBubble()">
-            <h3>&nbsp;告警条件</h3>
+            <h3 style="top: 2%;left: 1%;">&nbsp;告警条件</h3>
+            <select id="emailIP" style="top: 2%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;position:absolute;">
+                <option seleted="true" value="">请选择主机</option>
+            </select>
             <select id="emailCPU" style="top: 18%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                 <option value="">CPU占用 (%)</option>
                 <option value="10">10 %</option>
@@ -385,9 +388,9 @@
                 <option value="120">120 s</option>
                 <option value="300">300 s</option>
             </select>
-            <label for="emailSetup" style="top: 39%;left: 24%;height: 5vh;width: 13vw;border-radius: 4px;position: absolute;">收件人：</label>
-            <input id="emailSetup" style="top: 38%;left: 31.2%;height: 5vh;width: 13vw;border-radius: 4px;background-color: #d8e0ed;position: absolute;" type="email" />
-            <button onclick="eMailSend()" style="top: 38%;left: 50.2%;height: 5vh;width: 13vw;border-radius: 4px;background-color: #d8e0ed;position: absolute;border: none;box-shadow: 1px 1px 1px 1px #000;">提交</button>
+            <label for="emailSetup" style="top: 39%;left: 42%;height: 5vh;width: 13vw;border-radius: 4px;position: absolute;">收件人：</label>
+            <input id="emailSetup" placeholder="  email@xxx.com" style="top: 38%;left: 50.2%;height: 5vh;width: 13vw;border-radius: 4px;background-color: #d8e0ed;position: absolute;" type="email" />
+            <button onclick="eMailSend()" style="top: 38%;left: 69.4%;height: 5vh;width: 13vw;border-radius: 4px;background-color: #d8e0ed;position: absolute;border: none;box-shadow: 1px 1px 1px 1px #000;">提交</button>
         </div>
     </div>
 

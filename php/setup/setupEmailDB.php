@@ -14,6 +14,7 @@ $get_value = $memcache->get($username.'UserToken');   //从内存中取出key的
 
 //sha256+date验证、有效期验证
 if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) == $get_value && $now-$datatime <= 600) {
+    $host_ip = isset($_GET['host_ip']) ? htmlspecialchars($_GET['host_ip']) : '';
     $cpu = isset($_GET['cpu']) ? htmlspecialchars($_GET['cpu']) : '';
     $mem = isset($_GET['mem']) ? htmlspecialchars($_GET['mem']) : '';
     $disk = isset($_GET['disk']) ? htmlspecialchars($_GET['disk']) : '';
@@ -23,8 +24,8 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
     require_once "../linkDB.php";
     mysqli_select_db($con, "bysj");
     mysqli_set_charset($con, "utf8");
-    $stmt = $con->prepare("update eMail set cpu=?,mem=?,disk=?,time=?,email=? where id=1;");
-    $stmt->bind_param("sssss", $cpu,$mem,$disk,$time,$email);
+    $stmt = $con->prepare("update eMail set cpu=?,mem=?,disk=?,time=?,email=? where host_ip=?;");
+    $stmt->bind_param("ssssss", $cpu,$mem,$disk,$time,$email,$host_ip);
     $stmt->execute();
 }else{
     echo "身份已失效！";

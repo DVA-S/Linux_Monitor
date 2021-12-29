@@ -72,10 +72,13 @@ function allFlush(){
 	runDate();
 	hostall();
 	hostLinkList();
+	//加载下拉选框数据
 	hostSingleList("perfSingle");
 	hostSingleList("perfSinglePort");
 	hostSingleList("perfSingleDevice");
 	hostSingleList("panelHost");
+	hostSingleList("emailIP");
+
 	userList();
 }
 function flushToken(){
@@ -675,16 +678,18 @@ function hostDevice(){
 
 //邮件告警
 function eMailSend(){
+	var emailIP =$("#emailIP").val();
+	emailIP = emailIP.substring(11);
 	var emailCPU =$("#emailCPU").val();
 	var emailMEM =$("#emailMEM").val();
 	var emailDISK =$("#emailDISK").val();
 	var emailTIME =$("#emailTIME").val();
 	var emailSetup =$("#emailSetup").val();
-	if ((emailCPU=="") || (emailMEM=="") || (emailTIME=="") || (emailSetup=="") || (emailDISK=="")){
+	if ((emailIP=="") || (emailCPU=="") || (emailMEM=="") || (emailTIME=="") || (emailSetup=="") || (emailDISK=="")){
 		alert("还没填完！");
 	}else{
 		$.get(
-			"../php/setup/setupEmailDB.php",{"cpu":emailCPU,"mem":emailMEM,"disk":emailDISK,"time":emailTIME,"email":emailSetup,"username":getCookie("UserName"),"token":getCookie("Token")},
+			"../php/setup/setupEmailDB.php",{"host_ip":emailIP,"cpu":emailCPU,"mem":emailMEM,"disk":emailDISK,"time":emailTIME,"email":emailSetup,"username":getCookie("UserName"),"token":getCookie("Token")},
 			function(){
 				alert("OK!");
 				flushToken();
