@@ -1,0 +1,121 @@
+<!--使用"npm install xterm"安装xterm-->
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/xterm.css" />
+    <script src="js/xterm.js"></script>
+<!--    <script src="node_modules/xterm/dist/addons/attach/attach.js"></script>-->
+<!--    <script src="node_modules/xterm/dist/addons/fit/fit.js"></script>-->
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+
+        input[type=text], input[type=password], input[type=number] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .serverbox {
+            padding: 16px;
+            border: 3px solid #f1f1f1;
+            width: 25%;
+            position: absolute;
+            top: 15%;
+            left: 37%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="terminal" style="width:100%; height:90vh;visibility:hidden"></div>
+
+<script>
+    var resizeInterval;
+    //连接websocket服务器
+    var wSocket = new WebSocket("ws:192.168.157.128:8081");
+    Terminal.applyAddon(attach);  // Apply the `attach` addon
+    Terminal.applyAddon(fit);  //Apply the `fit` addon
+    var term = new Terminal({
+        cols: 80,
+        rows: 24
+    });
+    term.open(document.getElementById('terminal'));
+
+    function ConnectServer(){
+        //ssh登录服务器需要的信息
+        var server = "";      //服务器地址
+        var port = 22;      //ssh端口
+        var user = "";      //账号
+        var password = "";      //密码
+
+        document.getElementById("terminal").style.visibility="visible";
+        var dataSend = {"auth":
+                {
+                    "server":server, //document.getElementById("server").value,
+                    "port":port, //document.getElementById("port").value,
+                    "user":user, //document.getElementById("user").value,
+                    "password":password, //document.getElementById("password").value
+                }
+        };
+        wSocket.send(JSON.stringify(dataSend));
+
+        term.fit();
+        term.focus();
+    }
+
+    wSocket.onopen = function (event) {
+        console.log("打开连接");
+        term.attach(wSocket,false,false);
+        window.setInterval(function(){
+            wSocket.send(JSON.stringify({"refresh":""}));
+        }, 700);
+    };
+
+    wSocket.onerror = function (event){
+        term.detach(wSocket);
+        alert("Connection Closed");
+    }
+
+    term.on('data', function (data) {
+        var dataSend = {"data":data};
+        wSocket.send(JSON.stringify(dataSend));
+        //Xtermjs with attach dont print zero, so i force. Need to fix it :(
+        if (data=="0"){
+            term.write(data);
+        }
+    })
+
+    //Execute resize with a timeout
+    window.onresize = function() {
+        clearTimeout(resizeInterval);
+        resizeInterval = setTimeout(resize, 400);
+    }
+    // Recalculates the terminal Columns / Rows and sends new size to SSH server + xtermjs
+    function resize() {
+        if (term) {
+            term.fit()
+        }
+    }
+
+    window.onload=ConnectServer;
+</script>
+</body>
+</html>
+
