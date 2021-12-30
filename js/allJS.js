@@ -453,6 +453,13 @@ function cancelBubble(e) {
 /* - ---------------------------------------------------------------------------------动作交互----------------------------------------------------------------------------------- */
 
 /* - ---------------------------------------------------------------------------------单击事件----------------------------------------------------------------------------------- */
+//设备管理 -- 连接设备
+function sshHost(element){
+	hostIP=element.id.slice(5);
+	//选择设备用户 && 显示shell面板
+	alert("link"+hostIP);
+}
+
 //设备管理 -- 删除设备
 function deleteHost(element){
 	hostID=element.id.slice(5);
@@ -494,7 +501,7 @@ function linkHostStatus(element){
 }
 //设备管理 -- 搜索设备
 function SearchHost(){
-	var searchHost =$("#searchHost").val();
+	var searchHost = $("#searchHost").val();
 	$.get(
 		"php/host/SearchHost.php",{"search":searchHost,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){

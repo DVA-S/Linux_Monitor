@@ -45,14 +45,21 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
 
     echo "
     <tr>
-        <th>主机名</th><th>类型</th><th>地址</th><th>内存</th><th>网卡速率</th><th>硬盘</th><th>操作</th>
+        <th>主机名</th><th>类型</th><th>地址</th><th>内存</th><th>网卡速率</th><th>硬盘</th><th colspan='2'>操作</th>
     </tr>
     ";
     while ($stmt->fetch()) {
 //  按钮上绑定主机ID
         echo "
     <tr>
-        <td>$host_name</td><td>$host_type</td><td>$host_ip</td><td>$mem_total MB</td><td>$network_speed</td><td>$disk_all</td><td id='host_$id' class='deleteBtn' onclick='deleteHost(this)'>删除</td>
+        <td>$host_name</td>
+        <td>$host_type</td>
+        <td>$host_ip</td>
+        <td>$mem_total MB</td>
+        <td>$network_speed</td>
+        <td>$disk_all</td>
+        <td id='host_$id' class='deleteBtn' onclick='deleteHost(this)' width='10%'>删除</td>
+        <td id='host_$host_ip' class='deleteBtn' onclick='sshHost(this)' width='10%'>ssh</td>
     </tr>";
     }
 }else{
