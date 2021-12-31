@@ -127,6 +127,9 @@
 
 .xterm {
     cursor: text;
+    /* 2021年12月31日 为了调整终端大小 更改框架文件 */
+    height: 97vh;
+    width: 217vh;
 }
 
 .xterm.enable-mouse-events {

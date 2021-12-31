@@ -23,12 +23,8 @@ if (($ret = socket_listen($sock, 4)) < 0) {
     exit();
 }
 
-$connection = ssh2_connect('192.168.157.128', 22);
-
-ssh2_auth_password($connection, 'root', '8080');
-
-$stream = ssh2_shell($connection, 'vt102', null, 80, 24, SSH2_TERM_UNIT_CHARS);
-
+$connection=null;
+$stream=null;
 do {
     //接收一个Socket连接
     if (($msgsock = socket_accept($sock)) < 0) {
@@ -36,16 +32,29 @@ do {
         break;
     } else {
         $buf = socket_read($msgsock, 2048);
-
+        $ip = explode("+",$buf)[0];
+        $cmd = explode("+",$buf)[1];
         if ($buf == 'exit') {
-            exit(1);
+            exit();
+        }
+        $user = explode("+",$buf)[2];
+        $pass = explode("+",$buf)[3];
+        if( $connection == null || $stream == null ){
+            $connection = ssh2_connect($ip, 22);
+            ssh2_auth_password($connection, $user, $pass);
+            $stream = ssh2_shell($connection, 'vt102', null, 80, 24, SSH2_TERM_UNIT_CHARS);
+
+            if ($stream){
+                socket_write($msgsock, '连接成功!', strlen('连接成功!'));
+            }else{
+                socket_write($msgsock, '连接失败!', strlen('连接失败!'));
+            }
         }
 
-        fwrite($stream, $buf . "\n");
-//        fwrite($stream, $buf);
+        fwrite($stream, $cmd . "\n");
 
         sleep(1);
-
+        //发送命令结果
         while ($line = fgets($stream)) {
             socket_write($msgsock, $line, strlen($line));
             echo $line;
@@ -56,4 +65,5 @@ do {
 } while (true);
 
 fclose($stream);
+exit();
 ?>

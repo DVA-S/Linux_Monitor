@@ -467,7 +467,6 @@ function cancelBubble(e) {
 function sshHost(element){
 	hostIP=element.id.slice(5);
 	//选择设备用户 && 显示shell面板
-	alert("link"+hostIP);
 }
 
 //设备管理 -- 删除设备
@@ -905,6 +904,9 @@ function viewCharts(panelId,Atitle,Btitle,unit){
 	option && myChart.setOption(option);
 }
 /* - ---------------------------------------------------------------------------------监控面板----------------------------------------------------------------------------------- */
+
+
+
 //鼠标右击
 // function rightClick(){
 // 	//这一步是为了阻止右击时系统默认的弹出框

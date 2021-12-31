@@ -1,4 +1,5 @@
 <?php
+//用来验证token和刷新token有效期
 $user = isset($_GET['user']) ? htmlspecialchars($_GET['user']) : '';
 $token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; //base64编码
 
