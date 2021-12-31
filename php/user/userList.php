@@ -36,7 +36,7 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
 
     echo "
     <tr>
-        <th>ID</th><th>用户名</th><th>邮箱</th><th>性别</th><th>电话</th>
+        <th>ID</th><th>用户名</th><th>邮箱</th><th>性别</th><th>电话</th><th>操作</th>
     </tr>
     ";
     while($stmt->fetch()){
@@ -47,7 +47,7 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
         }
         echo "
     <tr>
-        <td>$id</td><td>$user</td><td>$email</td><td>$sex</td><td>$phone</td>
+        <td>$id</td><td>$user</td><td>$email</td><td>$sex</td><td>$phone</td><td id='sysUser_$id' class='deleteBtn' onclick='deleteSysUser(this)' width='10%'>删除</td>
     </tr>";
     }
 }else{

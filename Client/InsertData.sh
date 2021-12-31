@@ -1,4 +1,6 @@
 #!/bin/bash
+#Jaina 服务器地址必须用远程的，可以放在配置文件
+
 lang=`locale | grep LANG= | awk -F '=' '{print $2}'`
 
 memory(){

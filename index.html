@@ -288,35 +288,27 @@
             </div>
         </div>
         <div class="user_right_deviceUser" id="user_right_DeviceUser">
-            <table class='alltable'>
-                <div class="alltable_head">
-                    <p>设备用户列表</p>
-                </div>
-                <tr>
-                    <th>ID</th><th>IP地址</th><th>用户名</th><th>密码</th>
-                </tr>
-                <!--                         <?php-->
-                <!--//                         Jaina 待完成-->
-                <!--//                         echo file_get_contents('http://localhost/php/user/devList.php');-->
-                <!--                         ?>-->
-            </table>
+            <div class="alltable_head">
+                <p>设备用户列表</p>
+            </div>
+            <table id="alltableDevUser" class='alltable'> </table>
             <button class="ok" onclick="addUserWindowsDev()" style="position: absolute;top: 1.5%;height: 6%;left: 87%;box-shadow: 2px 2px 2px 2px #bbb;border: none;">添加用户</button>
             <div class="floatWindows" id="addSysUserDev">
                 <form class="addWindows">
                     <h4 align="center" style="top: -5%;">添加设备用户</h4>
-                    <label for="ipaddressDev" style="position: absolute;top: 18%;left: 22%;">IP地址：</label>
+<!--                    <label for="ipaddressDev" style="position: absolute;top: 18%;left: 22%;">IP地址：</label>-->
+<!--                    &lt;!&ndash; 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 &ndash;&gt;-->
+<!--                    <input id="ipaddressDev" maxlength="20" name="ipaddressDev" style="position: absolute;top: 18%;left: 39%;" type="text">-->
+                    <br>
+                    <br>
+                    <label for="userDev" style="position: absolute;top: 25%;left: 22%;">用户名：</label>
                     <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                    <input id="ipaddressDev" maxlength="20" name="ipaddressDev" style="position: absolute;top: 18%;left: 39%;" type="text">
+                    <input id="userDev" maxlength="20" name="userDev" style="position: absolute;top: 25%;left: 39%;" type="text">
                     <br>
                     <br>
-                    <label for="userDev" style="position: absolute;top: 30%;left: 22%;">用户名：</label>
+                    <label for="passwdDev" style="position: absolute;top: 37%;left: 22%;">密&nbsp;&nbsp;&nbsp;码：</label>
                     <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                    <input id="userDev" maxlength="20" name="userDev" style="position: absolute;top: 30%;left: 39%;" type="text">
-                    <br>
-                    <br>
-                    <label for="passwdDev" style="position: absolute;top: 42%;left: 22%;">密&nbsp;&nbsp;&nbsp;码：</label>
-                    <!-- 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 -->
-                    <input id="passwdDev" maxlength="20" name="passwdDev" style="position: absolute;top: 42%;left: 39%;" type="password">
+                    <input id="passwdDev" maxlength="20" name="passwdDev" style="position: absolute;top: 37%;left: 39%;" type="password">
                     <br>
                     <br>
                     <div class="floatWindowsBtn ok" onclick="addUserDev();location.reload();" style="top: 75%;">&nbsp;添加</div>

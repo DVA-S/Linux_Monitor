@@ -1,11 +1,8 @@
 <?php
-$user = isset($_GET['user']) ? htmlspecialchars($_GET['user']) : '';
-$passwd = isset($_GET['passwd']) ? htmlspecialchars($_GET['passwd']) : '';
-
+$userID = isset($_GET['userID']) ? htmlspecialchars($_GET['userID']) : '';
 $token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; //base64编码
 $username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : '';
 
-$con = null;
 $hashAndData = explode('--', base64_decode($token));
 //将日期转换为时间戳 注：时间戳即秒数
 $now = strtotime(date('Y-m-d h:i:s'));
@@ -17,33 +14,16 @@ $get_value = $memcache->get($username . 'UserToken');   //从内存中取出key�
 
 //空值验证、sha256+date验证、有效期验证
 if (base64_decode($token) !== '' && $get_value !== '' && base64_decode($token) == $get_value && $now - $datatime <= 600) {
-
-    if ($user == '') {
-        echo '请换个用户名！';
-        exit;//退出当前脚本
-    }
-
-    $createdate = date('Y-m-d h:i:s');
-    $yanzhi = 'JainaProudmoore';
-    $all = $passwd . $createdate . $yanzhi;
-    $passwd = hash('sha256', $all);
-
+    $con = null;
+    $Count = null;
     require_once '../linkDB.php';
-
     mysqli_select_db($con, 'bysj');
-
+// 设置编码，防止中文乱码
     mysqli_set_charset($con, 'utf8');
+//利用数据行数判定登录
+    $stmt = $con->prepare('delete from bysj.sysUser where id=?');
+    $stmt->bind_param('i', $userID);
 
-    $stmt = $con->prepare('insert into bysj.devUser(user,passwd,createdate) values(?,?,?)');
-
-    $stmt->bind_param('sss', $user, $passwd, $createdate);
-
-    if ($stmt->execute()) {
-        echo 'OK!';
-    } else {
-        echo '无法插入数据库！';
-    }
-} else {
-    echo '身份已失效！';
+    $stmt->execute();
 }
 ?>

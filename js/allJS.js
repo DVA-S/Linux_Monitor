@@ -66,6 +66,15 @@ function userList(){
 		}
 	);
 }
+//用户管理 -- 设备用户列表
+function devUserList(){
+	$.get(
+		"php/user/devUserList.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+		function (data){
+			document.getElementById("alltableDevUser").innerHTML=data;
+		}
+	);
+}
 //加载所有数据（非监控面板）一次
 function allFlush(){
 	hostList();
@@ -80,6 +89,7 @@ function allFlush(){
 	hostSingleList("emailIP");
 
 	userList();
+	devUserList();
 }
 function flushToken(){
 	$.get(
@@ -479,6 +489,45 @@ function deleteHost(element){
 
 	}
 }
+//用户管理 -- 删除系统用户
+function deleteSysUser(element){
+	userID=element.id.slice(8);
+	// console.log(hostID);
+	res=confirm("确认删除？");
+	if(res==true){
+		//传入数据ID，调用php删除接口，刷新
+		$.get(
+			"php/user/deleteSysUser.php",{"userID":userID,"username":getCookie("UserName"),"token":getCookie("Token")},
+			function (){
+				flushToken();
+			}
+		);
+		setTimeout(function (){
+			location.reload()
+		},1500);
+
+	}
+}
+//用户管理 -- 删除设备用户
+function deleteDevUser(element){
+	userID=element.id.slice(8);
+	// console.log(hostID);
+	res=confirm("确认删除？");
+	if(res==true){
+		//传入数据ID，调用php删除接口，刷新
+		$.get(
+			"php/user/deleteDevUser.php",{"userID":userID,"username":getCookie("UserName"),"token":getCookie("Token")},
+			function (){
+				flushToken();
+			}
+		);
+		setTimeout(function (){
+			location.reload()
+		},1500);
+
+	}
+}
+
 //设备管理 -- 连通性检测
 function linkHostStatus(element){
 	//(host_177)
@@ -549,15 +598,11 @@ function addUserSys(){
 	}
 }
 function addUserDev(){
-	var ipaddr =$("#ipaddressDev").val();
 	var user =$("#userDev").val();
 	var passwd =$("#passwdDev").val();
 	$.get(
-		"php/user/AddDevUser.php",{"ipaddr":ipaddr,"user":user,"passwd":passwd},
+		"php/user/AddDevUser.php",{"username":getCookie("UserName"),"token":getCookie("Token"),"user":user,"passwd":passwd},
 		function(){
-			// alert("OK!");
-			document.getElementById('addSysUserDev').style.animation='0.5s ease forwards running login_loginOk';
-			document.getElementById('addSysUserDev').style.display='none';
 			flushToken();
 		}
 	);
