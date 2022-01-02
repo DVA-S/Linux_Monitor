@@ -95,18 +95,6 @@
                     term.write(data);
                 }
             );
-            //保持登录
-            $.get(
-                "/php/memcached.php", {"user": getCookie("UserName"), "token": getCookie("Token")},
-                function (data) {
-                    var obj = JSON.parse(data);
-                    if (obj.status == 1) {
-                        //重置时间
-                        setCookie("UserName", obj.username, 10);
-                        setCookie("Token", obj.token, 10);
-                    }
-                }
-            );
         } else {
             prompt(term);
         }
@@ -144,6 +132,18 @@
                 if (send(c)){
                     cmd=[];
                 }
+                //保持登录
+                $.get(
+                    "/php/memcached.php", {"user": getCookie("UserName"), "token": getCookie("Token")},
+                    function (data) {
+                        var obj = JSON.parse(data);
+                        if (obj.status == 1) {
+                            //重置时间
+                            setCookie("UserName", obj.username, 10);
+                            setCookie("Token", obj.token, 10);
+                        }
+                    }
+                );
             } else if (e.domEvent.keyCode === 8) {
                 // Do not delete the prompt
                 if (term._core.buffer.x > 2) {
