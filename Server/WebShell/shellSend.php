@@ -51,15 +51,14 @@ if (base64_decode($token) !== '' && $get_value !== '' && base64_decode($token) =
         echo "<img src='/img/stop.png' width='12%'>";
         exit();
     }
-
+    //sleep(1);
 //读取指定长度的数据
     while ($out = socket_read($socket, 2048)) {
+        //避免了返回结果中包含命令
+        $out = str_replace($cmd,'',$out);
         echo $out;
     }
 
     socket_close($socket);
 }
-//else{
-//    echo "登录过期!";
-//}
 ?>

@@ -64,6 +64,54 @@
     });
     term.open(document.getElementById('terminal'));
 
+    function send(c) {
+        console.log("发送的命令：" + c);
+        if (c.length > 1) {
+
+            //清空输入字符
+            //prompt(term);
+
+            // term.write("asd"+"\n");
+            //发送命令
+            $.get(
+                "/Server/WebShell/shellSend.php", {
+                    "username": getCookie("UserName"),
+                    "token": getCookie("Token"),
+                    "ip": ip,
+                    "cmd": c,
+                    "user": getCookie("user"),
+                    "pass": getCookie("passwd")
+                },
+                function (data) {
+                    //有时候请求会不成功，但是不能丢失未成功的命令
+                    if (data == "") {
+                        //方案一：弹出多余回车 让用户重新回车
+                        //cmd.pop();
+                        //term.write("发送失败！你的回车键好像坏了！使劲按，没吃饭吗？");
+                        //方案二：重新请求 收不到回复就一直发！循环发！
+                        send(c);
+                        console.log("重新请求的命令：" + c);
+                    }
+                    term.write(data);
+                }
+            );
+            //保持登录
+            $.get(
+                "/php/memcached.php", {"user": getCookie("UserName"), "token": getCookie("Token")},
+                function (data) {
+                    var obj = JSON.parse(data);
+                    if (obj.status == 1) {
+                        //重置时间
+                        setCookie("UserName", obj.username, 10);
+                        setCookie("Token", obj.token, 10);
+                    }
+                }
+            );
+        } else {
+            prompt(term);
+        }
+        return true;
+    }
     function runFakeTerminal() {
         if (term._initialized) {
             return;
@@ -81,44 +129,21 @@
         let cmd = [];
 
         term.onKey(e => {
+            //控制键位判断
             const printable = !e.domEvent.altKey && !e.domEvent.altGraphKey && !e.domEvent.ctrlKey && !e.domEvent.metaKey;
+
             cmd.push(e.key);
 
             if (e.domEvent.keyCode === 13) {
                 //数组最后一个是回车，去掉他
-                cmd.pop();
+                //cmd.pop();
                 //判断数组长度 识别空回车
-                if(cmd.length > 0){
-                    var c = cmd.join("");
-                    // term.write("asd"+"\n");
-                    //发送命令
-                    $.get(
-                        "/Server/WebShell/shellSend.php",{"username":getCookie("UserName"),"token":getCookie("Token"),"ip":ip,"cmd":c,"user":getCookie("user"),"pass":getCookie("passwd")},
-                        function(data){
-                            term.write(data);
-                        }
-                    );
-                }else {
-                    prompt(term);
+                console.log("函数外："+cmd);
+                var c = cmd.join("");
+                //收发完成，重置数组
+                if (send(c)){
+                    cmd=[];
                 }
-                c = "";
-                cmd = [];
-
-                //保持登录
-                $.get(
-                    "/php/memcached.php",{"user":getCookie("UserName"),"token":getCookie("Token")},
-                    function (data){
-                        var obj = JSON.parse(data);
-                        if (obj.status == 1){
-                            //重置时间
-                            setCookie("UserName",obj.username,10);
-                            setCookie("Token",obj.token,10);
-                            //刷新所有查询数据
-                            allFlush();
-                            oneFlush();
-                        }
-                    }
-                );
             } else if (e.domEvent.keyCode === 8) {
                 // Do not delete the prompt
                 if (term._core.buffer.x > 2) {
@@ -127,7 +152,6 @@
             } else if (printable) {
                 term.write(e.key);
             }
-            c = "";
         });
     }
 

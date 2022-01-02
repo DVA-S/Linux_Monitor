@@ -34,10 +34,11 @@ do {
         $buf = socket_read($msgsock, 2048);
         $ip = explode("+",$buf)[0];
         $cmd = explode("+",$buf)[1];
+        echo "收到的命令：".$cmd."\n";
         if ($buf == 'exit') {
             exit();
         }
-        $user = explode("+",$buf)[2];
+        $user= explode("+",$buf)[2];
         $pass = explode("+",$buf)[3];
         if( $connection == null || $stream == null ){
             $connection = ssh2_connect($ip, 22);
@@ -51,19 +52,19 @@ do {
             }
         }
 
-        fwrite($stream, $cmd . "\n");
+        //fwrite($stream, $cmd . "\n");
+        fwrite($stream, $cmd);
 
         sleep(1);
         //发送命令结果
-        while ($line = fgets($stream)) {
-            socket_write($msgsock, $line, strlen($line));
-            echo $line;
-        }
+       while ($line = fgets($stream)) {
+               socket_write($msgsock, $line, strlen($line));
+               echo '发出的结果：' . $line;
+       }
     }
     //关闭socket
     socket_close($msgsock);
 } while (true);
 
 fclose($stream);
-exit();
 ?>
