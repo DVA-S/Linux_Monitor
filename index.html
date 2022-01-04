@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+    <meta name="viewport">
+    <meta http-equiv="Cache-Control" content="max-age=7200" />
+
     <link href="css/kuangjia.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="css/xterm.css">
     <script src="js/xterm.js"></script>
@@ -85,7 +88,7 @@
         <div class="host_right_all" id="host_right_all" style="display: block;">
             <div id="hostall" style="width: 90vh;height: 90vh;padding-left: 28%;padding-top: 3%;"> </div>
         </div>
-        <div class="host_right_list" id="host_right_list">
+        <div class="host_right_list" id="host_right_list" style="overflow: hidden auto;">
             <div class="alltable_head">
                 <p>设备列表</p>
                 <input id="searchHost" maxlength="20" onkeydown="keySearchHost()" placeholder="  名称/类型/地址" style="height: 4vh;width: 24vw;top: -6vh;left: 45vw;background-color: #ddd;border-radius: 3px;color: #000;box-shadow: 2px 2px 2px 2px #888;" type="text">
@@ -127,7 +130,7 @@
     <!-- 右侧面板 -->
     <div class="checking_right">
         <!-- 连通性检测 -->
-        <div class="checking_right_link" id="checking_right_link" style="display: block;">
+        <div class="checking_right_link" id="checking_right_link" style="display: block;overflow: hidden auto;">
             <div class="alltable_head">
                 <p>设备列表</p>
             </div>
@@ -151,7 +154,7 @@
             </table>
         </div>
         <!-- 端口检测 -->
-        <div class="checking_right_port" id="checking_right_port">
+        <div class="checking_right_port" id="checking_right_port" style="overflow: hidden auto;">
             <div class="addhost_form">
                 <select id="perfSinglePort" style="top: 14%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;">
                     <option value ="">请选择主机</option>
@@ -171,7 +174,7 @@
             </table>
         </div>
         <!-- 硬件检测 -->
-        <div class="checking_right_device" id="checking_right_device" style="overflow-y: scroll;overflow-x: clip;width: 81vw;">
+        <div class="checking_right_device" id="checking_right_device" style="overflow: hidden scroll;width: 81vw;">
             <div class="addhost_form">
                 <form action="#" method="get">
                     <select id="perfSingleDevice" style="top: 14%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;margin-top: 0.5%;">
@@ -241,7 +244,7 @@
     </div>
     <!-- 右侧面板 -->
     <div class="user_right">
-        <div class="user_right_webUser" id="user_right_WebUser" style="display: block;">
+        <div class="user_right_webUser" id="user_right_WebUser" style="display: block;overflow: hidden auto;">
             <div class="alltable_head">
                 <p>系统用户列表</p>
             </div>
@@ -277,11 +280,11 @@
                     <br>
                     <br>
                     <div class="floatWindowsBtn ok" id="addUserSysBtn" style="top: 78%;">&nbsp;添加</div>
-                    <div class="floatWindowsBtn ok" style="left: 30%;top: 78%;">&nbsp;关闭</div>
+                    <div class="floatWindowsBtn ok" id="closeSys" style="left: 30%;top: 78%;">&nbsp;关闭</div>
                 </form>
             </div>
         </div>
-        <div class="user_right_deviceUser" id="user_right_DeviceUser">
+        <div class="user_right_deviceUser" id="user_right_DeviceUser" style="overflow: hidden auto;">
             <div class="alltable_head">
                 <p>设备用户列表</p>
             </div>
@@ -306,7 +309,7 @@
                     <br>
                     <br>
                     <div class="floatWindowsBtn ok" id="addUserDevBtn" style="top: 75%;">&nbsp;添加</div>
-                    <div class="floatWindowsBtn ok" style="left: 30%;top: 75%;">&nbsp;关闭</div>
+                    <div class="floatWindowsBtn ok" id="closeDev" style="left: 30%;top: 75%;">&nbsp;关闭</div>
                 </form>
             </div>
         </div>

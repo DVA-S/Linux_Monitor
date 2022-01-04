@@ -93,11 +93,19 @@ document.getElementById("addSysUserWindowsBtn").addEventListener("click",addUser
 document.getElementById("addUserSysBtn").addEventListener("click",function (){
     addUserSys();location.reload();
 });
+//关闭添加系统用户按钮
+document.getElementById("closeSys").addEventListener("click",function (){
+    document.getElementById('addSysUser').style.display='none';
+});
 //添加设备用户窗口
 document.getElementById("addDevUserWindowsBtn").addEventListener("click",addUserWindowsDev);
 //添加设备用户按钮
 document.getElementById("addUserDevBtn").addEventListener("click",function (){
     addUserDev();location.reload();
+});
+//关闭添加设备用户按钮
+document.getElementById("closeDev").addEventListener("click",function (){
+    document.getElementById('addSysUserDev').style.display='none';
 });
 //系统设置
 //组件/日志
