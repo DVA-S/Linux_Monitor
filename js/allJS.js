@@ -141,8 +141,9 @@ function pgGet(url,back){
 function setCookie(cname,cvalue,minute){
 	var d = new Date();
 	d.setTime(d.getTime()+(minute*60*1000));
-	var expires = "expires="+d.toGMTString();
-	document.cookie = cname + "=" + cvalue + "; " + expires;
+	//var expires = "expires="+d.toGMTString();
+	// document.cookie = cname + "=" + cvalue + "; " + expires;
+	document.cookie = cname + "=" + cvalue + "; " + "/";
 }
 function getCookie(cname){
 	var name = cname + "=";
@@ -305,7 +306,7 @@ function lastViewClild(view){
 			break;
 	}
 }
-// btnOnClick(this)根据按钮的类名，传出右侧面板ID到view_panel()
+// btnOnClick(this)根据按钮的类名/ID，传出右侧面板ID到view_panel()
 function btnOnClick(element){
 	var go=element.className;
 	switch(go)
@@ -464,10 +465,10 @@ function cancelBubble(e) {
 
 /* - ---------------------------------------------------------------------------------单击事件----------------------------------------------------------------------------------- */
 //设备管理 -- 连接设备
-function sshHost(element){
-	hostIP=element.id.slice(5);
-	//选择设备用户 && 显示shell面板
-}
+// function sshHost(element){
+// 	hostIP=element.id.slice(5);
+// 	//选择设备用户 && 显示shell面板
+// }
 
 //设备管理 -- 删除设备
 function deleteHost(element){
@@ -611,7 +612,6 @@ function addUserDev(){
 function hostPerf(element){
 	document.getElementById("checkingPerf").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;opacity: 0.5;width: 30%;\" />";
 	var go=element.id;
-
 	switch (go){
 		case 'hostDisk':
 			//获取下拉列表的值(Singlehost_181)
@@ -779,9 +779,11 @@ function loading(){
 			document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 			//loading()和runNetwork()为无限嵌套函数
 			setTimeout("runNetwork();runMemory();runDisk();runCpu();",200);
-			// console.log("动画结束");
+			console.log("正在刷新！");
 			//刷新状态
 			setCookie("flushPanel",1,10);
+		}else {
+			return;
 		}
 	},10000);
 }

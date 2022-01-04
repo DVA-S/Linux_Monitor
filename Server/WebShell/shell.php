@@ -23,8 +23,8 @@ if (($ret = socket_listen($sock, 4)) < 0) {
     exit();
 }
 
-$connection=null;
-$stream=null;
+$connection = null;
+$stream = null;
 do {
     //接收一个Socket连接
     if (($msgsock = socket_accept($sock)) < 0) {

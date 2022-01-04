@@ -139,6 +139,16 @@ https://echarts.apache.org/examples/zh/editor.html?c=line-marker~~
     图表3:    
         在bysj-for-wxk/js/host/hostall.js文件中，读取php接口数据
 ```
+xterm：
+```
+地址：
+    https://github.com/chjj/term.js
+样式：
+    Default styles for xterm.js
+使用位置：
+    bysj-for-wxk/Server/WebShell/shell.html
+```
+
 Memcached：
 ```
 版本：
