@@ -1,4 +1,23 @@
 ### Linux服务器自动巡检与监控系统的设计与实现
+
+####整体设计  
+**环境**  
+L(Linux)、A(Apache)、M(MySQL)、P(PHP)
+
+Windows10(源码) ➡ VMware共享文件夹 ➡ Ubuntu(/mnt/hgfs/xxx) ➡ 软连接apache(/var/www/html/)  
+Windows10(源码) ➡ gitee代码托管  
+**功能**  
+性能监控、设备分类、检测、用户管理、日志、邮件告警、交互动画
+
+**流程**  
+Web图表 ⬅ Echatrs框架 ⬅ Apache ⬅ MySQL ⬅ Shell脚本采集(/proc)
+
+Web性能测试 ➡ jQuery GET ➡ PHP Socket发送指令 ➡ PHP Server执行脚本 ➡ jQuery GET data ➡ Web界面
+
+Web Shell ➡ Xterm框架 ➡ PHP Socket发送指令 ➡ PHP SSH2扩展 ➡ Xterm GET data ➡ 命令结果
+
+Web GET告警阈值 ➡ MySQL阈值存储 ➡ PHP SELECT均值 ➡ Shell发送邮件(s-nail)
+
 tip：  
 1,VMware共享文件夹权限问题
 ```

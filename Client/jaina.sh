@@ -18,7 +18,7 @@ case $1 in
     fi
   #写入日志
   echo {`date`}-{$1}-{$res} >> /var/log/jaina.log
-    ;;
+  ;;
 "start-server")
   sh /etc/jaina/InsertData.sh > /etc/jaina/JainaStatus &
   sleep 1
@@ -134,7 +134,7 @@ case $1 in
   echo "    start-client                      运行client代理，接收执行server命令"
   echo "    start-email                       开启邮件报警功能"
   echo "    stop-server                       停止采集主机性能指标"
-  echo "    stop-client                       运行client代理，接收执行server命令"
+  echo "    stop-client                       停止client代理，接收执行server命令"
   echo "    stop-email                        停止邮件报警功能"
   echo "    status                            查看服务状态"
   echo "    testcpus                          查看cpu运行情况"
