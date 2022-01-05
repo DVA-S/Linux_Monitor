@@ -25,6 +25,10 @@ if (($ret = socket_listen($sock, 4)) < 0) {
 
 $connection = null;
 $stream = null;
+
+$shell = [];
+$shell_link = [];
+$shell_ip = [];
 do {
     //接收一个Socket连接
     if (($msgsock = socket_accept($sock)) < 0) {
@@ -40,31 +44,34 @@ do {
         }
         $user= explode("+",$buf)[2];
         $pass = explode("+",$buf)[3];
-        if( $connection == null || $stream == null ){
-            $connection = ssh2_connect($ip, 22);
-            ssh2_auth_password($connection, $user, $pass);
-            $stream = ssh2_shell($connection, 'vt102', null, 80, 24, SSH2_TERM_UNIT_CHARS);
 
-            if ($stream){
-                socket_write($msgsock, '连接成功!', strlen('连接成功!'));
-            }else{
-                socket_write($msgsock, '连接失败!', strlen('连接失败!'));
-            }
+        //未连接的IP == 数组为空
+        if ( !in_array($ip,$shell_ip) || empty($shell_ip) ){
+            //ip进栈
+            array_push($shell_ip,$ip);
+
+            $shell[array_search($ip,$shell_ip)] = ssh2_connect(end($shell_ip), 22);
+            ssh2_auth_password($shell[array_search($ip,$shell_ip)], $user, $pass);
+            $shell_link[array_search($ip,$shell_ip)] = ssh2_shell($shell[array_search($ip,$shell_ip)], 'vt102', null, 80, 24, SSH2_TERM_UNIT_CHARS);
         }
+        //else{
+        //    $i = array_search($ip,$shell_ip);
+        //    $shell_link[$i] = ssh2_shell($shell[$i], 'vt102', null, 80, 24, SSH2_TERM_UNIT_CHARS);
+        //}
 
-        //fwrite($stream, $cmd . "\n");
-        fwrite($stream, $cmd);
+        fwrite($shell_link[array_search($ip,$shell_ip)], $cmd);
 
         sleep(1);
         //发送命令结果
-       while ($line = fgets($stream)) {
+       while ($line = fgets($shell_link[array_search($ip,$shell_ip)])) {
                socket_write($msgsock, $line, strlen($line));
                echo '发出的结果：' . $line;
        }
+
     }
     //关闭socket
     socket_close($msgsock);
 } while (true);
 
-fclose($stream);
+fclose($shell_link[array_search($ip,$shell_ip)]);
 ?>

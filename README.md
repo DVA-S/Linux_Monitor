@@ -70,7 +70,12 @@ alter table tableName add columnName varchar(30);
  利用邮件通知功能用户可以自行设置触发发送邮件的条件。例如，当CPU使用率超过95%时邮件通知系统管理员。
 
 **环境配置：**
+Ubuntu：
 
+```shell
+root@ubuntu:/opt# cat /etc/hosts
+192.168.157.128 jaina.com
+```
 PHP:
 
 ```
