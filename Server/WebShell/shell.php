@@ -38,7 +38,7 @@ do {
         $buf = socket_read($msgsock, 2048);
         $ip = explode("+",$buf)[0];
         $cmd = explode("+",$buf)[1];
-        echo "收到的命令：".$cmd."\n";
+        echo "命令：".$cmd."\n";
         if ($buf == 'exit') {
             exit();
         }
@@ -49,25 +49,24 @@ do {
         if ( !in_array($ip,$shell_ip) || empty($shell_ip) ){
             //ip进栈
             array_push($shell_ip,$ip);
-
+            //以IP队列为基准
             $shell[array_search($ip,$shell_ip)] = ssh2_connect(end($shell_ip), 22);
             ssh2_auth_password($shell[array_search($ip,$shell_ip)], $user, $pass);
             $shell_link[array_search($ip,$shell_ip)] = ssh2_shell($shell[array_search($ip,$shell_ip)], 'vt102', null, 80, 24, SSH2_TERM_UNIT_CHARS);
         }
-        //else{
-        //    $i = array_search($ip,$shell_ip);
-        //    $shell_link[$i] = ssh2_shell($shell[$i], 'vt102', null, 80, 24, SSH2_TERM_UNIT_CHARS);
-        //}
 
         fwrite($shell_link[array_search($ip,$shell_ip)], $cmd);
 
         sleep(1);
         //发送命令结果
        while ($line = fgets($shell_link[array_search($ip,$shell_ip)])) {
-               socket_write($msgsock, $line, strlen($line));
-               echo '发出的结果：' . $line;
+               if ((strpos($line,'@')&&strpos($line,'~#')) || (strpos($line,'@')&&strpos($line,'$'))){
+                   socket_write($msgsock, "der".$line."der", strlen('der'.$line .'der'));
+               }else{
+                   socket_write($msgsock, $line, strlen($line));
+               }
+               echo '返回结果：' . $line;
        }
-
     }
     //关闭socket
     socket_close($msgsock);

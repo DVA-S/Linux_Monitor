@@ -34,11 +34,11 @@
             document.getElementById("devUserList").innerHTML=data;
         }
     );
-</script>
-<script>
+
     <!--  获取参数  -->
     var url = location.search; //获取url中"?"符后的字串,?ip=192.168.157.131&c=a
     var theRequest = new Object();
+
     if (url.indexOf("?") != -1) {
         var str = url.substr(1);//ip=192.168.157.131&c=a
         strs = str.split("&");//ip=192.168.157.131
@@ -49,6 +49,7 @@
 
     var window_width = $(window).width();
     var window_height = $(window).height();
+
     let term = new Terminal({
         cols: Math.floor(window_width/10),
         rows: Math.floor(window_height/18),
@@ -64,14 +65,12 @@
     });
     term.open(document.getElementById('terminal'));
 
+    var Tip = null;
+
+    //发送命令，输出结果
     function send(c) {
-        console.log("发送的命令：" + c);
+        //排除只有一个回车的情况
         if (c.length > 1) {
-
-            //清空输入字符
-            //prompt(term);
-
-            // term.write("asd"+"\n");
             //发送命令
             $.get(
                 "/Server/WebShell/shellSend.php", {
@@ -83,23 +82,32 @@
                     "pass": getCookie("passwd")
                 },
                 function (data) {
-                    //有时候请求会不成功，但是不能丢失未成功的命令
+                    //有时候请求会不成功，但是不能丢失未成功的命令（没有回复的话，99%是没收到，不需要等待）
                     if (data == "") {
                         //方案一：弹出多余回车 让用户重新回车
                         //cmd.pop();
-                        //term.write("发送失败！你的回车键好像坏了！使劲按，没吃饭吗？");
+                        //term.write("发送失败！使劲按，没吃饭吗？");
                         //方案二：重新请求 收不到回复就一直发！循环发！
                         send(c);
                         console.log("重新请求的命令：" + c);
                     }
-                    term.write(data);
+                    //ERROR::Uncaught TypeError: Cannot read properties of undefined (reading 'indexOf')==indexof()函数找不到东西
+                    if ((data.split('der')[1].indexOf("~#") && data.split('der')[1].indexOf("@")) || (data.split('der')[1].indexOf("@") && data.split('der')[1].indexOf("$"))){
+                        Tip = data.split('der')[1];
+                        console.log(Tip);
+                    }
+
+                    term.write(data.split('der')[0]+data.split('der')[1]);
+                    //term.write(data);
                 }
             );
         } else {
+            //只有回车就换行
             prompt(term);
         }
         return true;
     }
+
     function runFakeTerminal() {
         if (term._initialized) {
             return;
@@ -108,7 +116,8 @@
         term._initialized = true;
 
         term.prompt = () => {
-            term.write('\r\nroot@ubuntu:~# ');
+            // term.write('\r\nroot@ubuntu:~# ');
+            term.write('\r\n'+Tip);
         };
         //单独一行
         term.writeln('Welcome to xterm.js');
@@ -125,8 +134,7 @@
             if (e.domEvent.keyCode === 13) {
                 //数组最后一个是回车，去掉他
                 //cmd.pop();
-                //判断数组长度 识别空回车
-                console.log("函数外："+cmd);
+
                 var c = cmd.join("");
                 //收发完成，重置数组
                 if (send(c)){
@@ -147,7 +155,11 @@
             } else if (e.domEvent.keyCode === 8) {
                 // Do not delete the prompt
                 if (term._core.buffer.x > 2) {
+                    //表面删除，实际添加两个退格符
                     term.write('\b \b');
+                    //实际删除
+                    cmd.pop();
+                    cmd.pop();
                 }
             } else if (printable) {
                 term.write(e.key);
@@ -156,7 +168,7 @@
     }
 
     function prompt(term) {
-        term.write('\r\nroot@ubuntu:~# ');
+        term.write('\r\n'+Tip);
     }
     runFakeTerminal();
 </script>
