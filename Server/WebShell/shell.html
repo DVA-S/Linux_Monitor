@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>xterm.js</title>
@@ -56,7 +56,7 @@
         cursorStyle: 'underline', //光标样式
         cursorBlink: true, // 光标闪烁
         convertEol: true, //启用时，光标将设置为下一行的开头
-        disableStdin: false, //是否应禁用输入。
+        disableStdin: true, //是否应禁用输入。
         theme: {
             foreground: 'yellow', //字体
             background: '#060101', //背景色
@@ -82,6 +82,16 @@
                     "pass": getCookie("passwd")
                 },
                 function (data) {
+                    //修复BUG：第一条命令没有标识符且收不到返回结果
+                    if (data.indexOf("连接成功2022年1月6日") != -1){
+                        alert("连接成功！")
+                        location.reload();
+                        // if (confirm("连接成功!")) {
+                        //     location.reload();
+                        // } else {
+                        //     location.reload();
+                        // }
+                    }
                     //有时候请求会不成功，但是不能丢失未成功的命令（没有回复的话，99%是没收到，不需要等待）
                     if (data == "") {
                         //方案一：弹出多余回车 让用户重新回车
@@ -92,13 +102,20 @@
                         console.log("重新请求的命令：" + c);
                     }
                     //ERROR::Uncaught TypeError: Cannot read properties of undefined (reading 'indexOf')==indexof()函数找不到东西
+                    //获取登录标识符
                     if ((data.split('der')[1].indexOf("~#") && data.split('der')[1].indexOf("@")) || (data.split('der')[1].indexOf("@") && data.split('der')[1].indexOf("$"))){
                         Tip = data.split('der')[1];
                         console.log(Tip);
                     }
 
-                    term.write(data.split('der')[0]+data.split('der')[1]);
-                    //term.write(data);
+                    //输出命令结果
+                    term.write(data.split('der')[0]);
+
+                    if (Tip == null){
+                        term.write('\r\n'+'~# ');
+                    }else {
+                        term.write('\r\n'+Tip);
+                    }
                 }
             );
         } else {
@@ -116,12 +133,20 @@
         term._initialized = true;
 
         term.prompt = () => {
-            // term.write('\r\nroot@ubuntu:~# ');
-            term.write('\r\n'+Tip);
+            if (Tip == null){
+                term.write('\r\n'+'~# ');
+            }else {
+                term.write('\r\n'+Tip);
+            }
         };
         //单独一行
         term.writeln('Welcome to xterm.js');
-        prompt(term);
+        //prompt(term);
+        if (Tip == null){
+            term.write('\r\n'+'~# ');
+        }else {
+            term.write('\r\n'+Tip);
+        }
 
         let cmd = [];
 
@@ -136,10 +161,25 @@
                 //cmd.pop();
 
                 var c = cmd.join("");
+
+                //c后面有一个回车
+                if (cmd.slice(0,[cmd.length-1]).join('') == 'exit'){
+                    //收发完成，重置数组
+                    if (send(c)){
+                        cmd=[];
+                    }
+                    //关闭界面对话框
+                    if(confirm("您确定要关闭本页吗？")){
+                        window.opener=null;
+                        window.open('','_self');
+                        window.close();
+                    }
+                }
                 //收发完成，重置数组
                 if (send(c)){
                     cmd=[];
                 }
+
                 //保持登录
                 $.get(
                     "/php/memcached.php", {"user": getCookie("UserName"), "token": getCookie("Token")},
@@ -155,9 +195,9 @@
             } else if (e.domEvent.keyCode === 8) {
                 // Do not delete the prompt
                 if (term._core.buffer.x > 2) {
-                    //表面删除，实际添加两个退格符
+                    //表面删除，实际添加一个退格符
                     term.write('\b \b');
-                    //实际删除
+                    //实际删除，出栈一个退格符和最后一个按键
                     cmd.pop();
                     cmd.pop();
                 }
@@ -168,7 +208,11 @@
     }
 
     function prompt(term) {
-        term.write('\r\n'+Tip);
+        if (Tip == null){
+            term.write('\r\n'+'~# ');
+        }else {
+            term.write('\r\n'+Tip);
+        }
     }
     runFakeTerminal();
 </script>
