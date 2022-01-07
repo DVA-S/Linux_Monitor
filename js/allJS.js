@@ -141,9 +141,9 @@ function pgGet(url,back){
 function setCookie(cname,cvalue,minute){
 	var d = new Date();
 	d.setTime(d.getTime()+(minute*60*1000));
-	//var expires = "expires="+d.toGMTString();
+	var expires = "expires="+d.toGMTString();
 	// document.cookie = cname + "=" + cvalue + "; " + expires;
-	document.cookie = cname + "=" + cvalue + "; " + "/";
+	document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 function getCookie(cname){
 	var name = cname + "=";
