@@ -41,9 +41,9 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
     ";
     while($stmt->fetch()){
         if ($sex == "man"){
-            $sex = "<img src='/img/man.png' style='height: 4vh;'>";
+            $sex = "<img alt='男' src='/img/man.png' style='height: 4vh;'>";
         }else{
-            $sex = "<img src='/img/woman.png' style='height: 4vh;'>";
+            $sex = "<img alt='女' src='/img/woman.png' style='height: 4vh;'>";
         }
         echo "
     <tr>

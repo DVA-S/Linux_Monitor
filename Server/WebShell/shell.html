@@ -86,11 +86,6 @@
                     if (data.indexOf("连接成功2022年1月6日") != -1){
                         alert("连接成功！")
                         location.reload();
-                        // if (confirm("连接成功!")) {
-                        //     location.reload();
-                        // } else {
-                        //     location.reload();
-                        // }
                     }
                     //有时候请求会不成功，但是不能丢失未成功的命令（没有回复的话，99%是没收到，不需要等待）
                     if (data == "") {
@@ -111,6 +106,7 @@
                     //输出命令结果
                     term.write(data.split('der')[0]);
 
+                    //返回结果后的标识符
                     if (Tip == null){
                         term.write('\r\n'+'~# ');
                     }else {

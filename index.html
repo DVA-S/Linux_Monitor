@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+    <!--  针对搜索引擎的关键字  -->
+    <meta name="keywords" content="Linux, 服务器监控, 服务器告警, PHP, 毕业设计" />
+    <!--  定义对页面的描述  -->
+    <meta name="description" content="基于LAMP应用结构设计的Linux服务器监控与巡检系统。" />
+    <!--  定义页面的最新版本  -->
+    <meta name="revised" content="David, 2022/1/07/" />
+    <!--  定义对页面视口：宽度=屏幕宽度，初始缩放比例=1， -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Cache-Control" content="max-age=7200" />
+    <!--  设置不缓存  -->
+    <meta http-equiv="pragma" content="no-cache">
+    <!--  强制页面在当前窗口中以独立页面显示，可以防止自己的网页被别人当作一个frame页调用  -->
+    <meta http-equiv="windows-Target" contect="_top">
+    <!--  设置网页字符集 -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <!--  作者  -->
+    <meta name="author" content="朝阳晓露至黄昏" />
 
+    <!--  手写CSS  -->
     <link href="css/kuangjia.css" rel="stylesheet" type="text/css"/>
+    <!--  WebShell框架  -->
     <link rel="stylesheet" href="css/xterm.css">
     <script src="js/xterm.js"></script>
+    <!--  手写JS  -->
     <script src="js/allJS.js" type="text/javascript"></script>
+    <!--  JS框架  -->
     <script src="js/kuangjia/jquery.js" type="text/javascript"></script>
     <script src="js/kuangjia/echars.js" type="text/javascript"></script>
+    <!--  SHA256加密框架  -->
     <script src="js/jssha256.js" type="text/javascript"></script>
-    <!--    设备总览图表    -->
+    <!--  设备总览图表  -->
     <script src="js/host/hostall.js"></script>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+
     <title>Jaina</title>
 </head>
 <body>
@@ -139,8 +158,7 @@
         <!-- 性能测试 -->
         <div class="checking_right_test" id="checking_right_test">
             <div class="addhost_form" style="height: 18%;">
-                <select id="perfSingle" style="top: 33%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;"> </script>
-                </select>
+                <select id="perfSingle" style="top: 33%;left: 12%;height: 5vh;width: 13vw;border-radius: 4px;"> </select>
                 <div class="ok" id="hostDisk" style="position: absolute;top: 38%;left: 34%;">&nbsp;硬盘</div>
                 <div class="ok" id="hostNetwork" style="position: absolute;top: 38%;left: 46%;">&nbsp;网络</div>
                 <div class="ok" id="hostCpu" style="position: absolute;top: 38%;left: 58%;">&nbsp;处理器</div>
@@ -293,9 +311,7 @@
             <div class="floatWindows" id="addSysUserDev">
                 <form class="addWindows">
                     <h4 align="center" style="top: -5%;">添加设备用户</h4>
-<!--                    <label for="ipaddressDev" style="position: absolute;top: 18%;left: 22%;">IP地址：</label>-->
-<!--                    &lt;!&ndash; 横向内边距为2*3=6% 维持宽度100%，不至于超出范围 &ndash;&gt;-->
-<!--                    <input id="ipaddressDev" maxlength="20" name="ipaddressDev" style="position: absolute;top: 18%;left: 39%;" type="text">-->
+                    <!--横向内边距为2*3=6% 维持宽度100%，不至于超出范围 &ndash;&gt;-->
                     <br>
                     <br>
                     <label for="userDev" style="position: absolute;top: 25%;left: 22%;">用户名：</label>
@@ -390,45 +406,7 @@
     </div>
 </div>
 <!-- 放在页面底部可以读到上面元素的ID值 -->
-<script>
-    $.get(
-        "php/memcached.php",{"user":getCookie("UserName"),"token":getCookie("Token")},
-        function (data){
-            var obj = JSON.parse(data);
-            if (obj.status == 1){
-                //重置时间
-                setCookie("UserName",obj.username,10);
-                setCookie("Token",obj.token,10);
-                //显示内容面板
-                document.getElementById('head_div').style.animation='0.5s ease 0s 1 normal forwards running index_head_loginOk';
-                document.getElementById('head_div').style.display='block';
-                document.getElementById('panel').style.display='block';
-                document.getElementById('panel').style.animation='0.5s ease 0s 1 normal forwards running index_panel_loginOk';
-                //显示离开时的面板和子面板
-                lastView(getCookie('panelView'));
-                lastViewClild(getCookie('Child'));
-                //刷新所有查询数据
-                allFlush();
-                <!--    设置初始化监控面板    -->
-                setTimeout(
-                    function (){
-                        setCookie('panelHost',getCookie('panelHost'));
-                        document.getElementById("viewPanelDev").innerText='正在显示：'+$('#panelHost').val().substring(11);
-                        // console.log("刷新后："+$('#panelHost').val());
-                        //刷新监控面板(登陆成功后，就会立马刷新数据) -- 解决：避免刷新后图表缩成一团
-                        oneFlush();
-                    },500);
-
-            }else{
-                //播放拒绝动画
-                // document.getElementById('login_div').style.animation='0.5s ease 0s 1 normal forwards running login_loginView';
-                $("#login_div").removeClass('login_loginOk');
-                $("#login_div").addClass('login_loginView');
-                document.getElementById('login_div').style.display='block';
-            }
-        }
-    );
-</script>
+<script src="js/lastFlush.js"></script>
 <!-- 为元素添加单机事件 -->
 <script src="js/clickList.js" type="text/javascript"></script>
 
