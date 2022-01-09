@@ -96,15 +96,9 @@ createTB(){
 	id int(255) not null primary key auto_increment,
 	host_name char(20) not null,
 	host_type char(20) not null,
-	host_ip varchar(50) not null,
-	cpu_model varchar(50) not null,
-	cpu_core int not null,
+	host_ip varchar(50) not null unique,
 	mem_total float not null,
-	swap_total float null,
-	network_model varchar(100) not null,
 	network_speed varchar(50) not null,
-	network_num int not null,
-	disk_num int not null,
 	disk_all varchar(10) not null
 	);
 	"
@@ -211,7 +205,7 @@ createTB(){
     use bysj;
     create table if not exists eMail (
     id int(255) not null primary key auto_increment,
-    host_ip varchar(50) not null,
+    host_ip varchar(50) not null unique,
     cpu varchar(20) not null,
     mem varchar(20) not null,
     disk varchar(20) not null,
@@ -219,10 +213,14 @@ createTB(){
     email varchar(20) not null
     );
     "
-    #初始化报警条件
+    #触发器 - 根据主机表初始化告警条件
     mysql -uroot -pEsxi0000. -e "
     use bysj;
-    insert into bysj.eMail(host_ip,cpu,mem,disk,time,email) values("192.168.157.128","90","1024","5","60","1218304973@qq.com");
+    CREATE TRIGGER eMail
+    AFTER INSERT ON host
+    FOR EACH ROW
+    INSERT INTO eMail(host_ip,cpu,mem,disk,time,email)
+    VALUES (NEW.host_ip,"90","1024","5","120","1218304973@qq.com");
     "
 }
 

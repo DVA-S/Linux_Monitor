@@ -127,6 +127,7 @@ var windowsSizeNoView = -window.innerWidth+'px';
 
 /* - ---------------------------------------------------------------------------------复用函数----------------------------------------------------------------------------------- */
 //请求数据
+//参数1：请求地址 参数2：数据返回的函数
 function pgGet(url,back){
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("GET",url,true);
@@ -210,7 +211,7 @@ function loginJudge(){
 				$("#login_div").removeClass('login_loginNo');
 				$("#login_div").removeClass('login_loginView');
 
-				//设置延迟 js不会反复添加一个类 对于同一个类不会有变化过程
+				//设置延迟 原因：js不会反复添加一个类 对于同一个类不会有变化过程
 				setTimeout(function(){ $("#login_div").addClass('login_loginNo'); },1);
 				console.log("logNO!");
 			}
@@ -777,11 +778,16 @@ function loading(){
 			document.getElementById("disk").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 			document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
 			document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
+
+			if (getCookie("Token") == ""){
+				alert("登录超时！");location.reload();
+			}
 			//loading()和runNetwork()为无限嵌套函数
 			setTimeout("runNetwork();runMemory();runDisk();runCpu();",200);
 			console.log("正在刷新！");
 			//刷新状态
 			setCookie("flushPanel",1,10);
+
 		}else {
 			return;
 		}
@@ -803,7 +809,8 @@ function oneFlush(){
 	setCookie("flushPanel",1,10);
 }
 
-//图表
+//显示图表
+//参数1：面板 参数2：数据A 参数2：数据B 参数3：单位
 function viewCharts(panelId,Atitle,Btitle,unit){
 	//报错：There is a chart instance already initialized on the dom.解决方法0.1
 	if(chartDom != null && chartDom != "" && chartDom != undefined){
@@ -906,20 +913,3 @@ function viewCharts(panelId,Atitle,Btitle,unit){
 	option && myChart.setOption(option);
 }
 /* - ---------------------------------------------------------------------------------监控面板----------------------------------------------------------------------------------- */
-
-
-
-//鼠标右击
-// function rightClick(){
-// 	//这一步是为了阻止右击时系统默认的弹出框
-// 	document.getElementById("exit_info").oncontextmenu = function(e){
-// 		e.preventDefault();
-// 	};
-// 	//在这里你就可以自己定义事件的函数啦
-// 	document.getElementById("exit_info").onmouseup=function(oEvent) {
-// 		if (!oEvent) oEvent=window.event;
-// 		if (oEvent.button==2) {
-// 			alert('鼠标右击了')
-// 		}
-// 	}
-// }

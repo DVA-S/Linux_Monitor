@@ -26,7 +26,11 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
     mysqli_set_charset($con, "utf8");
     $stmt = $con->prepare("update eMail set cpu=?,mem=?,disk=?,time=?,email=? where host_ip=?;");
     $stmt->bind_param("ssssss", $cpu,$mem,$disk,$time,$email,$host_ip);
-    $stmt->execute();
+    if ($stmt->execute()) {
+        echo 'OK!';
+    } else {
+        echo '无法插入数据库！';
+    }
 }else{
     echo "身份已失效！";
 }
