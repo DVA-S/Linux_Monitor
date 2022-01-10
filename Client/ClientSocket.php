@@ -56,62 +56,52 @@ do{
                 while ($stmt->fetch()) {
                     $msg = `jaina ping $hostIP`;
                     //$msg = <img src='/img/go.png' width='12%'> or <img src='/img/stop.png' width='12%'>
-//                    echo "发送:" . $msg;
                     socket_write($msgsock, $msg, strlen($msg));
                 }
                 break;
             case "cpus":
                 $msg = `jaina testcpus`;
                 //$msg = 10:42:18 up 2 days, 3:14, 3 users, load average: 0.04, 0.05, 0.01
-//                echo "发送:" . $msg;
                 socket_write($msgsock, $msg, strlen($msg));
                 break;
             case "disk":
                 $msg = `jaina testdisk`;
                 //$msg = 写入速度：1.0GB/s 读取速度：7.5GB/s
-//                echo "发送:" . $msg;
                 socket_write($msgsock, $msg, strlen($msg));
                 break;
             case "nets":
                 $msg = `jaina testnets`;
                 //$msg = Hosted by China Telecom JiangSu 5G (Suzhou) [118.30 km]: 14.205 ms Download: 94.05 Mbit/s Upload: 40.35 Mbit/s
-//                echo "发送:" . $msg;
                 socket_write($msgsock, $msg, strlen($msg));
                 break;
             case "port":
                 $msg = `jaina testport`;
                 //$msg = <tr> <td>ubuntu</td> <td>127.0.0.1</td> <td>tcp</td> <td>58468 </td> <td>2675841/php </td> </tr>
-//                echo "发送:" . $msg;
                 socket_write($msgsock, $msg, strlen($msg));
                 break;
             case "cpui":
                 $msg = `jaina testcpui`;
                 //$msg = <td>2</td> <td> AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx</td> <td> 2000.000 GHz</td>
-//                echo "发送:" . $msg;
                 socket_write($msgsock, $msg, strlen($msg));
                 break;
             case "moth":
                 $msg = `jaina testmoth`;
                 //$msg = <td> 440BX Desktop Reference Platform</td>
-//                echo "发送:" . $msg;
                 socket_write($msgsock, $msg, strlen($msg));
                 break;
             case "memo":
                 $msg = `jaina testmemo`;
                 //$msg = <td>1</td> <td> Size: 2048 MB</td>
-//                echo "发送:" . $msg;
                 socket_write($msgsock, $msg, strlen($msg));
                 break;
             case "neti":
                 $msg = `jaina testneti`;
                 //$msg = <td>02:01.0 Ethernet controller: Intel Corporation 82545EM Gigabit Ethernet Controller (Copper) (rev 01)</td> <td>'1000Mb/s</td>
-//                echo "发送:" . $msg;
                 socket_write($msgsock, $msg, strlen($msg));
                 break;
             case "diki":
                 $msg = `jaina testdiki`;
                 //$msg = <td>1</td> <td>00:10.0 SCSI storage controller: Broadcom / LSI 53c1030 PCI-X Fusion-MPT Dual Ultra320 SCSI (rev 01)</td> <td>50G</td>
-//                echo "发送:" . $msg;
                 socket_write($msgsock, $msg, strlen($msg));
                 break;
             default:

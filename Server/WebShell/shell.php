@@ -1,7 +1,8 @@
 <?php
+require_once '/var/www/html/php/functionUse/getConfig.php';
 //此处交给ClientSocket来启动，启动时带上地址、用户名和密码
 
-$ip = `ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}'`;
+$ip =getConfig("ServerHost");
 $port = 1095;
 
 //创建socket

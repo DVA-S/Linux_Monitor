@@ -189,4 +189,10 @@ Memcached：
     index.php
 ```
 
-修正提交
+闲置:
+```
+内存：/proc/meminfo == MemTotal-MemAvailable=已用内存(KB)
+磁盘：/proc/meminfo == 第十三列 取值两次 两次之差/所用时间（(xms-yms)/10*1000ms）=磁盘使用率(%)
+网络：/proc/net/dev == 第二列（接收）和第十列（发送） 取值两次 两次之差/所用时间(xbytes-ybytes/10s)=每秒速率
+CPU：/proc/stat    == 第一行的前三列和第一行的所有值之和 取值两次 两次之差相除*100=处理器使用率
+```
