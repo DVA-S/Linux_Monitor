@@ -1,4 +1,6 @@
 <?php
+require_once '/var/www/html/php/functionUse/getConfig.php';
+
 //向客户端发送消息type
 $ip = isset($_GET['ip']) ? htmlspecialchars($_GET['ip']) : '';
 $cmd = isset($_GET['cmd']) ? htmlspecialchars($_GET['cmd']) : '';
@@ -25,7 +27,7 @@ if (base64_decode($token) !== '' && $get_value !== '' && base64_decode($token) =
     set_time_limit(0);
     $sock = null;
 
-    $serverip = '192.168.157.128';
+    $serverip = getConfig("ServerHost");
     $port = 1095;
 
 //创建socket

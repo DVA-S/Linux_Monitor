@@ -1,4 +1,5 @@
 <?php
+require_once '/var/www/html/php/functionUse/getConfig.php';
 
 $token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; //base64编码
 $username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : '';
@@ -19,7 +20,7 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
 
     $host_ip = null;
     $host_name = null;
-    $servername=null;
+    $ServerHost = getConfig('ServerHost');
 
     require_once "../linkDB.php";
 
@@ -32,7 +33,7 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
     $stmt->execute();
 
     echo "
-        <option seleted ='true' value='Singlehost_$servername'>请选择主机</option>
+        <option seleted='true' value='Singlehost_$ServerHost'>请选择主机</option>
         ";
     while ($stmt->fetch()) {
         //$host_ip传递IP地址到接口，Status$host_ip传回ping结果

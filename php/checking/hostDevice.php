@@ -71,5 +71,7 @@ switch ($type){
         echo `lsblk | grep ^sd | awk '{print $4}' | sed 's/$/<\/td>/g' | sed 's/^/<td>/g'`;
         echo "</tr>";
         break;
+    default:
+        break;
 }
 ?>

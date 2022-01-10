@@ -1,11 +1,8 @@
 <?php
-//Jaina 服务器地址必须用远程的，可以放在配置文件
-$servername = "192.168.157.128";
-$username = "root";
-$password = "Esxi0000.";
+require_once "/var/www/html/php/functionUse/getConfig.php";
 
 // 创建连接
-$con = new mysqli($servername, $username, $password);
+$con = new mysqli(getConfig('DbHost'), getConfig('DbUser'), getConfig('DbPasswd'));
 // 选择数据库
 mysqli_select_db($con,"bysj");
 // 设置编码，防止中文乱码
