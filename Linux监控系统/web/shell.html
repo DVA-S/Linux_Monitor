@@ -73,7 +73,7 @@
         if (c.length > 1) {
             //发送命令
             $.get(
-                "/Server/WebShell/shellSend.php", {
+                "/php/webshell/shellSend.php", {
                     "username": getCookie("UserName"),
                     "token": getCookie("Token"),
                     "ip": ip,

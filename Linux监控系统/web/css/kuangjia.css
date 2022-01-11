@@ -461,8 +461,8 @@ body{
 /* 内容面板 第三层 > 右侧面板 > 功能面板 ：设备总览，连通性检测，系统用户 */
 .host_right_all,.user_right_webUser,.checking_right_link,.host_right_list,.user_right_deviceUser,.checking_right_test,.host_right_addhost,.checking_right_port,.user_right_addUser,.checking_right_device{
 	width: 107%;
-	height: 98%;
-	left: -8vw;
+	height: 100%;
+	left: -8.6vw;
 	display: none;
 }
 /**********************************************内容面板*********************************************/

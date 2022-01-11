@@ -59,8 +59,8 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
         <td>$network_speed</td>
         <td>$disk_all</td>
         <td id='host_$id' class='deleteBtn' onclick='deleteHost(this)' width='10%'>删除</td>
-        <td id='host_$host_ip' class='deleteBtn' onclick='sshHost(this)' width='10%'>
-            <a href='/Server/WebShell/shell.html?ip=$host_ip' target='_blank'>ssh</a>
+        <td id='host_$host_ip' class='deleteBtn' width='10%'>
+            <a href='/shell.html?ip=$host_ip' target='_blank'>ssh</a>
         </td>
     </tr>";
     }

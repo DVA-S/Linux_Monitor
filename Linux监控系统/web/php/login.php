@@ -14,7 +14,7 @@
     $login_status = null;
     $createdate = null;
 
-    require_once "linkDB.php";
+    require_once "/var/www/html/php/linkDB.php";
     // 选择数据库
     mysqli_select_db($con,"bysj");
     // 设置编码，防止中文乱码

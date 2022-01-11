@@ -17,7 +17,6 @@ function getConfig($valuse){
             default:
                 return "{}";
         }
-
     }
     return "{}";
 }
