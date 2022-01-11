@@ -222,6 +222,14 @@ createTB(){
     INSERT INTO eMail(host_ip,cpu,mem,disk,time,email)
     VALUES (NEW.host_ip,"90","1024","5","120","1218304973@qq.com");
     "
+    #触发器 - 删除主机时，删除对应的告警条目
+    mysql -uroot -pEsxi0000. -e "
+    use bysj;
+    CREATE TRIGGER eMailDelete
+    AFTER DELETE ON host
+    FOR EACH ROW
+    DELETE from eMail where host_ip=OLD.host_ip;
+    "
 }
 
 db=$(mysql --version 2> /dev/null | awk -F ' ' '{print $1}')

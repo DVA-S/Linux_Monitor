@@ -45,7 +45,7 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
         <td>$host_type</td>
         <td id='ip$id'>$host_ip</td>
         <td id='Status$id'>
-            <img src='./img/none.png' width='12%' height='12%'>
+            <img alt='未知' src='./img/none.png' width='12%' height='12%'>
         </td>
         <td id='ping$id' class='deleteBtn' onclick='linkHostStatus(this)'>Ping</td>
     </tr>

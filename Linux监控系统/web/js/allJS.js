@@ -1,3 +1,4 @@
+var loadingDH = "<img alt='加载中……' src='img/loading.gif' style='position: relative;left: 6.5vw;top: 4vh;' />";
 /* - ---------------------------------------------------------------------------------数据请求----------------------------------------------------------------------------------- */
 //设备管理 -- 设备列表
 function hostList(){
@@ -198,8 +199,9 @@ function loginJudge(){
 				<!--    设置初始化监控面板    -->
 				setTimeout(
 					function (){
-						setCookie('panelHost',$('#panelHost').val().substring(11));
-						document.getElementById("viewPanelDev").innerText='正在显示：'+$('#panelHost').val().substring(11);
+						var panelHost = $('#panelHost').val();
+						setCookie('panelHost',panelHost.substring(11));
+						document.getElementById("viewPanelDev").innerText='正在显示：'+panelHost.substring(11);
 						//刷新监控面板 -- 解决：避免刚登陆时图表缩成一团
 						oneFlush();
 					},500
@@ -208,8 +210,9 @@ function loginJudge(){
 				//拒绝动画
 				//document.getElementById("login_div").style.animation="0.5s ease 0s 1 normal forwards running login_loginNo";
 				// $("#login_div").removeClass('login_loginOk');
-				$("#login_div").removeClass('login_loginNo');
-				$("#login_div").removeClass('login_loginView');
+				var login_div = $("#login_div");
+				login_div.removeClass('login_loginNo');
+				login_div.removeClass('login_loginView');
 
 				//设置延迟 原因：js不会反复添加一个类 对于同一个类不会有变化过程
 				setTimeout(function(){ $("#login_div").addClass('login_loginNo'); },1);
@@ -231,25 +234,26 @@ function getPanelView(list){
 
 //根据传入面板值，显示离开时的面板
 function lastView(view){
+	var panel = $('#panel,#checking,#user,#host,#setup');
 	switch (view){
 		case '0':
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
+			panel.css('display', 'none');
 			document.getElementById('panel').style.display='block';
 			break;
 		case '1':
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
+			panel.css('display', 'none');
 			document.getElementById('host').style.display='block';
 			break;
 		case '2':
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
+			panel.css('display', 'none');
 			document.getElementById('checking').style.display='block';
 			break;
 		case '3':
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
+			panel.css('display', 'none');
 			document.getElementById('user').style.display='block';
 			break;
 		case '4':
-			$('#panel,#checking,#user,#host,#setup').css('display', 'none');
+			panel.css('display', 'none');
 			document.getElementById('setup').style.display='block';
 			break;
 		default:
@@ -258,49 +262,52 @@ function lastView(view){
 }
 //保持最后离开的子面板
 function lastViewClild(view){
+	var hostpanel = $('#host_right_list,#host_right_addhost,#host_right_all');
+	var checkingpanel = $('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link');
+	var userpanel = $('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List');
 	switch (view){
 		case '5':
-			$('#host_right_list,#host_right_addhost,#host_right_all').hide();
+			hostpanel.hide();
 			$('#host_right_all').show();
 			break;
 		case '6':
-			$('#host_right_list,#host_right_addhost,#host_right_all').hide();
+			hostpanel.hide();
 			$('#host_right_list').show();
 			break;
 		case '7':
-			$('#host_right_list,#host_right_addhost,#host_right_all').hide();
+			hostpanel.hide();
 			$('#host_right_addhost').show();
 			break;
 		case '8':
-			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
+			checkingpanel.hide();
 			$('#checking_right_link').show();
 			break;
 		case '9':
-			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
+			checkingpanel.hide();
 			$('#checking_right_test').show();
 			break;
 		case '10':
-			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
+			checkingpanel.hide();
 			$('#checking_right_port').show();
 			break;
 		case '11':
-			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
+			checkingpanel.hide();
 			$('#checking_right_device').show();
 			break;
 		case '12':
-			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
+			userpanel.hide();
 			$('#user_right_List').show();
 			break;
 		case '13':
-			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
+			userpanel.hide();
 			$('#user_right_WebUser').show();
 			break;
 		case '14':
-			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
+			userpanel.hide();
 			$('#user_right_DeviceUser').show();
 			break;
 		case '15':
-			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
+			userpanel.hide();
 			$('#user_right_AddUser').show();
 			break;
 		default:
@@ -334,6 +341,7 @@ function btnOnClick(element){
 
 // 根据btnOnClick传入的ID显示面板（主界面导航栏按钮和面板左侧按钮）
 function viewPanel(view_btn){
+	var viewPanel = $('#'+view_btn);
 	//函数主体
 	switch(panel_list.indexOf(view_btn))
 	{
@@ -361,9 +369,12 @@ function viewPanel(view_btn){
 			document.getElementById(panel_list[panel_list.indexOf(view_btn)-1]).style.display="block";
 			document.getElementById(panel_list[panel_list.indexOf(view_btn)-1]).style.animation="0.5s ease forwards running btn_switch_CenterGoLeftHide";
 			// 进入动画--当前元素从右边到中间显示 不加绝对定位动画会上天
-			document.getElementById(view_btn).style.display="block";
-			document.getElementById(view_btn).style.position="absolute";
-			document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_RightGoCenterShow";
+			viewPanel.css("display","block");
+			viewPanel.css("animation","0.5s ease forwards running btn_switch_RightGoCenterShow");
+			viewPanel.css("position","absolute");
+			// document.getElementById(view_btn).style.display="block";
+			// document.getElementById(view_btn).style.position="absolute";
+			// document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_RightGoCenterShow";
 			console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"<<向左");
 			//将最后一次显示的面板存入cookie
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
@@ -376,9 +387,12 @@ function viewPanel(view_btn){
 			document.getElementById(panel_list[panel_list.indexOf(view_btn)+1]).style.display="block";
 			document.getElementById(panel_list[panel_list.indexOf(view_btn)+1]).style.animation="0.5s ease forwards running btn_switch_CenterGoRightHide";
 			// 进入动画--当前元素从左边到中间显示
-			document.getElementById(view_btn).style.display="block";
-			document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_LeftGoCenterShow";
-			document.getElementById(view_btn).style.position="absolute";
+			viewPanel.css("display","block");
+			viewPanel.css("animation","0.5s ease forwards running btn_switch_LeftGoCenterShow");
+			viewPanel.css("position","absolute");
+			// document.getElementById(view_btn).style.display="block";
+			// document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_LeftGoCenterShow";
+			// document.getElementById(view_btn).style.position="absolute";
 			console.log('当前显示为：'+panel_list.indexOf(view_btn),"点击为：",panel_list.indexOf(view_btn)+">>向右");
 			//将最后一次显示的面板存入cookie
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
@@ -389,65 +403,70 @@ function viewPanel(view_btn){
 			// // 点击当前面板按钮
 			// // 刷新动画--当前元素显示
 			// //BUG:只能显示一次🤔
-			document.getElementById(view_btn).style.display="block";
-			document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
-			document.getElementById(view_btn).style.position="absolute";
+			viewPanel.css("display","block");
+			viewPanel.css("animation","0.5s ease forwards running flush");
+			viewPanel.css("position","absolute");
+			// document.getElementById(view_btn).style.display="block";
+			// document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
+			// document.getElementById(view_btn).style.position="absolute";
 			console.log('当前显示为：'+panel_list.indexOf(view_btn),"点击为：",panel_list.indexOf(view_btn)+"刷新显示");
 			//将最后一次显示的面板存入cookie
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
 			break;
 		}
 		case 5:case 6:case 7:
-		$('#host_right_list,#host_right_addhost,#host_right_all').hide();
-		$('#'+view_btn).show();											break;
-		case 8:case 9:case 10:case 11:
-		$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
-		$('#'+view_btn).show();	    									break;
-		case 12:case 13:case 14:case 15:
-		$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
-		$('#'+view_btn).show();											break;
+			$('#host_right_list,#host_right_addhost,#host_right_all').hide();
+			viewPanel.show();											break;
+			case 8:case 9:case 10:case 11:
+			$('#checking_right_test,#checking_right_port,#checking_right_device,#checking_right_link').hide();
+			viewPanel.show();	    									break;
+			case 12:case 13:case 14:case 15:
+			$('#user_right_WebUser,#user_right_DeviceUser,#user_right_AddUser,#user_right_List').hide();
+			viewPanel.show();											break;
 		default:														break;
 	}
 }
 
 //系统设置 -- 点击执行动画 有三个状态：从左向右分别是“初始状态”、“将展开”、“将收缩”
 function sysSetup(id,initialClass,AClass,BClass){
-	if($('#'+id).attr('class') == initialClass+" "+AClass) {
+	var setupID = $('#'+id);
+	var setupBodyID = $('#Body'+id);
+	if(setupID.attr('class') == initialClass+" "+AClass) {
 		//收缩
-		$('#'+id).removeClass(AClass);
-		$('#'+id).addClass(BClass);
+		setupID.removeClass(AClass);
+		setupID.addClass(BClass);
 		//内容隐藏
-		$('#Body'+id).removeClass('viewHide');
-		$('#Body'+id).addClass('viewHide');
-		$('#Body'+id).hide();
+		setupBodyID.removeClass('viewHide');
+		setupBodyID.addClass('viewHide');
+		setupBodyID.hide();
 
 		//标题位移
 		$('#Tit'+id).css('left','9vw');
 	}else if ($('#'+id).attr('class') == initialClass+" "+BClass){
 		//展开
-		$('#'+id).removeClass(BClass);
-		$('#'+id).addClass(AClass);
-		$('#Body'+id).removeClass('viewHide');
-		$('#Body'+id).show();
-		$('#Body'+id).addClass('viewShow');
+		setupID.removeClass(BClass);
+		setupID.addClass(AClass);
+		setupBodyID.removeClass('viewHide');
+		setupBodyID.show();
+		setupBodyID.addClass('viewShow');
 
 		$('#Tit'+id).css('left','3vw');
 	}else if ($('#'+id).attr('class') == initialClass+" "+AClass+" "+BClass){
 		//展开
-		$('#'+id).removeClass(AClass);
-		$('#'+id).removeClass(BClass);
-		$('#'+id).addClass(AClass);
-		$('#Body'+id).removeClass('viewHide');
-		$('#Body'+id).show();
-		$('#Body'+id).addClass('viewShow');
+		setupID.removeClass(AClass);
+		setupID.removeClass(BClass);
+		setupID.addClass(AClass);
+		setupBodyID.removeClass('viewHide');
+		setupBodyID.show();
+		setupBodyID.addClass('viewShow');
 
 		$('#Tit'+id).css('left','3vw');
 	}else {
 		//展开
-		$('#'+id).addClass(AClass);
-		$('#Body'+id).removeClass('viewHide');
-		$('#Body'+id).show();
-		$('#Body'+id).addClass('viewShow');
+		setupID.addClass(AClass);
+		setupBodyID.removeClass('viewHide');
+		setupBodyID.show();
+		setupBodyID.addClass('viewShow');
 
 		//标题隐藏
 		$('#Tit'+id).css('left','3vw');
@@ -611,14 +630,13 @@ function addUserDev(){
 
 //自动巡检 -- 性能检测
 function hostPerf(element){
-	document.getElementById("checkingPerf").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;opacity: 0.5;width: 30%;\" />";
+	document.getElementById("checkingPerf").innerHTML=loadingDH;
 	var go=element.id;
+	var perfSingle = $("#perfSingle").val();
 	switch (go){
 		case 'hostDisk':
 			//获取下拉列表的值(Singlehost_181)
-			var hostIP = $("#perfSingle").val();
-			//多出一个空格引发的血案
-			hostIP = hostIP.replace("Singlehost_","");
+			var hostIP = perfSingle.replace("Singlehost_","");
 			$.get(
 				"/php/checking/ServerSocket.php",{"type":"disk","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 				function(data){
@@ -629,9 +647,7 @@ function hostPerf(element){
 			break;
 		case 'hostNetwork':
 			//获取下拉列表的值(Singlehost_181)
-			var hostIP = $("#perfSingle").val();
-			//多出一个空格引发的血案
-			hostIP = hostIP.replace("Singlehost_","");
+			var hostIP = perfSingle.replace("Singlehost_","");
 			$.get(
 				"/php/checking/ServerSocket.php",{"type":"nets","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 				function(data){
@@ -642,9 +658,7 @@ function hostPerf(element){
 			break;
 		case 'hostCpu':
 			//获取下拉列表的值(Singlehost_181)
-			var hostIP = $("#perfSingle").val();
-			//多出一个空格引发的血案
-			hostIP = hostIP.replace("Singlehost_","");
+			var hostIP = perfSingle.replace("Singlehost_","");
 			$.get(
 				"/php/checking/ServerSocket.php",{"type":"cpus","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 				function(data){
@@ -664,12 +678,9 @@ function hostPerf(element){
 
 //自动巡检 -- 获取端口信息
 function hostPort(){
-	document.getElementById("checkingPerfPort").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;opacity: 0.5;width: 30%;\" />";
-
+	document.getElementById("checkingPerfPort").innerHTML=loadingDH;
 	//获取下拉列表的值(Singlehost_181)
-	var hostIP = $("#perfSinglePort").val();
-	//多出一个空格引发的血案
-	hostIP = hostIP.replace("Singlehost_","");
+	var hostIP = $("#perfSinglePort").val().replace("Singlehost_","");
 	$.get(
 		"/php/checking/ServerSocket.php",{"type":"port","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
@@ -683,13 +694,9 @@ function hostPort(){
 
 //自动巡检 -- 获取硬件信息
 function hostDevice(){
-	document.getElementById("checkingPerfDevice").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;opacity: 0.5;width: 30%;\" />";
-
+	document.getElementById("checkingPerfDevice").innerHTML=loadingDH;
 	//获取下拉列表的值(Singlehost_181)
-	var hostIP = $("#perfSingleDevice").val();
-	//多出一个空格引发的血案
-	hostIP = hostIP.replace("Singlehost_","");
-
+	var hostIP = $("#perfSingleDevice").val().replace("Singlehost_","");
 	$.get(
 		"/php/checking/ServerSocket.php",{"type":"cpui","clientIP":hostIP,"username":getCookie("UserName"),"token":getCookie("Token")},
 		function(data){
@@ -774,10 +781,10 @@ function loading(){
 			getComputedStyle(document.getElementById("panel"),null).getPropertyValue('left') != windowsSizeNoView){
 			// console.log("动画开始");
 			// //此动画主要用来清空图表刷新数据时的异常闪动
-			document.getElementById("memory").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
-			document.getElementById("disk").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
-			document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
-			document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
+			document.getElementById("memory").innerHTML=loadingDH;
+			document.getElementById("disk").innerHTML=loadingDH;
+			document.getElementById("network").innerHTML=loadingDH;
+			document.getElementById("cpu").innerHTML=loadingDH;
 
 			if (getCookie("Token") == ""){
 				alert("登录超时！");location.reload();
@@ -788,18 +795,16 @@ function loading(){
 			//刷新状态
 			setCookie("flushPanel",1,10);
 
-		}else {
-			return;
 		}
 	},10000);
 }
 //单次刷新监控面板
 function oneFlush(){
 	// //此动画主要用来清空图表刷新数据时的异常闪动
-	document.getElementById("memory").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
-	document.getElementById("disk").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
-	document.getElementById("network").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
-	document.getElementById("cpu").innerHTML="<img src=\"img/loading.gif\" style=\"position: relative;left: 6.5vw;top: 4vh;\" />";
+	document.getElementById("memory").innerHTML=loadingDH;
+	document.getElementById("disk").innerHTML=loadingDH;
+	document.getElementById("network").innerHTML=loadingDH;
+	document.getElementById("cpu").innerHTML=loadingDH;
 	// runNetwork(); 不用直接调用runNetwork() 是因为他和loading()是无限嵌套函数，会产生两个无限循环，具体表现为监控面板每十秒刷新两次
 	xmlHttpdNetworkTime = pgGet("https://jaina.com/php/panel/network.php?type=datatime&username="+getCookie("UserName")+"&token="+getCookie("Token")+"&panelip="+getCookie("panelHost"),networkback);
 	xmlHttpNetworkUp = pgGet("https://jaina.com/php/panel/network.php?type=networkup&username="+getCookie("UserName")+"&token="+getCookie("Token")+"&panelip="+getCookie("panelHost"),networkback);

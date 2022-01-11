@@ -35,8 +35,9 @@ document.getElementById("setup_btn").addEventListener("click",function () {
 
 //监控面板
 document.getElementById("selectHostOK").addEventListener("click",function () {
-    setCookie('panelHost',$('#panelHost').val().substring(11));
-    document.getElementById('viewPanelDev').innerText='正在显示：'+$('#panelHost').val().substring(11);
+    var panelHost = $('#panelHost').val();
+    setCookie('panelHost',panelHost.substring(11));
+    document.getElementById('viewPanelDev').innerText='正在显示：'+panelHost.substring(11);
     //刷新监控面板(登陆成功后，就会立马刷新数据) -- 解决：避免刷新后图表缩成一团
     oneFlush();
 });

@@ -23,7 +23,8 @@
     $stmt->bind_param("s",$user);
     $stmt->bind_result($createdate);
     $stmt->execute();
-    while($stmt->fetch()){}
+    $stmt->fetch();
+//    while($stmt->fetch()){}
 
     $yanzhi = "JainaProudmoore";
     $all = $passwd.$createdate.$yanzhi;
@@ -66,7 +67,8 @@ function keepLogin($login_status,$user,$rtJson){
     $stmt->bind_result($login_status);
     $stmt->execute();
     //判定登录--输出查询数据的行数
-    while($stmt->fetch()){}
+    $stmt->fetch();
+//    while($stmt->fetch()){}
 
     //last
     keepLogin($login_status,$user,$rtJson);

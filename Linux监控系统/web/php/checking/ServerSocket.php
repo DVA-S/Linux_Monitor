@@ -45,7 +45,7 @@ if (base64_decode($token) !== "" && $get_value !== "" && base64_decode($token) =
 
 //发送数据
     if (!socket_write($socket, $in, strlen($in))) {
-        echo "<img src='/img/stop.png' width='12%'>";
+        echo "<img alt='不可达' src='/img/stop.png' width='12%'>";
         exit();
     }
 

@@ -64,7 +64,7 @@ case $1 in
 #启动脚本
 "start")
   pid
-  if [[ $emailPid != $test || $webshellPid != $test ]]
+  if [[ $emailPid != $test && $webshellPid != $test ]]
   then
     echo "服务已启动！"
   else

@@ -15,8 +15,9 @@
         <option value="">请选择设备用户</option>
     </select>
     <button onclick="(function (){
-        setCookie('user',$('#devUserList').val().split('+')[0]);
-        setCookie('passwd',$('#devUserList').val().split('+')[1]);
+        var values = $('#devUserList').val();
+        setCookie('user',values.split('+')[0]);
+        setCookie('passwd',values.split('+')[1]);
         location.reload();
     })()">确认</button>
 </div>
