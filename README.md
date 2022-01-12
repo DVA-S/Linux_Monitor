@@ -2,6 +2,7 @@
 ```
 root@ubuntu:~# git clone https://gitee.com/JainaWitch/bysj-for-wxk/
 root@ubuntu:~# cd ./bysj-for-wxk/Linux监控系统/
+
 修改配置文件中的地址：
 root@ubuntu:~/bysj-for-wxk/Linux监控系统# cat config.conf
 {
@@ -10,6 +11,11 @@ root@ubuntu:~/bysj-for-wxk/Linux监控系统# cat config.conf
         "DbPasswd": "Esxi0000.",
         "ServerHost":"192.168.157.131"
 }
+
+安装脚本：
+root@ubuntu:~# sh install.sh
+
+启动服务：
 root@ubuntu:~# /etc/jaina/agent/agent.sh 
  用法: jaina <选项>
 
