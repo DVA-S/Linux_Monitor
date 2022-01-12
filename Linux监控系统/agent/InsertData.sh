@@ -1,7 +1,7 @@
 #!/bin/bash
 #Jaina 服务器地址必须用远程的，可以放在配置文件
-server_ip=`cat config.conf | grep "DbHost" | awk -F "\"" '{print $4}'`
-DbPasswd=`cat config.conf | grep "DbPasswd" | awk -F "\"" '{print $4}'`
+server_ip=`cat /etc/jaina/config.conf | grep "DbHost" | awk -F "\"" '{print $4}'`
+DbPasswd=`cat /etc/jaina/config.conf | grep "DbPasswd" | awk -F "\"" '{print $4}'`
 lang=`locale | grep LANG= | awk -F '=' '{print $2}'`
 
 memory(){
