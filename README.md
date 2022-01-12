@@ -88,8 +88,7 @@ PHP:
 安装：
     配置数据库驱动：
         【在/etc/php/7.4/apache2/php.ini中取消掉extension=mysqli的注释】
-        apt install php-common libapache2-mod-php php-cli
-        apt install php-mysql php-curl php-ssh2
+        apt install php7.4-cli php-common libapache2-mod-php php-cli php-mysql php-curl php-ssh2
 ```
 
 MySQL：
