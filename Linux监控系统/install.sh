@@ -181,10 +181,10 @@ createTB(){
 
 #主函数
 #安装额外包
-apt -y install sysstat net-tools expect ethtool curl expect
+apt update && apt -y install sysstat net-tools expect ethtool curl expect
 
 #安装Apache
-apt update && apt -y install apache2
+apt -y install apache2
 #配置https和http2
 a2enmod ssl
 a2ensite default-ssl
