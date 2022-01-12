@@ -1,4 +1,8 @@
 #!/bin/bash
+#安装变量
+server_ip=`cat config.conf | grep "DbHost" | awk -F "\"" '{print $4}'`
+DbPasswd=`cat config.conf | grep "DbPasswd" | awk -F "\"" '{print $4}'`
+
 #函数封装区
 #Ubuntu MySQL
 initialization_ubuntu(){
@@ -10,9 +14,9 @@ initialization_ubuntu(){
 	expect \"Please enter 0 = LOW, 1 = MEDIUM and 2 = STRONG:\"
 	send \"0\r\"
 	expect \"New password:\"
-	send \"Esxi0000.\r\"
+	send \""$DbPasswd"\r\"
 	expect \"Re-enter new password:\"
-	send \"Esxi0000.\r\"
+	send \""$DbPasswd"\r\"
 	expect \"Do you wish to continue with the password provided?(Press y|Y for Yes, any other key for No) :\"
 	send \"y\r\"
 	expect \"Remove anonymous users?\"
@@ -26,56 +30,12 @@ initialization_ubuntu(){
 	expect eof
 	"
 }
-#CentOS MySQL
-initialization_centos(){
-  #安装额外包
-  yum -y install redhat-lsb-core
-	yum -y install expect
-  #初始化数据库
-	expect -c "
-	spawn /usr/bin/mysql_secure_installation
-	expect \"Enter current password for root (enter for none):\"
-	send \"\r\"
-	expect \"Set root password? [Y/n]\"
-	send \"Y\r\"
-	expect \"New password:\"
-	send \"Esxi0000.\r\"
-	expect \"Re-enter new password:\"
-	send \"Esxi0000.\r\"
-	expect \"Remove anonymous users?\"
-	send \"y\r\"
-	expect \"Disallow root login remotely?\"
-	send \"n\r\"
-	expect \"Remove test database and access to it?\"
-	send \"y\r\"
-	expect \"Reload privilege tables now?\"
-	send \"y\r\"
-	expect eof
-	"
-}
+
 #安装MySQL
 installDB(){
-	#判断系统类型
-	sys=`lsb_release -a 2> /dev/null | grep "Distributor ID:" | awk -F ' ' '{print $3}'`
-	if [ $sys = "Ubuntu" ]
-	then
-		apt -y install mysql-server
-		systemctl enable mysql
-		initialization_ubuntu
-		#echo "安装数据库"
-
-		#采集网卡和硬盘信息使用的软件包
-		apt -y install ethtool sysstat
-	else
-		if [ $sys = "Centos" ]
-		then
-			yum -y install mariadb mariadb-server
-			systemctl start mariadb
-			systemctl enable mariadb
-			initialization_centos
-			#echo "安装数据库"
-		fi
-	fi
+  apt -y install mysql-server
+  systemctl enable mysql
+  initialization_ubuntu
 }
 
 #建表
@@ -162,6 +122,11 @@ createTB(){
   createdate datetime not null
   );
   "
+  #初始化管理员账号
+  mysql -uroot -pEsxi0000. -e "
+  use bysj;
+  insert into sysUser(user,passwd,email,sex,phone,createdate)
+  values(\"admin\",\"d25dcca71c5e8e48883fabcd938e3920dd0b9e63e7cd710474cd36b44baf821d\",\"1218304973@qq.com\",\"男\",\"17852766922\",\"2022-01-12 11:36:00\");"
   #用户Token表
   mysql -uroot -pEsxi0000. -e "
   use bysj;
@@ -202,7 +167,7 @@ createTB(){
   AFTER INSERT ON host
   FOR EACH ROW
   INSERT INTO eMail(host_ip,cpu,mem,disk,time,email)
-  VALUES (NEW.host_ip,"90","1024","5","120","1218304973@qq.com");
+  VALUES (NEW.host_ip,\"90\",\"1024\",\"5\",\"120\",\"1218304973@qq.com\");
   "
   #触发器 - 删除主机时，删除对应的告警条目
   mysql -uroot -pEsxi0000. -e "
@@ -223,8 +188,7 @@ rm -rf /var/www/html/* && cp -rvf ./web/* /var/www/html/
   echo {`date`}-{监控系统安装}-{安装目录：/etc/jaina /var/www/html } >> /var/log/jaina-server.log
 
 #安装额外包
-apt -y install sysstat net-tools expect ethtool
-
+apt -y install sysstat net-tools expect ethtool curl expect
 #安装数据库
 db=$(mysql --version 2> /dev/null | awk -F ' ' '{print $1}')
 if [ $db ]
@@ -232,7 +196,7 @@ then
 	#设置数据库编码
 	mysql -uroot -pEsxi0000. -e "set global character_set_server=gbk;"
 	mysql -uroot -pEsxi0000. -e "set global character_set_database=gbk;"
-	#建库、建表
+	#建库、建表 "找不到编码类型"
 	mysql -uroot -pEsxi0000. -e "create database if not exists bysj character set utf8 collate utf8;"
 	createTB
 else
@@ -244,25 +208,35 @@ else
 fi
 
 #安装PHP
-apt install -y php7.4-cli php-common libapache2-mod-php php-cli php-mysql php-curl php-ssh2
+apt install -y php7.4-cli php-common libapache2-mod-php php-cli php-mysql php-curl php-ssh2 php7.4-fpm
+
 sed -i 's/;extension=mysqli/extension=mysqli/g' /etc/php/7.4/apache2/php.ini
 
 #安装数据库
 apt -y install mysql-server
 sed -i 's/^bind-address/#bind-address/g' /etc/mysql/mysql.conf.d/mysqld.cnf
-mysql -uroot -pEsxi0000. -e "
-  create user 'root'@'%' identified by '8080';
-  grant all privileges on *.* to 'root'@'%';
-  flush privileges;
-"
+
+mysql -e "create user 'root'@'%' identified by '$DbPasswd';"
+mysql -e "grant all privileges on *.* to 'root'@'%';"
+mysql -e "flush privileges;"
+
 
 #安装Apache
 apt -y install apache2
+#配置https和http2
 a2enmod ssl
 a2ensite default-ssl
 
 mkdir /etc/apache2/ssl
 cp ./ssl/server.crt ./ssl/server.key ./ssl/ca.crt /etc/apache2/ssl/
+sed -i '/ServerAdmin/a ServerName https://'$server_ip':443' /etc/apache2/sites-available/default-ssl.conf
+sed -i 's/\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem/\/etc\/apache2\/ssl\/server.crt/g' /etc/apache2/sites-available/default-ssl.conf
+sed -i 's/\/etc\/ssl\/private\/ssl-cert-snakeoil.key/\/etc\/apache2\/ssl\/server.key/g' /etc/apache2/sites-available/default-ssl.conf
+
+a2dismod php7.4 && a2enconf php7.4-fpm && a2enmod proxy_fcgi
+a2dismod mpm_prefork && a2enmod mpm_event && a2enmod http2
+sed -i '/ServerAdmin/a Protocols h2 http/1.1' /etc/apache2/sites-available/default-ssl.conf
+sed -i '/LoadModule/a <IfModule http2_module>\n    LogLevel http2:info\n</IfModule>' /etc/apache2/mods-available/http2.load
 
 #安装memcached
 apt -y install memcached php-memcache

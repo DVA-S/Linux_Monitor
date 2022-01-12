@@ -69,7 +69,7 @@ _配置文件_
                 SSLEngine on
                 SSLCertificateFile      /etc/apache2/ssl/server.crt
                 SSLCertificateKeyFile   /etc/apache2/ssl/server.key
-                SSLCertificateChainFile /etc/apache2/ssl/ca.crt
+                #SSLCertificateChainFile /etc/apache2/ssl/ca.crt
 ```
 ```shell
 /etc/apache2/ports.conf
