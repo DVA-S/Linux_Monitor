@@ -180,6 +180,26 @@ createTB(){
 }
 
 #主函数
+#安装额外包
+apt -y install sysstat net-tools expect ethtool curl expect
+
+#安装Apache
+apt update && apt -y install apache2
+#配置https和http2
+a2enmod ssl
+a2ensite default-ssl
+
+mkdir /etc/apache2/ssl
+cp ./ssl/server.crt ./ssl/server.key ./ssl/ca.crt /etc/apache2/ssl/
+sed -i '/ServerAdmin/a ServerName https://'"$server_ip"':443' /etc/apache2/sites-available/default-ssl.conf
+sed -i 's/\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem/\/etc\/apache2\/ssl\/server.crt/g' /etc/apache2/sites-available/default-ssl.conf
+sed -i 's/\/etc\/ssl\/private\/ssl-cert-snakeoil.key/\/etc\/apache2\/ssl\/server.key/g' /etc/apache2/sites-available/default-ssl.conf
+
+a2dismod php7.4 && a2enconf php7.4-fpm && a2enmod proxy_fcgi
+a2dismod mpm_prefork && a2enmod mpm_event && a2enmod http2
+sed -i '/ServerAdmin/a Protocols h2 http/1.1' /etc/apache2/sites-available/default-ssl.conf
+sed -i '/LoadModule/a <IfModule http2_module>\n    LogLevel http2:info\n</IfModule>' /etc/apache2/mods-available/http2.load
+
 #安装源代码
 chmod a+x `find . -name "*.sh"`
 mkdir /etc/jaina && cp -rvf ./agent/ ./server/ /etc/jaina/ && cp ./config.conf /etc/jaina/
@@ -188,8 +208,6 @@ rm -rf /var/www/html/* && cp -rvf ./web/* /var/www/html/
   #记录日志
   echo {`date`}-{监控系统安装}-{安装目录：/etc/jaina /var/www/html } >> /var/log/jaina-server.log
 
-#安装额外包
-apt -y install sysstat net-tools expect ethtool curl expect
 #安装数据库
 db=$(mysql --version 2> /dev/null | awk -F ' ' '{print $1}')
 if [ $db ]
@@ -210,7 +228,6 @@ fi
 
 #安装PHP
 apt install -y php7.4-cli php-common libapache2-mod-php php-cli php-mysql php-curl php-ssh2 php7.4-fpm
-
 sed -i 's/;extension=mysqli/extension=mysqli/g' /etc/php/7.4/apache2/php.ini
 
 #安装数据库
@@ -220,24 +237,6 @@ sed -i 's/^bind-address/#bind-address/g' /etc/mysql/mysql.conf.d/mysqld.cnf
 mysql -e "create user 'root'@'%' identified by '$DbPasswd';"
 mysql -e "grant all privileges on *.* to 'root'@'%';"
 mysql -e "flush privileges;"
-
-
-#安装Apache
-apt -y install apache2
-#配置https和http2
-a2enmod ssl
-a2ensite default-ssl
-
-mkdir /etc/apache2/ssl
-cp ./ssl/server.crt ./ssl/server.key ./ssl/ca.crt /etc/apache2/ssl/
-sed -i '/ServerAdmin/a ServerName https://'$server_ip':443' /etc/apache2/sites-available/default-ssl.conf
-sed -i 's/\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem/\/etc\/apache2\/ssl\/server.crt/g' /etc/apache2/sites-available/default-ssl.conf
-sed -i 's/\/etc\/ssl\/private\/ssl-cert-snakeoil.key/\/etc\/apache2\/ssl\/server.key/g' /etc/apache2/sites-available/default-ssl.conf
-
-a2dismod php7.4 && a2enconf php7.4-fpm && a2enmod proxy_fcgi
-a2dismod mpm_prefork && a2enmod mpm_event && a2enmod http2
-sed -i '/ServerAdmin/a Protocols h2 http/1.1' /etc/apache2/sites-available/default-ssl.conf
-sed -i '/LoadModule/a <IfModule http2_module>\n    LogLevel http2:info\n</IfModule>' /etc/apache2/mods-available/http2.load
 
 #安装memcached
 apt -y install memcached php-memcache
