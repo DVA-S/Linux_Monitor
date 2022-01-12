@@ -126,7 +126,7 @@ createTB(){
   mysql -uroot -pEsxi0000. -e "
   use bysj;
   insert into sysUser(user,passwd,email,sex,phone,createdate)
-  values(\"admin\",\"d25dcca71c5e8e48883fabcd938e3920dd0b9e63e7cd710474cd36b44baf821d\",\"1218304973@qq.com\",\"男\",\"17852766922\",\"2022-01-12 11:36:00\");"
+  values(\"admin\",\"d25dcca71c5e8e48883fabcd938e3920dd0b9e63e7cd710474cd36b44baf821d\",\"1218304973@qq.com\",\"男\",\"17852766922\",\"2021-12-10 01:19:36\");"
   #用户Token表
   mysql -uroot -pEsxi0000. -e "
   use bysj;
@@ -198,13 +198,13 @@ then
 	mysql -uroot -pEsxi0000. -e "set global character_set_server=gbk;"
 	mysql -uroot -pEsxi0000. -e "set global character_set_database=gbk;"
 	#建库、建表 "找不到编码类型"
-	mysql -uroot -pEsxi0000. -e "create database if not exists bysj character set utf8 collate utf8;"
+	mysql -uroot -pEsxi0000. -e "create database if not exists bysj;"
 	createTB
 else
   #安装数据库
 	installDB
 	#建库、建表
-	mysql -uroot -pEsxi0000. -e "create database if not exists bysj character set utf8 collate utf8;"
+	mysql -uroot -pEsxi0000. -e "create database if not exists bysj;"
 	createTB
 fi
 
