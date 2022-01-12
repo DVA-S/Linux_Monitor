@@ -240,3 +240,6 @@ mysql -e "flush privileges;"
 
 #安装memcached
 apt -y install memcached php-memcache
+
+#邮件服务s-nail未配置
+apt -y
