@@ -1,12 +1,13 @@
 #!/bin/bash
 #Jaina 服务器地址必须用远程的，可以放在配置文件
-
+server_ip=`cat config.conf | grep "DbHost" | awk -F "\"" '{print $4}'`
+DbPasswd=`cat config.conf | grep "DbPasswd" | awk -F "\"" '{print $4}'`
 lang=`locale | grep LANG= | awk -F '=' '{print $2}'`
 
 memory(){
     if [ $lang = "zh_CN.UTF-8" ]
     then
-	      mysql -uroot -pEsxi0000. -h192.168.157.128 -e "insert into bysj.memory (host_ip,mem_used,mem_free,swap_used,swap_free,data_time) values
+	      mysql -uroot -p$DbPasswd -h$server_ip -e "insert into bysj.memory (host_ip,mem_used,mem_free,swap_used,swap_free,data_time) values
 	            (
 	            `echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}')\'`,
 	            `free -m | grep "内存：" | awk '{print $3}'`,
@@ -16,7 +17,7 @@ memory(){
 	            `date +"%Y%m%d%T" | sed 's/://g'`
 	            );" > /dev/null 2>&1
 	  else
-	    mysql -uroot -pEsxi0000. -h192.168.157.128 -e "insert into bysj.memory (host_ip,mem_used,mem_free,swap_used,swap_free,data_time) values
+	    mysql -uroot -p$DbPasswd -h$server_ip -e "insert into bysj.memory (host_ip,mem_used,mem_free,swap_used,swap_free,data_time) values
       	      (
       	      `echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}')\'`,
       	      `free -m | grep Mem | awk '{print $3}'`,
@@ -30,7 +31,7 @@ memory(){
 
 #CPU
 cpu(){
-	mysql -uroot -pEsxi0000. -h192.168.157.128 -e "insert into bysj.cpu(host_ip,cpu_used,data_time)
+	mysql -uroot -p$DbPasswd -h$server_ip -e "insert into bysj.cpu(host_ip,cpu_used,data_time)
 	values(
 	`echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}')\'`,
 	`echo $(vmstat -w 2 2 | sed -n '4p' | awk -F ' ' '{print $13,$14}') | awk '{print $1+$2}'`,
@@ -44,7 +45,7 @@ network(){
   if [ $lang = "zh_CN.UTF-8" ]
   then
       #rxkB/s下载
-    	mysql -uroot -pEsxi0000. -h192.168.157.128 -e "insert into bysj.network(host_ip,network_name,network_up,network_down,data_time)
+    	mysql -uroot -p$DbPasswd -h$server_ip -e "insert into bysj.network(host_ip,network_name,network_up,network_down,data_time)
     	values(
     	`echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}')\'`,
     	`echo \'$(ip a | grep "<" | awk -F ":" '{print $2}'| sed 's/^ //g' | sed -n '1,4p')\' | sed 's/ /\//g'`,
@@ -53,7 +54,7 @@ network(){
     	`date +"%Y%m%d%T" | sed 's/://g'`
     	);" > /dev/null 2>&1
   else
-    	mysql -uroot -pEsxi0000. -h192.168.157.128 -e "insert into bysj.network(host_ip,network_name,network_up,network_down,data_time)
+    	mysql -uroot -p$DbPasswd -h$server_ip -e "insert into bysj.network(host_ip,network_name,network_up,network_down,data_time)
     	values(
     	`echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}')\'`,
     	`echo \'$(ip a | grep "<" | awk -F ":" '{print $2}'| sed 's/^ //g' | sed -n '1,4p')\' | sed 's/ /\//g'`,
@@ -67,7 +68,7 @@ network(){
 #磁盘
 #读写单位为KB/s，空间单位为GB -- 针对sda
 disk(){
-	mysql -uroot -pEsxi0000. -h192.168.157.128 -e "insert into bysj.disk (host_ip,disk_read,disk_write,disk_used,disk_free,data_time)
+	mysql -uroot -p$DbPasswd -h$server_ip -e "insert into bysj.disk (host_ip,disk_read,disk_write,disk_used,disk_free,data_time)
 	values(
 	`echo \'$(ip a | grep inet | sed -n '3p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}')\'`,
 	`echo $(iostat -d -k 1 2 | grep sda | awk -F ' ' '{print $3}') | awk -F ' ' '{print $2}'`,

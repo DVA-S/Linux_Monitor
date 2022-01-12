@@ -181,6 +181,7 @@ createTB(){
 
 #主函数
 #安装源代码
+chmod a+x `find . -name "*.sh"`
 mkdir /etc/jaina && cp -rvf ./agent/ ./server/ /etc/jaina/ && cp ./config.conf /etc/jaina/
 touch /etc/jaina/JainaStatus
 rm -rf /var/www/html/* && cp -rvf ./web/* /var/www/html/
