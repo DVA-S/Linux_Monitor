@@ -12,14 +12,14 @@ root@ubuntu:~/bysj-for-wxk/Linux监控系统# cat config.conf
         "ServerHost":"192.168.157.131"
 }
 root@ubuntu:~/bysj-for-wxk/Linux监控系统# cat s-nail.rc
-
-安装脚本：
-root@ubuntu:~# sh install.sh
 set from="207728515@qq.com"
 set smtp="smtps://smtp.qq.com:465"
 set smtp-auth-user="207728515@qq.com"
 set smtp-auth-password="zidnnemqaclvbgje"
 set smtp-auth=login
+
+安装脚本：
+root@ubuntu:~# sh install.sh
 
 启动服务：
 root@ubuntu:~# /etc/jaina/agent/agent.sh 
