@@ -1,0 +1,5 @@
+set from="207728515@qq.com"
+set smtp="smtps://smtp.qq.com:465"
+set smtp-auth-user="207728515@qq.com"
+set smtp-auth-password="zidnnemqaclvbgje"
+set smtp-auth=login

@@ -241,5 +241,8 @@ mysql -e "flush privileges;"
 #安装memcached
 apt -y install memcached php-memcache
 
-#邮件服务s-nail未配置
-apt -y
+#邮件服务s-nail未配置 (交互式界面需要用户按两次回车)
+echo "deb http://cz.archive.ubuntu.com/ubuntu xenial main universe" >> /etc/apt/sources.list
+apt update && apt install -y heirloom-mailx mailutils
+cp ./s-nail.rc /etc/s-nail.rc
+echo "OK!" |s-nail -s "邮件配置成功！" 1218304973@qq.com
