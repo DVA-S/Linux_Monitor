@@ -1,3 +1,45 @@
+安装方法：
+```
+root@ubuntu:~# git clone https://gitee.com/JainaWitch/bysj-for-wxk/
+root@ubuntu:~# cd ./bysj-for-wxk/Linux监控系统/
+
+修改配置文件中的地址：
+root@ubuntu:~/bysj-for-wxk/Linux监控系统# cat config.conf
+{
+        "DbHost": "192.168.157.131",
+        "DbUser": "root",
+        "DbPasswd": "Esxi0000.",
+        "ServerHost":"192.168.157.131"
+}
+
+安装脚本：
+root@ubuntu:~# sh install.sh
+
+启动服务：
+root@ubuntu:~# /etc/jaina/agent/agent.sh 
+ 用法: jaina <选项>
+
+ Linux监控系统代理...
+
+ 选项：
+    addhost <ServerIPAddress>         添加主机到服务器
+    start                             开启代理服务
+    stop                              停止代理服务
+    status                            查看代理状态
+    logs                              查看代理日志
+root@ubuntu:~# /etc/jaina/server/server.sh
+ 用法: jaina <参数>
+
+ Linux监控系统服务端...
+
+ 选项：
+    ping <IPAddress>                  执行ping测试
+    start                             开始Server服务
+    stop                              停止Server服务
+    status                            查看Server状态
+    logs                              查看Server日志
+```
+
 ### Linux服务器自动巡检与监控系统的设计与实现
 
 ####整体设计  
