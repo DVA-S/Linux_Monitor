@@ -1,3 +1,5 @@
+我的邮箱是：1218304973@qq.com
+
 安装方法：
 ```
 root@ubuntu:~# git clone https://gitee.com/JainaWitch/bysj-for-wxk/
