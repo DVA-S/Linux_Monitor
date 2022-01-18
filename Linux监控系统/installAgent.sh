@@ -1,4 +1,6 @@
 #!/bin/bash
+#安装客户端
+
 #安装变量
 server_ip=`cat config.conf | grep "DbHost" | awk -F "\"" '{print $4}'`
 DbPasswd=`cat config.conf | grep "DbPasswd" | awk -F "\"" '{print $4}'`
