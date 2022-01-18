@@ -22,6 +22,7 @@
     <link href="css/kuangjia.css" rel="stylesheet" type="text/css"/>
     <!--  WebShell框架  -->
     <link rel="stylesheet" href="css/xterm.css">
+    <link rel="stylesheet" href="css/prism.css">
     <script src="js/xterm.js"></script>
     <!--  手写JS  -->
     <script src="js/allJS.js" type="text/javascript"></script>
@@ -337,7 +338,7 @@
     <!--  时间 -->
     <div class="setup_package" id="setup_info" style="left: 6%;top: 10%;">
         <h2 class="sysTitleTitle" id="Titsetup_info">系  统  日   志</h2>
-        <div class="sysBody" id="Bodysetup_info">
+        <div class="sysBody" id="Bodysetup_info" style="overflow:auto;">
 
         </div>
     </div>
@@ -346,6 +347,85 @@
     <div  class="setup_clock" id="setup_script" style="left: 29%;top: -65%;">
         <h2 class="sysTitleTitle" id="Titsetup_script">系  统  脚  本</h2>
         <div class="sysBody" id="Bodysetup_script">
+            <pre style="width: 97%;height: 91%;border-radius: 16px;top: -2.2%;">
+                <code class="language-css" >
+项目目录结构：
+/var/www/html/
+├── css -> /mnt/hgfs/jaina/web/css
+├── img -> /mnt/hgfs/jaina/web/img
+├── index.html -> /mnt/hgfs/jaina/web/index.html
+├── js -> /mnt/hgfs/jaina/web/js
+├── php -> /mnt/hgfs/jaina/web/php
+└── shell.html -> /mnt/hgfs/jaina/web/shell.html
+/etc/jaina/
+├── agent
+│   ├── AddHostCurl.sh
+│   ├── agent.sh
+│   ├── ClientSocket.php
+│   ├── InsertData.sh
+│   └── Port.sh
+├── config.conf
+├── JainaStatus
+└── server
+├── server.sh
+├── setupEmail.php
+└── shell.php
+表结构：
+mysql> desc cpu;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| host_ip   | varchar(50) | NO   |     | NULL    |                |
+| cpu_used  | float       | NO   |     | NULL    |                |
+| data_time | datetime    | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+mysql> desc memory;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| host_ip   | varchar(50) | NO   |     | NULL    |                |
+| mem_used  | float       | NO   |     | NULL    |                |
+| mem_free  | float       | NO   |     | NULL    |                |
+| swap_used | float       | YES  |     | NULL    |                |
+| swap_free | float       | YES  |     | NULL    |                |
+| data_time | datetime    | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+mysql> desc disk;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| id         | int         | NO   | PRI | NULL    | auto_increment |
+| host_ip    | varchar(50) | NO   |     | NULL    |                |
+| disk_read  | float       | NO   |     | NULL    |                |
+| disk_write | float       | NO   |     | NULL    |                |
+| disk_used  | float       | NO   |     | NULL    |                |
+| disk_free  | float       | NO   |     | NULL    |                |
+| data_time  | datetime    | NO   |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+mysql> desc network;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id           | int         | NO   | PRI | NULL    | auto_increment |
+| host_ip      | varchar(50) | NO   |     | NULL    |                |
+| network_name | varchar(50) | NO   |     | NULL    |                |
+| network_up   | float       | NO   |     | NULL    |                |
+| network_down | float       | NO   |     | NULL    |                |
+| data_time    | datetime    | NO   |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+mysql> desc userToken;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20) | NO   | UNI | NULL    |                |
+| token    | char(64)    | NO   | UNI | NULL    |                |
+| data     | datetime    | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+                </code>
+            </pre>
         </div>
     </div>
 
@@ -410,5 +490,6 @@
 <!-- 为元素添加单机事件 -->
 <script src="js/clickList.js" type="text/javascript"></script>
 
+<script src="js/kuangjia/prism.js"></script>
 </body>
 </html>

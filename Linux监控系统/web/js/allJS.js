@@ -1,5 +1,15 @@
 var loadingDH = "<img alt='加载中……' src='img/loading.gif' style='position: relative;left: 6.5vw;top: 4vh;' />";
 /* - ---------------------------------------------------------------------------------数据请求----------------------------------------------------------------------------------- */
+//系统设置 -- 系统日志
+function logList(){
+	$.get(
+		"php/setup/log.php",{"username":getCookie("UserName"),"token":getCookie("Token")},
+		function (data){
+			document.getElementById("Bodysetup_info").innerText=data;
+		}
+	);
+}
+
 //设备管理 -- 设备列表
 function hostList(){
 	$.get(
@@ -91,6 +101,7 @@ function allFlush(){
 
 	userList();
 	devUserList();
+	logList();
 }
 function flushToken(){
 	$.get(
@@ -360,11 +371,10 @@ function viewPanel(view_btn){
 			view=4;}
 
 		 //switch主体 - 获取按钮点击传来的ID，判断该ID在数组中的位置（返回数字）;正在显示面板下标和点击按钮将要显示的面板的下标作比较
+		 //点击当前面板右边的按钮
 		 if(view<panel_list.indexOf(view_btn)){
 			 // ##BUG:所有面板都显示过后，无法跳转切换 ##例如：从2到4后，虽然实际显示的是4，但view的值是3 ##所以解决方法之一为：做动作前先清场，大概属于一刀切方法，很简单。
-			 // $('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			 $('#panel,#checking,#user,#host,#setup').hide();
-			//点击当前面板右边的按钮
 			// 离开动画--当前面板左移(BUG:导航栏按钮--应该是将要显示前的面板离开)
 			document.getElementById(panel_list[panel_list.indexOf(view_btn)-1]).style.display="block";
 			document.getElementById(panel_list[panel_list.indexOf(view_btn)-1]).style.animation="0.5s ease forwards running btn_switch_CenterGoLeftHide";
@@ -372,17 +382,13 @@ function viewPanel(view_btn){
 			viewPanel.css("display","block");
 			viewPanel.css("animation","0.5s ease forwards running btn_switch_RightGoCenterShow");
 			viewPanel.css("position","absolute");
-			// document.getElementById(view_btn).style.display="block";
-			// document.getElementById(view_btn).style.position="absolute";
-			// document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_RightGoCenterShow";
-			console.log('当前显示为：'+view,"点击为：",panel_list.indexOf(view_btn)+"<<向左");
+			console.log('当前显示为：'+panel_list.indexOf(view_btn),"点击为：",panel_list.indexOf(view_btn)+"<<向左");
 			//将最后一次显示的面板存入cookie
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
 			break;
+		 // 点击当前面板左边的按钮
 		}else if(view>panel_list.indexOf(view_btn)){
-			// $('#panel,#checking,#user,#host,#setup').css('display', 'none');
 			 $('#panel,#checking,#user,#host,#setup').hide();
-			// 点击当前面板左边的按钮
 			// 离开动画--当前面板右移
 			document.getElementById(panel_list[panel_list.indexOf(view_btn)+1]).style.display="block";
 			document.getElementById(panel_list[panel_list.indexOf(view_btn)+1]).style.animation="0.5s ease forwards running btn_switch_CenterGoRightHide";
@@ -390,9 +396,6 @@ function viewPanel(view_btn){
 			viewPanel.css("display","block");
 			viewPanel.css("animation","0.5s ease forwards running btn_switch_LeftGoCenterShow");
 			viewPanel.css("position","absolute");
-			// document.getElementById(view_btn).style.display="block";
-			// document.getElementById(view_btn).style.animation="0.5s ease forwards running btn_switch_LeftGoCenterShow";
-			// document.getElementById(view_btn).style.position="absolute";
 			console.log('当前显示为：'+panel_list.indexOf(view_btn),"点击为：",panel_list.indexOf(view_btn)+">>向右");
 			//将最后一次显示的面板存入cookie
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
@@ -406,9 +409,6 @@ function viewPanel(view_btn){
 			viewPanel.css("display","block");
 			viewPanel.css("animation","0.5s ease forwards running flush");
 			viewPanel.css("position","absolute");
-			// document.getElementById(view_btn).style.display="block";
-			// document.getElementById(view_btn).style.animation="0.5s ease forwards running flush";
-			// document.getElementById(view_btn).style.position="absolute";
 			console.log('当前显示为：'+panel_list.indexOf(view_btn),"点击为：",panel_list.indexOf(view_btn)+"刷新显示");
 			//将最后一次显示的面板存入cookie
 			setCookie("panelView",panel_list.indexOf(view_btn),600);
