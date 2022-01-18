@@ -21,7 +21,7 @@ set smtp-auth-password="zidnnemqaclvbgje"
 set smtp-auth=login
 
 安装脚本：
-root@ubuntu:~# sh install.sh
+root@ubuntu:~# sh install.sh（安装服务端和客户端）/sh installAgent.sh（安装客户端）
 
 启动服务：
 root@ubuntu:~# /etc/jaina/agent/agent.sh 
