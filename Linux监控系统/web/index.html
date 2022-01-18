@@ -123,13 +123,13 @@
             <div class="addhost_form" style="height: 68vh;">
                 <p><i><b>第一步 - 安装：</b></i></p> <br>
                 <p style="background-color: #EEE;line-height: 25px;padding-top: 0.5vh;padding-bottom: 0.5vh;width: 70vw;top: -1vh;">
-                    &nbsp;&nbsp;#&nbsp;wget http://<?php echo file_get_contents('http://127.0.0.1/php/ServerIP.php'); ?>/Client/ -P /opt/ <br>
-                    &nbsp;&nbsp;#&nbsp;wget -nc -B http://<?php echo file_get_contents('http://127.0.0.1/php/ServerIP.php'); ?>/Client/ -F -nH --cut-dirs=3 -i /opt/index.html -P /etc/jaina/ <br>
-                    &nbsp;&nbsp;#&nbsp;mv /etc/jaina/jaina.sh /usr/bin/jaina && chmod a+x /usr/bin/jaina <br>
+                    &nbsp;&nbsp;#&nbsp;wget https://gitee.com/JainaWitch/bysj-for-wxk/raw/JainaSocket/agent.zip<br>
+                    &nbsp;&nbsp;#&nbsp;mkdir /etc/jaina && touch /etc/jaina/JainaStatus <br>
+                    &nbsp;&nbsp;#&nbsp;apt -y install ethtool curl <br>
+                      # unzip -n agent.zip -d /etc/jaina/ <br>
+                      # chmod a+x /etc/jaina/agent/*.sh <br>
+                      # /etc/jaina/agent/agent.sh addhost 192.168.157.128 <br>
                 </p>
-                <p><i><b>第二步 - 添加设备：</b></i></p> <br>
-                <p style="background-color: #EEE;line-height: 25px;padding-top: 0.5vh;padding-bottom: 0.5vh;width: 70vw;top: -1vh;">
-                    <!--                                 &nbsp;&nbsp;#&nbsp;jaina addhost  <?php echo file_get_contents('http://127.0.0.1/php/ServerIP.php'); ?> <br>-->
             </div>
         </div>
     </div>

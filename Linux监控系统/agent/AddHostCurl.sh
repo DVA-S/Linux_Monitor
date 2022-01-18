@@ -11,3 +11,5 @@ hostCurl(){
   fi
 }
 hostCurl $1
+sleep 5
+exit
