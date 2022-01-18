@@ -3,11 +3,11 @@
 server_ip=`cat config.conf | grep "DbHost" | awk -F "\"" '{print $4}'`
 DbPasswd=`cat config.conf | grep "DbPasswd" | awk -F "\"" '{print $4}'`
 
-#函数封装区
+mkdir -p /var/www/html/php/functionUse/ && cp web/php/functionUse/getConfig.php /var/www/html/php/functionUse/
 
 #主函数
 #安装额外包
-apt update && apt -y install sysstat net-tools expect ethtool curl expect
+apt update && apt -y install sysstat net-tools expect ethtool curl expect mysql-client-core-8.0
 
 #安装源代码
 chmod a+x `find . -name "*.sh"`
