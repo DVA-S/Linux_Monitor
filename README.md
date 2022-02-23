@@ -1,6 +1,6 @@
 我的邮箱是：1218304973@qq.com
 
-安装方法：
+### 安装方法
 ```
 root@ubuntu:~# git clone https://gitee.com/JainaWitch/bysj-for-wxk/
 root@ubuntu:~# cd ./bysj-for-wxk/Linux监控系统/
@@ -68,7 +68,7 @@ Web Shell ➡ Xterm框架 ➡ PHP Socket发送指令 ➡ PHP SSH2扩展 ➡ Xter
 
 Web GET告警阈值 ➡ MySQL阈值存储 ➡ PHP SELECT均值 ➡ Shell发送邮件(s-nail)
 
-tip：  
+### tip
 1,VMware共享文件夹权限问题
 ```
 sudo umount /mnt/hgfs
@@ -119,7 +119,7 @@ alter table tableName add columnName varchar(30);
  **邮件通知**  
  利用邮件通知功能用户可以自行设置触发发送邮件的条件。例如，当CPU使用率超过95%时邮件通知系统管理员。
 
-**环境配置：**
+### 环境配置
 Ubuntu：
 
 ```shell
@@ -238,7 +238,7 @@ Memcached：
     index.php
 ```
 
-闲置:
+### 闲置:
 ```
 内存：/proc/meminfo == MemTotal-MemAvailable=已用内存(KB)
 磁盘：/proc/meminfo == 第十三列 取值两次 两次之差/所用时间（(xms-yms)/10*1000ms）=磁盘使用率(%)
